@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { NgClass, NgIf, TitleCasePipe } from '@angular/common'
 import { AuthRoutingModule } from './auth-routing.module'
+import { LoginComponent } from './component/login/login.component'
 
 @NgModule({
     imports: [
@@ -9,9 +10,10 @@ import { AuthRoutingModule } from './auth-routing.module'
         ReactiveFormsModule,
         NgIf,
         NgClass,
+        AuthRoutingModule,
     ],
     declarations: [
-        AuthRoutingModule,
+        LoginComponent,
     ],
     providers: [],
 })
