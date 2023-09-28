@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { NgClass, NgIf, TitleCasePipe } from '@angular/common'
-import { AuthRoutingModule } from './auth-routing.module'
-import { LoginComponent } from './component/login/login.component'
+import { HomeRoutingModule } from './home-routing.module'
+import { IndexComponent } from './component/index/index.component'
 
 @NgModule({
     imports: [
@@ -10,11 +10,11 @@ import { LoginComponent } from './component/login/login.component'
         ReactiveFormsModule,
         NgIf,
         NgClass,
-        AuthRoutingModule,
+        HomeRoutingModule,
     ],
     declarations: [
-        LoginComponent,
+        IndexComponent,
     ],
     providers: [],
 })
-export class AuthModule { }
+export class HomeModule { }
