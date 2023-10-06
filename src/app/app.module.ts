@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { ToastModule } from 'primeng/toast';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 import { ErrorsModule } from './errors/errors.module';
@@ -28,7 +29,7 @@ import { HttpClientModule } from '@angular/common/http';
         FlashcardModule,
         UserModule,
         HttpClientModule,
-    ],
+   ],
     providers: [],
     bootstrap: [AppComponent]
 })
