@@ -1,1 +1,7 @@
-<div></div>
+<main>
+  <!-- <app-header *ngIf="headerVisible"></app-header> -->
+  <div class="py-3 sm:px-4 md:px-6 content">
+    <router-outlet (activate)="onComponentLoad()"></router-outlet>
+  </div>
+  <!-- <app-footer *ngIf="footerVisible"></app-footer> -->
+</main>
