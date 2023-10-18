@@ -6,6 +6,7 @@ import { getAuth } from "firebase/auth";
     providedIn: 'root',
 })
 export class FireBaseService {
+    constructor() { }
     private _firebaseConfig = {
 
     }
