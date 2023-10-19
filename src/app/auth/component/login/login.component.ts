@@ -1,5 +1,6 @@
 import { Component } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
+import { Router } from '@angular/router'
 
 @Component({
     selector: 'app-login',
@@ -21,7 +22,9 @@ export class LoginComponent {
         password: new FormControl(null, Validators.required),
     })
 
-    constructor() { }
+    constructor(
+        private readonly router: Router,
+    ) { }
 
     /**
      * @author @Alexis1663
@@ -29,7 +32,9 @@ export class LoginComponent {
      * @description redirect to register page. Using redirectTo tool.
      * @memberof LoginComponent
      */
-    public redirectToRegister(): void { }
+    public redirectToRegister(): void {
+        this.router.navigate(['../register'])
+    }
 
     /**
      * @author @Alexis1663
@@ -37,5 +42,7 @@ export class LoginComponent {
      * @description redirect to forgot password page. Using redirectTo tool.
      * @memberof LoginComponent
      */
-    public redirectToForgotPassword(): void { }
+    public redirectToForgotPassword(): void {
+        this.router.navigate(['../forgot-password'])
+    }
 }
