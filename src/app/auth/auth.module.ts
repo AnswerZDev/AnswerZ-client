@@ -3,6 +3,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { NgClass, NgIf, TitleCasePipe } from '@angular/common'
 import { AuthRoutingModule } from './auth-routing.module'
 import { LoginComponent } from './component/login/login.component'
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
     imports: [
@@ -11,6 +13,8 @@ import { LoginComponent } from './component/login/login.component'
         NgIf,
         NgClass,
         AuthRoutingModule,
+        InputTextModule,
+        ButtonModule,
     ],
     declarations: [
         LoginComponent,
