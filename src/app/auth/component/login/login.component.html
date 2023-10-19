@@ -1,12 +1,12 @@
 <div class="flex flex-column justify-content-center pt-7">
   <div class="flex flex-row">
-    <form [formGroup]="authForm">
+    <form [formGroup]="authForm" class="w-5">
       <div
-        class="flex flex-row justify-content-around block-auth border-round-right-xl"
+        class="flex flex-row justify-content-around block-auth border-round-right-xl w-full"
       >
         <div class="flex flex-column gap-2 px-6 py-7">
           <div>
-            <h1 class="text-lg text-center">Welcome Back!</h1>
+            <h1 class="text-lg text-center main-title">Welcome Back!</h1>
           </div>
 
           <div class="flex flex-column gap-2">
@@ -38,22 +38,25 @@
               Don't have an account ?
               <a (click)="redirectToRegister()">Register</a>
             </p>
-          </div>
-
-          <div class="text-center">
             <p>
               You have forgot your password ?
               <a (click)="redirectToForgotPassword()">Reset password</a>
             </p>
           </div>
+
+          <div class="text-center"></div>
           <div class="flex flex-row justify-content-center gap-2">
             <i class="pi pi-google text-xl"></i>
             <i class="pi pi-github text-xl"></i>
-            <i class="pi pi-microsoft text-xl"></i>
             <i class="pi pi-facebook text-xl"></i>
           </div>
         </div>
       </div>
     </form>
+    <div class="w-8">
+      <div class="flex flex-row justify-content-center">
+        <img src="../../../../assets/images/login_image.png" />
+      </div>
+    </div>
   </div>
 </div>

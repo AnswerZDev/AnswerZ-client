@@ -2,11 +2,20 @@
     background-color: #F1F1F1;
 }
 
+.main-title {
+    color: #9468F1;
+}
+
+i {
+    color: #9468F1;
+}
+
 /* Override primeng default style */
 :host ::ng-deep {
     .p-inputtext {
         height: 2rem;
         border-radius: 3rem !important;
+        border: 1px solid #9468F1;
     }
 
     p-button {
