@@ -5,6 +5,7 @@ import { AuthRoutingModule } from './auth-routing.module'
 import { LoginComponent } from './component/login/login.component'
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
+import { HomeModule } from '../home/home.module'
 
 @NgModule({
     imports: [
@@ -15,6 +16,7 @@ import { ButtonModule } from 'primeng/button';
         AuthRoutingModule,
         InputTextModule,
         ButtonModule,
+        HomeModule,
     ],
     declarations: [
         LoginComponent,

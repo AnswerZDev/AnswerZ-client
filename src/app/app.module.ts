@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { AuthRoutingModule } from './auth/auth-routing.module';
 import { AuthModule } from './auth/auth.module';
 import { ToastModule } from 'primeng/toast';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
     declarations: [
@@ -14,8 +15,9 @@ import { ToastModule } from 'primeng/toast';
     imports: [
         BrowserModule,
         AppRoutingModule,
-        AuthModule,
         ToastModule,
+        AuthModule,
+        BrowserAnimationsModule,
     ],
     providers: [],
     bootstrap: [AppComponent]
