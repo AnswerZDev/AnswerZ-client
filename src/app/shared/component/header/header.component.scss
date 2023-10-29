@@ -1,0 +1,19 @@
+.logo{
+    max-height: 3.5rem !important;
+}
+
+.header-container{
+    height: 4rem;
+    background-color: #9468F1;
+}
+
+// To override the default primeng styles
+:host ::ng-deep {
+    .p-button {
+        border-radius: 40px;
+        background-color: white;
+        color: rgba(148,104,241,1);
+        border: rgba(148,104,241,1);
+    }
+}
+

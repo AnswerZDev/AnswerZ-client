@@ -1,0 +1,13 @@
+<div
+  class="flex flex-row header-container align-items-center justify-content-between px-6"
+>
+  <a class="flex flex-row align-items-center gap-3 cursor-pointer" (click)="redirectToHomePage()">
+    <img [src]="imageLogo" alt="Logo AnswerZ" class="logo" />
+    <h2 class="text-2xl h-full text-white-alpha-90">Answerz</h2>
+  </a>
+  <div class="button-header-container">
+    <p-button label="Login" (onClick)="redirectToLoginPage()"></p-button>
+    &nbsp;
+    <p-button label="Register" (onClick)="redirectToRegisterPage()"></p-button>
+  </div>
+</div>

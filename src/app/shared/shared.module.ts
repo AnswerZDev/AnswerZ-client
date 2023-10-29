@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { NgClass, NgIf } from '@angular/common'
-import { HomeRoutingModule } from './home-routing.module'
-import { IndexComponent } from './component/index/index.component';
 import { ButtonModule } from 'primeng/button';
+import { HeaderComponent } from './component/header/header.component';
 
 @NgModule({
     imports: [
@@ -11,13 +10,14 @@ import { ButtonModule } from 'primeng/button';
         ReactiveFormsModule,
         NgIf,
         NgClass,
-        HomeRoutingModule,
         ButtonModule,
     ],
     declarations: [
-        IndexComponent,
+        HeaderComponent,
     ],
     providers: [],
-    exports: []
+    exports: [
+        HeaderComponent,
+    ]
 })
-export class HomeModule { }
+export class SharedModule { }
