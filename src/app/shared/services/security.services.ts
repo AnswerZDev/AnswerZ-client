@@ -5,9 +5,6 @@ import { getAuth } from "firebase/auth";
 @Injectable({
     providedIn: 'root',
 })
-export class FireBaseService {
+export class SecurityService {
     constructor() { }
-    private _firebaseConfig = {
-
-    }
 }
