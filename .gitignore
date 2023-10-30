@@ -61,3 +61,6 @@ aio/content/examples/.DS_Store
 
 # environment variables
 .env
+
+# environment files
+src/environments/ 

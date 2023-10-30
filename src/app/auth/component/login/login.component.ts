@@ -3,6 +3,7 @@
 import { Component } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
+import { AuthService } from '../../services/auth.services'
 
 @Component({
     selector: 'app-login',
@@ -26,6 +27,7 @@ export class LoginComponent {
 
     constructor(
         private readonly router: Router,
+        private readonly authService: AuthService,
     ) { }
 
     /**
@@ -46,6 +48,18 @@ export class LoginComponent {
      */
     public redirectToForgotPassword(): void {
         this.router.navigate(['../forgot-password'])
+    }
+
+    /**
+     * @author @Alexis1663
+     * @date 29/10/2023
+     * @description TODO()
+     * @memberof LoginComponent
+     */
+    public login(): void {
+        if (this.authForm.valid) {
+            this.authService.login(this.authForm.value)
+        }
     }
 }
 >>>>>>> ea329e2 (:hammer: update: routing)
