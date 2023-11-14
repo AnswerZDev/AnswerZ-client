@@ -11,9 +11,8 @@
 :host ::ng-deep {
     .p-button {
         border-radius: 40px;
-        background-color: white;
-        color: rgba(148,104,241,1);
-        border: rgba(148,104,241,1);
+        background-color: rgba(148,104,241,1);
+        border: 1px solid white;
     }
 }
 
