@@ -1,6 +1,7 @@
 import { RouterModule, Routes } from '@angular/router'
 import { NgModule } from '@angular/core'
 import { CreateFlashcardComponent} from './component/create-flashcard/create-flashcard.component'
+import { EditFlashcardComponent } from './component/edit-flashcard/edit-flashcard.component'
 
 const routes: Routes = [
     {
@@ -12,6 +13,10 @@ const routes: Routes = [
         path: 'create-flashcard',
         component: CreateFlashcardComponent,
     },
+    {
+        path: 'edit-flashcard',
+        component: EditFlashcardComponent,
+    }
 ]
 
 @NgModule({

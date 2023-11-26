@@ -7,6 +7,8 @@ import { DropdownModule } from 'primeng/dropdown';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
+import { FlashcardGenericComponent } from './component/flashcard-generic/flashcard-generic.component';
+import { EditFlashcardComponent } from './component/edit-flashcard/edit-flashcard.component';
 
 @NgModule({
     imports: [
@@ -21,7 +23,9 @@ import { ButtonModule } from 'primeng/button';
         ButtonModule,
     ],
     declarations: [
+        FlashcardGenericComponent,
         CreateFlashcardComponent,
+        EditFlashcardComponent,
     ],
     providers: [],
     exports: []
