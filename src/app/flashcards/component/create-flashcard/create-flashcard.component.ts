@@ -1,5 +1,5 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 interface Mode{
   name: string;
@@ -11,6 +11,7 @@ interface Mode{
   styleUrls: ['./create-flashcard.component.scss'],
 })
 export class CreateFlashcardComponent implements OnInit {
+
   modesVisibilite: Mode[] | undefined;
   modesCategorie: Mode[] | undefined;
   selectedModeVisibilities: Mode | undefined;
@@ -65,5 +66,14 @@ export class CreateFlashcardComponent implements OnInit {
     } else {
       alert("Le fichier est trop volumineux. Veuillez sélectionner un fichier de 25 Mo ou moins.");
     }
+  }
+
+  moveToPreview() {
+    const totalHeight = document.documentElement.scrollHeight;
+    // Déplacer la fenêtre vers le haut de la section de prévisualisation
+    window.scrollTo({
+      top: totalHeight,
+      behavior: 'smooth'
+    });
   }
 }
