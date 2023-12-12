@@ -1,21 +1,16 @@
-import { Component, Input } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { AfterContentInit, Component, ContentChildren, QueryList, TemplateRef, ViewChild } from '@angular/core';
+import { PrimeTemplate } from 'primeng/api';
 
 interface Mode{
   name: string;
 }
 
 @Component({
-  selector: 'app-flashcard-generic',
-  templateUrl: './flashcard-generic.component.html',
-  styleUrls: ['./flashcard-generic.component.scss'],
+  selector: 'app-generic-flashcard',
+  templateUrl: './generic-flashcard.component.html',
+  styleUrls: ['./generic-flashcard.component.scss']
 })
-export class FlashcardGenericComponent {
-
-  @Input() isEditMode!: boolean;
-  @Input() title!: string;
-
-  title$ = new BehaviorSubject<string>('');
+export class GenericFlashcardComponent implements AfterContentInit{
 
   modesVisibilite: Mode[] | undefined;
   modesCategorie: Mode[] | undefined;
@@ -23,6 +18,11 @@ export class FlashcardGenericComponent {
   selectedModeCategories: Mode | undefined;
   blockChars: RegExp = /^[0-9a-zA-Z\s]+$/;
   public imageUpload: string = "../../../../assets/images/image_upload.png";
+
+  @ContentChildren(PrimeTemplate) templates = {} as QueryList<PrimeTemplate>;
+  title: PrimeTemplate | undefined = undefined
+  button: PrimeTemplate | undefined = undefined
+  
   
   ngOnInit() {
     this.modesVisibilite = [
@@ -37,8 +37,9 @@ export class FlashcardGenericComponent {
     ];
   }
 
-  ngAfterViewInit(): void {
-    this.title$.next(this.title);
+  ngAfterContentInit(): void {
+    this.title = this.templates.find((item) => (item.name === 'title'))
+    this.button = this.templates.find((item) => (item.name === 'button'))
   }
 
   onDragOver(event: Event) {

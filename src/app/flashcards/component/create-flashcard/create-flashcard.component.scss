@@ -5,86 +5,7 @@
     font-weight: bold;
 }
 
-label {
-    color: #9468F1;
-    opacity: 77%;
-}
-
-.ImageUpload{
-    border: 2px dashed #bbb5ff;
-    background: #f7f8ff;
-    max-height: 300px;
-}
-
-#inputFile {
-    height: 100%;
-    width: 100%;
-}
-
-#block {
-    background-color: rgba(148,104,241,0.2);
-    color: rgba(148,104,241,0.77);
-    border: #9468F1;
-    height: 45px;
-    text-indent: 2rem;
-}
-
-input::placeholder {
-    color: rgba(148,104,241,0.77);
-}
-
-.delete {
-    height: 1px;
-    width: 1px;
-    margin-right: 5px;
-    font-size: 30px; 
-    cursor: pointer; 
-    background: white; 
-    border-style: none; 
-    color: rgba(148,104,241,0.77);
-}
-
 :host ::ng-deep {
-    .p-dropdown {
-        background-color: #9468F1;
-        border: #9468F1;
-        border-radius: 10px;
-    }
-
-    .p-card {
-        span {
-            color: rgba(148,104,241,0.77);
-        }
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        border-radius: 20px;
-    }
-
-    .p-card .p-card-body {
-        padding-top: 0;
-    }
-
-    .p-card .p-card-content {
-        padding: 0;
-    }
-
-    .custom-card .p-card {
-        background: rgba(148,104,241,0.2);
-        padding-top: 0;
-    }
-
-    .p-dropdown-label, .p-icon {
-        color: white;
-    }
-
-    .button-add > .p-button {
-        background-color: #9468F1;
-        border: 1px solid #9468F1;
-        border-radius: 15px;
-        font-size: 18px;
-        font-weight: 550;
-        justify-content: center;
-    }
-
     .button-create > .p-button {
         background-color: #9468F1;
         border: 1px solid #9468F1;
@@ -92,17 +13,5 @@ input::placeholder {
         font-size: 40px;
         font-weight: 550;
         justify-content: center;
-    }
-
-    .right-side {
-        .p-button {
-            background-color: white;
-            border: 3px solid #9468F1;
-            color: #9468F1;
-            width: 80%;
-            justify-content: center;
-            font-weight: bold;
-        }
-        width: 40%;
     }
 }

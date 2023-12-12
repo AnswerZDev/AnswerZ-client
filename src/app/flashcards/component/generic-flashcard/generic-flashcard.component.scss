@@ -33,17 +33,6 @@ input::placeholder {
     color: rgba(148,104,241,0.77);
 }
 
-.delete {
-    height: 1px;
-    width: 1px;
-    margin-right: 5px;
-    font-size: 30px; 
-    cursor: pointer; 
-    background: white; 
-    border-style: none; 
-    color: rgba(148,104,241,0.77);
-}
-
 :host ::ng-deep {
     .p-dropdown {
         background-color: #9468F1;
@@ -81,15 +70,6 @@ input::placeholder {
         border: 1px solid #9468F1;
         border-radius: 15px;
         font-size: 18px;
-        font-weight: 550;
-        justify-content: center;
-    }
-
-    .button-create > .p-button {
-        background-color: #9468F1;
-        border: 1px solid #9468F1;
-        border-radius: 15px;
-        font-size: 40px;
         font-weight: 550;
         justify-content: center;
     }

@@ -1,6 +1,6 @@
 <div class="flex flex-column">
     <div class="flex-1 flex align-items-center justify-content-between pt-3 ml-5 mr-8">
-      <span class="mb-4 title">{{title}}</span>
+      <ng-container *ngIf="title" [ngTemplateOutlet]="title.template"></ng-container>
       <p-dropdown [options]="modesVisibilite" [(ngModel)]="selectedModeVisibilities" optionLabel="name" value="Public"></p-dropdown>
     </div>
     <div class="flex flex-row justify-content-between">
@@ -13,7 +13,8 @@
         <p-card class="flex flex-column w-full mt-5" (dragover)="onDragOver($event)" (drop)="onDrop($event)">
           <div class="flex flex-column justify-content-center align-items-center py-2">
             <div for="input-file" class="flex flex-column align-items-center gap-2 pt-3">
-              <input id="input-file" type="file" accept=".png, .jpg, .gif" class="opacity-0" (change)="uploadImage($event)" hidden>
+              <label></label>
+              <input id="input-file" type="file" accept=".png, .jpg, .gif" class="opacity-0 hidden" (change)="uploadImage($event)"/>
               <img [src]="imageUpload" alt="ImageUpload" class="w-5 h-full border-round-2xl ImageUpload"/>
               <div class="flex flex-column align-items-center gap-2">
                 <span class="font-bold block">Upload an image</span>
@@ -37,28 +38,12 @@
       </div>
     </div>
     <div class="flex flex-row justify-content-center w-full mt-5 mb-5">
-      <p-button class="flex flex-column w-6 button-create">{{isEditMode ? 'SAVE MODIFICATIONS' : 'CREATE YOUR SET'}}</p-button>
+      <ng-container *ngIf="button" [ngTemplateOutlet]="button.template"></ng-container>
     </div>
     <div class=" flex flex-column gap-3">
       <div class="flex flex-row w-full">
         <span class="text-4xl pl-3 title">Card's preview</span>
       </div>
-      <div class="flex flex-column w-full" id="previewSection">
-        <p-card class="w-3 mb-4 pl-3">
-          <div class="flex flex-column">
-            <div class="flex flex-row justify-content-between mt-1">
-              <div class="flex flex-column">
-                <span style="font-size: 30px; font-weight: bold; margin-top: 5px;">Flashcard #1</span>
-                <span>.................................................</span>
-              </div>
-              <button class="delete">×</button>
-            </div>
-            <span class="mt-2">Word</span>
-            <span style="font-size: 30px; font-weight: bold;">Hello</span>
-            <span class="mt-2">Translation</span>
-            <span style="font-size: 30px; font-weight: bold;">Witaj</span>
-          </div>
-        </p-card>
-      </div>
+      <app-cards-preview></app-cards-preview>
     </div>
   </div>

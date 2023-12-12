@@ -9,8 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 import { ErrorsModule } from './errors/errors.module';
 import { FlashcardModule } from './flashcards/flashcards.module';
-import { FlashcardGenericComponent } from './flashcards/component/flashcard-generic/flashcard-generic.component';
-import { EditFlashcardComponent } from './flashcards/component/edit-flashcard/edit-flashcard.component';
+import { CardsPreviewComponent } from './flashcards/component/cards-preview/cards-preview.component';
 
 @NgModule({
     declarations: [

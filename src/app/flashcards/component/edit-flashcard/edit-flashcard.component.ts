@@ -1,16 +1,12 @@
 import { Component } from '@angular/core';
-import { FlashcardGenericComponent } from '../flashcard-generic/flashcard-generic.component';
+import { HomeFlashcardComponent } from '../../pages/home-flashcard/home-flashcard.component';
 
 @Component({
   selector: 'app-edit-flashcard',
   templateUrl: './edit-flashcard.component.html',
   styleUrls: ['./edit-flashcard.component.scss']
 })
-export class EditFlashcardComponent extends FlashcardGenericComponent {
+export class EditFlashcardComponent {
 
-  constructor() {
-    super();
-    this.isEditMode = true;
-    this.title = 'Edit your flashcard set';
-  }
+  constructor() { }
 }
