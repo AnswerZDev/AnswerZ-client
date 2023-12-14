@@ -1,0 +1,24 @@
+.profil{
+    width: 90%;
+    margin: auto;
+    height: 100%;
+    color: #9468F1;
+
+    .first-container{
+        background-color: rgba(148, 128, 190, 0.77);
+        color: black;
+    }
+
+    .second-container{
+        background-color: rgba(148,104,241,1);
+        color: black;
+    }
+
+    .p-circle {
+        width: 85px;
+        height: 85px;
+        border-radius: 50%;
+        background-color:#d1d1d1;
+        color: black;
+    }
+}

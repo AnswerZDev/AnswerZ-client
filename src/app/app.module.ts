@@ -10,6 +10,7 @@ import { SharedModule } from './shared/shared.module';
 import { ErrorsModule } from './errors/errors.module';
 import { FlashcardModule } from './flashcards/flashcards.module';
 import { CardsPreviewComponent } from './flashcards/component/cards-preview/cards-preview.component';
+import { UserModule } from './user/user.module';
 
 @NgModule({
     declarations: [
@@ -24,6 +25,7 @@ import { CardsPreviewComponent } from './flashcards/component/cards-preview/card
         SharedModule,
         ErrorsModule,
         FlashcardModule,
+        UserModule,
     ],
     providers: [],
     bootstrap: [AppComponent]
