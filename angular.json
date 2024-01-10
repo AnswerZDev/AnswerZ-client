@@ -17,6 +17,7 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
+                        
                         "outputPath": "dist/answer-z-client",
                         "index": "src/index.html",
                         "main": "src/main.ts",
@@ -68,6 +69,10 @@
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                    "host": "0.0.0.0",
+                    "port": 4200
+                    },
                     "configurations": {
                         "production": {
                             "browserTarget": "AnswerZ-client:build:production"
@@ -106,5 +111,8 @@
                 }
             }
         }
+    },
+    "cli": {
+      "analytics": "3f6b16af-ee54-4c39-b5b0-043ba0c276df"
     }
 }
