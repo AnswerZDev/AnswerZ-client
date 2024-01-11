@@ -1,10 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
 .logo{
     max-height: 3.5rem !important;
 }
 
 .header-container{
     height: 4rem;
-    background-color: #9468F1;
+    background-color: #8A61E0;
+    .font-header{
+        font-family: 'Montserrat', sans-serif;
+        text-shadow: 2px 3px 3px rgba(0, 0, 0, 0.3);
+    }
 }
 
 // To override the default primeng styles
@@ -12,8 +18,8 @@
     .p-button {
         border-radius: 40px;
         background-color: white;
-        color: rgba(148,104,241,1);
-        border: rgba(148,104,241,1);
+        color: #8A61E0;
+        border: #8A61E0;
     }
 }
 
