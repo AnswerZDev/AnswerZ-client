@@ -11,6 +11,7 @@
 .slogan-home{
     color: #9468F1;
     word-break: break-all;
+    text-shadow: 2px 3px 3px rgba(0, 0, 0, 0.2);
 }
 
 .info-home{
@@ -25,4 +26,23 @@
 
 .image-container {
     margin-bottom: -2rem;
+}
+
+:host ::ng-deep {
+    .p-button {
+        border-radius: 40px;
+        background-color: transparent;
+        color: #8A61E0;
+        border: 1px solid #8A61E0;
+        box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.2);
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 300;
+    }
+
+    .home-button1 {
+        button {
+            background-color: #8A61E0;
+            color: white;
+        }
+    }
 }
