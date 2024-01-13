@@ -10,8 +10,10 @@ export class UserProfileComponent {
   
   public profil_picture: string = '../../../../assets/images/profil_user.png';
   public import_background: string = '../../../../assets/images/import_user2.svg';
-
+  public picture_friend: string = '../../../../assets/images/profil.jpeg';
   public data!: number;
+  public picture_friend2: string = '../../../../assets/images/carreau.jpeg';
+  
 
   constructor(
     private readonly router: Router){

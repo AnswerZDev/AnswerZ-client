@@ -4,7 +4,8 @@ import { UserProfileComponent } from './component/user-profile/user-profile.comp
 import { UserRoutingModule } from './user-routing.module';
 import { ButtonModule } from 'primeng/button';
 import { FormsModule } from '@angular/forms';
-
+import { AvatarModule } from 'primeng/avatar';
+import { AvatarGroupModule } from 'primeng/avatargroup';
 
 
 @NgModule({
@@ -16,6 +17,8 @@ import { FormsModule } from '@angular/forms';
     UserRoutingModule,
     ButtonModule,
     FormsModule,
+    AvatarGroupModule,
+    AvatarModule
   ]
 })
 export class UserModule { }

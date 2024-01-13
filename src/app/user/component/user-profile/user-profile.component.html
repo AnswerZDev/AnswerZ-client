@@ -35,28 +35,22 @@
         </div>
     </div>  
 
-    <div class="flex flex-row mt-5">
-        <div class="w-6 border-right-1 border-500 px-5 py-3">
+    <div class="flex flex-column lg:flex-row mt-5">
+        <div class="w-12 lg:w-6 lg:border-right-1 lg:border-500 px-2 lg:px-5 lg:py-3">
             <h3>Friends</h3>
-            <div class="flex flex-row justify-content-between">
-                <div class="p-circle flex align-items-center justify-content-center">
-                    1
-                </div>
-                <div class="p-circle flex align-items-center justify-content-center">
-                    1
-                </div>
-                <div class="p-circle flex align-items-center justify-content-center">
-                    1
-                </div>
-                <div class="p-circle flex align-items-center justify-content-center">
-                    1
-                </div>
-                <div class="p-circle flex align-items-center justify-content-center">
-                    1
-                </div>
-                <div class="p-circle flex align-items-center justify-content-center">
-                    1
-                </div>
+            <div class="flex flex-row justify-content-between flex-wrap">
+                    <p-avatar 
+                        [image]="picture_friend" 
+                        styleClass="mr-2 mb-3 custom-large-avatar" size="xlarge" shape="circle"></p-avatar>
+                    <p-avatar 
+                        [image]="picture_friend2" 
+                        styleClass="mr-2 mb-3 custom-large-avatar" size="xlarge" shape="circle"></p-avatar>
+                    <p-avatar 
+                        image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" 
+                        styleClass="mr-2 mb-3 custom-large-avatar" size="xlarge" shape="circle"></p-avatar>
+                    <p-avatar 
+                        image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" 
+                        styleClass="mr-2 mb-3 custom-large-avatar" size="xlarge" shape="circle"></p-avatar>
             </div>
             <div class="text-center p-3">
                 <a>see all friends</a>
@@ -69,28 +63,19 @@
             </div>
     
         </div>
-        <div class="w-6 px-5 py-3">
+        <div class="w-12 lg:w-6 px-2 py-2 lg:px-5 lg:py-3">
             <h3>Stats</h3>
             <div class="w-100 p-8 bg-green-200">
             </div>
-            <div class="flex flex-row justify-content-center mt-4">
-                <div class="p-circle flex align-items-center justify-content-center">
-                    1
-                </div>
-                <div class="p-circle flex align-items-center justify-content-center">
-                    1
-                </div>
-                <div class="p-circle flex align-items-center justify-content-center">
-                    1
-                </div>
+            <div class="flex flex-row justify-content-center mt-4 flex-wrap">
+                <p-avatar label="P" styleClass="mr-2" size="xlarge" shape="circle"></p-avatar>
+                <p-avatar label="P" styleClass="mr-2" size="xlarge" shape="circle"></p-avatar> 
+                <p-avatar label="P" styleClass="mr-2" size="xlarge" shape="circle"></p-avatar> 
+                <p-avatar label="P" styleClass="mr-2" size="xlarge" shape="circle"></p-avatar> 
             </div>
         </div>
     </div>
 
 </div>
 
-<!-- app.component.html -->
-<div class="text-2xl">
-    le nombre est : {{ data | json }}
-</div>
   
