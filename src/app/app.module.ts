@@ -11,6 +11,7 @@ import { ErrorsModule } from './errors/errors.module';
 import { FlashcardModule } from './flashcards/flashcards.module';
 import { CardsPreviewComponent } from './flashcards/component/cards-preview/cards-preview.component';
 import { UserModule } from './user/user.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
     declarations: [
@@ -26,6 +27,7 @@ import { UserModule } from './user/user.module';
         ErrorsModule,
         FlashcardModule,
         UserModule,
+        HttpClientModule,
     ],
     providers: [],
     bootstrap: [AppComponent]

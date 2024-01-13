@@ -4,14 +4,19 @@
     height: 100%;
     color: #9468F1;
 
+    .my-container{
+        background-color: rgba(148, 104, 241, 0.77);
+        border-radius: 10px;
+    }
+
     .first-container{
-        background-color: rgba(148, 128, 190, 0.77);
         color: black;
     }
 
     .second-container{
         background-color: rgba(148,104,241,1);
         color: black;
+        border-radius: 10px;
     }
 
     .p-circle {
@@ -20,5 +25,14 @@
         border-radius: 50%;
         background-color:#d1d1d1;
         color: black;
+    }
+}
+
+// To override the default primeng styles
+:host ::ng-deep {
+    .p-button {
+        border-radius: 40px;
+        background-color: rgba(148,104,241,1);
+        border: 1px solid white;
     }
 }

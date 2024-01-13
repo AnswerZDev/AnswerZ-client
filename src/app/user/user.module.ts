@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserProfileComponent } from './component/user-profile/user-profile.component';
 import { UserRoutingModule } from './user-routing.module';
+import { ButtonModule } from 'primeng/button';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -12,6 +14,8 @@ import { UserRoutingModule } from './user-routing.module';
   imports: [
     CommonModule,
     UserRoutingModule,
+    ButtonModule,
+    FormsModule,
   ]
 })
 export class UserModule { }

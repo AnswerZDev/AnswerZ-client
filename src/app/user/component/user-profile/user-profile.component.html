@@ -1,16 +1,42 @@
 <div class="profil">
     <h1>My profile</h1>
-    <div class="flex flex-column">
-        <div class="first-container p-4">
-            first
+
+    <div class="flex flex-column my-container">
+        <div class="first-container p-6">
         </div>
         <div class="second-container p-4">
-            second
+            <div class="flex flex-row static">
+                <div class="w-2 relative">
+                    <img class="absolute bottom-0 left-0" [src]="profil_picture"
+                        height="150">
+                </div>
+                <div class="w-4 flex text-white flex-column justify-content-center align-items-start">
+                    <div class="text-xl font-bold pl-3"> 
+                        John Doe
+                    </div>
+                    <div class="pl-3">
+                        19 flashcards 5 followers 34 likes
+                    </div>
+                </div>
+                <div class="w-3 p-6 relative">
+                    <img class="absolute bottom-100 right-50" [src]="import_background"
+                        height="70">
+                    <div class="absolute bottom-50 right-0 text-xs text-white">
+                        <span class="text-base">upload a image</span> <br>
+                        or drag and drop PNG, JPG, GIF up to 25MB
+                    </div>
+                </div>
+                <div class="w-5 flex justify-content-end align-items-end">
+                    <p-button label="Edit profil" severity="help"
+                        (onClick)="redirectToModifPage()">
+                    </p-button>
+                </div>
+            </div>
         </div>
     </div>  
 
     <div class="flex flex-row mt-5">
-        <div class="w-6 bg-indigo-300 px-3">
+        <div class="w-6 border-right-1 border-500 px-5 py-3">
             <h3>Friends</h3>
             <div class="flex flex-row justify-content-between">
                 <div class="p-circle flex align-items-center justify-content-center">
@@ -35,10 +61,36 @@
             <div class="text-center p-3">
                 <a>see all friends</a>
             </div>
+            <div>
+                <h3>Activité récente</h3>
+                <div class="w-100 p-8 bg-blue-200">
+                    
+                </div>
+            </div>
     
         </div>
-        <div class="w-6 bg-blue-200 pl-3">
+        <div class="w-6 px-5 py-3">
             <h3>Stats</h3>
+            <div class="w-100 p-8 bg-green-200">
+            </div>
+            <div class="flex flex-row justify-content-center mt-4">
+                <div class="p-circle flex align-items-center justify-content-center">
+                    1
+                </div>
+                <div class="p-circle flex align-items-center justify-content-center">
+                    1
+                </div>
+                <div class="p-circle flex align-items-center justify-content-center">
+                    1
+                </div>
+            </div>
         </div>
     </div>
+
 </div>
+
+<!-- app.component.html -->
+<div class="text-2xl">
+    le nombre est : {{ data | json }}
+</div>
+  
