@@ -13,6 +13,8 @@ export class UserProfileComponent {
   public picture_friend: string = '../../../../assets/images/profil.jpeg';
   public data!: number;
   public picture_friend2: string = '../../../../assets/images/carreau.jpeg';
+  public picture_friend3: string = '../../../../assets/images/hugo.jpeg';
+  public picture_friend4: string = '../../../../assets/images/audric.jpeg';
   
 
   constructor(

@@ -98,7 +98,7 @@
                             "src/assets"
                         ],
                         "styles": [
-                            "src/styles.scss"
+                            "src/styles.scss",
                             "@angular/material/prebuilt-themes/purple-green.css",
                             "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
                             "node_modules/primeng/resources/primeng.min.css",
@@ -109,11 +109,8 @@
                 }
             }
         }
-<<<<<<< HEAD
     },
     "cli": {
       "analytics": false
-=======
->>>>>>> 9f32dbc (:heavy_plus_sign: build: configure primeng & primeflex & update .gitignore)
     }
 }
