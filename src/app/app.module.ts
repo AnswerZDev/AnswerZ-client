@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { InjectionToken, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -13,6 +13,9 @@ import { FlashcardModule } from './flashcards/flashcards.module';
 import { CardsPreviewComponent } from './flashcards/component/cards-preview/cards-preview.component';
 import { UserModule } from './user/user.module';
 import { HttpClientModule } from '@angular/common/http';
+import { AdminModule } from './admin/admin.module';
+
+import { NbSidebarModule, NbThemeModule } from '@nebular/theme';
 
 @NgModule({
     declarations: [
@@ -29,6 +32,9 @@ import { HttpClientModule } from '@angular/common/http';
         FlashcardModule,
         UserModule,
         HttpClientModule,
+        AdminModule,
+        NbThemeModule,
+        NbSidebarModule,
    ],
     providers: [],
     bootstrap: [AppComponent]

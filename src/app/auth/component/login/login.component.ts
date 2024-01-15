@@ -1,5 +1,5 @@
-import { Component } from '@angular/core'
-import { FormControl, FormGroup, Validators } from '@angular/forms'
+import { Component, OnInit } from '@angular/core'
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
 import { AuthService } from '../../services/auth.services'
 
@@ -26,7 +26,15 @@ export class LoginComponent {
     constructor(
         private readonly router: Router,
         private readonly authService: AuthService,
+        private formBuilder: FormBuilder
     ) { }
+
+    // ngOnInit(){
+    //     this.authForm = this.formBuilder.group({
+    //     email: [null, [Validators.required, Validators.email]], // Ajout de Validators.email ici
+    //     password: [null, Validators.required, Validators.minLength(8)]
+    //     });
+    // }
 
     /**
      * @author @Alexis1663
@@ -56,7 +64,7 @@ export class LoginComponent {
      */
     public login(): void {
         if (this.authForm.valid) {
-            this.authService.login(this.authForm.value)
+            this.authService.login(this.authForm.get('email')?.value, this.authForm.get('password')?.value)
         }
     }
 }
