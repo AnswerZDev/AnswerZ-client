@@ -1,7 +1,7 @@
 import { Component } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
-import { AuthService } from '../../services/auth.services'
+import {SecurityService} from "../../../shared/services/security.services";
 
 @Component({
     selector: 'app-login',
@@ -25,7 +25,7 @@ export class LoginComponent {
 
     constructor(
         private readonly router: Router,
-        private readonly authService: AuthService,
+        private readonly securityService: SecurityService,
     ) { }
 
     /**
@@ -56,7 +56,7 @@ export class LoginComponent {
      */
     public login(): void {
         if (this.authForm.valid) {
-            this.authService.login(this.authForm.value)
+            this.securityService.login(this.authForm.value.email, this.authForm.value.password)
         }
     }
 }

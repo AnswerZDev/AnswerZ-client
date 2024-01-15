@@ -1,7 +1,8 @@
 import { Observable } from 'rxjs'
 import { Injectable } from '@angular/core'
-import { Token } from '@app/core/models/Token'
 import { HttpClient } from '@angular/common/http'
+import {environment} from "../../../../environments/environment";
+import {Token} from "../../models/Token";
 
 @Injectable({
     providedIn: 'root',

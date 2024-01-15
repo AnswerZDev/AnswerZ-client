@@ -5,7 +5,7 @@
     <img [src]="imageLogo" alt="Logo AnswerZ" class="logo" />
     <h2 class="text-2xl h-full text-white-alpha-90">Answerz</h2>
   </a>
-  <div class="button-header-container">
+  <div class="button-header-container" *ngIf="!securityService.isAuthenticated()">
     <p-button label="Login" (onClick)="redirectToLoginPage()"></p-button>
     &nbsp;
     <p-button label="Register" (onClick)="redirectToRegisterPage()"></p-button>
