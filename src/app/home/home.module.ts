@@ -4,6 +4,7 @@ import { NgClass, NgIf } from '@angular/common'
 import { HomeRoutingModule } from './home-routing.module'
 import { IndexComponent } from './component/index/index.component';
 import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
 
 @NgModule({
     imports: [
@@ -13,6 +14,7 @@ import { ButtonModule } from 'primeng/button';
         NgClass,
         HomeRoutingModule,
         ButtonModule,
+        InputTextModule,
     ],
     declarations: [
         IndexComponent,
