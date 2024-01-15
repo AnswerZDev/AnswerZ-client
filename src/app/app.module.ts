@@ -15,8 +15,6 @@ import { UserModule } from './user/user.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AdminModule } from './admin/admin.module';
 
-import { NbSidebarModule, NbThemeModule } from '@nebular/theme';
-
 @NgModule({
     declarations: [
         AppComponent,
@@ -33,8 +31,6 @@ import { NbSidebarModule, NbThemeModule } from '@nebular/theme';
         UserModule,
         HttpClientModule,
         AdminModule,
-        NbThemeModule,
-        NbSidebarModule,
    ],
     providers: [],
     bootstrap: [AppComponent]
