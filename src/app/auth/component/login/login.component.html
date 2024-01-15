@@ -30,7 +30,7 @@
           </div>
 
           <div class="w-full pt-5">
-            <p-button label="Login" (onClick)="login()"></p-button>
+            <p-button label="Login" (onClick)="login()" [disabled]="!authForm.valid"></p-button>
           </div>
 
           <div class="text-center">

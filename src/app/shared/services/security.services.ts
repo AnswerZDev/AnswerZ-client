@@ -10,7 +10,12 @@ import {User} from "../../core/models/api/user";
     providedIn: 'root',
 })
 export class SecurityService {
-    private jwt: JWT | undefined
+    
+    /**
+     * JWT object
+     * @private _jwt { JWT | undefined } JWT object is undefined by default and will be set(in localstorage) when the user logs in
+     */
+    private _jwt: JWT | undefined
 
     constructor(
         private readonly authentificationApi: AuthenticationApi,
@@ -48,7 +53,7 @@ export class SecurityService {
     }
 
     // public updateUser(){
-    //     if (this.jwt?.roles.includes('ROLE_USER')) {
+    //     if (this._jwt?.roles.includes('ROLE_USER')) {
     //         this._loadingUser = true
     //         this.userApi.current().subscribe({
     //             next: (user) => {
@@ -64,7 +69,7 @@ export class SecurityService {
 
     public load() {
         if (this.token) {
-            this.jwt = JWTService.parseJWT(this.token)
+            this._jwt = JWTService.parseJWT(this.token)
             this.addTimeoutLogout()
             this.loadUser()
         }
@@ -84,7 +89,7 @@ export class SecurityService {
 
     logout() {
         this.token = undefined
-        this.jwt = undefined
+        this._jwt = undefined
         this._user = undefined
         this.router.navigate(['/auth/login']).then()
     }
@@ -94,7 +99,8 @@ export class SecurityService {
     }
 
     private loadUser() {
-        /*if (this.jwt?.roles.includes('ROLE_USER')) {
+        console.log(this._jwt)
+        /*if (this._jwt?.roles.includes('ROLE_USER')) {
             this._loadingUser = true
             this.userApi.current().subscribe({
                 next: (user) => {
@@ -108,10 +114,10 @@ export class SecurityService {
     }
 
     private addTimeoutLogout() {
-        if (this.jwt) {
+        if (this._jwt) {
             setTimeout(() => {
                 this.logout()
-            }, this.jwt.exp * 1000 - Date.now())
+            }, this._jwt.exp * 1000 - Date.now())
         }
     }
 }
