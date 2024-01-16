@@ -11,6 +11,5 @@ export class AppComponent {
 
     public onComponentLoad() { }
 
-    /* Petite stratégie pour ne pas avoir le footer sur les pages souhaitées */
     constructor() {}
 }

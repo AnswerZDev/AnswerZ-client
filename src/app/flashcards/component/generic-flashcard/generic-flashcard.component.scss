@@ -1,8 +1,5 @@
 .title {
     color: #9468F1;
-    opacity: 77%;
-    font-size: 45px;
-    font-weight: bold;
 }
 
 label {
@@ -13,12 +10,6 @@ label {
 .ImageUpload{
     border: 2px dashed #bbb5ff;
     background: #f7f8ff;
-    max-height: 300px;
-}
-
-#input-file {
-    height: 100%;
-    width: 100%;
 }
 
 #block {
@@ -69,7 +60,6 @@ input::placeholder {
         background-color: #9468F1;
         border: 1px solid #9468F1;
         border-radius: 15px;
-        font-size: 18px;
         font-weight: 550;
         justify-content: center;
     }
@@ -79,7 +69,7 @@ input::placeholder {
             background-color: white;
             border: 3px solid #9468F1;
             color: #9468F1;
-            width: 80%;
+            width: 100%;
             justify-content: center;
             font-weight: bold;
         }

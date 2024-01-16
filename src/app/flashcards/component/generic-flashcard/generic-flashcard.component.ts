@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, ContentChildren, QueryList, TemplateRef, ViewChild } from '@angular/core';
+import { AfterContentInit, Component, ContentChildren, QueryList } from '@angular/core';
 import { PrimeTemplate } from 'primeng/api';
 
 interface Mode{
@@ -17,12 +17,11 @@ export class GenericFlashcardComponent implements AfterContentInit{
   selectedModeVisibilities: Mode | undefined;
   selectedModeCategories: Mode | undefined;
   blockChars: RegExp = /^[0-9a-zA-Z\s]+$/;
-  public imageUpload: string = "../../../../assets/images/image_upload.png";
+  imageUpload: string = "../../../../assets/images/image_upload.png";
 
   @ContentChildren(PrimeTemplate) templates = {} as QueryList<PrimeTemplate>;
   title: PrimeTemplate | undefined = undefined
   button: PrimeTemplate | undefined = undefined
-  
   
   ngOnInit() {
     this.modesVisibilite = [
