@@ -1,0 +1,16 @@
+
+<div class="flex flex-column align-items-center main-div">
+
+  <div class="flex flex-row"  *ngIf="image !== undefined">
+    <img [src]="image" alt="Image" class="image-set-flashcard">
+  </div>
+
+  <div class="flex flex-row text-flashcard text-xl text-center py-2" *ngIf="title !== undefined">
+    {{title}}
+  </div>
+
+  <div class="flex flex-row text-flashcard text-center text-md" *ngIf="description !== undefined">
+    {{description}}
+  </div>
+</div>
+

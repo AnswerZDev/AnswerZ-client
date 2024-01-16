@@ -5,8 +5,14 @@ import { HomeRoutingModule } from './home-routing.module'
 import { IndexComponent } from './component/index/index.component';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
+import { SharedModule } from "../shared/shared.module";
 
 @NgModule({
+    declarations: [
+        IndexComponent,
+    ],
+    providers: [],
+    exports: [],
     imports: [
         FormsModule,
         ReactiveFormsModule,
@@ -15,11 +21,7 @@ import { InputTextModule } from 'primeng/inputtext';
         HomeRoutingModule,
         ButtonModule,
         InputTextModule,
-    ],
-    declarations: [
-        IndexComponent,
-    ],
-    providers: [],
-    exports: []
+        SharedModule
+    ]
 })
 export class HomeModule { }
