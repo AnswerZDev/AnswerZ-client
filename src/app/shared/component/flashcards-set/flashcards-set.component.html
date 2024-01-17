@@ -1,16 +1,22 @@
-
 <div class="flex flex-column align-items-center main-div">
 
-  <div class="flex flex-row"  *ngIf="image !== undefined">
+  <div class="flex flex-row" *ngIf="image !== undefined">
     <img [src]="image" alt="Image" class="image-set-flashcard">
   </div>
 
-  <div class="flex flex-row text-flashcard text-xl text-center py-2" *ngIf="title !== undefined">
+  <div class="flex flex-row text-flashcard text-xl text-center py-1" *ngIf="title !== undefined">
     {{title}}
   </div>
 
-  <div class="flex flex-row text-flashcard text-center text-md" *ngIf="description !== undefined">
-    {{description}}
+  <div class="flex flex-row text-flashcard text-center text-description text-md" *ngIf="description !== undefined"
+    (mouseenter)="op.show($event)" (mouseleave)="op.hide()">
+    <span>
+      {{description.length > 50 ? description.slice(0,50) + '...' : description}}
+    </span>
   </div>
+  <p-overlayPanel #op>
+    <span>
+      {{description}}
+    </span>
+  </p-overlayPanel>
 </div>
-
