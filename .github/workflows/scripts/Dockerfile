@@ -7,13 +7,10 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 
 # Installe les dépendances
-RUN npm install
-
-# Copie le code source de l'application
-COPY . .
+RUN npm i
 
 # Construit l'application Angular en mode de production
-RUN npm run build --prod
+RUN npm run build
 
 # Utilise une image Nginx pour servir l'application construite
 FROM nginx:alpine
