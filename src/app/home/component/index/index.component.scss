@@ -80,3 +80,24 @@
     color: #9468F1;
     word-break: break-word;
 }
+
+.feature-icon{
+    background-color: #9468F1;
+    border-radius: 20%;
+}
+
+.features-box{
+    border: 2px solid;
+    border-color: #9468F1;
+    border-radius: 10%;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Divisez en quatre colonnes de largeur égale */
+    gap: 5%; /* Espace entre les colonnes */
+}
+
+.logo-container {
+    width: fit-content;
+}
