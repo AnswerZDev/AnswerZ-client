@@ -1,5 +1,5 @@
 # Utilise une image Node.js pour construire l'application Angular
-FROM node:14 AS builder
+FROM node:20 AS builder
 
 WORKDIR /app
 
