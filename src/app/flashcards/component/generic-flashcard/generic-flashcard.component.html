@@ -1,9 +1,9 @@
 <div class="flex flex-column px-5 md:px-auto">
-    <div class="flex-1 flex align-items-center justify-content-between pt-3 md:mr-5">
+    <div class="flex-1 flex flex-column md:flex-row md:align-items-center justify-content-between pt-3 md:mr-5 gap-2 md:gap-0">
       <ng-container *ngIf="title" [ngTemplateOutlet]="title.template" class="text-5xl md:text-6xl"></ng-container>
-      <p-dropdown [options]="modesVisibilite" [(ngModel)]="selectedModeVisibilities" class="align-self-center md:align-self-auto" optionLabel="name" value="Public"></p-dropdown>
+      <p-dropdown [options]="modesVisibilite" [(ngModel)]="selectedModeVisibilities" optionLabel="name" value="Public"></p-dropdown>
     </div>
-    <div class="flex flex-column md:flex-row justify-content-between w-full">
+    <div class="flex flex-column md:flex-row justify-content-between w-full mt-3 md:mt-0">
       <div class="flex flex-column md:align-self-auto align-self-center w-full md:w-6">
         <label for="blockChars" class="font-bold block mb-2"> Name </label>
         <input pInputText id="block" [pKeyFilter]="blockChars" class="w-full border-round-xl mb-2" placeholder="Name"/>
@@ -24,13 +24,15 @@
         </p-card>
       </div>
       <div class="flex flex-column mt-4 md:align-self-auto align-self-center w-full md:w-6">
-        <p-card class="flex flex-column pt-0 md:pl-5 custom-card mr-auto md:mr-4 w-full">
-          <label for="blockChars" class="font-bold block mt-1 mb-2"> Word </label>
-          <input pInputText id="block" [pKeyFilter]="blockChars" class="w-full border-round-xl mb-2" placeholder="Word"/>
-          <label for="blockChars" class="font-bold block mb-2"> Translation </label>
-          <input pInputText id="block" [pKeyFilter]="blockChars" class="w-full border-round-xl mb-4" placeholder="Translation"/>
-          <p-button class="flex flex-column w-full button-add"> ADD FLASHCARD TO SET </p-button>
-        </p-card>
+        <form class="flashcardForm" [formGroup]="flashcardForm" (ngSubmit)="onSubmit()">
+          <p-card class="flex flex-column pt-0 md:pl-5 custom-card mr-auto md:mr-4 w-full">
+            <label for="blockChars" class="font-bold block mt-1 mb-2"> Question </label>
+            <input pInputText id="block" formControlName="question" class="w-full border-round-xl mb-2" placeholder="Question"/>
+            <label for="blockChars" class="font-bold block mb-2"> Answer </label>
+            <input pInputText id="block" formControlName="answer" class="w-full border-round-xl mb-4" placeholder="Answer"/>
+            <p-button type="submit" class="flex flex-column w-full button-add"> ADD FLASHCARD TO SET </p-button>
+          </p-card>
+        </form>
         <div class="flex flex-row justify-content-center mt-4">
           <p-button class="right-side w-full md:w-7 pl-0 md:pl-5" (click)="moveToPreview()">PREVIEW</p-button>
         </div>
@@ -43,6 +45,6 @@
       <div class="flex flex-row w-full">
         <span class="text-5xl opacity-70 font-bold pl-0 md:pl-2 title">Card's preview</span>
       </div>
-      <app-cards-preview></app-cards-preview>
+      <app-cards-preview class="flex flex-column md:flex-row flex-wrap gap-0 md:gap-4 w-full" (editModeClicked)="moveToInput()"></app-cards-preview>
     </div>
   </div>

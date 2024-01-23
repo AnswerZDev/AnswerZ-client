@@ -4,6 +4,8 @@ import { NgClass, NgIf } from '@angular/common'
 import { ButtonModule } from 'primeng/button';
 import { HeaderComponent } from './component/header/header.component';
 import { FooterComponent } from './component/footer/footer.component';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
     imports: [
@@ -12,12 +14,13 @@ import { FooterComponent } from './component/footer/footer.component';
         NgIf,
         NgClass,
         ButtonModule,
+        ToastModule
     ],
     declarations: [
         HeaderComponent,
         FooterComponent,
     ],
-    providers: [],
+    providers: [MessageService],
     exports: [
         HeaderComponent,
         FooterComponent,

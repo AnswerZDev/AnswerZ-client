@@ -1,5 +1,9 @@
-import { AfterContentInit, Component, ContentChildren, QueryList } from '@angular/core';
+import { AfterContentInit, Component, ContentChildren, ElementRef, Input, QueryList, Renderer2, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PrimeTemplate } from 'primeng/api';
+import { FlashcardsService } from '../../services/flashcards.service';
+import { CardsPreviewComponent } from '../cards-preview/cards-preview.component';
+import { ToastService } from 'src/app/shared/services/toast.service';
 
 interface Mode{
   name: string;
@@ -12,6 +16,8 @@ interface Mode{
 })
 export class GenericFlashcardComponent implements AfterContentInit{
 
+  flashcardForm!: FormGroup;
+
   modesVisibilite: Mode[] | undefined;
   modesCategorie: Mode[] | undefined;
   selectedModeVisibilities: Mode | undefined;
@@ -19,9 +25,22 @@ export class GenericFlashcardComponent implements AfterContentInit{
   blockChars: RegExp = /^[0-9a-zA-Z\s]+$/;
   imageUpload: string = "../../../../assets/images/image_upload.png";
 
+  @ViewChild(CardsPreviewComponent) cardsPreview!: CardsPreviewComponent;
+
   @ContentChildren(PrimeTemplate) templates = {} as QueryList<PrimeTemplate>;
   title: PrimeTemplate | undefined = undefined
   button: PrimeTemplate | undefined = undefined
+
+  constructor(private formBuilder: FormBuilder, private flashcardService: FlashcardsService, private toastService: ToastService, private el: ElementRef, private renderer: Renderer2) {
+    this.createForm();
+  }
+
+  private createForm() {
+    this.flashcardForm = this.formBuilder.group({
+      question: ['', [Validators.required]],
+      answer: ['', [Validators.required]],
+    });
+  }
   
   ngOnInit() {
     this.modesVisibilite = [
@@ -78,10 +97,45 @@ export class GenericFlashcardComponent implements AfterContentInit{
 
   moveToPreview() {
     const totalHeight = document.documentElement.scrollHeight;
-    // Déplacer la fenêtre vers le haut de la section de prévisualisation
+    // Déplace la fenêtre vers le haut de la section de prévisualisation
     window.scrollTo({
       top: totalHeight,
       behavior: 'smooth'
     });
+  }
+
+  onSubmit() {
+    if (this.flashcardForm.valid) {
+      // Envoye les données au backend
+      this.flashcardService.createFlashcard(this.flashcardForm.value).subscribe(
+        (response) => {
+          console.log(response);
+          // Appelle la méthode dans CardsPreviewComponent pour ajouter la nouvelle flashcard
+          this.cardsPreview.addFlashcard(response);
+          this.flashcardForm.reset();
+          this.toastService.toast('success', 'Success', 'Création réussie');
+        },
+        (error) => {
+          console.error(error);
+          this.toastService.toast('error', 'Error', 'Erreur lors de la création');
+        }
+      );
+    } else {
+      // Le formulaire n'est pas valide
+      console.error('Form is not valid');
+      this.toastService.toast('error', 'Error', 'Le formulaire n\'est pas valide');
+    }
+  }
+
+  moveToInput() {
+    const formContainer = this.el.nativeElement.querySelector('.flashcardForm');
+
+    if (formContainer) {
+      // Déclencher le focus sur le premier champ de saisie
+      const firstInput = formContainer.querySelector('input');
+      if (firstInput) {
+        firstInput.focus();
+      }
+    }
   }
 }

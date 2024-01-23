@@ -1,12 +1,5 @@
 .title {
     color: #9468F1;
-    @media (min-width: 400px) and (max-width: 450px) {
-        font-size: 1.25rem !important;
-    }
-
-    @media (min-width: 500px) and (max-width: 600px) {
-        font-size: 1.5rem !important;
-    }
 }
 
 :host ::ng-deep {

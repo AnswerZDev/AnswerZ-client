@@ -11,6 +11,8 @@ import { HomeFlashcardComponent } from './pages/home-flashcard/home-flashcard.co
 import { EditFlashcardComponent } from './component/edit-flashcard/edit-flashcard.component';
 import { GenericFlashcardComponent } from './component/generic-flashcard/generic-flashcard.component';
 import { CardsPreviewComponent } from './component/cards-preview/cards-preview.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
     imports: [
@@ -24,6 +26,8 @@ import { CardsPreviewComponent } from './component/cards-preview/cards-preview.c
         KeyFilterModule,
         CardModule,
         ButtonModule,
+        HttpClientModule,
+        ToastModule
     ],
     declarations: [
         HomeFlashcardComponent,

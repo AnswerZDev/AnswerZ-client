@@ -1,17 +1,25 @@
-<div class="flex flex-column md:flex-row flex-wrap gap-0 md:gap-4 w-full" id="previewSection">
+<div *ngFor="let flashcard of flashcards; index as i" id="previewSection">
     <p-card class="w-full md:w-5 lg:w-20rem mb-4 pl-0 md:pl-2">
         <div class="flex flex-column">
-        <div class="flex flex-row justify-content-between mt-1">
-            <div class="flex flex-column">
-            <span style="font-size: 30px; font-weight: bold; margin-top: 5px;">Flashcard #1</span>
-            <span>.................................................</span>
+            <div class="flex flex-row justify-content-between mt-1">
+                <div class="flex flex-column">
+                    <span style="font-size: 30px; font-weight: bold; margin-top: 5px;">Flashcard #{{i+1}}</span>
+                    <span>.................................................</span>
+                </div>
+                <p-toast></p-toast>
+                <button class="delete" (click)="deleteFlashcard(flashcard.id)">×</button>
             </div>
-            <button class="delete">×</button>
-        </div>
-        <span class="mt-2">Word</span>
-        <span style="font-size: 30px; font-weight: bold;">Hello</span>
-        <span class="mt-2">Translation</span>
-        <span style="font-size: 30px; font-weight: bold;">Witaj</span>
+            <div class="flex flex-row justify-content-between">
+                <div class="flex flex-column">
+                    <span class="mt-2">Question</span>
+                    <span class=" text-xl font-bold">{{flashcard.question}}</span>
+                    <span class="mt-2">Answer</span>
+                    <span class=" text-xl font-bold">{{flashcard.answer}}</span>
+                </div>
+                <div *ngIf="editMode">
+                    <button pButton icon="pi pi-pencil" class="p-button-rounded mt-2 modify" (click)="editModeClicked.emit()"></button>
+                </div>
+            </div>
         </div>
     </p-card>
 </div>
