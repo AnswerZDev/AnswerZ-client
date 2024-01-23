@@ -1,15 +1,11 @@
 #!/bin/bash
 
-cd ~/frontend/AnswerZ-client
+cd ~/AnswerZ-client
 git pull origin main
-npm install
-ng build
-cp -r dist/* ~/prod
 
-cp .github/workflows/scripts/Dockerfile ~/prod
-cp .github/workflows/scripts/default.conf ~/prod
 
-cd ~/prod
+cp .github/workflows/scripts/Dockerfile ~/AnswerZ-client
+cp .github/workflows/scripts/default.conf ~/AnswerZ-client
 
 
 container_name="answerz-front"
