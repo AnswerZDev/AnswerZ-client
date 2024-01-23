@@ -20,4 +20,4 @@ if docker ps -q --filter "name=${container_name}" 2>/dev/null; then
 fi
 
 docker build --tag angular-app .
-docker run --name $container_name -p 4200:4200 -d angular-app
+docker run --name $container_name -p 80:80 -d angular-app
