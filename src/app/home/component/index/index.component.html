@@ -14,8 +14,8 @@
         Free app for everyone
       </span>
       <div class="flex flex-row py-4">
-        <p-button class="home-button1" label="Get Started"></p-button>
-        <p-button class="pl-5" label="Learn More"></p-button>
+        <p-button (click)="redirectToLoginPage()" class="home-button1" label="Get Started"></p-button>
+        <p-button (click)="redirectToGithubPage()" class="pl-5" label="Learn More"></p-button>
       </div>
 
       <div class="flex flex-row py-4 pr-7 justify-content-between">
@@ -68,6 +68,13 @@
       <app-flashcards-set image="../../../../assets/images/carte.PNG"
         description="Here's a tuto on how to loose $1000 dollars on BlackJack"
         title="How to win a BlackJack game"></app-flashcards-set>
+    </div>
+
+    <div class="flex flex-column py-3 align-items-center">
+      <span class="text-3xl font-semibold explore-set py-3" style="color: white;">
+        Explore More
+      </span>
+      <p-button icon="pi pi-plus button-explore text-xl"></p-button>
     </div>
   </div>
 

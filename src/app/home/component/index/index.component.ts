@@ -1,4 +1,5 @@
 import { Component } from '@angular/core'
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-index',
@@ -6,5 +7,27 @@ import { Component } from '@angular/core'
     styleUrls: ['./index.component.scss'],
 })
 export class IndexComponent {
-    constructor() { }
+    constructor(private readonly router: Router) { }
+
+    /**
+     * @author @HugoooR
+     * @date 24/01/2024
+     * @description Navigation to the Login page.
+     * @memberof HomePage
+     */
+    redirectToLoginPage(): void {
+        this.router.navigate(['/auth/login']);
+    }
+
+
+    /**
+     * @author @HugoooR
+     * @date 24/01/2024
+     * @description Navigation to the GitHub page.
+     * @memberof HomePage
+     */
+    redirectToGithubPage(): void {
+        window.open("https://github.com/AnswerZDev/AnswerZ", "_blank");
+    }
+
 }

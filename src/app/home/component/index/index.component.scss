@@ -38,8 +38,15 @@
         box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.2);
         font-family: 'Montserrat', sans-serif;
         font-weight: 300;
+
+        .button-explore{
+            border: none;
+            color: white;
+            font-weight: 800 !important;
+        }
     }
 
+ 
     .home-button1 {
         button {
             background-color: #8A61E0;
@@ -87,7 +94,7 @@
 }
 
 .features-box{
-    border: 2px solid;
+    border: 1.5px solid;
     border-color: #9468F1;
     border-radius: 10%;
 }
@@ -100,4 +107,8 @@
 
 .logo-container {
     width: fit-content;
+}
+
+.explore-set{
+    font-weight: 500 !important;
 }
