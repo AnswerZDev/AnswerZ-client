@@ -13,6 +13,7 @@ import { GenericFlashcardComponent } from './component/generic-flashcard/generic
 import { CardsPreviewComponent } from './component/cards-preview/cards-preview.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastModule } from 'primeng/toast';
+import { AllFlashcardsSetComponent } from './component/all-flashcards-set/all-flashcards-set.component';
 
 @NgModule({
     imports: [
@@ -35,6 +36,7 @@ import { ToastModule } from 'primeng/toast';
         EditFlashcardComponent,
         GenericFlashcardComponent,
         CardsPreviewComponent,
+        AllFlashcardsSetComponent,
     ],
     providers: [],
     exports: []
