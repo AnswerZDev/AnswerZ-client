@@ -29,7 +29,7 @@ export class UserProfileComponent {
   }
 
   redirectToModifPage(): void {
-    this.router.navigate(['/']);
+    this.router.navigate(['/user/profile/edit']);
   }
 
   onFileSelected(event: any): void {

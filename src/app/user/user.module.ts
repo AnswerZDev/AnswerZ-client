@@ -9,11 +9,13 @@ import { AvatarGroupModule } from 'primeng/avatargroup';
 import { ToastModule } from 'primeng/toast';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { EditProfileComponent } from './component/edit-profile/edit-profile.component';
 
 
 @NgModule({
   declarations: [
-    UserProfileComponent
+    UserProfileComponent,
+    EditProfileComponent
   ],
   imports: [
     CommonModule,
