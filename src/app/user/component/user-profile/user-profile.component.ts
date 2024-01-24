@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-user-profile',
@@ -23,6 +24,7 @@ export class UserProfileComponent {
 
   constructor(
     private readonly router: Router,
+    private messageService: MessageService,
   ){
   }
 
@@ -37,14 +39,16 @@ export class UserProfileComponent {
       const fileExtension: string = this.getFileExtension(file.name);
 
       if(this.isExtensionAllowed(fileExtension, this.allowedExtensions)){
-        this.getFileExtension(file.name)
+        this.getFileExtension(file.name);
+        reader.onload = (e) => {
+          this.previewImage = e.target?.result as string;
+        };
+        reader.readAsDataURL(file);
       } else {
-        //  TODO() => à refaire(toast primeng !)
+          console.log("tester toast");
+          this.showErrorToast('Veuillez sélectionner un fichier image valide : \
+                png, jpg, jpeg ou svg');
       }
-      reader.onload = (e) => {
-        this.previewImage = e.target?.result as string;
-      };
-      reader.readAsDataURL(file);
     }
   }
 
@@ -55,6 +59,14 @@ export class UserProfileComponent {
   
   private getFileExtension(filename: string): string {
     return filename.split('.').pop() || '';
+  }
+
+  private showErrorToast(message: string): void {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Erreur',
+      detail: message
+    });
   }
 
 }
