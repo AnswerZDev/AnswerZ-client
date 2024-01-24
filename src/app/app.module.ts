@@ -34,6 +34,7 @@ import { AdminModule } from './admin/admin.module'
         AdminModule,
         AuthModule,
         BrowserAnimationsModule,
+        SharedModule,
     ],
     providers: [],
     bootstrap: [AppComponent]
