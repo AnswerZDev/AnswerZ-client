@@ -6,6 +6,9 @@ import { ButtonModule } from 'primeng/button';
 import { FormsModule } from '@angular/forms';
 import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
+import { ToastModule } from 'primeng/toast';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -19,6 +22,8 @@ import { AvatarGroupModule } from 'primeng/avatargroup';
     FormsModule,
     AvatarGroupModule,
     AvatarModule,
+    ToastModule,
+    ToastModule,
   ]
 })
 export class UserModule { }
