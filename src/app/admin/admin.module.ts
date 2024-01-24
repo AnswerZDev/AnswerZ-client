@@ -1,7 +1,6 @@
-import { InjectionToken, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DashboardAdminComponent } from './component/dashboard-admin/dashboard-admin.component';
-import { AppRoutingModule } from '../app-routing.module';
 import { AdminRoutingModule } from './admin-routing.module';
 import { RouterModule } from '@angular/router';
 
@@ -16,8 +15,6 @@ import { RouterModule } from '@angular/router';
     AdminRoutingModule,
     RouterModule,
   ],
-  providers: [
-
-  ]
+  providers: []
 })
 export class AdminModule { }

@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { NotificationService } from 'src/app/shared/services/notifications.services';
 
 @Component({
   selector: 'app-user-profile',
@@ -10,7 +8,7 @@ import { NotificationService } from 'src/app/shared/services/notifications.servi
 })
 export class UserProfileComponent {
 
-  private allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+  private allowedExtensions: string[] = ['jpg', 'jpeg', 'png', 'gif'];
 
   public profil_picture: string = '../../../../assets/images/profil_user.png';
   public import_background: string = '../../../../assets/images/import_user2.svg';
@@ -25,10 +23,10 @@ export class UserProfileComponent {
 
   constructor(
     private readonly router: Router,
-    private notificationService: NotificationService){
+  ){
   }
 
-  redirectToModifPage(){
+  redirectToModifPage(): void {
     this.router.navigate(['/']);
   }
 
@@ -39,9 +37,9 @@ export class UserProfileComponent {
       const fileExtension: string = this.getFileExtension(file.name);
 
       if(this.isExtensionAllowed(fileExtension, this.allowedExtensions)){
-        console.log('Fichier autorisé. Extension:', this.getFileExtension(file.name));
+        this.getFileExtension(file.name)
       } else {
-        this.notificationService.showNotification('Fichier non autorisé', 'Fermer');
+        //  TODO() => à refaire(toast primeng !)
       }
       reader.onload = (e) => {
         this.previewImage = e.target?.result as string;
