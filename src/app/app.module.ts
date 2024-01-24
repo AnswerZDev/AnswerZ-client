@@ -26,14 +26,15 @@ import { AdminModule } from './admin/admin.module'
         AuthModule,
         ToastModule,
         BrowserAnimationsModule,
-        SharedModule,
         HttpClientModule,
         HomeModule,
         ErrorsModule,
         FlashcardModule,
         UserModule,
         AdminModule,
-   ],
+        AuthModule,
+        BrowserAnimationsModule,
+    ],
     providers: [],
     bootstrap: [AppComponent]
 })

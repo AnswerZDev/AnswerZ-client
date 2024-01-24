@@ -10,6 +10,17 @@ i {
     color: #9468F1;
 }
 
+.text-center {
+    a {
+        cursor: pointer;
+        color: blue;
+        text-decoration: none;
+    }
+    a:hover {
+        text-decoration: underline;
+    }
+}
+
 /* Override primeng default style */
 :host ::ng-deep {
     .p-inputtext {

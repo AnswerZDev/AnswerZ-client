@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
+<<<<<<< HEAD
 import { Route, Router } from '@angular/router';
 import {SecurityService} from "../../services/security.services";
+=======
+>>>>>>> header
 
 @Component({
     selector: 'app-header',

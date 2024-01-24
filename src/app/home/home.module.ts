@@ -3,16 +3,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { NgClass, NgIf } from '@angular/common'
 import { HomeRoutingModule } from './home-routing.module'
 import { IndexComponent } from './component/index/index.component';
+import { HeaderComponent } from './component/header/header.component';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { SharedModule } from "../shared/shared.module";
 
 @NgModule({
-    declarations: [
-        IndexComponent,
-    ],
-    providers: [],
-    exports: [],
     imports: [
         FormsModule,
         ReactiveFormsModule,
@@ -22,6 +18,15 @@ import { SharedModule } from "../shared/shared.module";
         ButtonModule,
         InputTextModule,
         SharedModule
+    ],
+    declarations: [
+        IndexComponent,
+        HeaderComponent,
+    ],
+    providers: [],
+    exports: [
+        HeaderComponent,
+        ButtonModule,
     ]
 })
 export class HomeModule { }
