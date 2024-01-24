@@ -1,8 +1,5 @@
 .title {
     color: #9468F1;
-    opacity: 77%;
-    font-size: 45px;
-    font-weight: bold;
 }
 
 :host ::ng-deep {
@@ -10,7 +7,6 @@
         background-color: #9468F1;
         border: 1px solid #9468F1;
         border-radius: 15px;
-        font-size: 40px;
         font-weight: 550;
         justify-content: center;
     }

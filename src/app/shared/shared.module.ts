@@ -6,6 +6,8 @@ import { HeaderComponent } from './component/header/header.component';
 import { FooterComponent } from './component/footer/footer.component';
 import { FlashcardsSetComponent } from './component/flashcards-set/flashcards-set.component';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
     imports: [
@@ -15,13 +17,14 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
         NgClass,
         ButtonModule,
         OverlayPanelModule,
+        ToastModule
     ],
     declarations: [
         HeaderComponent,
         FlashcardsSetComponent,
         FooterComponent,
     ],
-    providers: [],
+    providers: [MessageService],
     exports: [
         HeaderComponent,
         FlashcardsSetComponent,

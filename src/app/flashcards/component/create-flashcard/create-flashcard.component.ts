@@ -7,5 +7,5 @@ import { HomeFlashcardComponent } from '../../pages/home-flashcard/home-flashcar
   styleUrls: ['./create-flashcard.component.scss'],
 })
 export class CreateFlashcardComponent extends HomeFlashcardComponent {
-
+  
 }
