@@ -18,13 +18,11 @@
                         19 flashcards 5 followers 34 likes
                     </div>
                 </div>
-                <div class="w-3 p-6 relative">
+                <div class="w-3 p-6 relative profil_user">
+                    <img *ngIf="previewImage" [src]="previewImage" alt="Image Preview">
+                    <input type="file" (change)="onFileSelected($event)">
                     <img class="absolute bottom-100 right-50" [src]="import_background"
                         height="70">
-                    <div class="absolute bottom-50 right-0 text-xs text-white">
-                        <span class="text-base">upload a image</span> <br>
-                        or drag and drop PNG, JPG, GIF up to 25MB
-                    </div>
                 </div>
                 <div class="w-5 flex justify-content-end align-items-end">
                     <p-button label="Edit profil" severity="help"
@@ -77,5 +75,7 @@
     </div>
 
 </div>
+
+
 
   

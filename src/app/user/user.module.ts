@@ -18,7 +18,7 @@ import { AvatarGroupModule } from 'primeng/avatargroup';
     ButtonModule,
     FormsModule,
     AvatarGroupModule,
-    AvatarModule
+    AvatarModule,
   ]
 })
 export class UserModule { }

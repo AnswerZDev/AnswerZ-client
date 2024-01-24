@@ -30,12 +30,13 @@
                             "src/assets"
                         ],
                         "styles": [
-                            "src/styles.scss",
-                            "node_modules/primeicons/primeicons.css",
-                            "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
-                            "node_modules/primeng/resources/primeng.min.css",
-                            "node_modules/primeflex/primeflex.css",
-                            "primeng/resources/themes/lara-light-blue/theme.css"
+                          "@angular/material/prebuilt-themes/deeppurple-amber.css",
+                          "src/styles.scss",
+                          "node_modules/primeicons/primeicons.css",
+                          "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
+                          "node_modules/primeng/resources/primeng.min.css",
+                          "node_modules/primeflex/primeflex.css",
+                          "primeng/resources/themes/lara-light-blue/theme.css"
                         ],
                         "scripts": []
                     },
@@ -98,12 +99,12 @@
                             "src/assets"
                         ],
                         "styles": [
-                            "src/styles.scss",
-                            "@angular/material/prebuilt-themes/purple-green.css",
-                            "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
-                            "node_modules/primeng/resources/primeng.min.css",
-                            "node_modules/primeflex/primeflex.css",
-                            "node_modules/@nebular/theme/styles/prebuilt/default.css"
+                          "@angular/material/prebuilt-themes/deeppurple-amber.css",
+                          "src/styles.scss",
+                          "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
+                          "node_modules/primeng/resources/primeng.min.css",
+                          "node_modules/primeflex/primeflex.css",
+                          "node_modules/@nebular/theme/styles/prebuilt/default.css"
                         ],
                         "scripts": []
                     }

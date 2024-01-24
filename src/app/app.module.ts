@@ -14,6 +14,7 @@ import { CardsPreviewComponent } from './flashcards/component/cards-preview/card
 import { UserModule } from './user/user.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AdminModule } from './admin/admin.module';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
     declarations: [
@@ -31,6 +32,7 @@ import { AdminModule } from './admin/admin.module';
         UserModule,
         HttpClientModule,
         AdminModule,
+        MatSnackBarModule
    ],
     providers: [],
     bootstrap: [AppComponent]

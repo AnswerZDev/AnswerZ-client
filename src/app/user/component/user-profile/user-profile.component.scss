@@ -37,3 +37,9 @@
         border: 1px solid white;
     }
 }
+
+:host {
+    .profil_user{
+        //background-image: url('{{ backgroundImageUrl }}');
+    }
+}
