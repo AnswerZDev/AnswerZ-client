@@ -1,20 +1,19 @@
-import { InjectionToken, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AuthRoutingModule } from './auth/auth-routing.module';
 import { AuthModule } from './auth/auth.module';
 import { ToastModule } from 'primeng/toast';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
+import { HomeModule } from './home/home.module';
 import { ErrorsModule } from './errors/errors.module';
 import { FlashcardModule } from './flashcards/flashcards.module';
-import { CardsPreviewComponent } from './flashcards/component/cards-preview/cards-preview.component';
 import { UserModule } from './user/user.module';
 import { HttpClientModule } from '@angular/common/http';
-import { AdminModule } from './admin/admin.module';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { AdminModule } from './admin/admin.module'
 
 @NgModule({
     declarations: [
@@ -25,14 +24,15 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
         AppRoutingModule,
         ToastModule,
         AuthModule,
+        ToastModule,
         BrowserAnimationsModule,
         SharedModule,
+        HttpClientModule,
+        HomeModule,
         ErrorsModule,
         FlashcardModule,
         UserModule,
-        HttpClientModule,
         AdminModule,
-        MatSnackBarModule
    ],
     providers: [],
     bootstrap: [AppComponent]

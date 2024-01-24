@@ -11,7 +11,6 @@ export class AuthenticationApi {
     constructor(private readonly http: HttpClient) {}
 
     public login(email: string, password: string): Observable<Token> {
-        //console.log(environment.server);
         return this.http.post<Token>(environment.server + '/auth/login', {
             email,
             password,
@@ -21,5 +20,4 @@ export class AuthenticationApi {
     public logout(): Observable<any> {
         return this.http.post(environment.server + '/auth/logout', {})
     }
-
 }

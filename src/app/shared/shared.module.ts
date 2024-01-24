@@ -4,6 +4,8 @@ import { NgClass, NgIf } from '@angular/common'
 import { ButtonModule } from 'primeng/button';
 import { HeaderComponent } from './component/header/header.component';
 import { FooterComponent } from './component/footer/footer.component';
+import { FlashcardsSetComponent } from './component/flashcards-set/flashcards-set.component';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 
 @NgModule({
     imports: [
@@ -12,14 +14,17 @@ import { FooterComponent } from './component/footer/footer.component';
         NgIf,
         NgClass,
         ButtonModule,
+        OverlayPanelModule,
     ],
     declarations: [
         HeaderComponent,
+        FlashcardsSetComponent,
         FooterComponent,
     ],
     providers: [],
     exports: [
         HeaderComponent,
+        FlashcardsSetComponent,
         FooterComponent,
     ]
 })

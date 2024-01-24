@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+.welcome-container{
+    background-color: #9267F0;
+    .welcome-message{
+        color: white;
+        font-family: 'Montserrat', sans-serif;
+    }
+}
+
+.slogan-home{
+    color: #9468F1;
+    word-break: break-word;
+    text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
+}
+
+.info-home{
+    font-family: 'Montserrat', sans-serif;
+    color: #B594FF;
+}
+
+.search-courses{
+    background-color: #9468F1;
+}
+
+.image-container {
+    margin-bottom: -1rem;
+    height: 45%;
+    width: 45%;
+}
+
+:host ::ng-deep {
+    .p-button {
+        border-radius: 40px;
+        background-color: transparent;
+        color: #8A61E0;
+        border: 1px solid #8A61E0;
+        box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.2);
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 300;
+    }
+
+    .home-button1 {
+        button {
+            background-color: #8A61E0;
+            color: white;
+        }
+    }
+
+    .search-input{
+        box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.2);
+        height: 3rem !important;
+    }
+
+    .search-bar-home-color{
+        color: #9468F1;
+    }
+
+    .search-input:focus + .search-bar-text {
+        color: white;
+    }
+  
+    .search-input.p-inputtext {
+        height: 2rem;
+        border-radius: 3rem !important;
+        border: 1px solid #9468F1;
+    }
+}
+
+.message-home{
+    color: #8A61E0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.stats-number-home{
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+.features-home{
+    color: #9468F1;
+    word-break: break-word;
+}
+
+.feature-icon{
+    background-color: #9468F1;
+    border-radius: 20%;
+}
+
+.features-box{
+    border: 2px solid;
+    border-color: #9468F1;
+    border-radius: 10%;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Divisez en quatre colonnes de largeur égale */
+    gap: 5%; /* Espace entre les colonnes */
+}
+
+.logo-container {
+    width: fit-content;
+}

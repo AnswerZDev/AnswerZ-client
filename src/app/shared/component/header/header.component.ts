@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Route, Router } from '@angular/router';
+import {SecurityService} from "../../services/security.services";
 
 @Component({
     selector: 'app-header',
@@ -13,6 +14,7 @@ export class HeaderComponent {
 
     constructor(
         private readonly router: Router,
+        public readonly securityService: SecurityService,
     ) { }
 
     /**
