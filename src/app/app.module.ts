@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { ToastModule } from 'primeng/toast';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
+import {HttpClientModule} from "@angular/common/http";
 import { HomeModule } from './home/home.module';
 
 @NgModule({
@@ -19,8 +20,10 @@ import { HomeModule } from './home/home.module';
         AppRoutingModule,
         ToastModule,
         AuthModule,
+        ToastModule,
         BrowserAnimationsModule,
         SharedModule,
+        HttpClientModule,
         HomeModule,
     ],
     providers: [],

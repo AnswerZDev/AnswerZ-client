@@ -1,6 +1,7 @@
 import { Component } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
+import {SecurityService} from "../../../shared/services/security.services";
 
 @Component({
     selector: 'app-login',
@@ -24,6 +25,7 @@ export class LoginComponent {
 
     constructor(
         private readonly router: Router,
+        private readonly securityService: SecurityService,
     ) { }
 
     /**
@@ -44,5 +46,17 @@ export class LoginComponent {
      */
     public redirectToForgotPassword(): void {
         this.router.navigate(['../forgot-password'])
+    }
+
+    /**
+     * @author @Alexis1663
+     * @date 29/10/2023
+     * @description TODO()
+     * @memberof LoginComponent
+     */
+    public login(): void {
+        if (this.authForm.valid) {
+            this.securityService.login(this.authForm.value.email, this.authForm.value.password)
+        }
     }
 }
