@@ -1,9 +1,9 @@
-import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FlashcardsService } from '../../services/flashcards.service';
-import { MessageService } from 'primeng/api';
 import { ToastService } from 'src/app/shared/services/toast.service';
-import { GenericFlashcardComponent } from '../generic-flashcard/generic-flashcard.component';
 import { Router } from '@angular/router';
+import { ConfirmService } from 'src/app/shared/services/confirm.service';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-cards-preview',
@@ -11,19 +11,26 @@ import { Router } from '@angular/router';
   styleUrls: ['./cards-preview.component.scss'],
 })
 export class CardsPreviewComponent {
-  flashcards: any[] = [];
+  @Input() flashcards: any[] = [];
+  @Input() displayedFlashcards: any[] = [];
+  @Input() flashcardForm!: FormGroup;
+  @Input() question: string = '';
+  @Input() answer: string = '';
   editMode: boolean = false;
+  _currentDelete: number = 0;
 
   @Output() editModeClicked: EventEmitter<void> = new EventEmitter<void>();
+  @Output() flashcardId: EventEmitter<number> = new EventEmitter<number>();
 
-  constructor(private flashcardService: FlashcardsService, private toastService: ToastService, private router: Router) { }
+  constructor(
+    private flashcardService: FlashcardsService, 
+    private router: Router, 
+    private confirmService: ConfirmService,
+    private toastService: ToastService
+  ) { }
 
   ngOnInit() {
-    this.flashcardService.getAllFlashcards().subscribe((data: any) => {
-      this.flashcards = data;
-    });
-
-    // Vérifier si la route actuelle contient 'edit', si oui on est en mode édition, si non on est en mode création
+    // Vérifie si la route actuelle contient 'edit', si oui on est en mode édition, si non on est en mode création
     const currentRoute: string = this.router.url;
     this.editMode = currentRoute.includes('edit');
   }
@@ -33,21 +40,48 @@ export class CardsPreviewComponent {
   }
 
   modifyFlashcard(id: number) {
-    console.log(id);
+    this.editModeClicked.emit();
+    if(id !== undefined && id !== null) {
+      this.flashcardId.emit(id);
+    }
+    this.flashcardService.getFlashcardById(id).subscribe((flashcard) => {
+      if (flashcard) {
+        const updatedFlashcard = this.flashcardForm.setValue({
+            question: flashcard.question,
+            answer: flashcard.answer
+        });
+
+        this.flashcardService.updateFlashcard(id, updatedFlashcard)
+          .subscribe((result) => {
+            console.log('Flashcard updated with success', result);
+          });
+      }
+    });
   }
 
-  deleteFlashcard(id: number) {
-    this.flashcardService.deleteFlashcard(id).subscribe(
-      () => {
-        // Suppression réussie
-        this.flashcards = this.flashcards.filter((flashcard) => flashcard.id !== id);
-        this.toastService.toast('success', 'Success', 'Suppression réussie');
-      },
-      (error) => {
-        // Erreur lors de la suppression
-        console.error('Erreur lors de la suppression :', error);
-        this.toastService.toast('error', 'Error', 'Erreur lors de la suppression');
+  deleteFlashcard(id: number, event: Event) {
+    this._currentDelete = id;
+  
+    this.confirmService.confirm(event, 'Are you sure you want to delete ?', 'Canceled suppression', () => 
+    {
+      if (this._currentDelete === undefined) {
+        return;
       }
-    );
+
+      this.flashcardService.deleteFlashcard(this._currentDelete).subscribe(
+        () => {
+          // Suppression réussie
+          this.flashcards = this.flashcards.filter((flashcard) => flashcard.id !== this._currentDelete);
+          this.toastService.toast('success', 'Success', 'You have deleted this element');
+        },
+        (error) => {
+          // Erreur lors de la suppression
+          console.error('Error during the suppression :', error);
+        }
+      );
+    },
+    () => {
+      console.log('Rejected in Component 1');
+    });
   }
 }

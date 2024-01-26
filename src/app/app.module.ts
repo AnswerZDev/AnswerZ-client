@@ -4,12 +4,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
-import { ToastModule } from 'primeng/toast';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 import { ErrorsModule } from './errors/errors.module';
 import { FlashcardModule } from './flashcards/flashcards.module';
-import { CardsPreviewComponent } from './flashcards/component/cards-preview/cards-preview.component';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { ToastService } from './shared/services/toast.service';
+import { ConfirmService } from './shared/services/confirm.service';
 
 @NgModule({
     declarations: [
@@ -18,7 +19,6 @@ import { CardsPreviewComponent } from './flashcards/component/cards-preview/card
     imports: [
         BrowserModule,
         AppRoutingModule,
-        ToastModule,
         AuthModule,
         BrowserAnimationsModule,
         SharedModule,

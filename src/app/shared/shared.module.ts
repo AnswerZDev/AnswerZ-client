@@ -5,7 +5,10 @@ import { ButtonModule } from 'primeng/button';
 import { HeaderComponent } from './component/header/header.component';
 import { FooterComponent } from './component/footer/footer.component';
 import { ToastModule } from 'primeng/toast';
-import { MessageService } from 'primeng/api';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { ToastService } from './services/toast.service';
+import { ConfirmService } from './services/confirm.service';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @NgModule({
     imports: [
@@ -14,13 +17,14 @@ import { MessageService } from 'primeng/api';
         NgIf,
         NgClass,
         ButtonModule,
-        ToastModule
+        ToastModule,
+        ConfirmPopupModule
     ],
     declarations: [
         HeaderComponent,
         FooterComponent,
     ],
-    providers: [MessageService],
+    providers: [ToastService, ConfirmService, MessageService, ConfirmationService],
     exports: [
         HeaderComponent,
         FooterComponent,
