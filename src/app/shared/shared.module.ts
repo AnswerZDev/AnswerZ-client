@@ -19,7 +19,9 @@ import { ToastModule } from 'primeng/toast';
         NgIf,
         NgClass,
         ButtonModule,
-        ToastModule
+        OverlayPanelModule,
+        ToastModule,
+        ConfirmPopupModule
     ],
     declarations: [
         HeaderComponent,
