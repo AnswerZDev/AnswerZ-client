@@ -6,7 +6,10 @@ import { HeaderComponent } from './component/header/header.component';
 import { FooterComponent } from './component/footer/footer.component';
 import { FlashcardsSetComponent } from './component/flashcards-set/flashcards-set.component';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
-import { MessageService } from 'primeng/api';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { ToastService } from './services/toast.service';
+import { ConfirmService } from './services/confirm.service';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 
 @NgModule({
@@ -16,7 +19,6 @@ import { ToastModule } from 'primeng/toast';
         NgIf,
         NgClass,
         ButtonModule,
-        OverlayPanelModule,
         ToastModule
     ],
     declarations: [
@@ -24,7 +26,7 @@ import { ToastModule } from 'primeng/toast';
         FlashcardsSetComponent,
         FooterComponent,
     ],
-    providers: [MessageService],
+    providers: [ToastService, ConfirmService, MessageService, ConfirmationService],
     exports: [
         HeaderComponent,
         FlashcardsSetComponent,
