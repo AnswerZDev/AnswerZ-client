@@ -12,10 +12,11 @@ import { EditFlashcardComponent } from './component/edit-flashcard/edit-flashcar
 import { GenericFlashcardComponent } from './component/generic-flashcard/generic-flashcard.component';
 import { CardsPreviewComponent } from './component/cards-preview/cards-preview.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ToastModule } from 'primeng/toast';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { InputTextModule } from 'primeng/inputtext';
 import { PaginatorModule } from 'primeng/paginator';
+import { ToastModule } from 'primeng/toast';
+import { AllFlashcardsSetComponent } from './component/all-flashcards-set/all-flashcards-set.component';
 
 @NgModule({
     imports: [
@@ -41,6 +42,7 @@ import { PaginatorModule } from 'primeng/paginator';
         EditFlashcardComponent,
         GenericFlashcardComponent,
         CardsPreviewComponent,
+        AllFlashcardsSetComponent,
     ],
     providers: [],
     exports: []
