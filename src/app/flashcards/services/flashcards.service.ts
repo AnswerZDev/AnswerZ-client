@@ -1,17 +1,20 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { ApiService } from 'src/app/core/services/api.service';
 
 @Injectable({
     providedIn: 'root'
 })
-export class FlashcardsService {
+export class FlashcardsService extends ApiService {
     private baseUrl = 'http://localhost:3000/flashcard';
 
-    constructor(private http: HttpClient) { }
+    constructor(http: HttpClient) { 
+        super('');
+    }
 
-    getAllFlashcards(): Observable<any> {
-        return this.http.get(`${this.baseUrl}`);
+    getAllFlashcards() {
+        return this.get('flashcard');
     }
 
     getFlashcardById(id: number): Observable<any> {

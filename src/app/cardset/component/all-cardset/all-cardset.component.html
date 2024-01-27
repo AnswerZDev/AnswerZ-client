@@ -1,0 +1,32 @@
+<!-- <div *ngFor="let cardset of listCardset">
+    <div class="h-10rem w-8 bg-blue-200 border-1 border-blue-500 flex flex-column">
+        <h3>{{ cardset.Name }}</h3>
+        <div>
+            {{ cardset.description }}
+        </div>
+    </div>
+</div> -->
+<div class="flex flex-column p-8 bg-blue-200">
+
+    <div class="flex flex-row justify-content-between mb-4">
+        <div class="w-10 bg-yellow-200">
+            <span class="p-input-icon-left w-10">
+                <i class="pi pi-search"></i>
+                <p-autoComplete [(ngModel)]="selectedItems" [suggestions]="items" (completeMethod)="filterCountry()" [multiple]="true"></p-autoComplete>
+            </span>
+        </div>
+        <div class="">
+            <p-dropdown [options]="categories" [(ngModel)]="selectedCategories" optionLabel="name" value="All"></p-dropdown>
+        </div>
+    </div>
+
+    <div class="shadow-6 p-3 border-round-2xl border-ra flex-column">
+        <div>Mathématique</div>
+        <div class="flex flex-row">
+            <div *ngFor="let cardset of listCardset">
+                <app-search-cardset></app-search-cardset>
+            </div>
+        </div>
+    </div>
+
+</div>

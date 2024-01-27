@@ -10,8 +10,9 @@ import { environment } from "../../../environments/environment";
 export abstract class ApiService {
     protected readonly _uri: Uri
     protected readonly http: HttpClient = inject(HttpClient)
-    private url = environment.server + '/api-docs'
-
+    // private url = environment.server + '/api-docs'
+    private url = environment.server
+    
     protected constructor(extendUrl: string) {
         this._uri = new Uri(this.url)
         this._uri = this._uri.appendPath(extendUrl)

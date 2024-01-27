@@ -32,6 +32,11 @@ const routes: Routes = [
         path: 'admin',
         loadChildren: () =>
             import('./admin/admin.module').then((m) => m.AdminModule)
+    },
+    {
+        path: 'cardset',
+        loadChildren: () =>
+            import('./cardset/cardset.module').then((m) => m.CardsetModule)
     }
 ]
 

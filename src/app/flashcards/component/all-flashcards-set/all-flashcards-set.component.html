@@ -1,12 +1,14 @@
-<div class="flex flex-column p-5 bg-yellow-100">
+<div class="flex flex-column p-6 bg-yellow-100">
     
-    <div>
-        <p-button icon="pi pi-plus"></p-button>
-    </div>
+    <a (click)="onRedirigeToPageCreateFlashcardSet()" class="shadow-5 border-round-2xl w-2 h-6rem no-underline">
+        <div class="w-full h-full flex justify-content-center align-items-center">
+            <i class="pi pi-plus" style="color: black;"></i>
+        </div>
+    </a>
 
     <div class="flex flex-row justify-content-between">
         <h3>My sets</h3>
-        <p-button label="Public"></p-button>
+        <p-dropdown [options]="modesVisibilite" [(ngModel)]="selectedModeVisibilities" optionLabel="name" value="Public"></p-dropdown>
     </div>
     <div class="">
         

@@ -1,0 +1,11 @@
+:host ::ng-deep {
+    .p-dropdown {
+        background-color: #9468F1;
+        border: #9468F1;
+        border-radius: 10px;
+    }
+
+    .p-dropdown-label, .p-icon{
+        color: white;
+    }
+}
