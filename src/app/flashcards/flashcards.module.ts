@@ -13,6 +13,9 @@ import { GenericFlashcardComponent } from './component/generic-flashcard/generic
 import { CardsPreviewComponent } from './component/cards-preview/cards-preview.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastModule } from 'primeng/toast';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { InputTextModule } from 'primeng/inputtext';
+import { PaginatorModule } from 'primeng/paginator';
 
 @NgModule({
     imports: [
@@ -27,7 +30,10 @@ import { ToastModule } from 'primeng/toast';
         CardModule,
         ButtonModule,
         HttpClientModule,
-        ToastModule
+        InputTextModule,
+        ToastModule,
+        ConfirmPopupModule,
+        PaginatorModule
     ],
     declarations: [
         HomeFlashcardComponent,

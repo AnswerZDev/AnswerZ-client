@@ -1,13 +1,19 @@
-<div *ngFor="let flashcard of flashcards; index as i" id="previewSection">
+<div *ngFor="let flashcard of displayedFlashcards; index as i" id="previewSection">
     <p-card class="w-full md:w-5 lg:w-20rem mb-4 pl-0 md:pl-2">
         <div class="flex flex-column">
             <div class="flex flex-row justify-content-between mt-1">
                 <div class="flex flex-column">
-                    <span style="font-size: 30px; font-weight: bold; margin-top: 5px;">Flashcard #{{i+1}}</span>
-                    <span>.................................................</span>
+                    <div class="flex flex-row gap-2 md:gap-3 mr-2">
+                        <span style="font-size: 30px; font-weight: bold; margin-top: 5px;">Flashcard #{{i+1}}</span>
+                        <div *ngIf="editMode">
+                            <button pButton icon="pi pi-pencil" class="p-button-rounded modify" (click)="modifyFlashcard(flashcard.id)"></button>
+                        </div>
+                    </div>
+                    <span>.......................................................</span>
                 </div>
                 <p-toast></p-toast>
-                <button class="delete" (click)="deleteFlashcard(flashcard.id)">×</button>
+                <p-confirmPopup></p-confirmPopup>
+                <button class="delete" (click)="deleteFlashcard(flashcard.id, $event)">×</button>
             </div>
             <div class="flex flex-row justify-content-between">
                 <div class="flex flex-column">
@@ -16,10 +22,11 @@
                     <span class="mt-2">Answer</span>
                     <span class=" text-xl font-bold">{{flashcard.answer}}</span>
                 </div>
-                <div *ngIf="editMode">
-                    <button pButton icon="pi pi-pencil" class="p-button-rounded mt-2 modify" (click)="editModeClicked.emit()"></button>
-                </div>
             </div>
         </div>
     </p-card>
 </div>
+
+
+
+
