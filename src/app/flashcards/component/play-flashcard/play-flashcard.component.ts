@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./play-flashcard.component.scss']
 })
 export class PlayFlashcardComponent {
+  progressValue = 25;
 
+  increment() {
+    if (this.progressValue < 100) {
+      this.progressValue += 25;
+    }
+  }
 }

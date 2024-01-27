@@ -1,9 +1,8 @@
-/* flashcard-page.component.css */
 .flashcard-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100vh; /* Utiliser la hauteur de l'écran */
+    height: 100vh;
   }
   
   .top {
@@ -17,13 +16,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: auto; /* Utiliser la propriété auto pour pousser le contenu vers le bas */
+    margin-top: auto;
   }
   
   .additional-buttons {
     display: flex;
     justify-content: center;
-    margin-top: 10px; /* Ajuster la marge selon vos besoins */
+    margin-top: 10px;
   }
   
   .additional-buttons button {
@@ -42,6 +41,7 @@
     align-items: center;
     border: 4px solid #9468F1;
     border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   }
   
   
@@ -52,4 +52,5 @@
     background-color: #9468F1;
     width: 100%;
     border-radius: 0px 0px 10px 10px;
+    text-align: center;
   }

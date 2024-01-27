@@ -3,18 +3,26 @@
       <h1>English - vocabulary #3</h1>
       <h3>Theme : English</h3>
       <div class="progress-container">
+            <p-progressBar
+              [value]="progressValue"
+              [style]="{'height': '20px'}"
+              [showValue]="true"
+            >
+            </p-progressBar>
+            
       </div>
     </div>
   
     <div class="flashcard">
         <h3 class="answer-question">Lorem Ipsum</h3>
         <div class="flashcard-bottom">
+            <p>Hit the card to turn it</p>
         </div>  
     </div>
   
     <div class="additional-buttons">
       <button pButton type="button" label="Button 1"></button>
-      <button pButton type="button" label="Button 2"></button>
+      <button pButton type="button" label="Button 2" (click)="increment()"></button>
     </div>
   </div>
   

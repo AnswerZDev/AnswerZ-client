@@ -17,6 +17,7 @@ import { ToastModule } from 'primeng/toast';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { InputTextModule } from 'primeng/inputtext';
 import { PaginatorModule } from 'primeng/paginator';
+import { ProgressBarModule } from 'primeng/progressbar';
 
 @NgModule({
     imports: [
@@ -34,6 +35,7 @@ import { PaginatorModule } from 'primeng/paginator';
         InputTextModule,
         ToastModule,
         ConfirmPopupModule,
+        ProgressBarModule,
         PaginatorModule
     ],
     declarations: [
