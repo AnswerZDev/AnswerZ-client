@@ -11,6 +11,7 @@ import { HomeFlashcardComponent } from './pages/home-flashcard/home-flashcard.co
 import { EditFlashcardComponent } from './component/edit-flashcard/edit-flashcard.component';
 import { GenericFlashcardComponent } from './component/generic-flashcard/generic-flashcard.component';
 import { CardsPreviewComponent } from './component/cards-preview/cards-preview.component';
+import { PlayFlashcardComponent } from './component/play-flashcard/play-flashcard.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
@@ -41,6 +42,7 @@ import { PaginatorModule } from 'primeng/paginator';
         EditFlashcardComponent,
         GenericFlashcardComponent,
         CardsPreviewComponent,
+        PlayFlashcardComponent
     ],
     providers: [],
     exports: []

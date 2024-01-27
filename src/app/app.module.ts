@@ -13,7 +13,7 @@ import { ErrorsModule } from './errors/errors.module';
 import { FlashcardModule } from './flashcards/flashcards.module';
 import { UserModule } from './user/user.module';
 import { HttpClientModule } from '@angular/common/http';
-import { AdminModule } from './admin/admin.module'
+import { AdminModule } from './admin/admin.module';
 
 @NgModule({
     declarations: [
