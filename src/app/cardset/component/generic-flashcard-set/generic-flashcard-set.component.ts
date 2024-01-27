@@ -1,8 +1,8 @@
 import { AfterContentInit, Component, ContentChildren, ElementRef, QueryList, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PrimeTemplate } from 'primeng/api';
-import { FlashcardsService } from '../../services/flashcards.service';
-import { CardsPreviewComponent } from '../cards-preview/cards-preview.component';
+import { FlashcardsService } from '../../../flashcards/services/flashcards.service';
+import { CardsPreviewComponent } from '../../../flashcards/component/cards-preview/cards-preview.component';
 import { ToastService } from 'src/app/shared/services/toast.service';
 
 interface Mode{
@@ -11,10 +11,10 @@ interface Mode{
 
 @Component({
   selector: 'app-generic-flashcard',
-  templateUrl: './generic-flashcard.component.html',
-  styleUrls: ['./generic-flashcard.component.scss']
+  templateUrl: './generic-flashcard-set.component.html',
+  styleUrls: ['./generic-flashcard-set.component.scss']
 })
-export class GenericFlashcardComponent implements AfterContentInit{
+export class GenericFlashcardSetComponent implements AfterContentInit{
 
   flashcardForm!: FormGroup;
   flashcards: any[] = [];
@@ -29,6 +29,7 @@ export class GenericFlashcardComponent implements AfterContentInit{
   selectedModeCategories: Mode | undefined;
   blockChars: RegExp = /^[0-9a-zA-Z\s]+$/;
   imageUpload: string = "../../../../assets/images/image_upload.png";
+  imageResized: string = ''; // Image redimensionnée à afficher dans la section de prévisualisation
 
   @ViewChild(CardsPreviewComponent) cardsPreview!: CardsPreviewComponent;
 
@@ -101,17 +102,54 @@ export class GenericFlashcardComponent implements AfterContentInit{
 
   handleImageFile(file: File) {
     const maxSizeInBytes = 25 * 1024 * 1024; // 25 Mo en octets
-
+  
     if (file.size <= maxSizeInBytes) {
-      const imgLink = URL.createObjectURL(file);
-      this.imageUpload = imgLink;
+      const reader = new FileReader();
+  
+      reader.onload = (e: any) => {
+        const imageDataUrl = e.target.result;
+        this.resizeImage(imageDataUrl);
+      };
+  
+      reader.readAsDataURL(file);
     } else {
       alert("Le fichier est trop volumineux. Veuillez sélectionner un fichier de 25 Mo ou moins.");
     }
   }
+  
+  resizeImage(imageDataUrl: string): void {
+    const img = new Image();
+  
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+  
+      if (ctx) {  // Vérification pour éviter l'erreur potentielle
+        // Définissez la taille souhaitée (par exemple, 300x300)
+        const targetWidth = 300;
+        const targetHeight = 300;
+  
+        canvas.width = targetWidth;
+        canvas.height = targetHeight;
+  
+        // Dessinez l'image redimensionnée sur le canvas
+        ctx.drawImage(img, 0, 0, targetWidth, targetHeight);
+  
+        // Obtenez l'URL de l'image redimensionnée
+        const resizedImage = canvas.toDataURL('image/jpeg');
+  
+        // Utilisez `resizedImage` comme source pour votre image dans le modèle
+        this.imageUpload = resizedImage;
+      } else {
+        console.error("Le contexte 2D du canvas est null.");
+      }
+    };
+  
+    img.src = imageDataUrl;
+  }
 
   moveToPreview() {
-    // Obtenez la position de la section de prévisualisation
+    // Obtiens la position de la section de prévisualisation
     const previewSection = document.getElementById('previewSection');
     if (previewSection) {
       const previewSectionPosition = previewSection.getBoundingClientRect().top;
@@ -195,7 +233,7 @@ export class GenericFlashcardComponent implements AfterContentInit{
         firstInput.focus();
       }
     }
-  }
+  } 
 
   paginate(event: any) {
     const startIndex = event.first;
