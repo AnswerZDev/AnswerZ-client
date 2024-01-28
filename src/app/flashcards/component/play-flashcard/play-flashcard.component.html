@@ -2,33 +2,30 @@
     <div class="flex flex-column w-full">
       <div class="w-full flex justify-content-center mt-5">
         <div class="w-9">
-          <h1>English - vocabulary #3</h1>
-          <h3>Theme : English</h3>
+          <h1 class="p-0 m-0 text-primary">English - vocabulary #3</h1>
+          <h3 class="text-sm p-0 mt-2 text-primary-300">Theme : English</h3>
         </div>
       </div>
-      <div class="w-full flex justify-content-center">
-            <p-progressBar class="w-9"
+      <div class="w-full flex justify-content-center align-items-center">
+            <p-progressBar class="w-9 ml-6 "
               [value]="progressValue"
-              [style]="{'height': '25px', 'color': 'black'}"
-              [showValue]="true"
-            >
+              [showValue]="true">
             </p-progressBar>
-            <p>4/18</p>
+            <p class="ml-3">4/18</p>
       </div>
     </div>
   
-    <div id="flipContainer" type="button" (click)="flip_flashcard()" class="relative flex flex-column justify-content-center align-items-center w-6 h-30rem border-round-3xl border-solid border-3 border-primary shadow-6 border-solid">
-      <h3 class="text-5xl text-primary	">Lorem Ipsum</h3>
-      <div class="absolute bottom-0 h-3rem bg-primary w-full flex justify-content-center align-items-center border-round-bottom-2xl">
-          <p>Hit the card to turn it</p>
+    <div class="w-full h-screen flex flex-column align-items-center pt-6">
+      <div id="flipContainer" type="button" (click)="flip_flashcard()" class="relative flex justify-content-center align-items-center w-6 h-30rem border-round-3xl border-solid border-3 border-primary shadow-6 border-solid">
+        <h3 class="text-5xl text-primary	">Lorem Ipsum</h3>
+        <div class="absolute bottom-0 h-3rem bg-primary w-full flex justify-content-center align-items-center border-round-bottom-2xl">
+            <p>Hit the card to turn it</p>
+        </div>
       </div>
-    </div>
-  
-
-  
-    <div class="additional-buttons">
-      <button pButton type="button" label="Button 1"></button>
-      <button pButton type="button" label="Button 2" (click)="increment()"></button>
+      <div class="mt-6">
+        <button pButton type="button" label="Button 1"></button>
+        <button pButton type="button" label="Button 2" (click)="increment()"></button>
+      </div>
     </div>
   </div>
   
