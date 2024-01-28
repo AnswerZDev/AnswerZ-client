@@ -1,24 +1,30 @@
-<div class="flashcard-container">
-    <div class="top">
-      <h1>English - vocabulary #3</h1>
-      <h3>Theme : English</h3>
-      <div class="progress-container">
-            <p-progressBar
+<div class="flex flex-column align-items-center h-screen">
+    <div class="flex flex-column w-full">
+      <div class="w-full flex justify-content-center mt-5">
+        <div class="w-9">
+          <h1>English - vocabulary #3</h1>
+          <h3>Theme : English</h3>
+        </div>
+      </div>
+      <div class="w-full flex justify-content-center">
+            <p-progressBar class="w-9"
               [value]="progressValue"
-              [style]="{'height': '20px'}"
+              [style]="{'height': '25px', 'color': 'black'}"
               [showValue]="true"
             >
             </p-progressBar>
-            
+            <p>4/18</p>
       </div>
     </div>
   
-    <div class="flashcard">
-        <h3 class="answer-question">Lorem Ipsum</h3>
-        <div class="flashcard-bottom">
-            <p>Hit the card to turn it</p>
-        </div>  
+    <div id="flipContainer" type="button" (click)="flip_flashcard()" class="relative flex flex-column justify-content-center align-items-center w-6 h-30rem border-round-3xl border-solid border-3 border-primary shadow-6 border-solid">
+      <h3 class="text-5xl text-primary	">Lorem Ipsum</h3>
+      <div class="absolute bottom-0 h-3rem bg-primary w-full flex justify-content-center align-items-center border-round-bottom-2xl">
+          <p>Hit the card to turn it</p>
+      </div>
     </div>
+  
+
   
     <div class="additional-buttons">
       <button pButton type="button" label="Button 1"></button>

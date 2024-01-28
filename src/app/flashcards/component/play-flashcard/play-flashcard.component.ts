@@ -8,9 +8,21 @@ import { Component } from '@angular/core';
 export class PlayFlashcardComponent {
   progressValue = 25;
 
+  
   increment() {
     if (this.progressValue < 100) {
       this.progressValue += 25;
     }
   }
+
+  flip_flashcard() {
+      var flashcard = document.getElementById('flipContainer');
+
+      if (flashcard) {
+          flashcard.classList.add('flipleft');
+          flashcard.classList.add('animation-duration-500');
+      }
+  }
+      
+
 }
