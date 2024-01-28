@@ -10,7 +10,10 @@ import { InputTextModule } from 'primeng/inputtext';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { SearchCardsetComponent } from './component/search-cardset/search-cardset.component';
 import { CardModule } from 'primeng/card';
-
+import { DialogModule } from 'primeng/dialog';
+import { AvatarModule } from 'primeng/avatar';
+import { AvatarGroupModule } from 'primeng/avatargroup';
+import { DividerModule } from 'primeng/divider';
 
 @NgModule({
   declarations: [
@@ -30,6 +33,10 @@ import { CardModule } from 'primeng/card';
     ButtonModule,
     InputTextModule,
     AutoCompleteModule,
+    DialogModule,
+    AvatarModule,
+    AvatarGroupModule,
+    DividerModule
   ]
 })
 export class CardsetModule { }

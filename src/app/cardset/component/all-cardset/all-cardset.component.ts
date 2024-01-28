@@ -10,7 +10,7 @@ interface Mode{
   templateUrl: './all-cardset.component.html',
   styleUrls: ['./all-cardset.component.scss']
 })
-export class AllCardsetComponent implements OnInit, DoCheck {
+export class AllCardsetComponent implements OnInit{
 
   listCardset: any[] = [];
 
@@ -18,7 +18,7 @@ export class AllCardsetComponent implements OnInit, DoCheck {
   selectedCategories: Mode | undefined;
   value: any;
   selectedItems: any;
-  items: any;
+  items: any
 
   filterCountry() {
     //  console.log(this.selectedItems);
