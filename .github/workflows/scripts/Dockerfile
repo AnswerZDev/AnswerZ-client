@@ -1,5 +1,5 @@
 # Étape 1: Utilise une image Node.js pour construire l'application Angular
-FROM node:20
+FROM node:20 AS builder
 
 # Crée le répertoire de travail
 WORKDIR /app
@@ -17,7 +17,7 @@ RUN npm run build --prod
 FROM nginx
 
 # Copie les fichiers d'application construits depuis le conteneur du constructeur vers le conteneur Nginx
-COPY /app/dist/ /usr/share/nginx/html
+COPY --from=builder /app/dist/ /usr/share/nginx/html
 
 # Copie le fichier de configuration Nginx personnalisé
 COPY default.conf /etc/nginx/conf.d/default.conf
