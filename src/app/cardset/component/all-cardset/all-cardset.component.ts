@@ -1,5 +1,6 @@
 import { Component, DoCheck, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { CardsetService } from '../../services/cardset.service';
+import { Cardset } from 'src/app/core/models/api/cardset';
 
 interface Mode{
   name: string;
@@ -12,7 +13,7 @@ interface Mode{
 })
 export class AllCardsetComponent implements OnInit{
 
-  listCardset: any[] = [];
+  listCardset!: Cardset;
 
   categories: Mode[] | undefined;
   selectedCategories: Mode | undefined;
@@ -37,6 +38,7 @@ export class AllCardsetComponent implements OnInit{
   ngOnInit() {
     this.cardsetservice.getAllCardset().subscribe((data: any) => {
       this.listCardset = data;
+      console.log(this.listCardset);
     });
 
     this.categories = [

@@ -9,13 +9,14 @@ import {HydraFactory} from "../../models/api/hydra/hydra.factory";
 })
 export class UserApi extends ApiService {
     public constructor() {
-        super('users')
+        super('users') // nom du controller de NestJS
     }
 
-    public current(): Observable<User> {
+    // Fonction par route comme ceci
+    public current(): Observable<User> { // Observable qui retourne modele : USER
         let u = this.get('/me').pipe(
-            map((data: any) => HydraFactory.createItem(User, data))
+            map((data: any) => HydraFactory.createItem(User, data)) // model, data
         )
-        return u as unknown as Observable<User>
+        return u as unknown as Observable<User> // toujours retoruné comme ca avec <Model>
     }
 }

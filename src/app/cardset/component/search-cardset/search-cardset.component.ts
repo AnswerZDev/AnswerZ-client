@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Route, Router } from '@angular/router';
+import { Cardset } from 'src/app/core/models/api/cardset';
 
 @Component({
   selector: 'app-search-cardset',
@@ -7,8 +8,10 @@ import { Route, Router } from '@angular/router';
   styleUrls: ['./search-cardset.component.scss']
 })
 export class SearchCardsetComponent {
+  @Input() my_cardset!:Cardset; 
 
   constructor(private router: Router) {
+    console.log(this.my_cardset)
   }
 
   onRedirigeToPagePlay() {
