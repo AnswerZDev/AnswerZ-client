@@ -22,7 +22,6 @@ export class TokenInterceptor implements HttpInterceptor {
                     Authorization: `Bearer ${this.securityService.token}`,
                 },
             })
-
             return next.handle(newRequest)
         } else {
             return next.handle(request)

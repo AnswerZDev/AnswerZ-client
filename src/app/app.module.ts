@@ -14,6 +14,9 @@ import { FlashcardModule } from './flashcards/flashcards.module';
 import { UserModule } from './user/user.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AdminModule } from './admin/admin.module'
+import {CoreModule} from "./core/core.module";
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { MessagesModule } from 'primeng/messages';
 
 @NgModule({
     declarations: [
@@ -35,6 +38,9 @@ import { AdminModule } from './admin/admin.module'
         AuthModule,
         BrowserAnimationsModule,
         SharedModule,
+        CoreModule,
+        ProgressSpinnerModule,
+        MessagesModule,
     ],
     providers: [],
     bootstrap: [AppComponent]

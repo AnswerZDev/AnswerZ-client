@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import {Component, OnInit} from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
 import {SecurityService} from "../../../shared/services/security.services";
@@ -8,7 +8,7 @@ import {SecurityService} from "../../../shared/services/security.services";
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit{
 
     /**
      * @author @Alexis1663
@@ -27,6 +27,13 @@ export class LoginComponent {
         private readonly router: Router,
         private readonly securityService: SecurityService,
     ) { }
+
+    ngOnInit(): void {
+        console.log(this.securityService.isAuthenticated())
+        if(this.securityService.isAuthenticated()){
+            this.router.navigate(['/home'])
+        }
+    }
 
     /**
      * @author @Alexis1663
