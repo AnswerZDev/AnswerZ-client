@@ -1,9 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FlashcardsService } from '../../services/flashcards.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
 import { Router } from '@angular/router';
 import { ConfirmService } from 'src/app/shared/services/confirm.service';
 import { FormGroup } from '@angular/forms';
+import { Flashcard } from 'src/app/core/models/api/flashcard';
+import { FlashcardService } from '../../services/flashcards.service';
+import { first } from 'rxjs';
 
 @Component({
   selector: 'app-cards-preview',
@@ -11,7 +13,7 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./cards-preview.component.scss'],
 })
 export class CardsPreviewComponent {
-  @Input() flashcards: any[] = [];
+  @Input() flashcards: Flashcard[] = [];
   @Input() displayedFlashcards: any[] = [];
   @Input() flashcardForm!: FormGroup;
   @Input() question: string = '';
@@ -23,7 +25,7 @@ export class CardsPreviewComponent {
   @Output() flashcardId: EventEmitter<number> = new EventEmitter<number>();
 
   constructor(
-    private flashcardService: FlashcardsService, 
+    private flashcardService: FlashcardService, 
     private router: Router, 
     private confirmService: ConfirmService,
     private toastService: ToastService
@@ -36,7 +38,14 @@ export class CardsPreviewComponent {
   }
 
   addFlashcard(newFlashcard: any) {
-    this.flashcards.push(newFlashcard);
+    this.flashcardService.onReceiveFlashcards.pipe(first()).subscribe({
+      next: () => {
+        this.toastService.toast('success', 'Success', 'You have created this element');
+      },
+      error: (error) => {
+      }
+    });
+    this.flashcardService.createFlashcard(newFlashcard);
   }
 
   modifyFlashcard(id: number) {
@@ -50,11 +59,7 @@ export class CardsPreviewComponent {
             question: flashcard.question,
             answer: flashcard.answer
         });
-
         this.flashcardService.updateFlashcard(id, updatedFlashcard)
-          .subscribe((result) => {
-            console.log('Flashcard updated with success', result);
-          });
       }
     });
   }
@@ -68,20 +73,23 @@ export class CardsPreviewComponent {
         return;
       }
 
-      this.flashcardService.deleteFlashcard(this._currentDelete).subscribe(
-        () => {
+      this.flashcardService.onReceiveFlashcards.pipe(first()).subscribe({
+        next: () => {
           // Suppression réussie
-          this.flashcards = this.flashcards.filter((flashcard) => flashcard.id !== this._currentDelete);
+          this.flashcards = this.flashcards.filter((flashcard) => Number(flashcard.id) !== this._currentDelete);
+          this.flashcardService.deleteFlashcard(this._currentDelete);
           this.toastService.toast('success', 'Success', 'You have deleted this element');
         },
-        (error) => {
+        error: (error) => {
           // Erreur lors de la suppression
           console.error('Error during the suppression :', error);
         }
-      );
+      });
+      
     },
     () => {
-      console.log('Rejected in Component 1');
+      this._currentDelete = 0;
     });
+    this.flashcardService.deleteFlashcard(id);
   }
 }

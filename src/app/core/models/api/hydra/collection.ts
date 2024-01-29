@@ -16,7 +16,7 @@ export class Collection<T extends Item> extends Hydra {
         this._id = data['@id']
         this._type = data['@type']
         this._totalItems = data[this.prefix + 'totalItems']
-        data[this.prefix + 'member'].forEach((item: any) => {
+        data.forEach((item: any) => {
             this._member.push(HydraFactory.createItem<T>(type, item))
         })
     }

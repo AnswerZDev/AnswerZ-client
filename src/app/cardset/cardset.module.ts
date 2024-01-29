@@ -12,9 +12,10 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { InputTextModule } from 'primeng/inputtext';
 import { PaginatorModule } from 'primeng/paginator';
 import { EditFlashcardSetComponent } from './component/edit-flashcard-set/edit-flashcard-set.component';
-import { GenericFlashcardSetComponent } from './component/generic-flashcard-set/generic-flashcard-set.component';
+import { GenericFlashcardSetComponent } from './pages/generic-flashcard-set/generic-flashcard-set.component';
 import { CardsetRoutingModule } from './cardset-routing.module';
 import { FlashcardModule } from 'src/app/flashcards/flashcards.module';
+import { MyCardsetsComponent } from './pages/my-cardsets/my-cardsets.component';
 
 @NgModule({
     imports: [
@@ -39,6 +40,7 @@ import { FlashcardModule } from 'src/app/flashcards/flashcards.module';
         CreateFlashcardSetComponent,
         EditFlashcardSetComponent,
         GenericFlashcardSetComponent,
+        MyCardsetsComponent
     ],
     providers: [],
     exports: []

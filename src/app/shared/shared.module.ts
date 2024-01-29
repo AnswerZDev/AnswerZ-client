@@ -11,6 +11,7 @@ import { ToastService } from './services/toast.service';
 import { ConfirmService } from './services/confirm.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { TabMenuModule } from 'primeng/tabmenu';
 
 @NgModule({
     imports: [
@@ -21,7 +22,8 @@ import { ToastModule } from 'primeng/toast';
         ButtonModule,
         OverlayPanelModule,
         ToastModule,
-        ConfirmPopupModule
+        ConfirmPopupModule,
+        TabMenuModule
     ],
     declarations: [
         HeaderComponent,

@@ -11,14 +11,33 @@
     }
 }
 
+
+
 // To override the default primeng styles
 :host ::ng-deep {
-    .p-button {
+    .login {
         border-radius: 40px;
         background-color: white;
         color: #8A61E0;
         border: #8A61E0;
         box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    .menu {
+        border-radius: 40px;
+        background-color: #8A61E0;
+        color: white;
+        border: #8A61E0;
+    }
+
+    .menu:hover {
+        background-color: white;
+        color: #8A61E0;
+    }
+
+    .menu-focus {
+        background-color: white;
+        color: #8A61E0;
     }
 }
 

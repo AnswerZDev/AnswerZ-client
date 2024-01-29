@@ -1,8 +1,12 @@
 import { AfterContentInit, Component, ContentChildren, ElementRef, QueryList, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PrimeTemplate } from 'primeng/api';
-import { FlashcardsService } from '../../../flashcards/services/flashcards.service';
 import { CardsPreviewComponent } from '../../../flashcards/component/cards-preview/cards-preview.component';
+import { FlashcardApi } from 'src/app/core/http/flashcard/flashcard.api';
+import { FlashcardService } from 'src/app/flashcards/services/flashcards.service';
+import { first } from 'rxjs';
+import { Flashcard } from 'src/app/core/models/api/flashcard';
+import { Toast } from 'primeng/toast';
 import { ToastService } from 'src/app/shared/services/toast.service';
 
 interface Mode{
@@ -17,7 +21,6 @@ interface Mode{
 export class GenericFlashcardSetComponent implements AfterContentInit{
 
   flashcardForm!: FormGroup;
-  flashcards: any[] = [];
   displayedFlashcards: any[] = [];
   totalRecords: number = 0;
   first = 0;
@@ -28,7 +31,7 @@ export class GenericFlashcardSetComponent implements AfterContentInit{
   selectedModeVisibilities: Mode | undefined;
   selectedModeCategories: Mode | undefined;
   blockChars: RegExp = /^[0-9a-zA-Z\s]+$/;
-  imageUpload: string = "../../../../assets/images/image_upload.png";
+  imageUpload: string = "../../../../assets/images/image_upload.svg";
   imageResized: string = ''; // Image redimensionnée à afficher dans la section de prévisualisation
 
   @ViewChild(CardsPreviewComponent) cardsPreview!: CardsPreviewComponent;
@@ -38,10 +41,11 @@ export class GenericFlashcardSetComponent implements AfterContentInit{
   button: PrimeTemplate | undefined = undefined
 
   constructor(
-    private formBuilder: FormBuilder, 
-    private flashcardService: FlashcardsService, 
-    private toastService: ToastService, 
-    private el: ElementRef) {
+    private readonly formBuilder: FormBuilder,
+    private readonly toastService: ToastService, 
+    private readonly el: ElementRef,
+    public readonly flashcardsService: FlashcardService
+  ) {
     this.createForm();
   }
 
@@ -64,11 +68,7 @@ export class GenericFlashcardSetComponent implements AfterContentInit{
       { name: 'Chemical Physics'}
     ];
 
-    this.flashcardService.getAllFlashcards().subscribe((data: any) => {
-      this.flashcards = data;
-      this. totalRecords = this.flashcards.length;
-      this.paginate({ first: 0, rows: 8, page: 1, pageCount: Math.ceil(this.totalRecords / 8) });
-    });
+    this.getAllFlashcards();
   }
 
   ngAfterContentInit(): void {
@@ -89,6 +89,18 @@ export class GenericFlashcardSetComponent implements AfterContentInit{
       const file = files[0];
       this.handleImageFile(file);
     }
+  }
+
+  private getAllFlashcards(): void {
+    this.flashcardsService.onReceiveFlashcards.pipe(first()).subscribe(
+      (data: any) => {
+        if(data) {
+          this.totalRecords = this.flashcardsService.flashcards.length;
+          this.paginate({ first: 0, rows: 8, page: 1, pageCount: Math.ceil(this.totalRecords / 8) });
+        }
+      } 
+    )
+    this.flashcardsService.getAllFlashCards();
   }
 
   uploadImage(event: Event) {
@@ -170,57 +182,55 @@ export class GenericFlashcardSetComponent implements AfterContentInit{
     if (this.flashcardForm.valid) {
       // Envoie les données au backend
       if(this.flashcardId === undefined || this.flashcardId === 0){
-        this.flashcardService.createFlashcard(this.flashcardForm.value).subscribe(
-          (response) => {
+        this.flashcardsService.onReceiveFlashcards.pipe(first()).subscribe({
+          next: (response) => {
             // Appelle la méthode dans CardsPreviewComponent pour ajouter la nouvelle flashcard
             this.cardsPreview.addFlashcard(response);
             this.toastService.toast('success', 'Success', 'Creation successed');
           },
-          (error) => {
-            console.error(error);
+          error: (error) => {
             this.toastService.toast('error', 'Error', 'Error during creation');
           },
-          () => {
-            // Réinitialise le formulaire dans le bloc finally
+          complete: () => {
+            // Réinitialise le formulaire dans le bloc finally (au cas où il n'y aurait pas de réponse)
             this.flashcardForm.reset();
           }
-        );
+        });
+        this.flashcardsService.createFlashcard(this.flashcardForm.value);
       } else {
-        const data = {
-          question: this.flashcardForm.value.question,
-          answer: this.flashcardForm.value.answer
-        };
-        const idToUpdate = this.flashcardId;
-        this.flashcardService.updateFlashcard(idToUpdate, data).subscribe(
-          (response) => {
-            // Appelle la méthode dans CardsPreviewComponent pour ajouter la nouvelle flashcard
-            this.cardsPreview.modifyFlashcard(response.id);
-            this.toastService.toast('success', 'Success', 'Modification successed');
-            this.flashcardService.getAllFlashcards().subscribe((data: any) => {
-              this.flashcards = data;
-              this. totalRecords = this.flashcards.length;
-            });
-          },
-          (error) => {
-            console.error(error);
-            this.toastService.toast('error', 'Error', 'Error during creation');
-          },
-          () => {
-            setTimeout(() => {
-              this.flashcardForm.patchValue({
-                question: '',
-                answer: ''
-              });
-              this.flashcardId = 0;
-            }, 100);
-          }
-        );
+          const data = {
+            question: this.flashcardForm.value.question,
+            answer: this.flashcardForm.value.answer
+          };
+          const idToUpdate = this.flashcardId;
+          this.flashcardsService.onReceiveFlashcards.pipe(first()).subscribe(
+            (response) => {
+              // Appelle la méthode dans CardsPreviewComponent pour ajouter la nouvelle flashcard
+              this.cardsPreview.modifyFlashcard(idToUpdate);
+              this.toastService.toast('success', 'Success', 'Modification successed');
+              this. totalRecords = this.flashcardsService.flashcards.length;
+            },
+            (error) => {
+              console.error(error);
+              this.toastService.toast('error', 'Error', 'Error during creation');
+            },
+            () => {
+              setTimeout(() => {
+                this.flashcardForm.patchValue({
+                  question: '',
+                  answer: ''
+                });
+                this.flashcardId = 0;
+              }, 100);
+            }
+          );
+          this.flashcardsService.updateFlashcard(idToUpdate, data);
+        }
+      } else {
+        // Le formulaire n'est pas valide
+        console.error('Form is not valid');
+        this.toastService.toast('error', 'Error', 'Form is not valid');
       }
-    } else {
-      // Le formulaire n'est pas valide
-      console.error('Form is not valid');
-      this.toastService.toast('error', 'Error', 'Form is not valid');
-    }
   }
 
   moveToInput() {
@@ -238,6 +248,6 @@ export class GenericFlashcardSetComponent implements AfterContentInit{
   paginate(event: any) {
     const startIndex = event.first;
     const endIndex = startIndex + event.rows;
-    this.displayedFlashcards = this.flashcards.slice(startIndex, endIndex);
+    this.displayedFlashcards = this.flashcardsService.flashcards.slice(startIndex, endIndex);
   }
 }
