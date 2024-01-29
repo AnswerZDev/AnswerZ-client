@@ -11,7 +11,6 @@ export class SearchCardsetComponent {
   @Input() my_cardset!:Cardset; 
 
   constructor(private router: Router) {
-    console.log(this.my_cardset)
   }
 
   onRedirigeToPagePlay() {

@@ -38,7 +38,6 @@ export class AllCardsetComponent implements OnInit{
   ngOnInit() {
     this.cardsetservice.getAllCardset().subscribe((data: any) => {
       this.listCardset = data;
-      console.log(this.listCardset);
     });
 
     this.categories = [

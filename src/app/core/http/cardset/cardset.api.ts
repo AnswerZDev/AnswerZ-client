@@ -20,5 +20,4 @@ export class CardsetApi extends ApiService {
         )
         return u as unknown as Observable<Cardset> // toujours retoruné comme ca avec <Model>
     }
-
 }

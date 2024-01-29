@@ -1,3 +1,4 @@
+import { Flashcard } from "./flashcard";
 import {Item} from "./hydra/item";
 import { User } from "./user";
 
@@ -11,13 +12,13 @@ export class Cardset extends Item {
         this._visibility = data.visibility;
         this._numberOfGoodAnswer = data.numberOfGoodAnswer;
         this._createdAt = data.createdAt;
-        // data.flashcards !== undefined ? 
-        //     data.flashcards.map(
-        //         (flashcard: any) => this._flashcards.push(
-        //             new flashcard(flashcard)
-        //         )
-        //     )
-        // : undefined;
+        data.flashcards !== undefined ? 
+            data.flashcards.map(
+                (flashcard: any) => this._flashcards.push(
+                    new Flashcard(flashcard)
+                )
+            )
+        : undefined;
     }
 
     private _name: string | undefined;
@@ -32,7 +33,7 @@ export class Cardset extends Item {
 
     private _createdAt: Date | undefined;
 
-    // private _flashcards: Flashcard | undefined;
+    private _flashcards!: Flashcard[];
 
 
     public get name(): string | undefined {
@@ -64,8 +65,8 @@ export class Cardset extends Item {
     }
 
 
-    // public get flashcards(): Flashcard | undefined {
-    //   return this._flashcards;
-    // }
+    public get flashcards(): Flashcard[] | undefined {
+      return this._flashcards;
+    }
 
 }
