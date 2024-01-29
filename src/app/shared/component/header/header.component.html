@@ -3,9 +3,13 @@
     <img [src]="imageLogo" alt="Logo AnswerZ" class="logo" />
     <span class="text-lg md:text-2xl h-full text-white-alpha-90 font-bold">Answerz</span>
   </a>
+  <div class="flex gap-7" *ngIf="showButtons">
+    <p-button styleClass="menu">Flashcards</p-button>
+    <p-button styleClass="menu">Quizzes</p-button>
+  </div>
   <div class="flex flex-cloumn button-header-container">
-    <p-button label="Login" (onClick)="redirectToLoginPage()"></p-button>
+    <p-button styleClass="login" label="Login" (onClick)="redirectToLoginPage()"></p-button>
     &nbsp;
-    <p-button label="Register" (onClick)="redirectToRegisterPage()"></p-button>
+    <p-button styleClass="login" label="Register" (onClick)="redirectToRegisterPage()"></p-button>
   </div>
 </div>
