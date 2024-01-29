@@ -30,4 +30,6 @@ export class IndexComponent {
         window.open("https://github.com/AnswerZDev/AnswerZ", "_blank");
     }
 
+    tabCardSet = [];
+
 }

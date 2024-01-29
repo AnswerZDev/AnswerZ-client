@@ -1,47 +1,47 @@
 <div>
   <div class="flex flex-column lg:flex-row lg:justify-content-start py-2 welcome-container">
-    <span class="welcome-message pl-3 lg:pl-7 font-medium">
+    <span class="welcome-message pl-2 lg:pl-7 font-medium">
       Join us and start to boost your learning !
     </span>
   </div>
 
-  <div class="flex flex-row justify-content-between">
-    <div class="flex flex-column pl-8 py-5">
-      <span class="slogan-home text-7xl font-medium">
+  <div class="flex flex-row justify-content-center lg:justify-content-between">
+    <div class="flex flex-column w-full py-2 lg:pl-8 lg:py-5">
+      <span class="slogan-home font-medium text-5xl pl-3 lg:text-7xl">
         Have fun while learning with AnswerZ
       </span>
-      <span class="info-home text-4xl py-3 font-semibold">
+      <span class="info-home text-2xl py-3 font-semibold pl-3 lg:text-4xl">
         Free app for everyone
       </span>
-      <div class="flex flex-row py-4">
+      <div class="flex flex-row py-1 justify-content-center lg:justify-content-start lg:py-4">
         <p-button (click)="redirectToLoginPage()" class="home-button1" label="Get Started"></p-button>
         <p-button (click)="redirectToGithubPage()" class="pl-5" label="Learn More"></p-button>
       </div>
 
-      <div class="flex flex-row py-4 pr-7 justify-content-between">
+      <div class="flex flex-row py-4 px-2 justify-content-between lg:pr-7">
         <div class="flex flex-column message-home align-items-center">
-          <span class="text-5xl font-semibold stats-number-home">
+          <span class="text-3xl font-semibold stats-number-home lg:text-5xl">
             100K+
           </span>
-          <span class="text-3xl">
+          <span class="text-xl lg:text-3xl">
             Students
           </span>
         </div>
 
         <div class="flex flex-column message-home align-items-center">
-          <span class="text-5xl font-semibold stats-number-home">
+          <span class="text-3xl font-semibold stats-number-home lg:text-5xl">
             1K+
           </span>
-          <span class="text-3xl">
+          <span class="text-xl lg:text-3xl">
             Flashcards
           </span>
         </div>
 
         <div class="flex flex-column message-home align-items-center">
-          <span class="text-5xl font-semibold stats-number-home">
+          <span class="text-3xl font-semibold stats-number-home lg:text-5xl">
             100+
           </span>
-          <span class="text-3xl">
+          <span class="text-xl lg:text-3xl">
             Countries
           </span>
         </div>
@@ -50,24 +50,25 @@
 
     </div>
 
-    <div class="flex flex-column pt-2 pr-3 image-container">
-      <img src="../../../../assets/images/logo_home.svg" />
+    <div class="hidden lg:flex lg:flex-column lg:pt-2 lg:pr-3 image-container lg:block">
+      <img src="../../../../assets/images/logo_home.svg" class="hidden lg:block"/>
     </div>
   </div>
 
   <div class="flex flex-column search-courses align-items-center w-full">
-    <div class="flex flex-row justify-content-center py-5 w-full">
-      <span class="p-input-icon-left p-float-label w-6">
-        <i class="pi pi-search search-bar-home-color text-xl"></i>
+    <div class="flex flex-row justify-content-center pt-5 pb-2 lg:py-5 w-full">
+      <span class="p-input-icon-left p-float-label lg:w-6">
+        <i class="pi pi-search search-bar-home-color lg:text-xl"></i>
         <input id="searchbar-home" class="p-inputtext-lg search-input w-full" type="text" pInputText />
-        <label class="search-bar-home-color search-bar-text text-xl" htmlFor="searchbar-home">Search for what you want
-          to learn</label>
+        <label class="search-bar-home-color search-bar-text-small lg:search-bar-text lg:text-xl" htmlFor="searchbar-home">
+          Search for what you want to learn
+        </label>
       </span>
     </div>
-    <div>
+
+    <div *ngFor="let flashcard of tabCardSet">
       <app-flashcards-set image="../../../../assets/images/carte.PNG"
-        description="Here's a tuto on how to loose $1000 dollars on BlackJack"
-        title="How to win a BlackJack game"></app-flashcards-set>
+        description=flashcard.description title={{flashcard.title}}></app-flashcards-set>
     </div>
 
     <div class="flex flex-column py-3 align-items-center">
@@ -78,19 +79,20 @@
     </div>
   </div>
 
+
   <div class="flex flex-row py-5">
-    <div class="flex flex-column pl-5">
-      <span class="features-home text-5xl font-medium">
+    <div class="flex flex-column lg:pl-5">
+      <span class="features-home font-medium text-5xl pl-5">
         Features
       </span>
-      <span class="info-home text-2xl py-3 font-semibold">
+      <span class="info-home py-3 text-2xl pl-5 lg:font-semibold">
         Discover the benefits of our platform
       </span>
 
-      <div class="flex flex-row justify-content-center">
-        <div class="w-8">
-          <div class="grid-container py-4">
-            <div class="flex flex-row justify-content-center w-full features-box py-2">
+      <div class="flex lg:flex-row justify-content-center">
+        <div class="lg:w-8 px-5">
+          <div class="lg:grid-container py-4">
+            <div class="flex lg:flex-row justify-content-center w-full features-box py-2 mb-5">
               <div class="flex flex-column w-10 py-2">
                 <div class="flex flex-row feature-icon p-3 logo-container">
                   <span class="material-symbols-outlined text-5xl" style="color: white">thumb_up</span>
@@ -106,7 +108,7 @@
                 <p-button class="py-2" label="Read More"></p-button>
               </div>
             </div>
-            <div class="flex flex-row justify-content-center w-full features-box py-2">
+            <div class="flex flex-row justify-content-center w-full features-box py-2 mb-5">
               <div class="flex flex-column w-10 py-2">
                 <div class="flex flex-row feature-icon p-3 logo-container">
                   <span class="material-symbols-outlined text-5xl" style="color: white">editor_choice</span>
@@ -122,7 +124,7 @@
                 <p-button class="py-2" label="Read More"></p-button>
               </div>
             </div>
-            <div class="flex flex-row justify-content-center w-full features-box py-2">
+            <div class="flex flex-row justify-content-center w-full features-box py-2 mb-5">
               <div class="flex flex-column w-10 py-2">
                 <div class="flex flex-row feature-icon p-3 logo-container">
                   <span class="material-symbols-outlined text-5xl" style="color: white">emoji_objects</span>

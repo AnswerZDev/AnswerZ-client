@@ -66,6 +66,11 @@
     .search-input:focus + .search-bar-text {
         color: white;
     }
+
+    .search-input:focus + .search-bar-text-small {
+        color: white;
+        font-size: .875rem;
+    }
   
     .search-input.p-inputtext {
         height: 2rem;

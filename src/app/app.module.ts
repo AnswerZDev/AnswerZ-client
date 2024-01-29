@@ -14,6 +14,7 @@ import { FlashcardModule } from './flashcards/flashcards.module';
 import { UserModule } from './user/user.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AdminModule } from './admin/admin.module'
+import { NgClass } from '@angular/common';
 
 @NgModule({
     declarations: [
@@ -35,6 +36,7 @@ import { AdminModule } from './admin/admin.module'
         AuthModule,
         BrowserAnimationsModule,
         SharedModule,
+        NgClass,
     ],
     providers: [],
     bootstrap: [AppComponent]
