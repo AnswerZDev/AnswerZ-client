@@ -14,10 +14,14 @@
             <p class="ml-3">4/18</p>
       </div>
     </div>
-  
     <div class="w-full h-screen flex flex-column align-items-center pt-6">
       <div id="flipContainer" type="button" (click)="flip_flashcard()" class="relative flex justify-content-center align-items-center w-6 h-30rem border-round-3xl border-solid border-3 border-primary shadow-6 border-solid">
-        <h3 class="text-5xl text-primary	">Lorem Ipsum</h3>
+        <div *ngIf="currrentFlashCard">
+          <h3 class="text-5xl text-primary" *ngIf="!isFliped; else isFlipedTemplate">{{currrentFlashCard.question}}</h3>
+          <ng-template #isFlipedTemplate>
+            <h3 class="text-5xl text-primary">{{currrentFlashCard.answer}}</h3>
+          </ng-template>
+        </div>
         <div class="absolute bottom-0 h-3rem bg-primary w-full flex justify-content-center align-items-center border-round-bottom-2xl">
             <p>Hit the card to turn it</p>
         </div>
@@ -27,5 +31,6 @@
         <button pButton type="button" label="Button 2" (click)="increment()"></button>
       </div>
     </div>
+   
   </div>
   
