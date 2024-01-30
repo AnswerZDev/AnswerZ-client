@@ -1,0 +1,28 @@
+.text {
+    color: #9468F1;
+}
+
+.card {
+    border-color: #eee;
+}
+
+:host ::ng-deep {
+    .p-card-body, .p-card-content {
+        padding: 1px 1px 1px;
+    }
+
+    .cardset-button {
+        display: flex;
+        justify-content: center;
+        background-color: #9468F1;
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        height: 35px;
+        width: 100px;
+    }
+
+    .image {
+        width: 0.8rem;
+    }
+}

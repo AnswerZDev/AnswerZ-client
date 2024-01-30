@@ -49,11 +49,7 @@
       <app-cards-preview class="flex flex-column md:flex-row flex-wrap gap-3 md:gap-4 w-full" 
         [flashcards]="flashcardsService.flashcards" 
         [displayedFlashcards]="displayedFlashcards"
-        [flashcardForm]="flashcardForm"
-        [question]="flashcardForm.value.question"
-        [answer]="flashcardForm.value.answer" 
-        (editModeClicked)="moveToInput()"
-        (flashcardId)="getFlashcardId($event)">
+      >
       </app-cards-preview>
       <p-paginator [rows]="8" [totalRecords]="flashcardsService.flashcards.length" (onPageChange)="paginate($event)"></p-paginator>
     </div>

@@ -2,11 +2,8 @@ import { AfterContentInit, Component, ContentChildren, ElementRef, QueryList, Vi
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PrimeTemplate } from 'primeng/api';
 import { CardsPreviewComponent } from '../../../flashcards/component/cards-preview/cards-preview.component';
-import { FlashcardApi } from 'src/app/core/http/flashcard/flashcard.api';
 import { FlashcardService } from 'src/app/flashcards/services/flashcards.service';
 import { first } from 'rxjs';
-import { Flashcard } from 'src/app/core/models/api/flashcard';
-import { Toast } from 'primeng/toast';
 import { ToastService } from 'src/app/shared/services/toast.service';
 
 interface Mode{
@@ -43,7 +40,6 @@ export class GenericFlashcardSetComponent implements AfterContentInit{
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly toastService: ToastService, 
-    private readonly el: ElementRef,
     public readonly flashcardsService: FlashcardService
   ) {
     this.createForm();
@@ -174,21 +170,16 @@ export class GenericFlashcardSetComponent implements AfterContentInit{
     }
   }
 
-  getFlashcardId(id: number) {
-    this.flashcardId = id;
-  }
-
   onSubmit() {
     if (this.flashcardForm.valid) {
       // Envoie les données au backend
       if(this.flashcardId === undefined || this.flashcardId === 0){
-        this.flashcardsService.onReceiveFlashcards.pipe(first()).subscribe({
-          next: (response) => {
-            // Appelle la méthode dans CardsPreviewComponent pour ajouter la nouvelle flashcard
-            this.cardsPreview.addFlashcard(response);
+        this.flashcardsService.onCreateFlashcards.pipe(first()).subscribe({
+          next: () => {
             this.toastService.toast('success', 'Success', 'Creation successed');
+            this.totalRecords = this.flashcardsService.flashcards.length;
           },
-          error: (error) => {
+          error: () => {
             this.toastService.toast('error', 'Error', 'Error during creation');
           },
           complete: () => {
@@ -202,48 +193,25 @@ export class GenericFlashcardSetComponent implements AfterContentInit{
             question: this.flashcardForm.value.question,
             answer: this.flashcardForm.value.answer
           };
-          const idToUpdate = this.flashcardId;
-          this.flashcardsService.onReceiveFlashcards.pipe(first()).subscribe(
-            (response) => {
-              // Appelle la méthode dans CardsPreviewComponent pour ajouter la nouvelle flashcard
-              this.cardsPreview.modifyFlashcard(idToUpdate);
-              this.toastService.toast('success', 'Success', 'Modification successed');
-              this. totalRecords = this.flashcardsService.flashcards.length;
+          this.flashcardsService.onUpdateFlashcards.pipe(first()).subscribe({
+            next: () => {
+              //this.toastService.toast('success', 'Success', 'Modification successed');
             },
-            (error) => {
-              console.error(error);
-              this.toastService.toast('error', 'Error', 'Error during creation');
+            error: () => {
+              //this.toastService.toast('error', 'Error', 'Error during update');
             },
-            () => {
-              setTimeout(() => {
-                this.flashcardForm.patchValue({
-                  question: '',
-                  answer: ''
-                });
-                this.flashcardId = 0;
-              }, 100);
+            complete: () => {
+              // Réinitialise le formulaire dans le bloc finally (au cas où il n'y aurait pas de réponse)
+              //this.flashcardsService.flashcardForm.reset();
             }
-          );
-          this.flashcardsService.updateFlashcard(idToUpdate, data);
+          });
+          //this.flashcardsService.updateFlashcard(this.flashcardId, data);
         }
       } else {
         // Le formulaire n'est pas valide
-        console.error('Form is not valid');
         this.toastService.toast('error', 'Error', 'Form is not valid');
       }
   }
-
-  moveToInput() {
-    const formContainer = this.el.nativeElement.querySelector('.flashcardForm');
-
-    if (formContainer) {
-      // Déclencher le focus sur le premier champ de saisie
-      const firstInput = formContainer.querySelector('input');
-      if (firstInput) {
-        firstInput.focus();
-      }
-    }
-  } 
 
   paginate(event: any) {
     const startIndex = event.first;

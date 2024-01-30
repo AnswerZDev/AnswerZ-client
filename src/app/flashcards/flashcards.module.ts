@@ -12,6 +12,7 @@ import { ToastModule } from 'primeng/toast';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { InputTextModule } from 'primeng/inputtext';
 import { PaginatorModule } from 'primeng/paginator';
+import { ModifyPopUpComponent } from './component/modify-pop-up/modify-pop-up.component';
 
 @NgModule({
     imports: [
@@ -33,6 +34,7 @@ import { PaginatorModule } from 'primeng/paginator';
     declarations: [
         HomeFlashcardComponent,
         CardsPreviewComponent,
+        ModifyPopUpComponent
     ],
     providers: [],
     exports: [

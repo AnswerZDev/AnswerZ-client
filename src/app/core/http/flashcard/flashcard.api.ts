@@ -35,7 +35,7 @@ export class FlashcardApi extends ApiService {
 
     public update(id: number, data: any): Observable<Flashcard> {
         
-        let f = this.put(`/${id}`, data).pipe(
+        let f = this.patch(`/${id}`, data).pipe(
             map((response: any) => HydraFactory.createItem(Flashcard, response) as Flashcard)
         )
         return f as unknown as Observable<Flashcard>

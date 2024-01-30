@@ -16,6 +16,8 @@ import { GenericFlashcardSetComponent } from './pages/generic-flashcard-set/gene
 import { CardsetRoutingModule } from './cardset-routing.module';
 import { FlashcardModule } from 'src/app/flashcards/flashcards.module';
 import { MyCardsetsComponent } from './pages/my-cardsets/my-cardsets.component';
+import { CardsetComponent } from './component/cardset/cardset.component';
+import { ProgressBarModule } from 'primeng/progressbar';
 
 @NgModule({
     imports: [
@@ -34,13 +36,15 @@ import { MyCardsetsComponent } from './pages/my-cardsets/my-cardsets.component';
         ToastModule,
         ConfirmPopupModule,
         PaginatorModule,
+        ProgressBarModule,
         FlashcardModule
     ],
     declarations: [
         CreateFlashcardSetComponent,
         EditFlashcardSetComponent,
         GenericFlashcardSetComponent,
-        MyCardsetsComponent
+        MyCardsetsComponent,
+        CardsetComponent
     ],
     providers: [],
     exports: []

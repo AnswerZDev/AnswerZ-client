@@ -4,13 +4,25 @@
     </p-button>
 </div>
 <div class="flex flex-row justify-content-between pt-5 pl-5 pr-5">
-    <span class="title">My sets</span>
+    <span class="title align-self-center">My sets</span>
     <div class="flex flex-column">
         <p-dropdown [options]="modesVisibilite" [(ngModel)]="selectedModeVisibilities" optionLabel="name" value="Public" class="align-self-end"></p-dropdown>
         <div class="flex flex-row align-items-center pt-3 gap-3">
-            <img src="../../../../assets/images/information.svg" class="w-1rem h-1rem"/>
+            <img [src]="imageInformation" class="w-1rem h-1rem"/>
             <span class="font-medium">Hit to have more informations</span>
         </div>
     </div>
+</div>
+<app-cardset [isLikedMode]="isLikedMode"></app-cardset>
+<div class="flex flex-column align-items-center pt-7">
+    <p-toast></p-toast>
+    <p-progressBar [value]="value" styleClass="w-30rem"></p-progressBar>
+    <span class="text">6/36</span>
+</div>
+<div class="flex pt-5 pl-5">
+    <span class="title">My liked sets</span>
+</div>
+<div class="pt-5">
+    <app-cardset [isLikedMode]="!isLikedMode"></app-cardset>
 </div>
 

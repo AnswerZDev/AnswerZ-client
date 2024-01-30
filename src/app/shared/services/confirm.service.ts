@@ -7,23 +7,23 @@ import { ToastService } from "./toast.service";
 })
 export class ConfirmService {
   
-    constructor(
-      private readonly confirmationService: ConfirmationService,
-      private readonly toastService: ToastService
-    ) { }
-  
-    confirm(event: Event, message: string, detailReject: string, acceptCallBack: () => void, rejectCallBack: () => void): void {
-      this.confirmationService.confirm({
-        target: event.target as EventTarget,
-        message: message,
-        accept: () => {
-            acceptCallBack();
-            this.toastService.toast('success', 'Success', detailReject);
-        },
-        reject: () => {
-          rejectCallBack();
-            this.toastService.toast('warn', 'Reject', detailReject);
-        }
-      });
-    }
+  constructor(
+    private readonly confirmationService: ConfirmationService,
+    private readonly toastService: ToastService
+  ) { }
+
+  confirm(event: Event, message: string, detailAccept: string, detailReject: string, acceptCallBack: () => void, rejectCallBack: () => void): void {
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      message: message,
+      accept: () => {
+          acceptCallBack();
+          this.toastService.toast('success', 'Success', detailAccept);
+      },
+      reject: () => {
+        rejectCallBack();
+          this.toastService.toast('warn', 'Reject', detailReject);
+      }
+    });
+  }
 }

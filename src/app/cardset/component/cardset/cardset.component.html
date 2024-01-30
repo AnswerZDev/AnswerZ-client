@@ -1,0 +1,24 @@
+<div class="pl-5 align-items-center">
+    <div class="w-20rem h-15rem p-2 border-1 border-round-2xl shadow-3 surface-border" id="flip-card">
+        <div class="flex flex-row justify-content-between">
+            <img [src]="imageWorld" class="w-2rem h-2rem">
+            <span class="text-2xl font-bold text">English test</span>
+            <button (click)="flipCard('flip-card')" class=" p-0 border-none outline-none cursor-pointer surface-0" style="height: fit-content;">
+                <img [src]="imageInformation" class="w-1rem h-1rem">
+            </button>
+        </div>
+        <div class="flex justify-content-center">
+            <img [src]="imageEnglishTest" class="w-12rem">
+        </div>
+        <div class="flex flex-row justify-content-around pt-3">
+            <p-button styleClass=" flex justify-content-center cardset-button">PLAY</p-button>
+            <div *ngIf="isLikedMode">
+                <p-button styleClass="flex justify-content-center cardset-button" (click)="redirectToEdit()">EDIT</p-button>
+            </div>
+        </div>
+        <div class="flex justify-content-end pt-3 pr-2 gap-1">
+            <img [src]="imageHeart" class="image">
+            <span class="text-xs font-bold">13 000 000</span>
+        </div>
+    </div>
+</div>
