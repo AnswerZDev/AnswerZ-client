@@ -106,8 +106,17 @@
 
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Divisez en quatre colonnes de largeur égale */
     gap: 5%; /* Espace entre les colonnes */
+    grid-template-columns: repeat(1, 1fr); /* Divisez en quatre colonnes de largeur égale */
+    
+    @media (min-width: 560px) {
+        grid-template-columns: repeat(2, 1fr); /* Divisez en quatre colonnes de largeur égale */
+    }
+
+    @media (min-width: 1000px){
+        grid-template-columns: repeat(3, 1fr); /* Divisez en quatre colonnes de largeur égale */
+    }
+
 }
 
 .logo-container {
