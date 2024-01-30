@@ -6,18 +6,21 @@ import { Component } from '@angular/core';
   styleUrls: ['./play-flashcard.component.scss']
 })
 export class PlayFlashcardComponent {
-  progressValue = 25;
   _indexFlashcard: number = 0;
   isFliped: boolean = false;
   direction: 'left' | 'right' = 'right';
 
 
   data: tmp_Flashcards[] = [
-    { id: 29, question: "test", answer: "test12" },
-    { id: 30, question: "test2", answer: "test23" },
+    { id: 29, question: "WW1", answer: "14/18" },
+    { id: 30, question: "WW2", answer: "39/45" },
     { id: 31, question: "test3", answer: "test33" },
-    { id: 32, question: "test4", answer: "test44" }
+    { id: 32, question: "test5", answer: "test44" },
+    { id: 32, question: "test5", answer: "test44" }
   ];
+
+
+  progressValue = 1/this.data.length*100;
   
   
   increment() {
@@ -25,27 +28,37 @@ export class PlayFlashcardComponent {
       this.isFliped = !this.isFliped
     } 
 
-    if(this.data.length > this._indexFlashcard+1)
     if (this.progressValue < 100) {
-      this.progressValue += 25;
+      this.progressValue += 1/this.data.length*100;
       this._indexFlashcard ++;
-
     }
+
+    if(this._indexFlashcard > this.data.length){
+      this._indexFlashcard = 0
+    }
+
   }
 
+  toLearn(){
+    this.data.splice(this._indexFlashcard, 1);
+
+    if(this._indexFlashcard >= this.data.length){
+      this._indexFlashcard = 0
+    }
+  }
 
   flip_flashcard() {
     const flashcard = document.getElementById('flipContainer');
 
     if (flashcard) {
-      flashcard.classList.remove('flipleft', 'flipright', 'animation-duration-1000');
+      flashcard.classList.remove('flipleft', 'flipright');
 
       void flashcard.offsetWidth;
 
       if (this.direction === 'right') {
-        flashcard.classList.add('flipright', 'animation-duration-1000');
+        flashcard.classList.add('flipright');
       } else {
-        flashcard.classList.add('flipleft', 'animation-duration-1000');
+        flashcard.classList.add('flipleft');
       }
 
       this.direction = this.direction === 'right' ? 'left' : 'right';

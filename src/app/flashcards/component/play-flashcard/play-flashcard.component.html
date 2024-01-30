@@ -15,7 +15,8 @@
       </div>
     </div>
     <div class="w-full h-screen flex flex-column align-items-center pt-6">
-      <div id="flipContainer" type="button" (click)="flip_flashcard()" class="relative flex justify-content-center align-items-center w-6 h-30rem border-round-3xl border-solid border-3 border-primary shadow-6 border-solid">
+      
+      <div id="flipContainer" type="button" (click)="flip_flashcard()" class="relative flex justify-content-center align-items-center opacity-100 w-6 h-30rem border-round-3xl border-solid border-3 border-primary shadow-6 border-solid">
         <div *ngIf="currrentFlashCard">
           <h3 class="text-5xl text-primary" *ngIf="!isFliped; else isFlipedTemplate">{{currrentFlashCard.question}}</h3>
           <ng-template #isFlipedTemplate>
@@ -27,8 +28,8 @@
         </div>
       </div>
       <div class="mt-6">
-        <button pButton type="button" label="Button 1"></button>
-        <button pButton type="button" label="Button 2" (click)="increment()"></button>
+        <button pButton type="button" label="NON" (click)="increment()"></button>
+        <button pButton type="button" label="OUI" (click)="toLearn()"></button>
       </div>
     </div>
    
