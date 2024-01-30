@@ -5,6 +5,7 @@ import { AuthRoutingModule } from './auth-routing.module'
 import { LoginComponent } from './component/login/login.component'
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component'
 
 @NgModule({
     imports: [
@@ -18,6 +19,7 @@ import { ButtonModule } from 'primeng/button';
     ],
     declarations: [
         LoginComponent,
+        ForgotPasswordComponent,
     ],
     providers: [],
 })
