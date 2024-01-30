@@ -18,6 +18,7 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { InputTextModule } from 'primeng/inputtext';
 import { PaginatorModule } from 'primeng/paginator';
 import { ProgressBarModule } from 'primeng/progressbar';
+import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
     imports: [
@@ -36,7 +37,8 @@ import { ProgressBarModule } from 'primeng/progressbar';
         ToastModule,
         ConfirmPopupModule,
         ProgressBarModule,
-        PaginatorModule
+        PaginatorModule,
+        DialogModule
     ],
     declarations: [
         HomeFlashcardComponent,
