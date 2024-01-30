@@ -1,8 +1,7 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import {Observable, map, Subject} from 'rxjs';
 import { FlashcardApi } from 'src/app/core/http/flashcard/flashcard.api';
 import { Flashcard } from 'src/app/core/models/api/flashcard';
-import { ToastService } from 'src/app/shared/services/toast.service';
 
 @Injectable({
     providedIn: 'root',
@@ -16,9 +15,14 @@ export class FlashcardService {
     public onUpdateFlashcards: EventEmitter<boolean> = new EventEmitter<boolean>();
     public onDeleteFlashcards: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+    private _flashCardsChange: Subject<boolean> = new Subject<boolean>()
+
+    get flashCardsChange(): Subject<boolean> {
+        return this._flashCardsChange
+    }
+
     constructor(
-        private readonly flascardApi: FlashcardApi,
-        private readonly toastService: ToastService
+        private readonly flascardApi: FlashcardApi
     ) {}
 
     public getAllFlashCards(): void {
@@ -26,6 +30,7 @@ export class FlashcardService {
             next: (data: any) => {
                 this._flashcards = data.member;    
                 this.onReceiveFlashcards.emit(true);
+                this.flashCardsChange.next(true);
             }, 
             error: (error) => {
       
@@ -41,7 +46,7 @@ export class FlashcardService {
         return this.flascardApi.getOne(id).pipe(
             map((flashcard) => {
                 return flashcard;       
-            }), 
+            }),
         );
     }
 
@@ -50,6 +55,7 @@ export class FlashcardService {
           next: (createdFlashcard: any) => {
             this._flashcards.push(createdFlashcard);
             this.onCreateFlashcards.emit(true);
+            this.flashCardsChange.next(true);
           },
           error: (error) => {
 
@@ -64,6 +70,7 @@ export class FlashcardService {
                 if (index !== -1) {
                     this._flashcards[index] = data;
                 }
+                this.flashCardsChange.next(true);
                 this.onUpdateFlashcards.emit(true);  
             }, 
             error: (error) => {
@@ -77,8 +84,9 @@ export class FlashcardService {
                 const index = this._flashcards.findIndex((flashcard) => Number(flashcard.id) === id);
                 if (index !== -1) {
                     this._flashcards.splice(index, 1);
-                    this.onDeleteFlashcards.emit(true);
                 }
+                this.flashCardsChange.next(true);
+                this.onDeleteFlashcards.emit(true);
             },
             error: (error) => {
 

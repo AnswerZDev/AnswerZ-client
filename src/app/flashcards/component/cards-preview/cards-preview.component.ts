@@ -30,7 +30,6 @@ export class CardsPreviewComponent {
 
   modifyFlashcard(id: number, question: string, answer: string) {
     if(id !== undefined && id !== null) {
-      console.log('preview')
       this._ref = this.dialogService.open(ModifyPopUpComponent, { 
         data: {
           id: id,

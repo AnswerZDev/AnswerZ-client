@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, ContentChildren, ElementRef, QueryList, ViewChild } from '@angular/core';
+import {AfterContentInit, Component, ContentChildren, ElementRef, OnInit, QueryList, ViewChild} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PrimeTemplate } from 'primeng/api';
 import { CardsPreviewComponent } from '../../../flashcards/component/cards-preview/cards-preview.component';
@@ -15,7 +15,7 @@ interface Mode{
   templateUrl: './generic-flashcard-set.component.html',
   styleUrls: ['./generic-flashcard-set.component.scss']
 })
-export class GenericFlashcardSetComponent implements AfterContentInit{
+export class GenericFlashcardSetComponent implements AfterContentInit, OnInit{
 
   flashcardForm!: FormGroup;
   displayedFlashcards: any[] = [];
@@ -53,6 +53,7 @@ export class GenericFlashcardSetComponent implements AfterContentInit{
   }
   
   ngOnInit() {
+    this.onFlashcardesSubscribe();
     this.modesVisibilite = [
         { name: 'Public' },
         { name: 'Private' },
@@ -70,6 +71,15 @@ export class GenericFlashcardSetComponent implements AfterContentInit{
   ngAfterContentInit(): void {
     this.title = this.templates.find((item) => (item.name === 'title'))
     this.button = this.templates.find((item) => (item.name === 'button'))
+  }
+
+  private onFlashcardesSubscribe(): void {
+    this.flashcardsService.flashCardsChange.subscribe({
+      next: () => {
+        this.totalRecords = this.flashcardsService.flashcards.length;
+        this.paginate({ first: 0, rows: 8, page: 1, pageCount: Math.ceil(this.totalRecords / 8) });
+      }
+    });
   }
 
   onDragOver(event: Event) {

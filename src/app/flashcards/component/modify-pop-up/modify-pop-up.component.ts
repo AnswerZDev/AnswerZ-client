@@ -13,7 +13,18 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class ModifyPopUpComponent implements OnInit{
 
   flashcardId: number = 0;
-  flashcardForm!: FormGroup;
+  flashcardForm!: FormGroup
+
+  constructor(
+      public readonly flashcardService: FlashcardService,
+      private readonly ref: DynamicDialogRef,
+      private readonly config: DynamicDialogConfig,
+      private readonly toastService: ToastService,
+      private readonly formBuilder: FormBuilder,
+  ) {
+    this.updateForm();
+  }
+
 
   ngOnInit(): void {
     this.flashcardService.getFlashcardById(this.config.data.id).subscribe({
@@ -29,17 +40,6 @@ export class ModifyPopUpComponent implements OnInit{
       },
     });
   }
-
-  constructor(
-    public readonly flashcardService: FlashcardService,
-    private readonly ref: DynamicDialogRef,
-    private readonly config: DynamicDialogConfig,
-    private readonly toastService: ToastService,
-    private readonly formBuilder: FormBuilder,
-  ) { 
-    this.updateForm();
-  }
-
   private updateForm() {
     this.flashcardForm = this.formBuilder.group({
       question: ['', [Validators.required]],
@@ -58,11 +58,10 @@ export class ModifyPopUpComponent implements OnInit{
         },
         complete: () => {
           this.flashcardForm.reset();
+          this.ref.close();
         }
       });
-      console.log('popup')
       this.flashcardService.updateFlashcard(this.flashcardId, this.flashcardForm.value);
-      this.ref.close();
     }
   }
 }
