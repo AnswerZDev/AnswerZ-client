@@ -11,10 +11,10 @@ COPY . .
 RUN npm install
 
 # Construit l'application Angular en mode de production
-RUN npm run build
+RUN npm run build --prod
 
 # Étape 2: Utilise une image Nginx pour servir l'application construite
-FROM nginx:alpine
+FROM nginx
 
 # Copie les fichiers d'application construits depuis le conteneur du constructeur vers le conteneur Nginx
 COPY --from=builder /app/dist/ /usr/share/nginx/html
