@@ -25,7 +25,6 @@
       </div>
       <div class="flex flex-column mt-4 md:align-self-auto align-self-center w-full md:w-6">
         <form class="flashcardForm" [formGroup]="flashcardForm" (ngSubmit)="onSubmit()">
-          <p-toast></p-toast>
           <p-card class="flex flex-column pt-0 md:pl-5 custom-card mr-auto md:mr-4 w-full">
             <label for="blockChars" class="font-bold block mt-1 mb-2"> Question </label>
             <input pInputText id="block" formControlName="question" class="w-full border-round-xl mb-2" placeholder="Question"/>
