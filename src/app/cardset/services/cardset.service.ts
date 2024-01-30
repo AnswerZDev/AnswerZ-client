@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, map } from "rxjs";
 import { CardsetApi } from "src/app/core/http/cardset/cardset.api";
 import { ApiService } from "src/app/core/services/api.service";
 
@@ -9,10 +9,11 @@ import { ApiService } from "src/app/core/services/api.service";
 })
 export class CardsetService{
 
-    constructor(private api_cardset: CardsetApi) {
+    constructor(private readonly api_cardset: CardsetApi) {
     }
 
     getAllCardset(){
+        // return this.api_cardset.all_collection();
         return this.api_cardset.all_collection();
     }
 

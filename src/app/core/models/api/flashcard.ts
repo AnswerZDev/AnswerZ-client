@@ -19,4 +19,5 @@ export class Flashcard extends Item {
     public get answer(): string | undefined {
         return this._answer;
     }
+
 }

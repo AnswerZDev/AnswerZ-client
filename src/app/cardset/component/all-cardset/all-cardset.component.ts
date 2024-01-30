@@ -35,11 +35,12 @@ export class AllCardsetComponent implements OnInit{
     // Faire quelque chose lorsque l'utilisateur change de thématique
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+
     this.cardsetservice.getAllCardset().subscribe((data: any) => {
       this.listCardset = data;
     });
-
+   
     this.categories = [
       { name: 'All' },
       { name: 'Physique' },

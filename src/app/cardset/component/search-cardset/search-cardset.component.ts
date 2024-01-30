@@ -8,7 +8,7 @@ import { Cardset } from 'src/app/core/models/api/cardset';
   styleUrls: ['./search-cardset.component.scss']
 })
 export class SearchCardsetComponent {
-  @Input() my_cardset!:Cardset; 
+  @Input() my_cardset!: Cardset; 
 
   constructor(private router: Router) {
   }

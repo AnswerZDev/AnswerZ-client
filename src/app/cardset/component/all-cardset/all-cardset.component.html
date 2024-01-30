@@ -23,7 +23,7 @@
         </div>
     </div>
 
-    <div class="shadow-6 p-4 border-round-2xl border-ra flex-column">
+    <div class="shadow-6 p-4 border-round-2xl border-ra flex-column" *ngIf="listCardset">
         <div class="title mb-3">Physique</div>
         <div class="flex flex-row">
             <app-search-cardset [my_cardset]="listCardset"></app-search-cardset>

@@ -9,16 +9,17 @@ export class Cardset extends Item {
         this._name = data.name;
         this._description = data.description;
         this._author = data.author !== undefined ? new User(data.author) : undefined;
+
         this._visibility = data.visibility;
         this._numberOfGoodAnswer = data.numberOfGoodAnswer;
         this._createdAt = data.createdAt;
-        data.flashcards !== undefined ? 
-            data.flashcards.map(
-                (flashcard: any) => this._flashcards.push(
-                    new Flashcard(flashcard)
-                )
-            )
-        : undefined;
+
+        if (data.flashcards !== undefined) {
+            data.flashcards.forEach( (element: Flashcard) => {
+                console.log(element)
+                this._flashcards.push(element);
+            });
+        }
     }
 
     private _name: string | undefined;
@@ -33,7 +34,7 @@ export class Cardset extends Item {
 
     private _createdAt: Date | undefined;
 
-    private _flashcards!: Flashcard[];
+    private _flashcards: Flashcard[] = [];
 
 
     public get name(): string | undefined {
