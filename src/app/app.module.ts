@@ -17,6 +17,8 @@ import { AdminModule } from './admin/admin.module'
 import {CoreModule} from "./core/core.module";
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { MessagesModule } from 'primeng/messages';
+import { CardsetModule } from './cardset/cardset.module';
+import { NgClass } from '@angular/common';
 
 @NgModule({
     declarations: [
@@ -38,6 +40,8 @@ import { MessagesModule } from 'primeng/messages';
         AuthModule,
         BrowserAnimationsModule,
         SharedModule,
+        NgClass,
+        CardsetModule,
         CoreModule,
         ProgressSpinnerModule,
         MessagesModule,

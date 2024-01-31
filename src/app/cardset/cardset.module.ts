@@ -1,17 +1,21 @@
 import { NgModule } from '@angular/core'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { CommonModule, NgClass, NgIf } from '@angular/common'
+import { CreateFlashcardSetComponent } from './component/create-flashcard-set/create-flashcard-set.component';
 import { DropdownModule } from 'primeng/dropdown';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
-import { HomeFlashcardComponent } from './pages/home-flashcard/home-flashcard.component';
-import { CardsPreviewComponent } from './component/cards-preview/cards-preview.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { InputTextModule } from 'primeng/inputtext';
 import { PaginatorModule } from 'primeng/paginator';
+import { EditFlashcardSetComponent } from './component/edit-flashcard-set/edit-flashcard-set.component';
+import { GenericFlashcardSetComponent } from './pages/generic-flashcard-set/generic-flashcard-set.component';
+import { CardsetRoutingModule } from './cardset-routing.module';
+import { FlashcardModule } from 'src/app/flashcards/flashcards.module';
+import { MyCardsetsComponent } from './pages/my-cardsets/my-cardsets.component';
 
 @NgModule({
     imports: [
@@ -20,6 +24,7 @@ import { PaginatorModule } from 'primeng/paginator';
         ReactiveFormsModule,
         NgIf,
         NgClass,
+        CardsetRoutingModule,
         DropdownModule,
         KeyFilterModule,
         CardModule,
@@ -28,15 +33,16 @@ import { PaginatorModule } from 'primeng/paginator';
         InputTextModule,
         ToastModule,
         ConfirmPopupModule,
-        PaginatorModule
+        PaginatorModule,
+        FlashcardModule
     ],
     declarations: [
-        HomeFlashcardComponent,
-        CardsPreviewComponent,
+        CreateFlashcardSetComponent,
+        EditFlashcardSetComponent,
+        GenericFlashcardSetComponent,
+        MyCardsetsComponent
     ],
     providers: [],
-    exports: [
-        CardsPreviewComponent
-    ]
+    exports: []
 })
-export class FlashcardModule { }
+export class CardsetModule { }

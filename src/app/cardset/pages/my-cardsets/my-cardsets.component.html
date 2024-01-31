@@ -1,0 +1,16 @@
+<div class="pt-5 pl-5 pr-5 w-10rem">
+    <p-button styleClass="flex justify-content-center w-10rem h-6rem border-round-2xl" (click)="redirectToCreateFlashcardSet()">
+        <i class="pi pi-plus" style="font-size: 2.2rem; font-weight: bold;"></i>
+    </p-button>
+</div>
+<div class="flex flex-row justify-content-between pt-5 pl-5 pr-5">
+    <span class="title">My sets</span>
+    <div class="flex flex-column">
+        <p-dropdown [options]="modesVisibilite" [(ngModel)]="selectedModeVisibilities" optionLabel="name" value="Public" class="align-self-end"></p-dropdown>
+        <div class="flex flex-row align-items-center pt-3 gap-3">
+            <img src="../../../../assets/images/information.svg" class="w-1rem h-1rem"/>
+            <span class="font-medium">Hit to have more informations</span>
+        </div>
+    </div>
+</div>
+

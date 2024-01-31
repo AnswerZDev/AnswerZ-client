@@ -6,11 +6,15 @@ import { HeaderComponent } from './component/header/header.component';
 import { FooterComponent } from './component/footer/footer.component';
 import { FlashcardsSetComponent } from './component/flashcards-set/flashcards-set.component';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
-import { MessageService } from 'primeng/api';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { ToastService } from './services/toast.service';
+import { ConfirmService } from './services/confirm.service';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
 import { MenuModule } from 'primeng/menu';
+import { TabMenuModule } from 'primeng/tabmenu';
 
 @NgModule({
     imports: [
@@ -24,13 +28,16 @@ import { MenuModule } from 'primeng/menu';
         AvatarModule,
         AvatarGroupModule,
         MenuModule,
+        ToastModule,
+        ConfirmPopupModule,
+        TabMenuModule,
     ],
     declarations: [
         HeaderComponent,
         FlashcardsSetComponent,
         FooterComponent,
     ],
-    providers: [MessageService],
+    providers: [ToastService, ConfirmService, MessageService, ConfirmationService],
     exports: [
         HeaderComponent,
         FlashcardsSetComponent,

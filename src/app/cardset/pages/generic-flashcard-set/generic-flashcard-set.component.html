@@ -14,7 +14,7 @@
           <div class="flex flex-column justify-content-center align-items-center py-2">
             <label for="input-file" class="flex flex-column align-items-center gap-2 pt-3">
               <input id="input-file" type="file" accept=".png, .jpg, .gif" class="h-full w-full opacity-0 hidden" (change)="uploadImage($event)"/>
-              <img [src]="imageUpload" alt="ImageUpload" class="w-5 h-full border-round-2xl max-h-15rem ImageUpload"/>
+              <img [src]="imageUpload ? imageUpload : imageResized" alt="ImageUpload" class="w-6 h-full border-round-2xl max-h-15rem ImageUpload"/>
               <div class="flex flex-column text-center md:text-auto gap-2">
                 <span class="font-bold block text-sm md:text-lg align-self-auto md:align-self-center">Upload an image</span>
                 <span class="text-sm md:text-lg">or drag and drop PNG, JPG, GIF up to 25Mo</span>
@@ -25,6 +25,7 @@
       </div>
       <div class="flex flex-column mt-4 md:align-self-auto align-self-center w-full md:w-6">
         <form class="flashcardForm" [formGroup]="flashcardForm" (ngSubmit)="onSubmit()">
+          <p-toast></p-toast>
           <p-card class="flex flex-column pt-0 md:pl-5 custom-card mr-auto md:mr-4 w-full">
             <label for="blockChars" class="font-bold block mt-1 mb-2"> Question </label>
             <input pInputText id="block" formControlName="question" class="w-full border-round-xl mb-2" placeholder="Question"/>
@@ -41,10 +42,20 @@
     <div class="flex flex-row justify-content-center w-full mt-5 mb-5">
       <ng-container *ngIf="button" [ngTemplateOutlet]="button.template"></ng-container>
     </div>
-    <div class=" flex flex-column gap-3">
+    <div class=" flex flex-column gap-3" *ngIf="this.flashcardsService.flashcards.length > 0">
       <div class="flex flex-row w-full">
         <span class="text-5xl opacity-70 font-bold pl-0 md:pl-2 title">Card's preview</span>
       </div>
-      <app-cards-preview class="flex flex-column md:flex-row flex-wrap gap-0 md:gap-4 w-full" (editModeClicked)="moveToInput()"></app-cards-preview>
+      <app-cards-preview class="flex flex-column md:flex-row flex-wrap gap-3 md:gap-4 w-full" 
+        [flashcards]="flashcardsService.flashcards" 
+        [displayedFlashcards]="displayedFlashcards"
+        [flashcardForm]="flashcardForm"
+        [question]="flashcardForm.value.question"
+        [answer]="flashcardForm.value.answer" 
+        (editModeClicked)="moveToInput()"
+        (flashcardId)="getFlashcardId($event)">
+      </app-cards-preview>
+      <p-paginator [rows]="8" [totalRecords]="flashcardsService.flashcards.length" (onPageChange)="paginate($event)"></p-paginator>
     </div>
-  </div>
+</div>
+

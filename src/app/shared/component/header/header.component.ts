@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Route, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Route, Router } from '@angular/router';
 import {SecurityService} from "../../services/security.services";
 import {MenuItem} from "primeng/api";
 
@@ -8,10 +8,11 @@ import {MenuItem} from "primeng/api";
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
 
     // url for the logo
     public imageLogo: string = '../../../../assets/images/answerz-logo.png';
+    showButtons = false;
 
     items: MenuItem[] | undefined;
 
@@ -21,6 +22,28 @@ export class HeaderComponent {
     ) {
         this.initializeApp();
     }
+
+    ngOnInit(): void {
+        this.router.events.subscribe((event) => {
+            if (event instanceof NavigationEnd) {
+              this.showButtons = this.shouldShowButtons(event.url);
+            }
+        });
+    }
+
+    shouldShowButtons(url: string): boolean {
+        return url.includes('/my-cardsets');
+    }
+
+    action1() {
+        // Logique associée au bouton 1
+        console.log('Action 1');
+      }
+    
+      action2() {
+        // Logique associée au bouton 2
+        console.log('Action 2');
+      }
 
     /**
      * @author @thdupin2
