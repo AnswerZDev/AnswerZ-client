@@ -3,3 +3,9 @@
     animation-timing-function: ease;
 }
 
+:host ::ng-deep {
+    button{
+        border: 1px solid var(--primary);
+        outline-color: var(--primary);
+    }
+}

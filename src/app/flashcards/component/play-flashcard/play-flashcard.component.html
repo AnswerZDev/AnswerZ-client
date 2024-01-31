@@ -11,7 +11,7 @@
               [value]="progressValue"
               [showValue]="true">
             </p-progressBar>
-            <p class="ml-3">4/18</p>
+            <p class="ml-3">{{this.nbGoodAnswers}}/{{this.nbAnswers}}</p>
       </div>
     </div>
     <div class="w-full h-screen flex flex-column align-items-center pt-6">
@@ -27,9 +27,11 @@
             <p>Hit the card to turn it</p>
         </div>
       </div>
-      <div class="mt-6">
-        <button pButton type="button" label="OK" (click)="good()" class="bg-primary"></button>
-        <button pButton type="button" label="NON" (click)="toLearn()" class="bg-primary"></button>
+      <div class="mt-6 w-full flex justify-content-center">
+        <div class="w-2 surface-0 flex justify-content-around">
+          <button pButton type="button" label="OK" (click)="good()" class="bg-primary"></button>
+          <button pButton type="button" label="NON" (click)="toLearn()" class="bg-primary"></button>
+        </div>
       </div>    
       <p-dialog [(visible)]="visible" [style]="{width: '20vw'}" [modal]="true" [resizable]="false" [draggable]="false" [closable]="false">
         <div style="text-align: center;">

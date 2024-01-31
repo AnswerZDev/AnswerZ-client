@@ -17,6 +17,7 @@ export class PlayFlashcardComponent {
   direction: 'left' | 'right' = 'right';
   visible: boolean = false;
   nbAnswers: number = 0;
+  nbGoodAnswers: number = 0;
   progressValue = 0;
 
   data: tmp_Flashcards[] = [];
@@ -35,6 +36,8 @@ export class PlayFlashcardComponent {
 
   refreshProgressValue(){
     this.progressValue +=  Math.floor(1 / this.nbAnswers * 100);
+    this.nbGoodAnswers += 1;
+
     if(this.progressValue >= 99){
       this.progressValue = 100;
     }
@@ -57,6 +60,10 @@ export class PlayFlashcardComponent {
 
 
   toLearn() {
+    if (this.isFliped) {
+      this.isFliped = !this.isFliped;
+    }
+
     this.data.push(this.data[this._indexFlashcard]);
 
     this.data.splice(this._indexFlashcard, 1);
