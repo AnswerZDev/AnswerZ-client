@@ -3,9 +3,18 @@
     <img [src]="imageLogo" alt="Logo AnswerZ" class="logo" />
     <span class="text-lg md:text-2xl h-full text-white-alpha-90 font-bold">Answerz</span>
   </a>
-  <div class="flex flex-cloumn button-header-container" *ngIf="!securityService.isAuthenticated()">
-    <p-button label="Login" (onClick)="redirectToLoginPage()"></p-button>
-    &nbsp;
-    <p-button label="Register" (onClick)="redirectToRegisterPage()"></p-button>
+  <div>
+    <div class="flex flex-cloumn button-header-container" *ngIf="!securityService.isAuthenticated(); else isLoginTemplate">
+      <p-button label="Login" (onClick)="redirectToLoginPage()"></p-button>
+      &nbsp;
+      <p-button label="Register" (onClick)="redirectToRegisterPage()"></p-button>
+    </div>
+    <ng-template #isLoginTemplate>
+      <p-avatar (click)="menu.toggle($event)" *ngIf="securityService.user && securityService.user.pictureProfileUrl; else noProfilePicture" image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" styleClass="my-2" size="large" shape="circle"></p-avatar>
+      <ng-template #noProfilePicture>
+        <p-avatar (click)="menu.toggle($event)" icon="pi pi-user" styleClass="my-2" size="normal" shape="circle"></p-avatar>
+      </ng-template>
+      <p-menu #menu [popup]="true" [model]="items"></p-menu>
+    </ng-template>
   </div>
 </div>

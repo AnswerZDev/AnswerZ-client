@@ -13,6 +13,7 @@ export class SecurityService {
 
     /**
      * JWT object
+     * @author @Alexis1663
      * @private _jwt { JWT | undefined } JWT object is undefined by default and will be set(in localstorage) when the user logs in
      * @memberof SecurityService
      */
@@ -26,6 +27,7 @@ export class SecurityService {
 
     /**
      * Subject to notify when the user is loaded
+     * @author @Alexis1663
      * @private _userLoad { Subject<boolean> } Subject to notify when the user is loaded
      * @memberof SecurityService
      */
@@ -34,6 +36,7 @@ export class SecurityService {
 
     /**
      * Getter for the userLoad subject
+     * @author @Alexis1663
      * @returns { Subject<boolean> } Subject to notify when the user is loaded
      * @memberof SecurityService
      */
@@ -43,6 +46,7 @@ export class SecurityService {
 
     /**
      * Boolean to know if the user is loading
+     * @author @Alexis1663
      * @private _loadingUser { boolean } Boolean to know if the user is loading
      * @memberof SecurityService
      */
@@ -50,6 +54,7 @@ export class SecurityService {
 
     /**
      * Getter for the loadingUser boolean
+     * @author @Alexis1663
      * @returns { boolean } Boolean to know if the user is loading
      * @memberof SecurityService
      */
@@ -59,6 +64,7 @@ export class SecurityService {
 
     /**
      * User object
+     * @author @Alexis1663
      * @private _user { User | undefined } User object is undefined by default and will be set when the user logs in
      * @memberof SecurityService
      */
@@ -83,7 +89,6 @@ export class SecurityService {
          this._loadingUser = true
          this.userApi.current().subscribe({
              next: (user) => {
-                 console.log(user)
                  this._user = user
                  this._loadingUser = false
                  this._userLoad.next(true)
@@ -104,7 +109,6 @@ export class SecurityService {
         let loginSubscription = this.authentificationApi.login(email, password)
         loginSubscription.subscribe({
             next: (token) => {
-                console.log(token)
                 this.token = token.token
                 this.load()
             },
@@ -121,7 +125,6 @@ export class SecurityService {
     }
 
     isAuthenticated() {
-        console.log(this._user)
         return this._user !== undefined
     }
 
