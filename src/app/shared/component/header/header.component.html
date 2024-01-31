@@ -7,15 +7,10 @@
     <p-button styleClass="menu">Flashcards</p-button>
     <p-button styleClass="menu">Quizzes</p-button>
   </div>
-  <div class="flex flex-cloumn button-header-container">
-    <p-button styleClass="login" label="Login" (onClick)="redirectToLoginPage()"></p-button>
-    &nbsp;
-    <p-button styleClass="login" label="Register" (onClick)="redirectToRegisterPage()"></p-button>
   <div>
-    <div class="flex flex-cloumn button-header-container" *ngIf="!securityService.isAuthenticated(); else isLoginTemplate">
-      <p-button label="Login" (onClick)="redirectToLoginPage()"></p-button>
-      &nbsp;
-      <p-button label="Register" (onClick)="redirectToRegisterPage()"></p-button>
+    <div class="flex flex-row gap-2 button-header-container" *ngIf="!securityService.isAuthenticated(); else isLoginTemplate">
+      <p-button styleClass="login" label="Login" (onClick)="redirectToLoginPage()"></p-button>
+      <p-button styleClass="login" label="Register" (onClick)="redirectToRegisterPage()"></p-button>
     </div>
     <ng-template #isLoginTemplate>
       <p-avatar (click)="menu.toggle($event)" *ngIf="securityService.user && securityService.user.pictureProfileUrl; else noProfilePicture" image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" styleClass="my-2" size="large" shape="circle"></p-avatar>
