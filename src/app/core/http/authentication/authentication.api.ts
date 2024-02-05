@@ -17,7 +17,9 @@ export class AuthenticationApi {
         })
     }
 
-    public logout(): Observable<any> {
-        return this.http.post(environment.server + '/auth/logout', {})
+    public forgotPassword(email: string): Observable<void> {
+        return this.http.post<void>(environment.server + '/auth/forgot-password', {
+            email,
+        })
     }
 }

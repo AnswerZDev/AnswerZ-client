@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core'
+import {EventEmitter, Injectable} from '@angular/core'
 import {JWT, JWTService} from "../../core/services/jwt.service";
 import {AuthenticationApi} from "../../core/http/authentication/authentication.api";
 import {Router} from "@angular/router";
 import {UserApi} from "../../core/http/user/user.api";
 import {Subject} from "rxjs";
 import {User} from "../../core/models/api/user";
+import {ToastService} from "./toast.service";
 
 @Injectable({
     providedIn: 'root',
@@ -19,10 +20,12 @@ export class SecurityService {
      */
     private _jwt: JWT | undefined
 
+    public onSuccessSignin: EventEmitter<boolean> = new EventEmitter<boolean>()
+
     constructor(
         private readonly authentificationApi: AuthenticationApi,
         private readonly userApi: UserApi,
-        private readonly router: Router
+        private readonly router: Router,
     ) {}
 
     /**
@@ -112,7 +115,9 @@ export class SecurityService {
                 this.token = token.token
                 this.load()
             },
-            error: () => {},
+            error: () => {
+                this.onSuccessSignin.emit(false)
+            },
         })
         return loginSubscription
     }
@@ -137,7 +142,9 @@ export class SecurityService {
                 this._userLoad.next(true)
                 this.router.navigate(['/home'])
             },
-            error: () => {},
+            error: () => {
+
+            },
         })
     }
 
