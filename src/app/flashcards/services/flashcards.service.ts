@@ -1,5 +1,5 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import {Observable, map, Subject} from 'rxjs';
+import {Observable, map, Subject, tap} from 'rxjs';
 import { FlashcardApi } from 'src/app/core/http/flashcard/flashcard.api';
 import { Flashcard } from 'src/app/core/models/api/flashcard';
 
@@ -17,13 +17,17 @@ export class FlashcardService {
 
     private _flashCardsChange: Subject<boolean> = new Subject<boolean>()
 
-    get flashCardsChange(): Subject<boolean> {
-        return this._flashCardsChange
-    }
-
     constructor(
         private readonly flascardApi: FlashcardApi
     ) {}
+
+    get flashcards(): Flashcard[] {
+        return this._flashcards;
+    }
+
+    get flashCardsChange(): Subject<boolean> {
+        return this._flashCardsChange
+    }
 
     public getAllFlashCards(): void {
         this.flascardApi.getAll().subscribe({
@@ -38,16 +42,25 @@ export class FlashcardService {
         });
     }
 
-    get flashcards(): Flashcard[] {
-        return this._flashcards;
-    }
-
     public getFlashcardById(id: number): Observable<any> {
         return this.flascardApi.getOne(id).pipe(
             map((flashcard) => {
                 return flashcard;       
             }),
         );
+    }
+
+    public getAllFlashcardByCardsetId(cardsetId: number): void {
+        this.flascardApi.getAllFlashcardByCardsetId(cardsetId).subscribe({
+            next: (data: any) => {
+                this._flashcards = data.member;
+                console.log(this._flashcards)   
+                this.onReceiveFlashcards.emit(true);
+                this.flashCardsChange.next(true);  
+            },
+            error: (error) => {
+            }
+        });
     }
 
     public createFlashcard(data: any): void {

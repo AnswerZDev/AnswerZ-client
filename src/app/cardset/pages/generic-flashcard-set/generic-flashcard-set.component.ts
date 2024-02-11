@@ -1,14 +1,12 @@
-import {AfterContentInit, Component, ContentChildren, ElementRef, OnInit, QueryList, ViewChild} from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {AfterContentInit, Component, ContentChildren, OnInit, QueryList, ViewChild} from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { PrimeTemplate } from 'primeng/api';
 import { CardsPreviewComponent } from '../../../flashcards/component/cards-preview/cards-preview.component';
 import { FlashcardService } from 'src/app/flashcards/services/flashcards.service';
 import { first } from 'rxjs';
 import { ToastService } from 'src/app/shared/services/toast.service';
-
-interface Mode{
-  name: string;
-}
+import { CardsetService, Mode } from '../../services/cardset.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-generic-flashcard',
@@ -23,10 +21,12 @@ export class GenericFlashcardSetComponent implements AfterContentInit, OnInit{
   first = 0;
   flashcardId: number = 0;
 
+  cardsetId: number | null = 0;
+
   modesVisibilite: Mode[] | undefined;
   modesCategorie: Mode[] | undefined;
-  selectedModeVisibilities: Mode | undefined;
-  selectedModeCategories: Mode | undefined;
+  categoryName: string = '';
+  categoryVisibility: string = '';
   blockChars: RegExp = /^[0-9a-zA-Z\s]+$/;
   imageUpload: string = "../../../../assets/images/image_upload.svg";
   imageResized: string = ''; // Image redimensionnée à afficher dans la section de prévisualisation
@@ -40,7 +40,10 @@ export class GenericFlashcardSetComponent implements AfterContentInit, OnInit{
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly toastService: ToastService, 
-    public readonly flashcardsService: FlashcardService
+    public readonly flashcardsService: FlashcardService,
+    public readonly cardsetsService: CardsetService,
+    private readonly router: Router,
+    private readonly route: ActivatedRoute
   ) {
     this.createForm();
   }
@@ -53,17 +56,26 @@ export class GenericFlashcardSetComponent implements AfterContentInit, OnInit{
   }
   
   ngOnInit() {
-    this.onFlashcardesSubscribe();
+    this.onCardsetsSubscribe();
+    //this.onFlashcardesSubscribe();
     this.modesVisibilite = [
-        { name: 'Public' },
-        { name: 'Private' },
+      { name: 'Public' },
+      { name: 'Private' }
     ];
     this.modesCategorie = [
-      { name: 'English' },
-      { name: 'Sport' },
       { name: 'Mathematics' },
-      { name: 'Chemical Physics'}
+      { name: 'French' },
+      { name: 'English' },
+      { name: 'History' },
+      { name: 'Geography' },
+      { name: 'Science' },
+      { name: 'Sport' },
+      { name: 'Art' },
+      { name: 'Music' },
+      { name: 'Other' }
     ];
+
+    this.cardsetId = this.route.snapshot.params['cardsetId'];
 
     this.getAllFlashcards();
   }
@@ -73,11 +85,19 @@ export class GenericFlashcardSetComponent implements AfterContentInit, OnInit{
     this.button = this.templates.find((item) => (item.name === 'button'))
   }
 
-  private onFlashcardesSubscribe(): void {
-    this.flashcardsService.flashCardsChange.subscribe({
+  // private onFlashcardesSubscribe(): void {
+  //   this.flashcardsService.flashCardsChange.subscribe({
+  //     next: () => {
+  //       this.totalRecords = this.flashcardsService.flashcards.length;
+  //       this.paginate({ first: 0, rows: 8, page: 1, pageCount: Math.ceil(this.totalRecords / 8) });
+  //     }
+  //   });
+  // }
+
+  private onCardsetsSubscribe(): void {
+    this.cardsetsService.cardsetsChange.subscribe({
       next: () => {
-        this.totalRecords = this.flashcardsService.flashcards.length;
-        this.paginate({ first: 0, rows: 8, page: 1, pageCount: Math.ceil(this.totalRecords / 8) });
+        console.log("cardsetsChange")
       }
     });
   }
@@ -180,7 +200,7 @@ export class GenericFlashcardSetComponent implements AfterContentInit, OnInit{
     }
   }
 
-  onSubmit() {
+  onSubmitFlashcard() {
     if (this.flashcardForm.valid) {
       // Envoie les données au backend
       if(this.flashcardId === undefined || this.flashcardId === 0){
@@ -221,6 +241,117 @@ export class GenericFlashcardSetComponent implements AfterContentInit, OnInit{
         // Le formulaire n'est pas valide
         this.toastService.toast('error', 'Error', 'Form is not valid');
       }
+  }
+
+  onSubmitCardset() {
+    if (this.cardsetsService.cardsetForm.valid) {
+      if(this.cardsetId === null || this.cardsetId === undefined){
+        // Envoie les données au backend
+        this.cardsetsService.onCreateCardsets.pipe(first()).subscribe({
+          next: (id) => {
+            const cardSetId = id;
+            this.toastService.toast('success', 'Success', 'Creation successed');
+            this.router.navigate(['/cardset/add-flashcard-to-set', cardSetId]);
+          },
+          error: () => {
+            this.toastService.toast('error', 'Error', 'Error during creation');
+          },
+          complete: () => {
+            // Réinitialise le formulaire dans le bloc finally (au cas où il n'y aurait pas de réponse)
+            this.cardsetsService.cardsetForm.reset();
+            this.imageUpload = '../../../../assets/images/image_upload.svg';
+          }
+        });
+        const selectedCategoryControl = this.cardsetsService.cardsetForm.get('selectedCategory');
+        const selectedVisibilityControl = this.cardsetsService.cardsetForm.get('selectedVisibility');
+
+        if (selectedCategoryControl && selectedVisibilityControl) {
+          const selectedCategory: Mode | null = selectedCategoryControl.value;
+          const selectedVisibility: Mode | null = selectedVisibilityControl.value;
+
+          if (selectedCategory) {
+            this.categoryName = selectedCategory.name;
+            selectedCategoryControl.setValue(this.categoryName);
+          } else {
+            this.toastService.toast('error', 'Error', 'Some values are null');
+          }
+        
+          
+          if (selectedVisibility) {
+            this.categoryVisibility = selectedVisibility.name;
+          } else {
+            this.categoryVisibility = 'Public';
+          }
+        
+          selectedVisibilityControl.setValue(this.categoryVisibility);
+        } else {
+          this.toastService.toast('error', 'Error', 'Some values are null');
+        }
+        const cardsetData = {
+          name: this.cardsetsService.cardsetForm.value.name,
+          description: this.cardsetsService.cardsetForm.value.description,
+          category: this.categoryName,
+          visibility: this.categoryVisibility,
+          image: this.imageUpload,
+          createdAt: new Date(),
+          numberOfGoodAnswer: 0,
+          flashcards: this.displayedFlashcards,
+        };
+        this.cardsetsService.createCardset(cardsetData);
+      } else {
+        this.cardsetsService.onUpdateCardsets.pipe(first()).subscribe({
+          next: () => {
+            this.toastService.toast('success', 'Success', 'Modification successed');
+            this.router.navigate(['/cardset/add-flashcard-to-set', this.cardsetId]);
+          },
+          error: () => {
+            this.toastService.toast('error', 'Error', 'Error during update');
+          },
+          complete: () => {
+            // Réinitialise le formulaire dans le bloc finally (au cas où il n'y aurait pas de réponse)
+            this.cardsetsService.cardsetForm.reset();
+            this.imageUpload = '../../../../assets/images/image_upload.svg';
+          }
+        });
+        const selectedCategoryControl = this.cardsetsService.cardsetForm.get('selectedCategory');
+        const selectedVisibilityControl = this.cardsetsService.cardsetForm.get('selectedVisibility');
+
+        if (selectedCategoryControl && selectedVisibilityControl) {
+          const selectedCategory: Mode | null = selectedCategoryControl.value;
+          const selectedVisibility: Mode | null = selectedVisibilityControl.value;
+
+          if (selectedCategory) {
+            this.categoryName = selectedCategory.name;
+            selectedCategoryControl.setValue(this.categoryName);
+          } else {
+            this.toastService.toast('error', 'Error', 'Some values are null');
+          }
+        
+          
+          if (selectedVisibility) {
+            this.categoryVisibility = selectedVisibility.name;
+          } else {
+            this.categoryVisibility = 'Public';
+          }
+        
+          selectedVisibilityControl.setValue(this.categoryVisibility);
+        } else {
+          this.toastService.toast('error', 'Error', 'Some values are null');
+        }
+        const cardsetData = {
+          name: this.cardsetsService.cardsetForm.value.name,
+          description: this.cardsetsService.cardsetForm.value.description,
+          category: this.categoryName,
+          visibility: this.categoryVisibility,
+          image: this.imageUpload,
+          createdAt: new Date(),
+        };
+        this.cardsetsService.updateCardset(this.cardsetId, cardsetData);
+      }
+    } else {
+      // Le formulaire n'est pas valide
+      this.toastService.toast('error', 'Error', 'Form is not valid');
+    }
   }
 
   paginate(event: any) {

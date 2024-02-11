@@ -26,6 +26,13 @@ export class FlashcardApi extends ApiService {
         return f as unknown as Observable<Flashcard>
     }
 
+    public getAllFlashcardByCardsetId(cardsetId: number): Observable<Flashcard> {
+        let f = this.get(`/cardset/${cardsetId}`).pipe(
+            map((data: any) => HydraFactory.createCollection(Flashcard, data))
+        )
+        return f as unknown as Observable<Flashcard>
+    }
+
     public create(data: any): Observable<Flashcard> {
         let f = this.post('/', data).pipe(
             map((response: any) => HydraFactory.createItem(Flashcard, response) as Flashcard)

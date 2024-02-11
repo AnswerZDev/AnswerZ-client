@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { CardsetService } from '../../services/cardset.service';
 
 @Component({
   selector: 'app-cardset',
@@ -12,25 +13,35 @@ export class CardsetComponent {
   imageEnglishTest: string = '../../../../assets/images/english_test.svg';
   imageHeart: string = '../../../../assets/images/heart.svg';
   @Input() isLikedMode: boolean = false;
+  @Input() displayedCardsets: any[] = [];
 
+  direction: 'left' | 'right' = 'right';
 
   constructor(
-    private readonly router: Router
+    private readonly router: Router,
+    public readonly cardsetsService: CardsetService
   ) {}
 
-  redirectToEdit() {
-    this.router.navigate(['/cardset/edit-flashcard-set']);
+  redirectToEdit(cardsetId: number) {
+    this.router.navigate([`/cardset/edit-flashcard-set/${cardsetId}`]);
   }
 
-  flipCard(id: string) {
-    const card = document.getElementById(id);
-    if (card) {
-      card.classList.remove('flipright');
+  flipCard(cardset: any) {
+    const card = document.getElementById(`${cardset.id}`);
 
+    if (card) {
+      cardset.isFlipped = !cardset.isFlipped;
+
+      card.classList.remove('flipleft', 'flipright');
       void card.offsetWidth;
 
-      card.classList.add('flipright');
+      if (this.direction === 'right') {
+        card.classList.add('flipright');
+      } else {
+        card.classList.add('flipleft');
+      }
+
+      this.direction = this.direction === 'right' ? 'left' : 'right';
     }
   }
-  
 }
