@@ -4,6 +4,8 @@ import {MessageService} from "primeng/api";
 import {passwordConfirmValidator} from "../../../shared/validators/password-confirm.validator";
 import {AuthService} from "../../services/auth.services";
 import {ToastService} from "../../../shared/services/toast.service";
+import {Router} from "@angular/router";
+import {SecurityService} from "../../../shared/services/security.services";
 
 @Component({
     selector: 'app-register',
@@ -40,25 +42,23 @@ export class RegisterComponent{
     constructor(
         private readonly authService: AuthService,
         private readonly toastService: ToastService,
+        private readonly router: Router,
     ) {
     }
 
     protected register(): void {
-        this.authService.register(this.authForm).subscribe({
-            next: () => {
-                this.toastService.toast(
-                    'success',
-                    'User registered successfully',
-                    'User registered successfully'
-                )
-            },
-            error: (error) => {
+        this.authService.onSignUpEmitter.subscribe((isSuccess) => {
+            if(isSuccess) {
+                this.router.navigate(['/home']);
+            } else {
                 this.toastService.toast(
                     'error',
                     'Error',
                     'An error occurred while registering the user. Please retry later.'
-                )
+                );
             }
+
         });
+        this.authService.register(this.authForm);
     }
 }

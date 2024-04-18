@@ -23,7 +23,9 @@ export class AuthenticationApi {
         })
     }
 
-    public register(registerForm: any): Observable<void> {
-        return this.http.post<void>(environment.server + '/auth/register', registerForm);
+    public register(registerForm: any): Observable<Token> {
+        return this.http.post<Token>(
+            environment.server + '/auth/register', registerForm
+        ) as Observable<Token>;
     }
 }
