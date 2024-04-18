@@ -22,4 +22,8 @@ export class AuthenticationApi {
             email,
         })
     }
+
+    public register(registerForm: any): Observable<void> {
+        return this.http.post<void>(environment.server + '/auth/register', registerForm);
+    }
 }

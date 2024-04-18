@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import {Observable, Subject} from 'rxjs';
+import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import { AuthenticationApi } from 'src/app/core/http/authentication/authentication.api';
 import { Token } from 'src/app/core/models/token/token';
 
@@ -26,5 +26,18 @@ export class AuthService {
                 this._resetPasswordObservable.next(false);
             }
         });
+    }
+
+    public register(signUpForm: FormGroup): Subject<void> {
+        const subject: Subject<void> = new Subject<void>();
+        this.authApi.register(signUpForm.value).subscribe({
+            next: () => {
+                subject.next();
+            },
+            error: (error) => {
+                subject.error(error);
+            }
+        });
+        return subject;
     }
 }
