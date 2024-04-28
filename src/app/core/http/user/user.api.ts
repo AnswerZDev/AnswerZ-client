@@ -3,13 +3,14 @@ import {ApiService} from "../../services/api.service";
 import {map, Observable} from "rxjs";
 import {User} from "../../models/api/user";
 import {HydraFactory} from "../../models/api/hydra/hydra.factory";
+import {SecurityService} from "../../../shared/services/security.services";
 
 @Injectable({
     providedIn: 'root',
 })
 export class UserApi extends ApiService {
-    public constructor() {
-        super('users')
+    public constructor(    ) {
+        super('user')
     }
 
     public current(): Observable<User> {

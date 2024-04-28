@@ -1,15 +1,23 @@
 <div class="flex flex-row header-container align-items-center justify-content-between pl-1 md:pl-5 pr-1 md:pr-5">
   <a class="flex flex-row align-items-center sm:gap-3 cursor-pointer" (click)="redirectToHomePage()">
     <img [src]="imageLogo" alt="Logo AnswerZ" class="logo" />
-    <span class="text-lg md:text-2xl h-full text-white-alpha-90 font-bold">Answerz</span>
+    <span class="text-lg md:text-2xl h-full text-white font-bold">Answerz</span>
   </a>
   <div class="flex gap-7" *ngIf="showButtons">
     <p-button styleClass="menu">Flashcards</p-button>
     <p-button styleClass="menu">Quizzes</p-button>
   </div>
-  <div class="flex flex-cloumn button-header-container">
-    <p-button styleClass="login" label="Login" (onClick)="redirectToLoginPage()"></p-button>
-    &nbsp;
-    <p-button styleClass="login" label="Register" (onClick)="redirectToRegisterPage()"></p-button>
+  <div>
+    <div class="flex flex-row gap-2 button-header-container" *ngIf="!securityService.isAuthenticated(); else isLoginTemplate">
+      <p-button styleClass="login" label="Login" (onClick)="redirectToLoginPage()"></p-button>
+      <p-button styleClass="login" label="Register" (onClick)="redirectToRegisterPage()"></p-button>
+    </div>
+    <ng-template #isLoginTemplate>
+      <p-avatar (click)="menu.toggle($event)" *ngIf="securityService.user && securityService.user.pictureProfileUrl; else noProfilePicture" image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" styleClass="my-2" size="large" shape="circle"></p-avatar>
+      <ng-template #noProfilePicture>
+        <p-avatar (click)="menu.toggle($event)" icon="pi pi-user" styleClass="my-2" size="normal" shape="circle"></p-avatar>
+      </ng-template>
+      <p-menu #menu [popup]="true" [model]="items"></p-menu>
+    </ng-template>
   </div>
 </div>

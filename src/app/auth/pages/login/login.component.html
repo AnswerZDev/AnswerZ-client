@@ -23,7 +23,7 @@
             <label class="text-xs" for="password">Password</label>
             <input
               id="password"
-              type="text"
+              type="password"
               pInputText
               formControlName="password"
             />
@@ -32,7 +32,8 @@
           <div class="w-full pt-5">
             <p-button label="Login"
                 type="submit"
-                (click)="login()"></p-button>
+                (click)="login()" [disabled]="!authForm.valid">
+            </p-button>
           </div>
 
           <div class="text-center">
@@ -62,3 +63,4 @@
     </div>
   </div>
 </div>
+<p-toast></p-toast>
