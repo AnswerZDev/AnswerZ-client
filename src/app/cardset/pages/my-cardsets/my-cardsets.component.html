@@ -13,14 +13,12 @@
         </div>
     </div>
 </div>
-<app-cardset class="flex" [isLikedMode]="isLikedMode"
-[displayedCardsets]="displayedCardsets">
-</app-cardset>
+<app-cardset class="flex" [isLikedMode]="isLikedMode" [displayedCardsets]="displayedCardsets"></app-cardset>
 <div class="flex flex-column align-items-center pt-7">
     <p-toast></p-toast>
-    <p-paginator [rows]="5" [totalRecords]="cardsetsService.cardsets.length" (onPageChange)="paginate($event)" class="mt-2"></p-paginator>
-    <p-progressBar [value]="value" styleClass="w-30rem"></p-progressBar>
-    <span class="text">{{currentPage}} / {{pageSize}}</span>
+    <p-paginator [rows]="pageSize" [totalRecords]="totalRecords" (onPageChange)="paginate($event)" class="mt-2"></p-paginator>
+    <p-progressBar [value]="progressPercentage" styleClass="w-30rem"></p-progressBar>
+    <span class="text">{{currentPage}} / {{totalPages}}</span>
 </div>
 <div class="flex pt-5 pl-5">
     <span class="title">My liked sets</span>

@@ -12,14 +12,16 @@ import { ToastService } from 'src/app/shared/services/toast.service';
 })
 export class MyCardsetsComponent implements OnInit {
   modesVisibilite: Mode[] | undefined;
-  selectedModeVisibilities: Mode | undefined = {name: 'Private'};
+  selectedModeVisibilities: Mode | undefined = { name: 'Private' };
 
   imageInformation: string = '../../../../assets/images/information.svg';
   value: number = 0;
 
   totalRecords: number = 0;
   currentPage: number = 0;
+  totalPages: number = 0;
   pageSize: number = 0;
+  progressPercentage: number = 0;
   displayedCardsets: any[] = [];
 
   isLikedMode: boolean = true;
@@ -34,17 +36,9 @@ export class MyCardsetsComponent implements OnInit {
   ngOnInit(): void {
     this.onCardsetsSubscribe();
     this.modesVisibilite = [
-      {name: 'Public'},
-      {name: 'Private'}
+      { name: 'Public' },
+      { name: 'Private' }
     ];
-
-    let interval = setInterval(() => {
-      this.value = this.value + Math.floor(Math.random() * 10) + 1;
-      if (this.value >= 100) {
-          this.value = 100;
-          clearInterval(interval);
-      }
-    }, 2000);
 
     this.getAllCardsets();
   }
@@ -64,7 +58,7 @@ export class MyCardsetsComponent implements OnInit {
         this.totalRecords = this.cardsetsService.cardsets.length;
         this.paginate({ first: 0, rows: 4, page: 1, pageCount: Math.ceil(this.totalRecords / 5) });
       },
-      error: (error) => {
+      error: () => {
         this.toastService.toast('error', 'Error', 'Error during fetching cardsets');
       }
     });
@@ -78,16 +72,24 @@ export class MyCardsetsComponent implements OnInit {
   paginate(event: any) {
     this.currentPage = event.first / event.rows + 1; // Calcul de la page courante
     this.pageSize = event.rows; // Nombre d'éléments par page
-  
+
     // Filtrer les cardsets avec une visibilité en privé
     const privateCardsets = this.cardsetsService.cardsets
-      .filter(cardset => cardset.visibility === 'Private');
-  
-    const totalPages = Math.ceil(privateCardsets.length / this.pageSize); // Calcul du nombre total de pages
+        .filter(cardset => cardset.visibility === 'Private');
 
-    this.pageSize = totalPages;
-  
-    this.displayedCardsets = privateCardsets
-      .slice(event.first, event.first + this.pageSize);
+    const startIndex = event.first;
+    const endIndex = startIndex + event.rows;
+    this.displayedCardsets = privateCardsets.slice(startIndex, endIndex);
+
+    this.totalRecords = privateCardsets.length; // Total des enregistrements
+
+    // Calcul du nombre total de pages
+    if (this.totalRecords <= this.pageSize) {
+        this.totalPages = 1; // Tout tient sur une seule page
+    } else {
+        this.totalPages = Math.ceil(this.totalRecords / this.pageSize);
+    }
+
+    this.progressPercentage = (this.currentPage / this.totalPages) * 100;
   }
 }
