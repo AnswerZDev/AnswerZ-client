@@ -22,4 +22,10 @@ export class AuthenticationApi {
             email,
         })
     }
+
+    public register(registerForm: any): Observable<Token> {
+        return this.http.post<Token>(
+            environment.server + '/auth/register', registerForm
+        ) as Observable<Token>;
+    }
 }
