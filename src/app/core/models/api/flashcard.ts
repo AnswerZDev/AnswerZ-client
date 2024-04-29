@@ -1,4 +1,4 @@
-import { Item } from "./hydra/item";
+import {Item} from "./hydra/item";
 
 export class Flashcard extends Item {
     constructor(data: any) {
@@ -19,5 +19,4 @@ export class Flashcard extends Item {
     public get answer(): string | undefined {
         return this._answer;
     }
-
 }

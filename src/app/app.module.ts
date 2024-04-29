@@ -15,6 +15,10 @@ import { UserModule } from './user/user.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AdminModule } from './admin/admin.module'
 import { CardsetModule } from './cardset/cardset.module';
+import {CoreModule} from "./core/core.module";
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { MessagesModule } from 'primeng/messages';
+import { NgClass } from '@angular/common';
 
 @NgModule({
     declarations: [
@@ -36,7 +40,11 @@ import { CardsetModule } from './cardset/cardset.module';
         AuthModule,
         BrowserAnimationsModule,
         SharedModule,
-        CardsetModule
+        CardsetModule,
+        NgClass,
+        CoreModule,
+        ProgressSpinnerModule,
+        MessagesModule,
     ],
     providers: [],
     bootstrap: [AppComponent]

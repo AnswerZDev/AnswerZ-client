@@ -1,7 +1,18 @@
-<main>
+<main *ngIf="isReady(); else loader">
   <app-header></app-header>
   <div>
     <router-outlet (activate)="onComponentLoad()"></router-outlet>
   </div>
   <app-footer></app-footer>
+  <p-toast></p-toast>
 </main>
+<ng-template #loader>
+  <div class="flex flex-column justify-content-center h-full">
+    <div class="flex flex-row justify-content-center w-full">
+      <div class="flex flex-column align-items-center">
+        <p-progressSpinner></p-progressSpinner>
+        <p-messages [value]="messages" [enableService]="false" [closable]="false"></p-messages>
+      </div>
+    </div>
+  </div>
+</ng-template>

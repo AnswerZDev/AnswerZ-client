@@ -1,42 +1,48 @@
-import { NgModule } from '@angular/core';
-import { CommonModule, NgClass, NgIf } from '@angular/common';
-import { CarsetRoutingModule } from './cardset-routing.module';
-import { AllCardsetComponent } from './component/all-cardset/all-cardset.component';
+import { NgModule } from '@angular/core'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { CommonModule, NgClass, NgIf } from '@angular/common'
+import { CreateFlashcardSetComponent } from './component/create-flashcard-set/create-flashcard-set.component';
 import { DropdownModule } from 'primeng/dropdown';
 import { KeyFilterModule } from 'primeng/keyfilter';
-import { ButtonModule } from 'primeng/button';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { InputTextModule } from 'primeng/inputtext';
-import { AutoCompleteModule } from 'primeng/autocomplete';
-import { SearchCardsetComponent } from './component/search-cardset/search-cardset.component';
 import { CardModule } from 'primeng/card';
-import { DialogModule } from 'primeng/dialog';
-import { AvatarModule } from 'primeng/avatar';
-import { AvatarGroupModule } from 'primeng/avatargroup';
-import { DividerModule } from 'primeng/divider';
+import { ButtonModule } from 'primeng/button';
+import { HttpClientModule } from '@angular/common/http';
+import { ToastModule } from 'primeng/toast';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { InputTextModule } from 'primeng/inputtext';
+import { PaginatorModule } from 'primeng/paginator';
+import { EditFlashcardSetComponent } from './component/edit-flashcard-set/edit-flashcard-set.component';
+import { GenericFlashcardSetComponent } from './pages/generic-flashcard-set/generic-flashcard-set.component';
+import { CardsetRoutingModule } from './cardset-routing.module';
+import { FlashcardModule } from 'src/app/flashcards/flashcards.module';
+import { MyCardsetsComponent } from './pages/my-cardsets/my-cardsets.component';
 
 @NgModule({
-  declarations: [
-    AllCardsetComponent,
-    SearchCardsetComponent
-  ],
-  imports: [
-    FormsModule,
-    ReactiveFormsModule,
-    NgIf,
-    NgClass,
-    CommonModule,
-    CarsetRoutingModule,
-    DropdownModule,
-    KeyFilterModule,
-    CardModule,
-    ButtonModule,
-    InputTextModule,
-    AutoCompleteModule,
-    DialogModule,
-    AvatarModule,
-    AvatarGroupModule,
-    DividerModule
-  ]
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        NgIf,
+        NgClass,
+        CardsetRoutingModule,
+        DropdownModule,
+        KeyFilterModule,
+        CardModule,
+        ButtonModule,
+        HttpClientModule,
+        InputTextModule,
+        ToastModule,
+        ConfirmPopupModule,
+        PaginatorModule,
+        FlashcardModule
+    ],
+    declarations: [
+        CreateFlashcardSetComponent,
+        EditFlashcardSetComponent,
+        GenericFlashcardSetComponent,
+        MyCardsetsComponent
+    ],
+    providers: [],
+    exports: []
 })
 export class CardsetModule { }

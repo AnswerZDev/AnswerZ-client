@@ -3,20 +3,20 @@ import {ApiService} from "../../services/api.service";
 import {map, Observable} from "rxjs";
 import {User} from "../../models/api/user";
 import {HydraFactory} from "../../models/api/hydra/hydra.factory";
+import {SecurityService} from "../../../shared/services/security.services";
 
 @Injectable({
     providedIn: 'root',
 })
 export class UserApi extends ApiService {
-    public constructor() {
-        super('users') // nom du controller de NestJS
+    public constructor(    ) {
+        super('user')
     }
 
-    // Fonction par route comme ceci
-    public current(): Observable<User> { // Observable qui retourne modele : USER
+    public current(): Observable<User> {
         let u = this.get('/me').pipe(
-            map((data: any) => HydraFactory.createItem(User, data)) // model, data
+            map((data: any) => HydraFactory.createItem(User, data))
         )
-        return u as unknown as Observable<User> // toujours retoruné comme ca avec <Model>
+        return u as unknown as Observable<User>
     }
 }

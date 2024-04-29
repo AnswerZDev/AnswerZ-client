@@ -1,16 +1,26 @@
-import { NgModule } from "@angular/core";
-import { RouterModule, Routes } from "@angular/router";
-import { AllCardsetComponent } from "./component/all-cardset/all-cardset.component";
+import { RouterModule, Routes } from '@angular/router'
+import { NgModule } from '@angular/core'
+import { CreateFlashcardSetComponent } from './component/create-flashcard-set/create-flashcard-set.component'
+import { EditFlashcardSetComponent } from './component/edit-flashcard-set/edit-flashcard-set.component'
+import { MyCardsetsComponent } from './pages/my-cardsets/my-cardsets.component'
 
 const routes: Routes = [
     {
         path: '',
-        redirectTo: 'all-cardset',
-        pathMatch: 'full'
+        redirectTo: 'my-cardsets', // à changer dans le futur,
+        pathMatch: 'full',
     },
     {
-        path: 'all-cardset',
-        component: AllCardsetComponent
+        path: 'my-cardsets',
+        component: MyCardsetsComponent,
+    },
+    {
+        path: 'create-flashcard-set',
+        component: CreateFlashcardSetComponent,
+    },
+    {
+        path: 'edit-flashcard-set',
+        component: EditFlashcardSetComponent,
     }
 ]
 
@@ -18,4 +28,4 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
 })
-export class CarsetRoutingModule { }
+export class CardsetRoutingModule { }

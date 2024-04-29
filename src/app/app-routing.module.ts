@@ -18,9 +18,9 @@ const routes: Routes = [
             import('./auth/auth.module').then((m) => m.AuthModule),
     },
     {
-        path: 'flashcards',
+        path: 'cardset',
         loadChildren: () =>
-            import('./flashcards/flashcards.module').then((m) => m.FlashcardModule),
+            import('./cardset/cardset.module').then((m) => m.CardsetModule),
     },
     {
         path: 'user',
