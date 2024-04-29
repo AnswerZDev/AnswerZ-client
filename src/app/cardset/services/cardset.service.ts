@@ -27,7 +27,7 @@ export class CardsetService {
         public readonly cardsetApi: CardsetApi,
     ) {
         this.cardsetForm = new FormGroup({
-            image: new FormControl<string | null>(null),
+            image: new FormControl<File | null>(null),
             name: new FormControl<string | null>(null),
             description: new FormControl<string | null>(null),
             selectedCategory: new FormControl<Mode | null>(null),

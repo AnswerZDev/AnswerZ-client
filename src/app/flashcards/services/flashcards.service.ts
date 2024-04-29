@@ -53,8 +53,7 @@ export class FlashcardService {
     public getAllFlashcardByCardsetId(cardsetId: number): void {
         this.flascardApi.getAllFlashcardByCardsetId(cardsetId).subscribe({
             next: (data: any) => {
-                this._flashcards = data.member;
-                console.log(this._flashcards)   
+                this._flashcards = data.member; 
                 this.onReceiveFlashcards.emit(true);
                 this.flashCardsChange.next(true);  
             },

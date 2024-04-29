@@ -6,7 +6,7 @@ import { FlashcardService } from 'src/app/flashcards/services/flashcards.service
 import { first } from 'rxjs';
 import { ToastService } from 'src/app/shared/services/toast.service';
 import { CardsetService } from '../../services/cardset.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 interface Mode{
   name: string;
@@ -17,7 +17,7 @@ interface Mode{
   templateUrl: './add-flahscard-to-cardset.component.html',
   styleUrls: ['./add-flahscard-to-cardset.component.scss']
 })
-export class AddFlashcardToSetComponent implements AfterContentInit, OnInit{
+export class AddFlashcardToSetComponent implements OnInit{
 
   flashcardForm!: FormGroup;
   displayedFlashcards: any[] = [];
@@ -38,26 +38,21 @@ export class AddFlashcardToSetComponent implements AfterContentInit, OnInit{
   imageUpload: string = "../../../../assets/images/image_upload.svg";
   imageResized: string = ''; // Image redimensionnée à afficher dans la section de prévisualisation
 
-  @ViewChild(CardsPreviewComponent) cardsPreview!: CardsPreviewComponent;
-
-  @ContentChildren(PrimeTemplate) templates = {} as QueryList<PrimeTemplate>;
-  title: PrimeTemplate | undefined = undefined
-  button: PrimeTemplate | undefined = undefined
-
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly toastService: ToastService, 
     public readonly flashcardsService: FlashcardService,
     public readonly  cardsetsService: CardsetService,
     private readonly route: ActivatedRoute,
+    private readonly router: Router
   ) {
     this.createForm();
   }
 
   private createForm() {
     this.flashcardForm = this.formBuilder.group({
-      question: ['', [Validators.required]],
-      answer: ['', [Validators.required]],
+      question: [''],
+      answer: [''],
     });
   }
   
@@ -80,16 +75,13 @@ export class AddFlashcardToSetComponent implements AfterContentInit, OnInit{
     this.getAllFlashcardByCardsetId();
   }
 
-  ngAfterContentInit(): void {
-    this.title = this.templates.find((item) => (item.name === 'title'))
-    this.button = this.templates.find((item) => (item.name === 'button'))
-  }
-
   getCardsetById() {
     this.cardsetsService.getCardsetById(this.cardsetId).subscribe({
       next: (result) => {
         // Stocke les informations du cardset dans la propriété cardset
         this.cardset = result;
+
+        console.dir(this.cardset)
 
         // Vous pouvez maintenant accéder à l'image du cardset, par exemple :
         this.imageResized = this.cardset.image;
@@ -213,7 +205,7 @@ export class AddFlashcardToSetComponent implements AfterContentInit, OnInit{
   onSubmit() {
     if (this.flashcardForm.valid) {
       // Envoie les données au backend
-      if(this.flashcardId === undefined || this.flashcardId === 0){
+      if(this.flashcardId === undefined || this.flashcardId === 0) {
         this.flashcardsService.onCreateFlashcards.pipe(first()).subscribe({
           next: () => {
             this.toastService.toast('success', 'Success', 'Creation successed');
@@ -251,11 +243,15 @@ export class AddFlashcardToSetComponent implements AfterContentInit, OnInit{
             }
           });
           this.flashcardsService.updateFlashcard(this.flashcardId, data);
-        }
-      } else {
-        // Le formulaire n'est pas valide
-        this.toastService.toast('error', 'Error', 'Form is not valid');
       }
+    } else {
+      // Le formulaire n'est pas valide
+      this.toastService.toast('error', 'Error', 'Form is not valid');
+    }
+  }
+
+  onRedirectToMyCardsets() {
+    this.router.navigate(['/cardset/my-cardsets']);
   }
 
   paginate(event: any) {

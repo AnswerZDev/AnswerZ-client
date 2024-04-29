@@ -7,6 +7,7 @@ import { first } from 'rxjs';
 import { ToastService } from 'src/app/shared/services/toast.service';
 import { CardsetService, Mode } from '../../services/cardset.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-generic-flashcard',
@@ -21,7 +22,7 @@ export class GenericFlashcardSetComponent implements AfterContentInit, OnInit{
   first = 0;
   flashcardId: number = 0;
 
-  cardsetId: number | null = 0;
+  cardsetId: number = 0;
 
   modesVisibilite: Mode[] | undefined;
   modesCategorie: Mode[] | undefined;
@@ -29,7 +30,7 @@ export class GenericFlashcardSetComponent implements AfterContentInit, OnInit{
   categoryVisibility: string = '';
   blockChars: RegExp = /^[0-9a-zA-Z\s]+$/;
   imageUpload: string = "../../../../assets/images/image_upload.svg";
-  imageResized: string = ''; // Image redimensionnée à afficher dans la section de prévisualisation
+  imageUrl: string = ''; // Image qu'on a reçu dans le formulaire de modification
 
   @ViewChild(CardsPreviewComponent) cardsPreview!: CardsPreviewComponent;
 
@@ -56,7 +57,7 @@ export class GenericFlashcardSetComponent implements AfterContentInit, OnInit{
   }
   
   ngOnInit() {
-    this.onCardsetsSubscribe();
+    //this.onCardsetsSubscribe();
     //this.onFlashcardesSubscribe();
     this.modesVisibilite = [
       { name: 'Public' },
@@ -78,28 +79,17 @@ export class GenericFlashcardSetComponent implements AfterContentInit, OnInit{
     this.cardsetId = this.route.snapshot.params['cardsetId'];
 
     this.getAllFlashcards();
+
+    if(this.cardsetId !== null && this.cardsetId !== undefined) {
+      this.getCardsetById();
+    } else {
+      this.cardsetsService.cardsetForm.reset();
+    }
   }
 
   ngAfterContentInit(): void {
     this.title = this.templates.find((item) => (item.name === 'title'))
     this.button = this.templates.find((item) => (item.name === 'button'))
-  }
-
-  // private onFlashcardesSubscribe(): void {
-  //   this.flashcardsService.flashCardsChange.subscribe({
-  //     next: () => {
-  //       this.totalRecords = this.flashcardsService.flashcards.length;
-  //       this.paginate({ first: 0, rows: 8, page: 1, pageCount: Math.ceil(this.totalRecords / 8) });
-  //     }
-  //   });
-  // }
-
-  private onCardsetsSubscribe(): void {
-    this.cardsetsService.cardsetsChange.subscribe({
-      next: () => {
-        console.log("cardsetsChange")
-      }
-    });
   }
 
   onDragOver(event: Event) {
@@ -129,29 +119,60 @@ export class GenericFlashcardSetComponent implements AfterContentInit, OnInit{
     this.flashcardsService.getAllFlashCards();
   }
 
+  private getCardsetById(): void {
+    this.cardsetsService.getCardsetById(this.cardsetId).subscribe({
+      next: (result) => {
+        var base64ContentArray = result.image.split(','); // Chaine de caractères représentant les données en base64
+        var contentType = base64ContentArray[0].split(':')[1].split(';')[0]; // Sépare la partie "data:image/jpeg;base64," de la chaîne de caractères
+        var binaryString = window.atob(base64ContentArray[1]); // Obtenir le type de fichier à partir de la partie précédente
+        var binaryData = new Uint8Array(binaryString.length); // Obtenir les données binaires à partir de la partie restante
+        for (var i = 0; i < binaryString.length; i++) { // Convertir les données binaires en un tableau d'octets
+          binaryData[i] = binaryString.charCodeAt(i);
+        }
+        var blob = new Blob([binaryData], { type: contentType }); // Créer un objet Blob à partir des données binaires
+        var imageUrl = URL.createObjectURL(blob); // Obtenez l'URL de l'objet Blob
+        this.cardsetsService.cardsetForm.patchValue({
+            image: imageUrl,
+            name: result.name,
+            description: result.description,
+            selectedCategory: this.modesCategorie?.find((item) => item.name === result.category),
+            selectedVisibility: this.modesVisibilite?.find((item) => item.name === result.visibility)
+        });
+        this.imageUrl = imageUrl;
+      },
+      error: (error) => {
+        this.toastService.toast('error', 'Error', 'Error during fetching cardset');
+      }
+    });
+  }
+
   uploadImage(event: Event) {
     const inputElement = event.target as HTMLInputElement;
 
     if (inputElement.files && inputElement.files.length > 0) {
       const file = inputElement.files[0];
+      if (file.size > 25 * 1024 * 1024) {
+        console.log("Le fichier dépasse la taille maximale autorisée (25 Mo)");
+        return;
+      }
       this.handleImageFile(file);
     }
   }
 
-  handleImageFile(file: File) {
-    const maxSizeInBytes = 25 * 1024 * 1024; // 25 Mo en octets
-  
-    if (file.size <= maxSizeInBytes) {
-      const reader = new FileReader();
-  
-      reader.onload = (e: any) => {
-        const imageDataUrl = e.target.result;
-        this.resizeImage(imageDataUrl);
-      };
-  
-      reader.readAsDataURL(file);
-    } else {
-      alert("Le fichier est trop volumineux. Veuillez sélectionner un fichier de 25 Mo ou moins.");
+  async handleImageFile(file: File) {
+    let formData = new FormData();
+    formData.append('image', file, file.name);
+    try {
+      const response = await fetch('http://localhost:3000/cardset/upload', {
+        method: 'POST',
+        body: formData,
+      });
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      console.log(response);
+    } catch (err) {
+      console.log(err);
     }
   }
   
@@ -343,7 +364,7 @@ export class GenericFlashcardSetComponent implements AfterContentInit, OnInit{
           description: this.cardsetsService.cardsetForm.value.description,
           category: this.categoryName,
           visibility: this.categoryVisibility,
-          image: this.imageUpload,
+          image: this.imageUrl,
           createdAt: new Date(),
         };
         this.cardsetsService.updateCardset(this.cardsetId, cardsetData);

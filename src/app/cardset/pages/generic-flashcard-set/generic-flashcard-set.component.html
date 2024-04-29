@@ -11,7 +11,8 @@
                 <div class="flex flex-column align-items-center">
                   <label for="input-file" class="flex flex-column align-items-center gap-2 pt-3">
                     <input id="input-file" formControlName="image" type="file" accept=".png, .jpg, .gif" class="opacity-0 hidden" (change)="uploadImage($event)"/>
-                    <img *ngIf="imageUpload !== ''" [src]="imageUpload || imageResized" alt="ImageUpload" class="w-10 h-full border-round-2xl max-h-15rem ImageUpload"/>
+                    <img *ngIf="!cardsetId" [src]="imageUpload" alt="ImageUpload" class="w-10 h-full border-round-2xl max-h-15rem ImageUpload"/>
+                    <img *ngIf="cardsetId !== null && cardsetId !== undefined && cardsetsService.cardsetForm.get('image')?.value !== ''" [src]="cardsetsService.cardsetForm.get('image')?.value" alt="ImageUpload" class="w-10 h-full border-round-2xl max-h-15rem ImageUpload"/>
                     <div class="flex flex-column text-center md:text-auto gap-2">
                       <span class="font-bold block text-sm md:text-lg align-self-auto md:align-self-center">Upload an image</span>
                       <span class="text-sm md:text-lg">or drag and drop PNG, JPG, GIF up to 25Mo</span>

@@ -1,6 +1,11 @@
 <div class="flex flex-column px-5 md:px-auto">
-  <div class="flex-1 flex flex-column md:flex-row md:align-items-center justify-content-between pt-3 md:mr-5 gap-2 md:gap-0">
-    <ng-container *ngIf="title" [ngTemplateOutlet]="title.template" class="text-5xl md:text-6xl"></ng-container>
+  <div class="flex-1 flex flex-column md:flex-row md:align-items-center pt-3 md:mr-5 gap-2 md:gap-0">
+    <ng-container *ngIf="cardsetId">
+      <span class="title font-bold opacity-70 text-2xl md:text-6xl">
+        Edit your flashcard set
+      </span>
+      <i class="pi pi-pencil opacity-70 text-3xl md:text-6xl ml-3" style="color: #9468F1;"></i>
+    </ng-container>
   </div>
   <div class="pt-5">
     <p-card>
@@ -34,8 +39,11 @@
         </div>
       </div>
     </p-card>
+    <div class="flex mt-3 justify-content-center">
+      <p-button type="submit" class="flex flex-column w-full md:w-6 button-add" styleClass="text-xl md:text-2xl lg:text-3xl" (click)="onRedirectToMyCardsets()">SAVE YOUR FLASHCARD SET</p-button>
+    </div>
   </div>
-  <div class=" flex flex-column gap-3 pt-7" *ngIf="this.flashcardsService.flashcards.length > 0">
+  <div class=" flex flex-column gap-3 pt-4" *ngIf="this.flashcardsService.flashcards.length > 0">
     <div class="flex flex-row w-full">
       <span class="text-5xl opacity-70 font-bold pl-0 md:pl-2 title">Card's preview</span>
     </div>
