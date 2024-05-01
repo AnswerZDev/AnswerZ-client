@@ -40,7 +40,7 @@ export class MyCardsetsComponent implements OnInit {
       { name: 'Private' }
     ];
 
-    this.getAllCardsets();
+    this.getAllCardsets('Private');
   }
 
   private onCardsetsSubscribe(): void {
@@ -52,7 +52,7 @@ export class MyCardsetsComponent implements OnInit {
     });
   }
 
-  private getAllCardsets(): void {
+  private getAllCardsets(visibility: 'Private' | 'Public'): void {
     this.cardsetsService.onReceiveCardsets.pipe(first()).subscribe({
       next: () => {
         this.totalRecords = this.cardsetsService.cardsets.length;
@@ -62,7 +62,19 @@ export class MyCardsetsComponent implements OnInit {
         this.toastService.toast('error', 'Error', 'Error during fetching cardsets');
       }
     });
-    this.cardsetsService.getMyPrivateCardsets();
+    if(visibility === 'Public') {
+      this.cardsetsService.getMyPublicCardsets();
+    } else {
+      this.cardsetsService.getMyPrivateCardsets();
+    }
+  }
+
+  onVisibilityChange(event: any) {
+    if(event.value['name'] === 'Public') {
+      this.getAllCardsets('Public');
+    } else {
+      this.getAllCardsets('Private');
+    }
   }
 
   redirectToCreateFlashcardSet() {

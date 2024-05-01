@@ -29,7 +29,6 @@ import { NgClass } from '@angular/common';
         AppRoutingModule,
         ToastModule,
         AuthModule,
-        ToastModule,
         BrowserAnimationsModule,
         HttpClientModule,
         HomeModule,

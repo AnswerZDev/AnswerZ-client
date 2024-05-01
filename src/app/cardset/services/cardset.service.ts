@@ -44,9 +44,22 @@ export class CardsetService {
     }
 
     public getMyPrivateCardsets(): void {
-        this.cardsetApi.getMyPrivateCardsets().subscribe({
+        this.cardsetApi.getMyCardsets('Private').subscribe({
             next: (data: any) => {
                 this._cardsets = data.member;    
+                this.onReceiveCardsets.emit(true);
+                this.cardsetsChange.next(true);
+            }, 
+            error: (error) => {
+      
+            }
+        });
+    }
+
+    public getMyPublicCardsets(): void {
+        this.cardsetApi.getMyCardsets('Public').subscribe({
+            next: (data: any) => {
+                this._cardsets = data.member;  
                 this.onReceiveCardsets.emit(true);
                 this.cardsetsChange.next(true);
             }, 
