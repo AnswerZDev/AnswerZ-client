@@ -44,9 +44,13 @@ export class LoginComponent implements OnInit{
      * @description Use to redirect user to home page if he's already log in
      */
     private onRedirectAuthentification(): void {
-        if(this.securityService.isAuthenticated()){
-            this.router.navigate(['/home'])
-        }
+        this.securityService.userLoad.subscribe({
+            next: (value) => {
+                if(value) {
+                    this.router.navigate(['/home'])
+                }
+            }
+        })
     }
 
     /**

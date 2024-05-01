@@ -43,14 +43,29 @@ export class RegisterComponent{
         private readonly authService: AuthService,
         private readonly toastService: ToastService,
         private readonly router: Router,
+        private readonly _securityService: SecurityService
     ) {
+        this.onRedirectAuthentication();
+    }
+
+    /**
+     * @author @Alexis1663
+     * @date 01/02/2024
+     * @description Use to redirect user to home page if he's already log in
+     */
+    private onRedirectAuthentication(): void {
+        this._securityService.userLoad.subscribe({
+            next: (value) => {
+                if(value) {
+                    this.router.navigate(['/home'])
+                }
+            }
+        })
     }
 
     protected register(): void {
         this.authService.onSignUpEmitter.subscribe((isSuccess) => {
-            if(isSuccess) {
-                this.router.navigate(['/home']);
-            } else {
+            if(!isSuccess) {
                 this.toastService.toast(
                     'error',
                     'Error',
