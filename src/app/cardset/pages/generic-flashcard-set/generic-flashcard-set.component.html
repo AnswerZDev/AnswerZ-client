@@ -10,7 +10,7 @@
               <p-card class="flex flex-column w-full mt-5" (dragover)="onDragOver($event)" (drop)="onDrop($event)">
                 <div class="flex flex-column align-items-center">
                   <label for="input-file" class="flex flex-column align-items-center gap-2 pt-3">
-                    <input id="input-file" formControlName="image" type="file" accept=".png, .jpg, .gif" class="opacity-0 hidden" (change)="uploadImage($event)"/>
+                    <input id="input-file" type="file" accept=".png, .jpg, .gif" class="opacity-0 hidden" (change)="uploadImage($event)"/>
                     <img *ngIf="!cardsetId" [src]="imageUpload" alt="ImageUpload" class="w-10 h-full border-round-2xl max-h-15rem ImageUpload"/>
                     <img *ngIf="cardsetId !== null && cardsetId !== undefined && cardsetsService.cardsetForm.get('image')?.value !== ''" [src]="cardsetsService.cardsetForm.get('image')?.value" alt="ImageUpload" class="w-10 h-full border-round-2xl max-h-15rem ImageUpload"/>
                     <div class="flex flex-column text-center md:text-auto gap-2">

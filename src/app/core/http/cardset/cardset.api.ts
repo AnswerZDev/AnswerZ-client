@@ -12,11 +12,11 @@ export class CardsetApi extends ApiService {
         super('cardset')
     }
 
-    public getAll(): Observable<Cardset> {
+    public getMyPrivateCardsets(): Observable<Cardset[]> {
         let f = this.get('/').pipe(
             map((data: any) => HydraFactory.createCollection(Cardset, data))
         )
-        return f as unknown as Observable<Cardset>
+        return f as unknown as Observable<Cardset[]>
     }
 
     public getOne(id: number): Observable<Cardset> {

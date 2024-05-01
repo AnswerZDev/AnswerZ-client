@@ -62,7 +62,7 @@ export class MyCardsetsComponent implements OnInit {
         this.toastService.toast('error', 'Error', 'Error during fetching cardsets');
       }
     });
-    this.cardsetsService.getAllCardsets();
+    this.cardsetsService.getMyPrivateCardsets();
   }
 
   redirectToCreateFlashcardSet() {
@@ -73,15 +73,11 @@ export class MyCardsetsComponent implements OnInit {
     this.currentPage = event.first / event.rows + 1; // Calcul de la page courante
     this.pageSize = event.rows; // Nombre d'éléments par page
 
-    // Filtrer les cardsets avec une visibilité en privé
-    const privateCardsets = this.cardsetsService.cardsets
-        .filter(cardset => cardset.visibility === 'Private');
-
     const startIndex = event.first;
     const endIndex = startIndex + event.rows;
-    this.displayedCardsets = privateCardsets.slice(startIndex, endIndex);
+    this.displayedCardsets = this.cardsetsService.cardsets.slice(startIndex, endIndex);
 
-    this.totalRecords = privateCardsets.length; // Total des enregistrements
+    this.totalRecords = this.cardsetsService.cardsets.length; // Total des enregistrements
 
     // Calcul du nombre total de pages
     if (this.totalRecords <= this.pageSize) {

@@ -43,8 +43,8 @@ export class CardsetService {
         return this._cardsetsChange
     }
 
-    public getAllCardsets(): void {
-        this.cardsetApi.getAll().subscribe({
+    public getMyPrivateCardsets(): void {
+        this.cardsetApi.getMyPrivateCardsets().subscribe({
             next: (data: any) => {
                 this._cardsets = data.member;    
                 this.onReceiveCardsets.emit(true);
