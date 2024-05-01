@@ -140,7 +140,6 @@ export class SecurityService {
                 this._user = user
                 this._loadingUser = false
                 this._userLoad.next(true)
-                this.router.navigate(['/home'])
             },
             error: () => {
 
