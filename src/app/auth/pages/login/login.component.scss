@@ -64,13 +64,13 @@
     }
 
     @media screen and (min-width: 410px) and (max-width: 659px) {
-        .block-auth {
+        .form {
             width: 80% !important;
         }
     }
 
     @media screen and (min-width: 660px) and (max-width: 849px){
-        .block-auth {
+        .form {
             width: 50% !important;
             flex-direction: row;
             justify-content: space-around;
@@ -81,6 +81,13 @@
         flex-direction: row;
         .image-container {
             display: block;
+        }
+        .block-auth {
+            border-top-left-radius: 0rem;
+            border-bottom-left-radius: 0rem;
+        }
+        form {
+            width: 35% !important;
         }
     }
 
