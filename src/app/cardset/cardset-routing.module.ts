@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core'
 import { CreateFlashcardSetComponent } from './component/create-flashcard-set/create-flashcard-set.component'
 import { EditFlashcardSetComponent } from './component/edit-flashcard-set/edit-flashcard-set.component'
 import { MyCardsetsComponent } from './pages/my-cardsets/my-cardsets.component'
+import { AllCardsetComponent } from './pages/all-cardset/all-cardset.component'
 
 const routes: Routes = [
     {
@@ -21,6 +22,10 @@ const routes: Routes = [
     {
         path: 'edit-flashcard-set',
         component: EditFlashcardSetComponent,
+    },
+    {
+        path: 'all-cardset',
+        component: AllCardsetComponent,
     }
 ]
 

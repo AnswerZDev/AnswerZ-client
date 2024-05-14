@@ -1,0 +1,73 @@
+<div class="w-full bg-indigo-100 p-3 border-ra border-round-2xl text-center">
+    <div class="title text-sm mb-3">{{ my_cardset.name }}</div>
+    <div class="mb-3">
+        <img [src]="picture" alt="Image descriptif du cardset" class="w-full" >
+    </div>
+    
+    <p-button (click)="showDialog()" icon="pi pi-plus" label=""></p-button>
+    <p-dialog header="Header" [(visible)]="visible" [modal]="true" [style]="{ width: '50rem' }" [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" [draggable]="false" [resizable]="false">
+        <ng-template pTemplate="header">
+            <div class="inline-flex align-items-center justify-content-center gap-2">
+                <span class="font-bold white-space-nowrap">{{ my_cardset.name }}</span>
+                <i class="pi pi-heart mr-2"></i>
+            </div>
+        </ng-template>
+
+        <div class="flex flex-column">
+
+            <div class="grid">
+
+                <div class="col-5">
+                    <img [src]="picture" class="w-full">
+                </div>
+
+                <div class="col-7 flex align-items-center">
+                   {{ my_cardset.description }}
+                </div>
+
+                <div class="col-12">
+                    Questions
+                </div>
+
+                <div class="col-12" *ngFor="let flashcard of my_cardset.flashcards">
+                    <div class="border-ra border-round-2xl border-1 border-gray-900 flex flex-row text-lg">
+                        <div class="section__reponse w-1 border-ra border-round-2xl p-1">
+                            {{ flashcard.id }}
+                        </div>
+                        <div class="w-5 p-1">
+                            {{ flashcard.question }}
+                        </div>
+                        <div class="w-1 p-1">
+                            |
+                        </div>
+                        <div class="w-5 p-1">
+                            {{ flashcard.answer }}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>  
+        
+        <ng-template pTemplate="footer">
+            <p-button (click)="onRedirigeToPagePlay()" label="Play" pAutoFocus [autofocus]="true"></p-button>
+        </ng-template>
+    </p-dialog>
+    <!-- <p-dialog header="Header" [visible]="visible" [modal]="true" [style]="{ width: '50rem' }" [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+    (onHide)="onHideDialog()"> -->
+        <!-- <ng-template pTemplate="header">
+            <div class="inline-flex align-items-center justify-content-center gap-2">
+                <p-avatar image="https://primefaces.org/cdn/primeng/images/avatar/amyelsner.png" shape="circle" />
+                <span class="font-bold white-space-nowrap">Amy Elsner</span>
+            </div>
+        </ng-template> -->
+        <!-- <p class="m-0">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </p>
+        <ng-template pTemplate="footer">
+            <p-button icon="pi pi-check" (click)="visible = false" label="Ok" pAutoFocus [autofocus]="true"></p-button>
+        </ng-template>
+    </p-dialog> -->
+</div>

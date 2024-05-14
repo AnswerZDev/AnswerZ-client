@@ -16,6 +16,10 @@ import { GenericFlashcardSetComponent } from './pages/generic-flashcard-set/gene
 import { CardsetRoutingModule } from './cardset-routing.module';
 import { FlashcardModule } from 'src/app/flashcards/flashcards.module';
 import { MyCardsetsComponent } from './pages/my-cardsets/my-cardsets.component';
+import { AllCardsetComponent } from './pages/all-cardset/all-cardset.component';
+import { DialogModule } from 'primeng/dialog';
+import { VisualizationCardsetComponent } from './component/visualization-cardset/visualization-cardset.component';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 
 @NgModule({
     imports: [
@@ -34,13 +38,17 @@ import { MyCardsetsComponent } from './pages/my-cardsets/my-cardsets.component';
         ToastModule,
         ConfirmPopupModule,
         PaginatorModule,
-        FlashcardModule
+        FlashcardModule,
+        DialogModule,
+        AutoCompleteModule
     ],
     declarations: [
         CreateFlashcardSetComponent,
         EditFlashcardSetComponent,
         GenericFlashcardSetComponent,
-        MyCardsetsComponent
+        MyCardsetsComponent,
+        AllCardsetComponent,
+        VisualizationCardsetComponent
     ],
     providers: [],
     exports: []

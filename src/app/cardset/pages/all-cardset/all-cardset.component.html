@@ -1,0 +1,51 @@
+<div class="flex flex-column p-8">
+
+    <div class="flex flex-row justify-content-between">
+        <div class="w-7 section__input-search">
+            <span class="p-fluid p-float-label">
+                <p-autoComplete 
+                    [(ngModel)]="selectedItems" 
+                    [suggestions]="suggestions" 
+                    (completeMethod)="search($event)"
+                    (onClear)="onClear()">
+                </p-autoComplete>
+                <label for="float-label label-search">
+                    <i class="pi pi-search mr-2"></i>
+                    Search for what you want to learn</label>
+            </span>
+        </div>
+        <div class="">
+            <p-dropdown 
+                [options]="categories" 
+                [(ngModel)]="selectedCategories" 
+                optionLabel="name" 
+                value="All"
+                (ngModelChange)="onCategoryChange($event)">
+            </p-dropdown>
+        </div>
+    </div>
+
+    <div *ngFor="let category of categories_filtered">
+        <div *ngIf="cardsetservice.cardsets && hasCardsetsOfType(category.name)
+            && hasCardsetsOfTypeFiltered(category.name)">
+            <div class="shadow-4 mt-4 p-4 border-round-2xl border-ra">
+                <div class="title mb-3">{{ category.name }}</div>
+                <!-- SI ... -->
+                <div class="grid" *ngIf="useFilteredCardsets; else originalCardsets">
+                    <ng-container *ngFor="let cardset of filteredCardsets">
+                        <app-visualization-cardset class="col-3" [my_cardset]="cardset" *ngIf="cardset.category === category.name"></app-visualization-cardset>
+                    </ng-container>
+                </div>
+                <!-- SINON ... -->
+                <ng-template #originalCardsets>
+                    <div class="grid">
+                        <ng-container *ngFor="let cardset of cardsetservice.cardsets">
+                            <app-visualization-cardset class="col-3" [my_cardset]="cardset" *ngIf="cardset.category === category.name"></app-visualization-cardset>
+                        </ng-container>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+
+</div>
