@@ -1,6 +1,7 @@
 import { RouterModule, Routes } from '@angular/router'
 import { NgModule } from '@angular/core'
 import { RoomChoiceComponent } from './pages/room-choice/room-choice.component'
+import { CreateQuestionComponent } from './pages/create-question/create-question.component'
 
 const routes: Routes = [
     {
@@ -11,6 +12,10 @@ const routes: Routes = [
     {
         path: 'room-choice',
         component: RoomChoiceComponent,
+    },
+    {
+        path: 'create-question',
+        component: CreateQuestionComponent,
     },
 ]
 
