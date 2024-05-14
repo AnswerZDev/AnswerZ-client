@@ -10,12 +10,21 @@ import { Cardset } from "src/app/core/models/api/cardset";
 export class CardsetService{
 
     private _cardsets: Cardset[] = [];
+    private cardset_play!: Cardset;
 
     constructor(private readonly api_cardset: CardsetApi) {
     }
 
     get cardsets(): Cardset[] {
         return this._cardsets;
+    }
+
+    get cardsetPlay(){
+        return this.cardset_play;
+    }
+
+    setcardsetPlay(cardset: Cardset){
+        this.cardset_play = cardset;
     }
 
     getAllCardset(): void{

@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Cardset } from 'src/app/core/models/api/cardset';
+import { CardsetService } from '../../services/cardset.service';
 
 @Component({
   selector: 'app-visualization-cardset',
@@ -10,10 +11,13 @@ import { Cardset } from 'src/app/core/models/api/cardset';
 export class VisualizationCardsetComponent {
   @Input() my_cardset!: Cardset; 
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private readonly cardsetservice: CardsetService) {
   }
 
   onRedirigeToPagePlay() {
+    this.cardsetservice.setcardsetPlay(this.my_cardset);
     this.router.navigateByUrl('/');
   }
 
