@@ -15,7 +15,12 @@ export class UserApi extends ApiService {
     }
 
     public current(): Observable<User> {
-        let u = this.get('/me').pipe(
+        let u = this.get('/me', {
+            headers: {
+                'skip-cache': 'true',
+                'Cache-Control': 'no-store'
+            }
+        }).pipe(
             map((data: any) => HydraFactory.createItem(User, data))
         )
         return u as unknown as Observable<User>

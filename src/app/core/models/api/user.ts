@@ -1,4 +1,5 @@
 import {Item} from "./hydra/item";
+import {UserApi} from "../../http/user/user.api";
 
 export class User extends Item {
     constructor(data: any) {
@@ -7,10 +8,14 @@ export class User extends Item {
         this._numberOfFlashcards = data['numberOfFlashcards'];
     }
 
-    private readonly _pictureProfileUrl: string | undefined
+    private _pictureProfileUrl: string | undefined
 
     get pictureProfileUrl(): string | undefined {
         return this._pictureProfileUrl
+    }
+
+    public set pictureProfileUrl(value: string|undefined) {
+        this._pictureProfileUrl = value;
     }
 
     private readonly _numberOfFlashcards: number

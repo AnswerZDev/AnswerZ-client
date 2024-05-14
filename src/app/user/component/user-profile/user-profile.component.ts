@@ -12,6 +12,8 @@ import {UserApi} from "../../../core/http/user/user.api";
 })
 export class UserProfileComponent {
 
+    private _version: number = 0;
+
     constructor(
         private readonly router: Router,
         private readonly route: ActivatedRoute,
@@ -22,7 +24,7 @@ export class UserProfileComponent {
 
     public get profilePicture(): string | undefined {
         if (!this.securityService.user) return undefined;
-        return this.securityService.user.pictureProfileUrl;
+        return this.securityService.user.pictureProfileUrl + `?v=${this._version}`;
     }
 
     public get editMode(): boolean {
@@ -30,9 +32,10 @@ export class UserProfileComponent {
     }
 
     public redirectToEditMode(): void {
+        this._version++;
         if (this.editMode) {
-            this.router.navigate(['/user/profile']).then();
             this.securityService.updateUser();
+            this.router.navigate(['/user/profile']).then();
             return;
         }
         this.router.navigate(['edit'], {relativeTo: this.route}).then();
