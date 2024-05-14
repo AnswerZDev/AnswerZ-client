@@ -1,43 +1,38 @@
 <div class="profil">
     <h1>My profile</h1>
-    
-    <div class="flex flex-column my-container">
-        <div class="first-container p-6">
-        </div>
-        <div class="second-container p-4">
-            <div class="flex flex-row static">
-                <div class="w-2 relative">
-                    <p-avatar
-                              *ngIf="profilePicture; else noProfilePicture"
-                              [image]="profilePicture" styleClass="my-2"
-                              size="xlarge" shape="circle"></p-avatar>
-                    <ng-template #noProfilePicture>
-                        <p-avatar icon="pi pi-user" styleClass="my-2" size="xlarge"
-                                  shape="circle"></p-avatar>
-                    </ng-template>
-                    <p-fileUpload
-                            mode="basic"
-                            [url]="profilePicture"
-                            accept="image/*"
-                            [auto]="true"
-                            chooseLabel="Browse" />
+    <div class="flex flex-column gap-2 head-container">
+        <div class="flex flex-row gap-2 align-items-center">
+            <p-avatar
+                *ngIf="profilePicture; else noProfilePicture"
+                [image]="profilePicture" styleClass="my-2"
+                size="xlarge" shape="circle"></p-avatar>
+            <ng-template #noProfilePicture>
+                <p-avatar icon="pi pi-user" styleClass="my-2" size="xlarge"
+                          shape="circle"></p-avatar>
+            </ng-template>
+            <div class="w-4 flex text-white flex-column justify-content-center align-items-start">
+                <div class="text-xl font-bold pl-3">
+                    John Doe
                 </div>
-                <div class="w-4 flex text-white flex-column justify-content-center align-items-start">
-                    <div class="text-xl font-bold pl-3">
-                        John Doe
-                    </div>
-                    <div class="pl-3">
-                        19 flashcards 5 followers 34 likes
-                    </div>
-                </div>
-                <div class="w-3 p-6 relative profil_user">
-                
-                </div>
-                <div class="w-5 flex justify-content-end align-items-end">
-                    <p-button label="Edit profil" severity="help">
-                    </p-button>
+                <div class="pl-3">
+                    {{securityService.user?.numberOfFlashcards}} flashcards 5 followers 34 likes
                 </div>
             </div>
+        </div>
+        <div class="flex flex-row" [ngClass]="editMode ? 'justify-content-between' : 'justify-content-end'">
+            <p-fileUpload
+                *ngIf="editMode"
+                method="post"
+                accept="image/*"
+                (onSelect)="uploadProfilePicture($event)"
+                chooseLabel="Browse"
+                mode="basic"
+            />
+            <p-button
+                [label]="editMode ? 'Save' : 'Edit'"
+                severity="help"
+                (onClick)="redirectToEditMode()"
+            />
         </div>
     </div>
     
@@ -46,13 +41,13 @@
             <h3>Friends</h3>
             <div class="flex flex-row justify-content-between flex-wrap">
                 <p-avatar
-                        styleClass="mr-2 mb-3 custom-large-avatar" size="xlarge" shape="circle"></p-avatar>
+                    styleClass="mr-2 mb-3 custom-large-avatar" size="xlarge" shape="circle"></p-avatar>
                 <p-avatar
-                        styleClass="mr-2 mb-3 custom-large-avatar" size="xlarge" shape="circle"></p-avatar>
+                    styleClass="mr-2 mb-3 custom-large-avatar" size="xlarge" shape="circle"></p-avatar>
                 <p-avatar
-                        styleClass="mr-2 mb-3 custom-large-avatar" size="xlarge" shape="circle"></p-avatar>
+                    styleClass="mr-2 mb-3 custom-large-avatar" size="xlarge" shape="circle"></p-avatar>
                 <p-avatar
-                        styleClass="mr-2 mb-3 custom-large-avatar" size="xlarge" shape="circle"></p-avatar>
+                    styleClass="mr-2 mb-3 custom-large-avatar" size="xlarge" shape="circle"></p-avatar>
             </div>
             <div class="text-center p-3">
                 <a>see all friends</a>
@@ -77,7 +72,6 @@
             </div>
         </div>
     </div>
-
 </div>
 
 <p-toast></p-toast>
