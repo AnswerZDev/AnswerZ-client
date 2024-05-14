@@ -9,7 +9,8 @@ import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms'
 })
 export class RoomChoiceComponent{
     public roomForm: FormGroup = new FormGroup({
-        roomId: new FormControl(null, Validators.required)
+        roomId: new FormControl(null, Validators.required),
+        messageId : new FormControl(null, Validators.required),
     })
 
     constructor(private socketService: SocketService) { }
