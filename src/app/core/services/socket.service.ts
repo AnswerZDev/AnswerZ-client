@@ -25,10 +25,11 @@ export class SocketService {
 
     getRoomInfo(roomId: string): Observable<any> {
       return new Observable<any>(observer => {
-        this._socket.emit('getRoomInfo', roomId);
         this._socket.on('roomInfo', (info: any) => {
           observer.next(info);
         });
+        this._socket.emit('getRoomInfo', roomId);
+
       });
     }
 

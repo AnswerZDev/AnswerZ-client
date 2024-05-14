@@ -3,10 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Lobby</title>
 </head>
 <body>
-    <p>Host by : {{ roomInfo.game.host  }}</p>
+    <p> {{ roomInfo?.game?.host }} </p>
+
+    <p> Voici les joueurs dans votre lobby : </p><br>
+    <p *ngFor="let players of roomInfo.clients">{{ players }}</p>
 
 </body>
 </html>

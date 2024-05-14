@@ -9,7 +9,7 @@ import { SocketService } from 'src/app/core/services/socket.service';
 })
 export class LobbyComponent implements OnInit {
   roomInfo: any;
-    roomId: string | null | undefined;
+  roomId: string | null | undefined;
 
   constructor(private route: ActivatedRoute, private socketService: SocketService) { }
 
@@ -19,7 +19,7 @@ export class LobbyComponent implements OnInit {
       if(this.roomId != null){
         this.socketService.getRoomInfo(this.roomId).subscribe((info: any) => {
             this.roomInfo = info;
-            console.log(this.roomInfo);
+            console.log(this.roomInfo)
           });
       }
     });
