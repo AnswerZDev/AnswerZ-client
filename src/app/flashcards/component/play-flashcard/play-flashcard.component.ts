@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { CardsetService } from 'src/app/cardset/services/cardset.service';
+import { Flashcard } from 'src/app/core/models/api/flashcard';
 
 
 @Component({
@@ -6,10 +8,6 @@ import { Component } from '@angular/core';
   templateUrl: './play-flashcard.component.html',
   styleUrls: ['./play-flashcard.component.scss']
 })
-
-
-
-
 
 export class PlayFlashcardComponent {
   _indexFlashcard: number = 0;
@@ -20,16 +18,22 @@ export class PlayFlashcardComponent {
   nbGoodAnswers: number = 0;
   progressValue = 0;
 
-  data: tmp_Flashcards[] = [];
+  data: Flashcard[] = [];
 
 
-  constructor(){
-    // appeler API chargement données
-    this.data = [
-      { id: 29, question: "WW1", answer: "14/18" },
-      { id: 30, question: "WW2", answer: "39/45" },
-      { id: 31, question: "test3", answer: "test33" }
-    ];
+  constructor(
+      private readonly cardsetservice: CardsetService
+    ){
+      // appeler API chargement données
+      cardsetservice.cardsetPlay.flashcards?.forEach(
+        flashcard => this.data.push(flashcard)
+      );
+
+    // this.data = [
+    //   { id: 29, question: "WW1", answer: "14/18" },
+    //   { id: 30, question: "WW2", answer: "39/45" },
+    //   { id: 31, question: "test3", answer: "test33" }
+    // ];
   
     this.nbAnswers = this.data.length;
   }
@@ -100,7 +104,7 @@ export class PlayFlashcardComponent {
     }
   }
 
-  get currrentFlashCard(): tmp_Flashcards | undefined {
+  get currrentFlashCard(): Flashcard | undefined {
     return this.data[this._indexFlashcard];
   }
 

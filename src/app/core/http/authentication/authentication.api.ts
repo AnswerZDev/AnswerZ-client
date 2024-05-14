@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs'
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
-import { environment } from 'src/environments/environments'
+import { environment } from 'src/environments/environment'
 import { Token } from '../../models/token/token'
 
 @Injectable({
@@ -17,7 +17,15 @@ export class AuthenticationApi {
         })
     }
 
-    public logout(): Observable<any> {
-        return this.http.post(environment.server + '/auth/logout', {})
+    public forgotPassword(email: string): Observable<void> {
+        return this.http.post<void>(environment.server + '/auth/forgot-password', {
+            email,
+        })
+    }
+
+    public register(registerForm: any): Observable<Token> {
+        return this.http.post<Token>(
+            environment.server + '/auth/register', registerForm
+        ) as Observable<Token>;
     }
 }
