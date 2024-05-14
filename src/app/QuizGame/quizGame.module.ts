@@ -16,6 +16,7 @@ import { CreateQuestionComponent } from './pages/create-question/create-question
     declarations: [
         RoomChoiceComponent,
         CreateQuestionComponent,
+        
     ],
     providers: [],
 })
