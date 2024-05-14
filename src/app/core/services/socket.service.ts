@@ -15,4 +15,9 @@ export class SocketService {
     addToRoom(roomId: string){
         this._socket.emit('WantAddToRoom', roomId);
     }
+
+    sendMessage(roomId: string, message: string){
+      this._socket.emit("answer", {message, roomId});
+    }
+
 }

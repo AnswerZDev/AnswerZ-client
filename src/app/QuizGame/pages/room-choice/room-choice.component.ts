@@ -20,4 +20,10 @@ export class RoomChoiceComponent{
             this.socketService.addToRoom(this.roomForm.controls['roomId'].value);
         }
     }
+
+    onSend() {
+        if(this.roomForm.valid){
+            this.socketService.sendMessage(this.roomForm.controls['roomId'].value,this.roomForm.controls['messageId'].value);
+        }
+    }
 }
