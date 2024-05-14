@@ -6,16 +6,12 @@ import { ButtonModule } from 'primeng/button';
 import { FormsModule } from '@angular/forms';
 import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
-import { ToastModule } from 'primeng/toast';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { EditProfileComponent } from './component/edit-profile/edit-profile.component';
+import { FileUploadModule } from 'primeng/fileupload';
 
 
 @NgModule({
   declarations: [
-    UserProfileComponent,
-    EditProfileComponent
+    UserProfileComponent
   ],
   imports: [
     CommonModule,
@@ -24,8 +20,7 @@ import { EditProfileComponent } from './component/edit-profile/edit-profile.comp
     FormsModule,
     AvatarGroupModule,
     AvatarModule,
-    ToastModule,
-    ToastModule,
+    FileUploadModule
   ]
 })
 export class UserModule { }

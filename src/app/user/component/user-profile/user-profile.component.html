@@ -1,17 +1,29 @@
 <div class="profil">
     <h1>My profile</h1>
-
+    
     <div class="flex flex-column my-container">
         <div class="first-container p-6">
         </div>
         <div class="second-container p-4">
             <div class="flex flex-row static">
                 <div class="w-2 relative">
-                    <img class="absolute bottom-0 left-0" [src]="profil_picture"
-                        height="150">
+                    <p-avatar
+                              *ngIf="profilePicture; else noProfilePicture"
+                              [image]="profilePicture" styleClass="my-2"
+                              size="xlarge" shape="circle"></p-avatar>
+                    <ng-template #noProfilePicture>
+                        <p-avatar icon="pi pi-user" styleClass="my-2" size="xlarge"
+                                  shape="circle"></p-avatar>
+                    </ng-template>
+                    <p-fileUpload
+                            mode="basic"
+                            [url]="profilePicture"
+                            accept="image/*"
+                            [auto]="true"
+                            chooseLabel="Browse" />
                 </div>
                 <div class="w-4 flex text-white flex-column justify-content-center align-items-start">
-                    <div class="text-xl font-bold pl-3"> 
+                    <div class="text-xl font-bold pl-3">
                         John Doe
                     </div>
                     <div class="pl-3">
@@ -19,35 +31,27 @@
                     </div>
                 </div>
                 <div class="w-3 p-6 relative profil_user">
-                    <img *ngIf="previewImage" [src]="previewImage" alt="Image Preview">
-                    <input type="file" (change)="onFileSelected($event)">
-                    <img class="absolute bottom-100 right-50" [src]="import_background"
-                        height="70">
+                
                 </div>
                 <div class="w-5 flex justify-content-end align-items-end">
-                    <p-button label="Edit profil" severity="help"
-                        (onClick)="redirectToModifPage()">
+                    <p-button label="Edit profil" severity="help">
                     </p-button>
                 </div>
             </div>
         </div>
-    </div>  
-
+    </div>
+    
     <div class="flex flex-column lg:flex-row mt-5">
         <div class="w-12 lg:w-6 lg:border-right-1 lg:border-500 px-2 lg:px-5 lg:py-3">
             <h3>Friends</h3>
             <div class="flex flex-row justify-content-between flex-wrap">
-                    <p-avatar 
-                        [image]="picture_friend" 
+                <p-avatar
                         styleClass="mr-2 mb-3 custom-large-avatar" size="xlarge" shape="circle"></p-avatar>
-                    <p-avatar 
-                        [image]="picture_friend2" 
+                <p-avatar
                         styleClass="mr-2 mb-3 custom-large-avatar" size="xlarge" shape="circle"></p-avatar>
-                    <p-avatar 
-                        [image]="picture_friend3" 
+                <p-avatar
                         styleClass="mr-2 mb-3 custom-large-avatar" size="xlarge" shape="circle"></p-avatar>
-                    <p-avatar 
-                        [image]="picture_friend4" 
+                <p-avatar
                         styleClass="mr-2 mb-3 custom-large-avatar" size="xlarge" shape="circle"></p-avatar>
             </div>
             <div class="text-center p-3">
@@ -56,10 +60,10 @@
             <div>
                 <h3>Activité récente</h3>
                 <div class="w-100 p-8 bg-blue-200">
-                    
+                
                 </div>
             </div>
-    
+        
         </div>
         <div class="w-12 lg:w-6 px-2 py-2 lg:px-5 lg:py-3">
             <h3>Stats</h3>
@@ -67,9 +71,9 @@
             </div>
             <div class="flex flex-row justify-content-center mt-4 flex-wrap">
                 <p-avatar label="P" styleClass="mr-2" size="xlarge" shape="circle"></p-avatar>
-                <p-avatar label="P" styleClass="mr-2" size="xlarge" shape="circle"></p-avatar> 
-                <p-avatar label="P" styleClass="mr-2" size="xlarge" shape="circle"></p-avatar> 
-                <p-avatar label="P" styleClass="mr-2" size="xlarge" shape="circle"></p-avatar> 
+                <p-avatar label="P" styleClass="mr-2" size="xlarge" shape="circle"></p-avatar>
+                <p-avatar label="P" styleClass="mr-2" size="xlarge" shape="circle"></p-avatar>
+                <p-avatar label="P" styleClass="mr-2" size="xlarge" shape="circle"></p-avatar>
             </div>
         </div>
     </div>
