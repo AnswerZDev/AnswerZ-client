@@ -9,5 +9,16 @@ import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms'
 })
 
 export class CreateQuestionComponent{
+    
+    public e_value = "";
 
+    /**
+     * @author @HugoooR
+     * @date 14/05/2024
+     * @description Create a question with the data
+     * @memberof HomePage
+     */
+    createQuestion(): void {
+        
+    }
 }

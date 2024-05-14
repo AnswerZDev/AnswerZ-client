@@ -4,6 +4,8 @@ import { NgClass, NgIf } from '@angular/common'
 import { QuizGameRoutingModule } from './quizGame-routing.module'
 import { RoomChoiceComponent } from './pages/room-choice/room-choice.component'
 import { CreateQuestionComponent } from './pages/create-question/create-question.component'
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
 
 @NgModule({
     imports: [
@@ -12,6 +14,8 @@ import { CreateQuestionComponent } from './pages/create-question/create-question
         NgIf,
         NgClass,
         QuizGameRoutingModule,
+        ButtonModule,
+        InputTextModule,
     ],
     declarations: [
         RoomChoiceComponent,
