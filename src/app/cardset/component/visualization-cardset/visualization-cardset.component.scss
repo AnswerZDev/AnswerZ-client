@@ -13,5 +13,16 @@
         color: white;
         border: 1px solid black;
     }
-
 }
+
+// Media queries
+@media (max-width: 750px) {
+    .title{
+        font-size: 10px;
+    }
+}
+
+.title{
+    font: 10px;
+}
+

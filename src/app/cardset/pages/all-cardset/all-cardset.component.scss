@@ -1,3 +1,22 @@
+// Media queries
+@media (max-width: 750px) {
+    .text-search-bar{
+        font-size: 0.65rem;
+    }
+    
+}
+
+:host ::ng-deep {
+
+    .p-dropdown{
+    }
+}
+  
 .title{
     color: #9468F1;
 }
+
+.container-cardset{
+    padding: 60px;
+}
+
