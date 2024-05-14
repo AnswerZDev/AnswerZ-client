@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SocketService } from 'src/app/core/services/socket.service';
 import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-room-choice',
@@ -15,10 +16,11 @@ export class RoomChoiceComponent{
 
     constructor(private socketService: SocketService) { }
 
-
     onSubmit() {
         if(this.roomForm.valid){
-            this.socketService.addToRoom(this.roomForm.controls['roomId'].value);
+            this.socketService.createRoom();
+           
+            //this.socketService.addToRoom(this.roomForm.controls['roomId'].value);
         }
     }
 

@@ -20,6 +20,7 @@ import { InputTextModule } from 'primeng/inputtext';
     declarations: [
         RoomChoiceComponent,
         CreateQuestionComponent,
+        
     ],
     providers: [],
 })
