@@ -9,7 +9,7 @@ export const userGuard = () => {
     const security = inject(SecurityService)
     const router = inject(Router)
 
-    if (security.isAuthenticated()) {
+    if (security.isAuthenticated() || security.userLoad) {
         return true;
     }
     // Rediriger l'utilisateur vers la page de connexion ou la page d'accueil

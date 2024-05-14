@@ -6,6 +6,7 @@ import { ButtonModule } from 'primeng/button';
 import { FormsModule } from '@angular/forms';
 import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
+import { FileUploadModule } from 'primeng/fileupload';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { AvatarGroupModule } from 'primeng/avatargroup';
     FormsModule,
     AvatarGroupModule,
     AvatarModule,
+    FileUploadModule
   ]
 })
 export class UserModule { }

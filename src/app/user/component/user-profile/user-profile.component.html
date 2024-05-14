@@ -15,6 +15,12 @@
                         <p-avatar icon="pi pi-user" styleClass="my-2" size="xlarge"
                                   shape="circle"></p-avatar>
                     </ng-template>
+                    <p-fileUpload
+                            mode="basic"
+                            [url]="profilePicture"
+                            accept="image/*"
+                            [auto]="true"
+                            chooseLabel="Browse" />
                 </div>
                 <div class="w-4 flex text-white flex-column justify-content-center align-items-start">
                     <div class="text-xl font-bold pl-3">

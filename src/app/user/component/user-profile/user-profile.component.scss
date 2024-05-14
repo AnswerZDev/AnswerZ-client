@@ -26,7 +26,7 @@
         background-color:#d1d1d1;
         color: black;
     }
-  
+
 }
 
 // To override the default primeng styles
@@ -36,10 +36,9 @@
         background-color: rgba(148,104,241,1);
         border: 1px solid white;
     }
-}
 
-:host {
-    .profil_user{
-        //background-image: url('{{ backgroundImageUrl }}');
+    .p-avatar {
+        width: 6rem !important;
+        height: 6rem !important;
     }
 }
