@@ -29,15 +29,8 @@ export class AllCardsetComponent {
 
   async ngOnInit() {
 
-    // this.cardsetservice.getAllCardset();
+    // load all cardset public
     this.cardsetservice.getAllCardset();
-    // this.cardsetservice.cardsets.forEach(
-    //   element => this.filteredCardsets.push(element)
-    // );
-
-    // this.cardsetservice.cardsets.forEach(
-    //   cardset => console.log(cardset)
-    // );
    
     this.categories = [
       { name: 'Categories' },
@@ -60,10 +53,10 @@ export class AllCardsetComponent {
       { name: 'Français' },
       { name: 'Informatique' },
     ];
-
-
   }
 
+  // Search cardset which match with the search of the User 
+  // Add to temporary list 
   search($event: AutoCompleteCompleteEvent) {
     console.log(this.filteredCardsets);
 
@@ -75,10 +68,13 @@ export class AllCardsetComponent {
 
   }
 
+  // When the user stop to search (search bar empty)
   onClear() {
     this.useFilteredCardsets = false;
   }
 
+  // When the user change the category with the button (top on the right)
+  // display cardset with the categorie selected by the user
   onCategoryChange($event: any) {
     if(this.selectedCategories && this.selectedCategories?.name !== "Categories"){
       this.categories_filtered = [
@@ -98,10 +94,13 @@ export class AllCardsetComponent {
     }
   }
 
+  // return true if a category exist in cardset list
   hasCardsetsOfType(arg0: string): boolean {
     return this.cardsetservice.cardsets.some(cardset => cardset.category === arg0);
   }
 
+  // return true if a category exist in filteredCardsets list only if filtered list
+  // is not empty, false otherwise
   hasCardsetsOfTypeFiltered(arg0: string): boolean {
     if(this.useFilteredCardsets){
       return this.filteredCardsets.some(cardset => cardset.category === arg0); 
