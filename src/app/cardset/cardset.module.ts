@@ -38,7 +38,6 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
         ToastModule,
         ConfirmPopupModule,
         PaginatorModule,
-        FlashcardModule,
         DialogModule,
         AutoCompleteModule
     ],
