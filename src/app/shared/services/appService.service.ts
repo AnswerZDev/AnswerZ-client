@@ -30,6 +30,4 @@ export class AppService {
     public applicationIsLoaded(): boolean {
         return this.isApplicationLoaded
     }
-
-
 }

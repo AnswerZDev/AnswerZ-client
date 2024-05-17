@@ -6,6 +6,7 @@ export class User extends Item {
         super(data)
         this._pictureProfileUrl = data['profilePicture'];
         this._numberOfFlashcards = data['numberOfFlashcards'];
+        this._displayName = data['displayName'];
     }
 
     private _pictureProfileUrl: string | undefined
@@ -22,5 +23,11 @@ export class User extends Item {
 
     get numberOfFlashcards(): number {
         return this._numberOfFlashcards
+    }
+
+    private readonly _displayName: string
+
+    get displayName(): string {
+        return this._displayName
     }
 }

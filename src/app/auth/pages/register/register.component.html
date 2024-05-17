@@ -9,20 +9,37 @@
             >
                 <div class="flex flex-column gap-2 px-6 py-7">
                     <div>
-                        <h1 class="text-lg text-center main-title">Welcome Back!</h1>
+                        <h1 class="text-lg text-center main-title">Welcome !</h1>
                     </div>
                     
                     <div class="flex flex-column gap-2">
-                        <label class="text-xs" for="fullname">Fullname</label>
+                        <label class="text-xs" for="firstname">Firstname</label>
                         <input
-                                id="fullname"
+                                id="firstname"
                                 type="text"
                                 pInputText
-                                formControlName="fullName"
+                                formControlName="firstName"
                         />
                         <small *ngIf="
-                            authForm.get('fullName')?.value !== null
-                             && authForm.get('fullName')?.hasError('required')">
+                            authForm.get('firstName')?.value !== null
+                             && authForm.get('firstName')?.hasError('required')">
+                            <span class="text-red-500">
+                                Fullname is required
+                            </span>
+                        </small>
+                    </div>
+                    
+                    <div class="flex flex-column gap-2">
+                        <label class="text-xs" for="lastName">Lastname</label>
+                        <input
+                            id="lastName"
+                            type="text"
+                            pInputText
+                            formControlName="lastName"
+                        />
+                        <small *ngIf="
+                            authForm.get('lastName')?.value !== null
+                             && authForm.get('lastName')?.hasError('required')">
                             <span class="text-red-500">
                                 Fullname is required
                             </span>

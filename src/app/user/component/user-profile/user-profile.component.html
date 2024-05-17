@@ -12,7 +12,7 @@
             </ng-template>
             <div class="w-4 flex text-white flex-column justify-content-center align-items-start">
                 <div class="text-xl font-bold pl-3">
-                    John Doe
+                    {{securityService.user?.displayName}}
                 </div>
                 <div class="pl-3">
                     {{securityService.user?.numberOfFlashcards}} flashcards 34 likes
