@@ -33,11 +33,11 @@
           <button pButton type="button" label="NON" (click)="toLearn()" class="bg-primary"></button>
         </div>
       </div>    
-      <p-dialog [(visible)]="visible" [style]="{width: '20vw'}" [modal]="true" [resizable]="false" [draggable]="false" [closable]="false">
+      <p-dialog [(visible)]="visible" [style]="{width: 'auto'}" [modal]="true" [resizable]="false" [draggable]="false" [closable]="false">
         <div style="text-align: center;">
             <h3 class="mb-5">Voulez-vous recommencer ?</h3>
-            <button pButton type="button" label="OUI" class="ml-4 bg-primary"></button>
-            <button pButton type="button" label="NON" class="ml-4 bg-primary"></button>
+            <button pButton (click)="onClickRestartGame()" type="button" label="OUI" class="ml-4 bg-primary"></button>
+            <button pButton (click)="onClickLeave()" type="button" label="NON" class="ml-4 bg-primary"></button>
         </div> 
       </p-dialog>
     </div>

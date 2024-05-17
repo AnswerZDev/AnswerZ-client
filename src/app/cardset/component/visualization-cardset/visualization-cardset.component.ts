@@ -9,6 +9,7 @@ import { CardsetService } from '../../services/cardset.service';
   styleUrls: ['./visualization-cardset.component.scss']
 })
 export class VisualizationCardsetComponent {
+
   @Input() my_cardset!: Cardset; 
 
   constructor(
@@ -30,5 +31,9 @@ export class VisualizationCardsetComponent {
 
   showDialog() {
       this.visible = true;
+  }
+
+  onLike() {
+    throw new Error('Method not implemented.');
   }
 }

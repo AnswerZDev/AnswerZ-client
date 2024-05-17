@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { CardsetService } from 'src/app/cardset/services/cardset.service';
 import { Flashcard } from 'src/app/core/models/api/flashcard';
 
@@ -10,6 +11,7 @@ import { Flashcard } from 'src/app/core/models/api/flashcard';
 })
 
 export class PlayFlashcardComponent {
+
   _indexFlashcard: number = 0;
   isFliped: boolean = false;
   direction: 'left' | 'right' = 'right';
@@ -22,19 +24,14 @@ export class PlayFlashcardComponent {
 
 
   constructor(
-      private readonly cardsetservice: CardsetService
+      private readonly cardsetservice: CardsetService,
+      private router: Router,
     ){
       // appeler API chargement données
       cardsetservice.cardsetPlay.flashcards?.forEach(
         flashcard => this.data.push(flashcard)
       );
 
-    // this.data = [
-    //   { id: 29, question: "WW1", answer: "14/18" },
-    //   { id: 30, question: "WW2", answer: "39/45" },
-    //   { id: 31, question: "test3", answer: "test33" }
-    // ];
-  
     this.nbAnswers = this.data.length;
   }
 
@@ -46,8 +43,6 @@ export class PlayFlashcardComponent {
       this.progressValue = 100;
     }
   }
-
-
 
   isQuizFinished: boolean = false;
 
@@ -62,7 +57,6 @@ export class PlayFlashcardComponent {
     this.isFinished();
   }
 
-
   toLearn() {
     if (this.isFliped) {
       this.isFliped = !this.isFliped;
@@ -75,14 +69,12 @@ export class PlayFlashcardComponent {
     this.isFinished();    
   }
 
-
   isFinished() {
     if (this._indexFlashcard >= this.data.length) {
       this.isQuizFinished = true;
       this.showDialog();
     }
   }
-
 
   flip_flashcard() {
     const flashcard = document.getElementById('flipContainer');
@@ -112,11 +104,20 @@ export class PlayFlashcardComponent {
       this.visible = true;
   }
 
-}
+  // leave the game 
+  onClickLeave() {
+    this.router.navigateByUrl('/cardset');
+  }
 
-/* Change to Flashcards models */
-interface tmp_Flashcards {
-  id: number;
-  question: string;
-  answer: string;
+  // restart the game
+  onClickRestartGame() {
+    this.cardsetservice.cardsetPlay.flashcards?.forEach(
+      flashcard => this.data.push(flashcard)
+    );
+
+    this.progressValue = 0;
+    this.visible = false;
+    this.nbGoodAnswers = 0;
+  }
+
 }
