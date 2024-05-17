@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-import { NgClass, NgIf } from '@angular/common'
+import {NgClass, NgIf, NgOptimizedImage} from '@angular/common'
 import { AuthRoutingModule } from './auth-routing.module'
 import { LoginComponent } from './pages/login/login.component'
 import { InputTextModule } from 'primeng/inputtext';
@@ -20,6 +20,7 @@ import {RegisterComponent} from "./pages/register/register.component";
         InputTextModule,
         ButtonModule,
         ToastModule,
+        NgOptimizedImage,
     ],
     declarations: [
         LoginComponent,

@@ -13,17 +13,17 @@ export class FlashcardService {
     public onReceiveFlashcards: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     constructor(
-        private readonly flascardApi: FlashcardApi,  
+        private readonly flascardApi: FlashcardApi,
     ) { }
 
     public getAllFlashCards(): void {
         this.flascardApi.getAll().subscribe({
             next: (data: any) => {
-                this._flashcards = data.member;    
-                this.onReceiveFlashcards.emit(true)        
-            }, 
+                this._flashcards = data.member;
+                this.onReceiveFlashcards.emit(true)
+            },
             error: (error) => {
-      
+
             }
         });
     }
@@ -35,8 +35,8 @@ export class FlashcardService {
     public getFlashcardById(id: number): Observable<any> {
         return this.flascardApi.getOne(id).pipe(
             map((flashcard) => {
-                return flashcard;       
-            }), 
+                return flashcard;
+            }),
         );
     }
 
@@ -59,8 +59,8 @@ export class FlashcardService {
                 if (index !== -1) {
                     this._flashcards[index] = data;
                 }
-                this.onReceiveFlashcards.emit(true);  
-            }, 
+                this.onReceiveFlashcards.emit(true);
+            },
             error: (error) => {
 
             }

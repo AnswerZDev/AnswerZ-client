@@ -14,6 +14,11 @@ const routes: Routes = [
         path: 'profile',
         canActivate: [userGuard],
         component: UserProfileComponent,
+    },
+    {
+        path: 'profile/edit',
+        canActivate: [userGuard],
+        component: UserProfileComponent,
     }
 ]
 

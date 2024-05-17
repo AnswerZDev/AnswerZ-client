@@ -14,10 +14,10 @@ import { FlashcardModule } from './flashcards/flashcards.module';
 import { UserModule } from './user/user.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AdminModule } from './admin/admin.module'
+import { CardsetModule } from './cardset/cardset.module';
 import {CoreModule} from "./core/core.module";
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { MessagesModule } from 'primeng/messages';
-import { CardsetModule } from './cardset/cardset.module';
 import { NgClass } from '@angular/common';
 
 @NgModule({
@@ -40,8 +40,8 @@ import { NgClass } from '@angular/common';
         AuthModule,
         BrowserAnimationsModule,
         SharedModule,
-        NgClass,
         CardsetModule,
+        NgClass,
         CoreModule,
         ProgressSpinnerModule,
         MessagesModule,

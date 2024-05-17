@@ -11,7 +11,6 @@ import {SecurityService} from "../../../shared/services/security.services";
     selector: 'app-register',
     templateUrl: './register.component.html',
     styleUrls: ['./register.component.scss'],
-    providers: []
 })
 export class RegisterComponent{
 
@@ -35,7 +34,8 @@ export class RegisterComponent{
             Validators.required,
             Validators.minLength(10),
         ]),
-        fullName: new FormControl(null, Validators.required),
+        firstName: new FormControl(null, Validators.required),
+        lastName: new FormControl(null, Validators.required),
         username: new FormControl(null, Validators.required),
     },)
 
@@ -72,7 +72,6 @@ export class RegisterComponent{
                     'An error occurred while registering the user. Please retry later.'
                 );
             }
-
         });
         this.authService.register(this.authForm);
     }
