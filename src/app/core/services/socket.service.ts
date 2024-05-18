@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Socket, io } from 'socket.io-client';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs/internal/Observable';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +31,13 @@ export class SocketService {
     });
   }
 
-
+  newUserInLobby(roomId: string): Observable<any> {
+    return new Observable<any>(observer => {
+      this._socket.on('userJoined', (data: { roomId: string, clientId: string }) => {
+        observer.next(data);
+      });
+    });
+  }
 
   getRoomInfo(roomId: string): Observable<any> {
     return new Observable<any>(observer => {

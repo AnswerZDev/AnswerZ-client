@@ -19,8 +19,16 @@ export class LobbyComponent implements OnInit {
       if(this.roomId != null){
         this.socketService.getRoomInfo(this.roomId).subscribe((info: any) => {
             this.roomInfo = info;
-            console.log(this.roomInfo)
-          });
+            console.log(this.roomInfo);
+        });
+
+        this.socketService.newUserInLobby(this.roomId).subscribe((newParticipant: any) => {
+            console.log('New user joined:', newParticipant);
+            this.socketService.getRoomInfo(this.roomId!).subscribe((info: any) => {
+                this.roomInfo = info;
+                console.log(this.roomInfo);
+            });
+        });
       }
     });
   }
