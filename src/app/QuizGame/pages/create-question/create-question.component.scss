@@ -2,6 +2,10 @@
   color: #9468f1;
 }
 
+input::placeholder {
+  color: rgba(148,104,241,0.77);
+}
+
 :host ::ng-deep {
   .p-button {
     border-radius: 8px;
@@ -31,4 +35,22 @@
   .p-inputtext:enabled:focus {
     box-shadow: none !important;
   }
+
+  .p-dropdown {
+    background-color: #9468F1;
+    border: #9468F1;
+    border-radius: 10px;
+  }
+
+  .p-dropdown:enabled:focus {
+    box-shadow: none !important;
+  }
+
+  .p-dropdown-label, .p-dropdown-trigger-icon {
+    color: white;
+  }
+}
+
+.input-question-compo{
+  width: 35%;
 }

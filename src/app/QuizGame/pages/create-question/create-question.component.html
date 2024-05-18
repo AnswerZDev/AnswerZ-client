@@ -3,20 +3,31 @@
         Create question
     </span>
     <div class="flex flex-column px-3 py-3">
-        <div class="flex flex-column">
-            <div class="flex flex-column">
+        <div class="flex flex-row">
+            <div class="flex flex-column input-question-compo">
                 <span class="create-question font-medium text-2xl">
                     Question
                 </span>
                 
                 <input class="input-question" type="text" pInputText [(ngModel)]="e_value" placeholder="Enter a question"/>
             </div>
-            <div>
-               <!-- For the 3 select fields -->
+            <div class="flex flex-row">
+                <p-dropdown class="text-sm md:text-lg w-1rem md:w-7rem" [options]="timeChoices" optionLabel="duration" placeholder="Time"></p-dropdown>
+                <p-dropdown class="text-sm md:text-lg w-1rem md:w-7rem" [options]="pointsChoices" optionLabel="points" placeholder="Points"></p-dropdown>
+                <p-dropdown class="text-sm md:text-lg w-1rem md:w-7rem" [options]="typeChoices" optionLabel="type" placeholder="Type" [(ngModel)]="myChoice"></p-dropdown>
             </div>
         </div>
         <div class="flex flex-column">
-
+            <div *ngIf="myChoice && myChoice.type === 'MCQ'">
+                <span class="font-medium text-xl">Options QCM</span>
+                <input type="text" pInputText placeholder="Option 1"/>
+                <input type="text" pInputText placeholder="Option 2"/>
+                <input type="text" pInputText placeholder="Option 3"/>
+                <input type="text" pInputText placeholder="Option 4"/>
+            </div>
+            <div *ngIf="myChoice && myChoice.type === 'True/False'">
+                <span class="font-medium text-xl">Options True/False</span>
+            </div>
         </div>
         <div class="flex flex-column align-items-center py-5">
             <p-button (click)="createQuestion()" class="submit-button" label="Submit"></p-button>
