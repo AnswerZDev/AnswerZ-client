@@ -4,11 +4,11 @@ import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-room-choice',
-  templateUrl: './room-choice.component.html',
-  styleUrls: ['./room-choice.component.scss']
+  selector: 'app-create-room',
+  templateUrl: './create-room.component.html',
+  styleUrls: ['./create-room.component.scss']
 })
-export class RoomChoiceComponent{
+export class createRoomComponent{
     public roomForm: FormGroup = new FormGroup({
         roomId: new FormControl(null, Validators.required),
         messageId : new FormControl(null, Validators.required),
@@ -19,8 +19,6 @@ export class RoomChoiceComponent{
     onSubmit() {
         if(this.roomForm.valid){
             this.socketService.createRoom();
-           
-            //this.socketService.addToRoom(this.roomForm.controls['roomId'].value);
         }
     }
 
