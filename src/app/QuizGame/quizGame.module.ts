@@ -10,6 +10,8 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { joinRoomComponent } from './pages/join-room/join-room.component'
 import { DropdownModule } from 'primeng/dropdown';
+import { LobbyListComponent } from './components/lobby-list/lobby-list.component' 
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @NgModule({
     imports: [
@@ -22,13 +24,15 @@ import { DropdownModule } from 'primeng/dropdown';
         ButtonModule,
         InputTextModule,
         DropdownModule,
+        ProgressSpinnerModule
 
     ],
     declarations: [
         createRoomComponent,
         CreateQuestionComponent,
         LobbyComponent,
-        joinRoomComponent
+        joinRoomComponent,
+        LobbyListComponent
     ],
     providers: [],
 })

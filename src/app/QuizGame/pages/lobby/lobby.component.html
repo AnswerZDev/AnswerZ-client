@@ -1,15 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lobby</title>
-</head>
-<body>
-    <p> {{ roomInfo?.game?.host }} </p>
+<div class="game-container">
+  <div class="header" style="display: flex; align-items: center; height: fit-content; width: 100%;
+  margin-left: 15%;">
+    <h2>Waiting for players  </h2>
+    <div class="loader"></div>
+  </div>
+  <div id="flipContainer" type="button" (click)="flip_flashcard()" class="relative flex justify-content-center align-items-center opacity-100 w-6 h-30rem border-round-3xl border-solid border-3 border-primary shadow-6 border-solid">
+    <div>
+      <div *ngIf="!isFliped; else isFlipedTemplate">
+        <img src="{{ roomInfo?.game?.image }}">
+        <h3>{{ roomInfo?.game?.title }}</h3>
+      </div>
+        
+      <ng-template #isFlipedTemplate>
+        <div class="card-container">
+          <div class="joining-method">
+            <p>{{ roomInfo?.game?.host }}</p>
+          </div>
+          <div class="game-description">
+            <h3>Description :</h3>
+            <div class="description-card">
+              {{ roomInfo?.game?.description }}
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </div>
 
-    <p> Voici les joueurs dans votre lobby : </p><br>
-    <p *ngFor="let players of roomInfo.clients">{{ players }}</p>
+  </div>
+  <div class="spinner-container">
+    <div class="spinner"></div>
+    <div class="spinner-text">{{  roomInfo?.game?.nOfActualPlayers }}/{{ roomInfo?.game?.maxPlayers  }} </div>
+  </div>
 
-</body>
-</html>
+  <app-lobby-list [roomInfo]="roomInfo" style="width: 100%"></app-lobby-list>
+</div>
