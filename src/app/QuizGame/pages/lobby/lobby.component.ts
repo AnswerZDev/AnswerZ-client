@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SocketService } from 'src/app/core/services/socket.service';
 
 @Component({
@@ -13,8 +13,12 @@ export class LobbyComponent implements OnInit {
   isFliped: boolean = false;
   direction: 'left' | 'right' = 'right';
   nOfParticipants : number = 0;
+  url: string = '';
+  isHost : boolean = false;
 
-  constructor(private route: ActivatedRoute, private socketService: SocketService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private socketService: SocketService) {
+  }
+
 
 
   flip_flashcard() {
@@ -39,11 +43,23 @@ export class LobbyComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
+
+
+      // TODO : REWORK QR CODE FUNCTIONS
+      // THIS IS JUST A QUICK POC
       this.roomId = params.get('roomId');
+      this.url = "http://localhost:4200/quiz-game/join-game";
+      this.url += "?roomId=";
+      this.url += this.roomId;
+
+
+
       if(this.roomId != null){
+        this.socketService.listenToGameStarted(this.roomId);
         this.socketService.getRoomInfo(this.roomId).subscribe((info: any) => {
             this.roomInfo = info;
             this.nOfParticipants = this.roomInfo.clients.length;
+            this.isHost = (this.socketService.getCurrentSocketId() == this.roomInfo.game.host);
         });
 
         this.socketService.newUserInLobby(this.roomId).subscribe((newParticipant: any) => {
@@ -56,4 +72,13 @@ export class LobbyComponent implements OnInit {
       }
     });
   }
+
+
+  startGame(){
+    if(this.roomId){
+      this.socketService.startGame(this.roomId);
+    }
+  }
 }
+
+

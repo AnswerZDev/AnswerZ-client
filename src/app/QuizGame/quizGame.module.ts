@@ -8,10 +8,11 @@ import { LobbyComponent } from './pages/lobby/lobby.component';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
-import { joinRoomComponent } from './pages/join-room/join-room.component'
+import { JoinRoomComponent } from './pages/join-room/join-room.component'
 import { DropdownModule } from 'primeng/dropdown';
 import { LobbyListComponent } from './components/lobby-list/lobby-list.component' 
-import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { QRCodeModule } from 'angularx-qrcode';
+import { GameComponent } from './pages/game/game.component'
 
 @NgModule({
     imports: [
@@ -24,15 +25,15 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
         ButtonModule,
         InputTextModule,
         DropdownModule,
-        ProgressSpinnerModule
-
+        QRCodeModule
     ],
     declarations: [
         createRoomComponent,
         CreateQuestionComponent,
         LobbyComponent,
-        joinRoomComponent,
-        LobbyListComponent
+        JoinRoomComponent,
+        LobbyListComponent,
+        GameComponent
     ],
     providers: [],
 })

@@ -15,6 +15,10 @@ export class SocketService {
     this._socket = io('http://localhost:3000');
   }
 
+  getCurrentSocketId(){
+    return this._socket.id;
+  }
+
   createRoom() {
     this._socket.emit('create-game', this._socket.id);
     this._socket.off('roomCreated');
@@ -49,7 +53,18 @@ export class SocketService {
     });
   }
 
+  startGame(roomId: string){
+    this._socket.emit('start-game', roomId);
+  }
+
   sendMessage(roomId: string, message: string) {
     this._socket.emit("answer", { message, roomId });
+  }
+
+  listenToGameStarted(roomId : string){
+    this._socket.off('game-started');
+    this._socket.once('game-started', () => {
+      this._router.navigate(['quiz-game/game', roomId]);
+    });
   }
 }

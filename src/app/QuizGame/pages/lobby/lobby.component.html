@@ -9,12 +9,16 @@
       <div *ngIf="!isFliped; else isFlipedTemplate">
         <img src="{{ roomInfo?.game?.image }}">
         <h3>{{ roomInfo?.game?.title }}</h3>
+        <div *ngIf="isHost">
+          <p-button type="submit" class="flex flex-column w-full button-start" (click)="startGame()"> START GAME </p-button>
+        </div>
       </div>
         
       <ng-template #isFlipedTemplate>
         <div class="card-container">
           <div class="joining-method">
             <p>{{ roomInfo?.game?.host }}</p>
+            <qrcode [qrdata]="url"></qrcode>
           </div>
           <div class="game-description">
             <h3>Description :</h3>

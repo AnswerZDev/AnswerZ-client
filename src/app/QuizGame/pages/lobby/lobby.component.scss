@@ -7,15 +7,19 @@
 }
 
 
+
 #flipContainer{
     animation-duration: 1000ms;
     animation-timing-function: ease;
 }
 
 :host ::ng-deep {
-    button{
-        border: 1px solid var(--primary);
-        outline-color: var(--primary);
+    .button-start > .p-button {
+        background-color: #9468F1;
+        border: 1px solid #9468F1;
+        border-radius: 15px;
+        font-weight: 550;
+        justify-content: center;
     }
 }
 
