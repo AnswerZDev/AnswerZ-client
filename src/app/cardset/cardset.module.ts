@@ -20,6 +20,7 @@ import { AllCardsetComponent } from './pages/all-cardset/all-cardset.component';
 import { DialogModule } from 'primeng/dialog';
 import { VisualizationCardsetComponent } from './component/visualization-cardset/visualization-cardset.component';
 import { AutoCompleteModule } from 'primeng/autocomplete';
+import { SearchCardsetComponent } from './component/search-cardset/search-cardset.component';
 
 @NgModule({
     imports: [
@@ -36,6 +37,8 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
         HttpClientModule,
         InputTextModule,
         ToastModule,
+        ButtonModule,
+        FlashcardModule,
         ConfirmPopupModule,
         PaginatorModule,
         DialogModule,
@@ -47,7 +50,8 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
         GenericFlashcardSetComponent,
         MyCardsetsComponent,
         AllCardsetComponent,
-        VisualizationCardsetComponent
+        VisualizationCardsetComponent,
+        SearchCardsetComponent
     ],
     providers: [],
     exports: []
