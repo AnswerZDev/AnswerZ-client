@@ -25,7 +25,7 @@ import { GameComponent } from './pages/game/game.component'
         ButtonModule,
         InputTextModule,
         DropdownModule,
-        QRCodeModule
+        QRCodeModule,
     ],
     declarations: [
         createRoomComponent,

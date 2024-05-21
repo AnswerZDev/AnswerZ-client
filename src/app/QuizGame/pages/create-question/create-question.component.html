@@ -4,16 +4,16 @@
     </span>
     <div class="flex flex-column px-3 py-3">
         <div class="flex flex-row">
-            <div class="flex flex-column input-question-compo">
+            <div class="flex flex-column input-question-compo w-4">
                 <span class="create-question font-medium text-2xl">
                     Question
                 </span>
                 
                 <input class="input-question" type="text" pInputText [(ngModel)]="e_value" placeholder="Enter a question"/>
             </div>
-            <div class="flex flex-row">
-                <p-dropdown class="text-sm md:text-lg w-1rem md:w-7rem" [options]="timeChoices" optionLabel="duration" placeholder="Time"></p-dropdown>
-                <p-dropdown class="text-sm md:text-lg w-1rem md:w-7rem" [options]="pointsChoices" optionLabel="points" placeholder="Points"></p-dropdown>
+            <div class="flex flex-row ml-auto justify-content-between w-5">
+                <p-dropdown class="text-sm md:text-lg w-1rem md:w-7rem" [options]="timeChoices" optionLabel="duration" placeholder="Time" [(ngModel)]="myTime"></p-dropdown>
+                <p-dropdown class="text-sm md:text-lg w-1rem md:w-7rem" [options]="pointsChoices" optionLabel="points" placeholder="Points" [(ngModel)]="myPoints"></p-dropdown>
                 <p-dropdown class="text-sm md:text-lg w-1rem md:w-7rem" [options]="typeChoices" optionLabel="type" placeholder="Type" [(ngModel)]="myChoice"></p-dropdown>
             </div>
         </div>
@@ -27,6 +27,10 @@
             </div>
             <div *ngIf="myChoice && myChoice.type === 'True/False'">
                 <span class="font-medium text-xl">Options True/False</span>
+                <div class="flex flex-row justify-content-between w-9">
+                    <input id="disabled-input" type="text" pInputText [disabled]="true" [(ngModel)]="e_value" placeholder="True" />
+                    <input id="disabled-input" type="text" pInputText [disabled]="true" [(ngModel)]="e_value" placeholder="False" />
+                </div>
             </div>
         </div>
         <div class="flex flex-column align-items-center py-5">

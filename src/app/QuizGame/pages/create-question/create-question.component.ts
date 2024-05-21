@@ -36,6 +36,10 @@ export class CreateQuestionComponent{
 
     myChoice : Type | undefined;
 
+    myPoints : Points | undefined;
+
+    myTime : Time | undefined;
+
 
     /**
      * @author @HugoooR
@@ -76,5 +80,6 @@ export class CreateQuestionComponent{
             { type: "True/False"},
             { type: "MCQ"},
         ];
+
     }
 }
