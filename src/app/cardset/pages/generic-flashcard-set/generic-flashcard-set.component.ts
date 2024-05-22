@@ -1,5 +1,5 @@
 import {AfterContentInit, Component, ContentChildren, OnInit, QueryList, ViewChild} from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PrimeTemplate } from 'primeng/api';
 import { CardsPreviewComponent } from '../../../flashcards/component/cards-preview/cards-preview.component';
 import { FlashcardService } from 'src/app/flashcards/services/flashcards.service';
@@ -7,7 +7,6 @@ import { first } from 'rxjs';
 import { ToastService } from 'src/app/shared/services/toast.service';
 import { CardsetService, Mode } from '../../services/cardset.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-generic-flashcard',
@@ -30,7 +29,9 @@ export class GenericFlashcardSetComponent implements AfterContentInit, OnInit{
   categoryVisibility: string = '';
   blockChars: RegExp = /^[0-9a-zA-Z\s]+$/;
   imageUpload: string = "../../../../assets/images/image_upload.svg";
+  file: File | null =  null;
   imageUrl: string = ''; // Image qu'on a reçu dans le formulaire de modification
+  resizedImageUrl: string = ''; // Image redimensionnée à afficher dans la section de prévisualisation
 
   @ViewChild(CardsPreviewComponent) cardsPreview!: CardsPreviewComponent;
 
@@ -102,8 +103,15 @@ export class GenericFlashcardSetComponent implements AfterContentInit, OnInit{
     const files = event.dataTransfer?.files;
 
     if (files && files.length > 0) {
-      const file = files[0];
-      this.handleImageFile(file);
+      this.file = files[0];
+      if(this.cardsetId === null || this.cardsetId === undefined){
+        this.imageUpload = URL.createObjectURL(files[0]);
+        this.handleFile(files[0]);
+        this.resizeImage(this.imageUpload);
+      } else {
+        this.handleFile(files[0]);
+        this.resizeImage(this.imageUrl);
+      }
     }
   }
 
@@ -121,24 +129,18 @@ export class GenericFlashcardSetComponent implements AfterContentInit, OnInit{
 
   private getCardsetById(): void {
     this.cardsetsService.getCardsetById(this.cardsetId).subscribe({
-      next: (result) => {
-        var base64ContentArray = result.image.split(','); // Chaine de caractères représentant les données en base64
-        var contentType = base64ContentArray[0].split(':')[1].split(';')[0]; // Sépare la partie "data:image/jpeg;base64," de la chaîne de caractères
-        var binaryString = window.atob(base64ContentArray[1]); // Obtenir le type de fichier à partir de la partie précédente
-        var binaryData = new Uint8Array(binaryString.length); // Obtenir les données binaires à partir de la partie restante
-        for (var i = 0; i < binaryString.length; i++) { // Convertir les données binaires en un tableau d'octets
-          binaryData[i] = binaryString.charCodeAt(i);
-        }
-        var blob = new Blob([binaryData], { type: contentType }); // Créer un objet Blob à partir des données binaires
-        var imageUrl = URL.createObjectURL(blob); // Obtenez l'URL de l'objet Blob
+      next: (result) => {  
         this.cardsetsService.cardsetForm.patchValue({
-            image: imageUrl,
+            image: result.image,
             name: result.name,
             description: result.description,
             selectedCategory: this.modesCategorie?.find((item) => item.name === result.category),
             selectedVisibility: this.modesVisibilite?.find((item) => item.name === result.visibility)
         });
-        this.imageUrl = imageUrl;
+        this.imageUrl = result.image === null ? this.imageUpload : result.image;
+        if(this.imageUrl !== this.imageUpload) {
+          this.resizeImage(this.imageUrl);
+        }
       },
       error: (error) => {
         this.toastService.toast('error', 'Error', 'Error during fetching cardset');
@@ -146,65 +148,57 @@ export class GenericFlashcardSetComponent implements AfterContentInit, OnInit{
     });
   }
 
-  uploadImage(event: Event) {
+  handleFileInput(event: Event) {
     const inputElement = event.target as HTMLInputElement;
+    const files = inputElement.files;
 
-    if (inputElement.files && inputElement.files.length > 0) {
-      const file = inputElement.files[0];
-      if (file.size > 25 * 1024 * 1024) {
-        console.log("Le fichier dépasse la taille maximale autorisée (25 Mo)");
-        return;
-      }
-      this.handleImageFile(file);
+    if (files && files.length > 0) {
+      this.file = files[0];
+      this.handleFile(files[0]);
+      this.resizeImage(this.imageUrl)
     }
   }
 
-  async handleImageFile(file: File) {
-    let formData = new FormData();
-    formData.append('image', file, file.name);
-    try {
-      const response = await fetch('http://localhost:3000/cardset/upload', {
-        method: 'POST',
-        body: formData,
-      });
-      if (!response.ok) {
-        throw new Error(response.statusText);
-      }
-      console.log(response);
-    } catch (err) {
-      console.log(err);
+  handleFile(file: File) {
+    if (file.size > 25 * 1024 * 1024) {
+      console.log("Le fichier dépasse la taille maximale autorisée (25 Mo)");
+      return;
     }
+  
+    const reader = new FileReader();
+  
+    reader.onload = (event) => {
+      this.imageUrl = event.target?.result as string;
+      this.resizeImage(this.imageUrl);
+    };
+  
+    reader.readAsDataURL(file);
   }
   
   resizeImage(imageDataUrl: string): void {
-    const img = new Image();
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    const image = new Image();
   
-    img.onload = () => {
-      const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
+    image.onload = () => {
+      const width = 400;
+      const height = 400;
   
-      if (ctx) {  // Vérification pour éviter l'erreur potentielle
-        // Définissez la taille souhaitée (par exemple, 300x300)
-        const targetWidth = 300;
-        const targetHeight = 300;
+      canvas.width = width;
+      canvas.height = height;
   
-        canvas.width = targetWidth;
-        canvas.height = targetHeight;
-  
-        // Dessinez l'image redimensionnée sur le canvas
-        ctx.drawImage(img, 0, 0, targetWidth, targetHeight);
-  
-        // Obtenez l'URL de l'image redimensionnée
-        const resizedImage = canvas.toDataURL('image/jpeg');
-  
-        // Utilisez `resizedImage` comme source pour votre image dans le modèle
-        this.imageUpload = resizedImage;
-      } else {
-        console.error("Le contexte 2D du canvas est null.");
+      if (ctx) {
+        ctx.drawImage(image, 0, 0, width, height);
+        if(this.cardsetId === null || this.cardsetId === undefined){
+          this.imageUpload = canvas.toDataURL("image/jpeg", 0.75);
+        } else {
+          this.imageUrl = canvas.toDataURL("image/jpeg", 0.75);
+        }
       }
     };
-  
-    img.src = imageDataUrl;
+
+    image.src = imageDataUrl;
+    image.setAttribute('crossOrigin', 'anonymous');
   }
 
   moveToPreview() {
@@ -219,49 +213,6 @@ export class GenericFlashcardSetComponent implements AfterContentInit, OnInit{
         behavior: 'smooth'
       });
     }
-  }
-
-  onSubmitFlashcard() {
-    if (this.flashcardForm.valid) {
-      // Envoie les données au backend
-      if(this.flashcardId === undefined || this.flashcardId === 0){
-        this.flashcardsService.onCreateFlashcards.pipe(first()).subscribe({
-          next: () => {
-            this.toastService.toast('success', 'Success', 'Creation successed');
-            this.totalRecords = this.flashcardsService.flashcards.length;
-          },
-          error: () => {
-            this.toastService.toast('error', 'Error', 'Error during creation');
-          },
-          complete: () => {
-            // Réinitialise le formulaire dans le bloc finally (au cas où il n'y aurait pas de réponse)
-            this.flashcardForm.reset();
-          }
-        });
-        this.flashcardsService.createFlashcard(this.flashcardForm.value);
-      } else {
-          const data = {
-            question: this.flashcardForm.value.question,
-            answer: this.flashcardForm.value.answer
-          };
-          this.flashcardsService.onUpdateFlashcards.pipe(first()).subscribe({
-            next: () => {
-              //this.toastService.toast('success', 'Success', 'Modification successed');
-            },
-            error: () => {
-              //this.toastService.toast('error', 'Error', 'Error during update');
-            },
-            complete: () => {
-              // Réinitialise le formulaire dans le bloc finally (au cas où il n'y aurait pas de réponse)
-              //this.flashcardsService.flashcardForm.reset();
-            }
-          });
-          //this.flashcardsService.updateFlashcard(this.flashcardId, data);
-        }
-      } else {
-        // Le formulaire n'est pas valide
-        this.toastService.toast('error', 'Error', 'Form is not valid');
-      }
   }
 
   onSubmitCardset() {
@@ -308,17 +259,16 @@ export class GenericFlashcardSetComponent implements AfterContentInit, OnInit{
         } else {
           this.toastService.toast('error', 'Error', 'Some values are null');
         }
-        const cardsetData = {
-          name: this.cardsetsService.cardsetForm.value.name,
-          description: this.cardsetsService.cardsetForm.value.description,
-          category: this.categoryName,
-          visibility: this.categoryVisibility,
-          image: this.imageUpload,
-          createdAt: new Date(),
-          numberOfGoodAnswer: 0,
-          flashcards: this.displayedFlashcards,
-        };
-        this.cardsetsService.createCardset(cardsetData);
+        const cardsetData: FormData = new FormData(); 
+        cardsetData.append('name', this.cardsetsService.cardsetForm.value.name);
+        cardsetData.append('description', this.cardsetsService.cardsetForm.value.description);
+        cardsetData.append('category', this.categoryName);
+        cardsetData.append('visibility', this.categoryVisibility);
+        cardsetData.append('createdAt', new Date().toISOString());
+        cardsetData.append('numberOfGoodAnswer', '0');
+        if(this.file) {
+          this.cardsetsService.createCardset(cardsetData, this.file); 
+        }
       } else {
         this.cardsetsService.onUpdateCardsets.pipe(first()).subscribe({
           next: () => {
@@ -364,10 +314,11 @@ export class GenericFlashcardSetComponent implements AfterContentInit, OnInit{
           description: this.cardsetsService.cardsetForm.value.description,
           category: this.categoryName,
           visibility: this.categoryVisibility,
-          image: this.imageUrl,
           createdAt: new Date(),
         };
-        this.cardsetsService.updateCardset(this.cardsetId, cardsetData);
+        if(this.file) {
+            this.cardsetsService.updateCardset(this.cardsetId, cardsetData, this.file);
+        }
       }
     } else {
       // Le formulaire n'est pas valide

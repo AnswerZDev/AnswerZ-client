@@ -1,7 +1,5 @@
-import {AfterContentInit, Component, ContentChildren, OnInit, QueryList, ViewChild} from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { PrimeTemplate } from 'primeng/api';
-import { CardsPreviewComponent } from '../../../flashcards/component/cards-preview/cards-preview.component';
+import { Component, OnInit} from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { FlashcardService } from 'src/app/flashcards/services/flashcards.service';
 import { first } from 'rxjs';
 import { ToastService } from 'src/app/shared/services/toast.service';
@@ -81,12 +79,15 @@ export class AddFlashcardToSetComponent implements OnInit{
         // Stocke les informations du cardset dans la propriété cardset
         this.cardset = result;
 
-        console.dir(this.cardset)
-
-        // Vous pouvez maintenant accéder à l'image du cardset, par exemple :
-        this.imageResized = this.cardset.image;
+        if(this.cardset.image !== null) {
+          this.imageResized = this.cardset.image;
+        } else {
+          this.imageResized = '../../../../assets/images/no_image.jpg';
+        }
         this.cardsetName = this.cardset.name;
         this.cardsetDescription = this.cardset.description;
+
+        this.resizeImage(this.imageResized);
       },
       error: (error) => {
         console.error('Erreur lors de la récupération du cardset : ', error);
@@ -103,20 +104,20 @@ export class AddFlashcardToSetComponent implements OnInit{
     });
   }
 
-  onDragOver(event: Event) {
-    event.preventDefault();
-  }
+  // onDragOver(event: Event) {
+  //   event.preventDefault();
+  // }
 
-  onDrop(event: DragEvent) {
-    event.preventDefault();
+  // onDrop(event: DragEvent) {
+  //   event.preventDefault();
 
-    const files = event.dataTransfer?.files;
+  //   const files = event.dataTransfer?.files;
 
-    if (files && files.length > 0) {
-      const file = files[0];
-      this.handleImageFile(file);
-    }
-  }
+  //   if (files && files.length > 0) {
+  //     const file = files[0];
+  //     this.handleImageFile(file);
+  //   }
+  // }
 
   private getAllFlashcardByCardsetId(): void {
     this.flashcardsService.onReceiveFlashcards.pipe(first()).subscribe({
@@ -131,61 +132,52 @@ export class AddFlashcardToSetComponent implements OnInit{
     this.flashcardsService.getAllFlashcardByCardsetId(this.cardsetId);
   }
 
-  uploadImage(event: Event) {
-    const inputElement = event.target as HTMLInputElement;
+  // uploadImage(event: Event) {
+  //   const inputElement = event.target as HTMLInputElement;
 
-    if (inputElement.files && inputElement.files.length > 0) {
-      const file = inputElement.files[0];
-      this.handleImageFile(file);
-    }
-  }
+  //   if (inputElement.files && inputElement.files.length > 0) {
+  //     const file = inputElement.files[0];
+  //     this.handleImageFile(file);
+  //   }
+  // }
 
-  handleImageFile(file: File) {
-    const maxSizeInBytes = 25 * 1024 * 1024; // 25 Mo en octets
+  // handleImageFile(file: File) {
+  //   const maxSizeInBytes = 25 * 1024 * 1024; // 25 Mo en octets
   
-    if (file.size <= maxSizeInBytes) {
-      const reader = new FileReader();
+  //   if (file.size <= maxSizeInBytes) {
+  //     const reader = new FileReader();
   
-      reader.onload = (e: any) => {
-        const imageDataUrl = e.target.result;
-        this.resizeImage(imageDataUrl);
-      };
+  //     reader.onload = (e: any) => {
+  //       const imageDataUrl = e.target.result;
+  //       this.resizeImage(imageDataUrl);
+  //     };
   
-      reader.readAsDataURL(file);
-    } else {
-      alert("Le fichier est trop volumineux. Veuillez sélectionner un fichier de 25 Mo ou moins.");
-    }
-  }
+  //     reader.readAsDataURL(file);
+  //   } else {
+  //     alert("Le fichier est trop volumineux. Veuillez sélectionner un fichier de 25 Mo ou moins.");
+  //   }
+  // }
   
   resizeImage(imageDataUrl: string): void {
-    const img = new Image();
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    const image = new Image();
   
-    img.onload = () => {
-      const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
+    image.onload = () => {
+      const width = 500;
+      const height = 300;
   
-      if (ctx) {  // Vérification pour éviter l'erreur potentielle
-        // Définissez la taille souhaitée (par exemple, 300x300)
-        const targetWidth = 300;
-        const targetHeight = 300;
+      canvas.width = width;
+      canvas.height = height;
   
-        canvas.width = targetWidth;
-        canvas.height = targetHeight;
-  
-        // Dessinez l'image redimensionnée sur le canvas
-        ctx.drawImage(img, 0, 0, targetWidth, targetHeight);
-  
-        // Obtenez l'URL de l'image redimensionnée
-        const resizedImage = canvas.toDataURL('image/jpeg');
-  
-        // Utilisez `resizedImage` comme source pour votre image dans le modèle
-        this.imageUpload = resizedImage;
-      } else {
-        console.error("Le contexte 2D du canvas est null.");
+      if (ctx) {
+        ctx.drawImage(image, 0, 0, width, height);
+        this.imageResized = canvas.toDataURL('image/jpeg', 1);
       }
     };
-  
-    img.src = imageDataUrl;
+
+    image.src = imageDataUrl;
+    image.setAttribute('crossOrigin', 'anonymous');
   }
 
   moveToPreview() {
@@ -250,8 +242,19 @@ export class AddFlashcardToSetComponent implements OnInit{
     }
   }
 
-  onRedirectToMyCardsets() {
-    this.router.navigate(['/cardset/my-cardsets']);
+  onSubmitFlashcardsToCardset() {
+    const cardset = {
+      ...this.cardset,
+      _flashcards: this.flashcardsService.flashcards
+    }
+    this.cardset = cardset;
+    if(cardset) {
+      this.toastService.toast('success', 'Success', 'Modification successed');
+      this.cardsetsService.uploadCardsetImage(this.cardsetId, this.cardset.image);
+      this.router.navigate(['/cardset/my-cardsets']);
+    } else {
+      this.toastService.toast('error', 'Error', 'Error during submit flashcards to cardset');
+    }
   }
 
   paginate(event: any) {

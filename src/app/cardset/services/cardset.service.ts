@@ -46,7 +46,7 @@ export class CardsetService {
     public getMyPrivateCardsets(): void {
         this.cardsetApi.getMyCardsets('Private').subscribe({
             next: (data: any) => {
-                this._cardsets = data.member;    
+                this._cardsets = data.member; 
                 this.onReceiveCardsets.emit(true);
                 this.cardsetsChange.next(true);
             }, 
@@ -77,9 +77,10 @@ export class CardsetService {
         );
     }
 
-    public createCardset(data: any): void {
+    public createCardset(data: any, file: File): void {
         this.cardsetApi.create(data).subscribe({
           next: (createdCardset: any) => {
+            this.uploadCardsetImage(createdCardset.id, file);
             this._cardsets.push(createdCardset);
             this.onCreateCardsets.emit(createdCardset.id);
             this.cardsetsChange.next(true);
@@ -90,8 +91,38 @@ export class CardsetService {
         });
     }
 
-    public updateCardset(id: number, data: any): void {
+    public updateCardset(id: number, data: any, file: File): void {
         this.cardsetApi.update(id, data).subscribe({
+          next: (updatedCardset: any) => {
+            this.uploadCardsetImage(updatedCardset.id, file);
+            const index = this._cardsets.findIndex((cardset) => cardset.id === updatedCardset.id);
+            this._cardsets[index] = updatedCardset;
+            this.onUpdateCardsets.emit(true);
+            this.cardsetsChange.next(true);
+          },
+          error: (error) => {
+
+          }
+        });
+    }
+
+    public createCardsetImage(cardsetData: any): void {
+        this.cardsetApi.createImage(cardsetData).subscribe({
+          next: (createdCardset: any) => {
+            this._cardsets.push(createdCardset);
+            this.onCreateCardsets.emit(true);
+            this.cardsetsChange.next(true);
+          },
+          error: (error) => {
+            console.dir(error)
+          }
+        });
+    }
+
+    public uploadCardsetImage(id: number, file: any): void {
+        let body: FormData = new FormData();
+        body.append('imageCardset', file);
+        this.cardsetApi.uploadImage(id, body).subscribe({
           next: (updatedCardset: any) => {
             const index = this._cardsets.findIndex((cardset) => cardset.id === updatedCardset.id);
             this._cardsets[index] = updatedCardset;

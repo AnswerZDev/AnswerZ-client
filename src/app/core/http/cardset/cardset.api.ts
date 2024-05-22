@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { ApiService } from "../../services/api.service";
-import { Observable, catchError, map, of } from "rxjs";
+import { Observable, map } from "rxjs";
 import { Cardset } from "../../models/api/cardset";
 import { HydraFactory } from "../../models/api/hydra/hydra.factory";
 
@@ -50,6 +50,20 @@ export class CardsetApi extends ApiService {
     public deleteByid(id: number): Observable<Cardset> {
         let f = this.delete(`/${id}`).pipe(
             map((data: any) => HydraFactory.createItem(Cardset, data))
+        )
+        return f as unknown as Observable<Cardset>
+    }
+
+    public createImage(body: any): Observable<Cardset> {
+        let f = this.post('/create-image-cardset', body).pipe(
+            map((response) => HydraFactory.createItem(Cardset, response))
+        );
+        return f as unknown as Observable<Cardset>
+    }
+
+    public uploadImage(id: number, body: FormData): Observable<Cardset> {
+        let f = this.patch(`/upload-image-cardset/${id}`, body).pipe(
+            map((response: any) => HydraFactory.createItem(Cardset, response))
         )
         return f as unknown as Observable<Cardset>
     }

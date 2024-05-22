@@ -1,6 +1,6 @@
 <div *ngFor="let cardset of displayedCardsets;" class="pl-5 align-items-center pt-3">
     <div class="w-20rem h-15rem p-2 border-1 border-round-2xl shadow-3 surface-border" id="{{cardset.id}}">
-        <div>
+        <div class="h-11rem">
             <div class="flex flex-row justify-content-between">
                 <img [src]="imageWorld" class="w-2rem h-2rem">
                 <div *ngIf="!cardset.isFlipped">
@@ -14,18 +14,19 @@
                 </button>
             </div>
             <ng-container *ngIf="!cardset.isFlipped; else cardBack">
-                <div class="flex justify-content-center">
-                    <img [src]="cardset.image" class="w-7rem">
-                </div>
-                <div class="flex flex-row justify-content-around pt-3">
-                    <p-button styleClass=" flex justify-content-center cardset-button">PLAY</p-button>
-                    <div *ngIf="isLikedMode">
-                        <p-button styleClass="flex justify-content-center cardset-button" (click)="redirectToEdit(cardset.id)">EDIT</p-button>
+                <div class="flex flex-column justify-content-between h-full">
+                    <div class="flex justify-content-center" *ngIf="cardset.image !== null">
+                        <img [src]="cardset.image" class="w-10rem h-7rem border-round-lg">
                     </div>
-                </div>
-                <div class="flex justify-content-end pt-3 pr-2 gap-1">
-                    <img [src]="imageHeart" class="image">
-                    <span class="text-xs font-bold">13 000 000</span>
+                    <div class="flex justify-content-center" *ngIf="cardset.image === null">
+                        <img src="../../../../assets/images/no_image.jpg" class="w-10rem h-7rem border-round-lg">
+                    </div>
+                    <div class="flex flex-row justify-content-around pt-3">
+                        <p-button styleClass=" flex justify-content-center cardset-button">PLAY</p-button>
+                        <div *ngIf="isLikedMode">
+                            <p-button styleClass="flex justify-content-center cardset-button" (click)="redirectToEdit(cardset.id)">EDIT</p-button>
+                        </div>
+                    </div>
                 </div>
             </ng-container>
             <ng-template #cardBack>

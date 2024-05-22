@@ -5,14 +5,14 @@
     <div class="pt-5">
       <form [formGroup]="cardsetsService.cardsetForm" (ngSubmit)="onSubmitCardset()">
         <p-card>
-          <div class="flex flex-row md:align-self-auto align-self-center gap-6 w-6 md:w-full">
-            <div class="flex w-4">
+          <div class="flex md:flex-row flex-column md:align-self-auto align-self-center gap-6 w-full">
+            <div class="flex md:w-4 w-full">
               <p-card class="flex flex-column w-full mt-5" (dragover)="onDragOver($event)" (drop)="onDrop($event)">
                 <div class="flex flex-column align-items-center">
                   <label for="input-file" class="flex flex-column align-items-center gap-2 pt-3">
-                    <input id="input-file" type="file" accept=".png, .jpg, .gif" class="opacity-0 hidden" (change)="uploadImage($event)"/>
+                    <input id="input-file" type="file" accept=".png, .jpg, .gif" class="opacity-0 hidden" (change)="handleFileInput($event)"/>
                     <img *ngIf="!cardsetId" [src]="imageUpload" alt="ImageUpload" class="w-10 h-full border-round-2xl max-h-15rem ImageUpload"/>
-                    <img *ngIf="cardsetId !== null && cardsetId !== undefined && cardsetsService.cardsetForm.get('image')?.value !== ''" [src]="cardsetsService.cardsetForm.get('image')?.value" alt="ImageUpload" class="w-10 h-full border-round-2xl max-h-15rem ImageUpload"/>
+                    <img *ngIf="cardsetId !== null && cardsetId !== undefined && imageUrl !== ''" [src]="imageUrl" alt="ImageUpload" class="w-10 h-full border-round-2xl max-h-15rem ImageUpload"/>
                     <div class="flex flex-column text-center md:text-auto gap-2">
                       <span class="font-bold block text-sm md:text-lg align-self-auto md:align-self-center">Upload an image</span>
                       <span class="text-sm md:text-lg">or drag and drop PNG, JPG, GIF up to 25Mo</span>
@@ -22,10 +22,10 @@
               </p-card>
             </div>
           
-            <div class="flex flex-column md:align-self-auto align-self-center w-6 md:w-full pt-4">
+            <div class="flex flex-column w-full md:pt-4 pt-0">
               <div class="flex justify-content-between">
-                <p-dropdown class="text-sm md:text-lg w-1rem md:w-7rem" formControlName="selectedCategory" [options]="modesCategorie" optionLabel="name" placeholder="CATEGORIES"></p-dropdown>
-                <p-dropdown class="align-self-end" formControlName="selectedVisibility" [options]="modesVisibilite" optionLabel="name" value="Public" placeholder="Public"></p-dropdown>
+                <p-dropdown formControlName="selectedCategory" [options]="modesCategorie" optionLabel="name" placeholder="CATEGORIES"></p-dropdown>
+                <p-dropdown formControlName="selectedVisibility" [options]="modesVisibilite" optionLabel="name" value="Public" placeholder="Public"></p-dropdown>
               </div>
               <div class="pt-3">
                 <label for="blockChars" class="font-bold block mb-2"> Name </label>
@@ -40,20 +40,6 @@
           </div>
         </p-card>
       </form>
-          <!-- <div class="flex flex-column mt-4 md:align-self-auto align-self-center w-full md:w-6">
-            <form class="flashcardForm" [formGroup]="flashcardForm" (ngSubmit)="onSubmitFlashcard()">
-              <p-card class="flex flex-column pt-0 md:pl-5 custom-card mr-auto md:mr-4 w-full">
-                <label for="blockChars" class="font-bold block mt-1 mb-2"> Question </label>
-                <input pInputText id="block" formControlName="question" class="w-full border-round-xl mb-2" placeholder="Question"/>
-                <label for="blockChars" class="font-bold block mb-2"> Answer </label>
-                <input pInputText id="block" formControlName="answer" class="w-full border-round-xl mb-4" placeholder="Answer"/>
-                <p-button type="submit" class="flex flex-column w-full button-add"> ADD FLASHCARD TO SET </p-button>
-              </p-card>
-            </form>
-            <div class="flex flex-row justify-content-center mt-4">
-              <p-button class="right-side w-full md:w-7 pl-0 md:pl-5" (click)="moveToPreview()">PREVIEW</p-button>
-            </div>
-          </div> -->
     </div>
 </div>
 

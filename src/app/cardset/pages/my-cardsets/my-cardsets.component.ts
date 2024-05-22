@@ -21,7 +21,6 @@ export class MyCardsetsComponent implements OnInit {
   currentPage: number = 0;
   totalPages: number = 0;
   pageSize: number = 0;
-  progressPercentage: number = 0;
   displayedCardsets: any[] = [];
 
   isLikedMode: boolean = true;
@@ -97,7 +96,5 @@ export class MyCardsetsComponent implements OnInit {
     } else {
         this.totalPages = Math.ceil(this.totalRecords / this.pageSize);
     }
-
-    this.progressPercentage = (this.currentPage / this.totalPages) * 100;
   }
 }
