@@ -13,9 +13,8 @@
         </div>
     </div>
 </div>
-<app-cardset class="flex" [isLikedMode]="isLikedMode" [displayedCardsets]="displayedCardsets"></app-cardset>
+<app-cardset class="flex" [displayedCardsets]="displayedCardsets"></app-cardset>
 <div class="flex flex-column align-items-center pt-7">
-    <p-toast></p-toast>
     <p-paginator [rows]="pageSize" [totalRecords]="totalRecords" (onPageChange)="paginate($event)" class="mt-2"></p-paginator>
 </div>
 

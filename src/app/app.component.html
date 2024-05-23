@@ -2,10 +2,11 @@
   <app-header></app-header>
   <div>
     <router-outlet (activate)="onComponentLoad()"></router-outlet>
-    <p-toast></p-toast>
+    <!-- <p-toast></p-toast> -->
   </div>
   <app-footer></app-footer>
   <p-toast></p-toast>
+  <p-confirmDialog />
 </main>
 <ng-template #loader>
   <div class="flex flex-column justify-content-center h-full">

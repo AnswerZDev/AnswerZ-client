@@ -22,10 +22,9 @@
                         <img src="../../../../assets/images/no_image.jpg" class="w-10rem h-7rem border-round-lg">
                     </div>
                     <div class="flex flex-row justify-content-around pt-3">
-                        <p-button styleClass=" flex justify-content-center cardset-button">PLAY</p-button>
-                        <div *ngIf="isLikedMode">
-                            <p-button styleClass="flex justify-content-center cardset-button" (click)="redirectToEdit(cardset.id)">EDIT</p-button>
-                        </div>
+                        <p-button icon="pi pi-pencil" styleClass="flex justify-content-center cardset-button" (click)="redirectToEdit(cardset.id)"></p-button>
+                        <p-button icon="pi pi-play" styleClass=" flex justify-content-center cardset-button"></p-button>
+                        <p-button icon="pi pi-trash" styleClass="flex justify-content-center cardset-button" (click)="deleteCardset($event, cardset.id)"></p-button>
                     </div>
                 </div>
             </ng-container>

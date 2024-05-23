@@ -23,8 +23,6 @@ export class MyCardsetsComponent implements OnInit {
   pageSize: number = 0;
   displayedCardsets: any[] = [];
 
-  isLikedMode: boolean = true;
-
   constructor(
     private router: Router,
     public readonly cardsetsService: CardsetService,

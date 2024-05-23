@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { CardsetService } from '../../services/cardset.service';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-cardset',
@@ -10,14 +11,15 @@ import { CardsetService } from '../../services/cardset.service';
 export class CardsetComponent {
   imageInformation: string = '../../../../assets/images/information.svg';
   imageWorld: string = '../../../../assets/images/world.svg';
-  @Input() isLikedMode: boolean = false;
   @Input() displayedCardsets: any[] = [];
 
   direction: 'left' | 'right' = 'right';
 
   constructor(
     private readonly router: Router,
-    public readonly cardsetsService: CardsetService
+    public readonly cardsetsService: CardsetService,
+    private readonly confirmationService: ConfirmationService,
+    private readonly messageService: MessageService
   ) {}
 
   redirectToEdit(cardsetId: number) {
@@ -41,5 +43,26 @@ export class CardsetComponent {
 
       this.direction = this.direction === 'right' ? 'left' : 'right';
     }
+  }
+
+  deleteCardset(event: Event, cardsetId: number) {
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      message: 'Do you want to delete this cardset?',
+      header: 'Delete Confirmation',
+      icon: 'pi pi-info-circle',
+      acceptButtonStyleClass:"p-button-danger p-button-text",
+      rejectButtonStyleClass:"p-button-text p-button-text",
+      acceptIcon:"none",
+      rejectIcon:"none",
+
+      accept: () => {
+        this.cardsetsService.deleteCardset(cardsetId);
+        this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'Record deleted' });
+      },
+      reject: () => {
+        this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
+      }
+    });
   }
 }

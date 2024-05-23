@@ -20,6 +20,7 @@ export class CardsetService {
     public onReceiveCardsets: EventEmitter<boolean> = new EventEmitter<boolean>();
     public onCreateCardsets: EventEmitter<any> = new EventEmitter<any>();
     public onUpdateCardsets: EventEmitter<boolean> = new EventEmitter<boolean>();
+    public onDeleteCardsets: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     private _cardsetsChange: Subject<boolean> = new Subject<boolean>();
 
@@ -98,6 +99,19 @@ export class CardsetService {
             const index = this._cardsets.findIndex((cardset) => cardset.id === updatedCardset.id);
             this._cardsets[index] = updatedCardset;
             this.onUpdateCardsets.emit(true);
+            this.cardsetsChange.next(true);
+          },
+          error: (error) => {
+
+          }
+        });
+    }
+
+    public deleteCardset(id: number): void {
+        this.cardsetApi.deleteByid(id).subscribe({
+          next: () => {
+            this._cardsets = this._cardsets.filter((cardset) => Number(cardset.id) !== id);
+            this.onDeleteCardsets.emit(true);
             this.cardsetsChange.next(true);
           },
           error: (error) => {

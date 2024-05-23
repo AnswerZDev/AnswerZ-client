@@ -7,7 +7,6 @@ import { KeyFilterModule } from 'primeng/keyfilter';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { HttpClientModule } from '@angular/common/http';
-import { ToastModule } from 'primeng/toast';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { InputTextModule } from 'primeng/inputtext';
 import { PaginatorModule } from 'primeng/paginator';
@@ -36,11 +35,10 @@ import { AddFlashcardToSetComponent } from './pages/add-flashcard-to-cardset/add
         HttpClientModule,
         InputTextModule,
         InputTextareaModule,
-        ToastModule,
         ConfirmPopupModule,
         PaginatorModule,
         ProgressBarModule,
-        FlashcardModule
+        FlashcardModule,
     ],
     declarations: [
         CreateFlashcardSetComponent,
