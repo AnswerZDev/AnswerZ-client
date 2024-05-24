@@ -17,17 +17,17 @@
                 <p-dropdown class="text-sm md:text-lg w-1rem md:w-7rem" [options]="typeChoices" optionLabel="type" placeholder="Type" [(ngModel)]="myChoice"></p-dropdown>
             </div>
         </div>
-        <div class="flex flex-column">
-            <div *ngIf="myChoice && myChoice.type === 'MCQ'">
-                <span class="font-medium text-xl">Options QCM</span>
-                <input type="text" pInputText placeholder="Option 1"/>
-                <input type="text" pInputText placeholder="Option 2"/>
-                <input type="text" pInputText placeholder="Option 3"/>
-                <input type="text" pInputText placeholder="Option 4"/>
+        <div class="flex flex-column pt-8">
+            <div *ngIf="myChoice && myChoice.type === 'MCQ'" class="flex flex-column">
+                <p-dropdown class="text-sm md:text-lg w-1rem md:w-7rem" [options]="NOQChoices" optionLabel="number" placeholder="Number of questions" [(ngModel)]="myNOQ" inputId="float-label"></p-dropdown>
+                <div class="flex flex-wrap pt-6 justify-content-between">
+                    <div *ngFor="let i of [].constructor(myNOQ && myNOQ.number && myNOQ.number > 2 ? myNOQ.number : 2); let j = index" class="pb-5">
+                        <input type="text" pInputText placeholder="Option {{ j + 1 }}" class="noq-input" />
+                    </div>
+                </div>
             </div>
-            <div *ngIf="myChoice && myChoice.type === 'True/False'">
-                <span class="font-medium text-xl">Options True/False</span>
-                <div class="flex flex-row justify-content-between w-9">
+            <div *ngIf="myChoice && myChoice.type === 'True/False'" class="flex justify-content-center">
+                <div class="flex flex-row justify-content-between w-7">
                     <input id="disabled-input" type="text" pInputText [disabled]="true" [(ngModel)]="e_value" placeholder="True" />
                     <input id="disabled-input" type="text" pInputText [disabled]="true" [(ngModel)]="e_value" placeholder="False" />
                 </div>

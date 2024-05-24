@@ -17,6 +17,10 @@ export interface Type{
     type: string;
 }
 
+export interface NumberOfQuestions{
+    number: number;
+}
+
 @Component({
     selector: 'app-create-question',
     templateUrl: './create-question.component.html',
@@ -34,11 +38,16 @@ export class CreateQuestionComponent{
 
     typeChoices : Type[] | undefined;
 
+    NOQChoices : NumberOfQuestions[] | undefined;
+
     myChoice : Type | undefined;
 
     myPoints : Points | undefined;
 
     myTime : Time | undefined;
+
+    myNOQ : NumberOfQuestions | undefined;
+
 
 
     /**
@@ -50,7 +59,6 @@ export class CreateQuestionComponent{
     createQuestion(): void {
         
     }
-
 
     ngOnInit() {
        
@@ -79,6 +87,16 @@ export class CreateQuestionComponent{
         this.typeChoices = [
             { type: "True/False"},
             { type: "MCQ"},
+        ];
+
+        this.NOQChoices = [
+            { number: 2 },
+            { number: 3 },
+            { number: 4 },
+            { number: 5 },
+            { number: 6 },
+            { number: 7 },
+            { number: 8 },
         ];
 
     }
