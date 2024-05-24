@@ -8,3 +8,30 @@
     text-decoration: none;
     color: black;
 }
+
+:host ::ng-deep {
+    .button-delete{
+        padding: 0;
+        margin: 0;
+        // font-size: 0.5px;
+    }
+
+    .bouton-save{
+        color: white;
+        background-color: #9468F1;
+        padding: 15px;
+        border-radius: 15px;
+    }
+}
+
+.number{
+    width: 50px;
+    height: 50px;
+    background-color: #9468F1;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+}

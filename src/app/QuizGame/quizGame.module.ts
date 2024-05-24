@@ -15,6 +15,7 @@ import { QRCodeModule } from 'angularx-qrcode';
 import { GameComponent } from './pages/game/game.component';
 import { QuizEditComponent } from './pages/quiz-edit/quiz-edit.component';
 import { VisualizationQuestionQuizComponent } from './components/visualization-question-quiz/visualization-question-quiz.component'
+import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
     imports: [
@@ -27,7 +28,8 @@ import { VisualizationQuestionQuizComponent } from './components/visualization-q
         ButtonModule,
         InputTextModule,
         DropdownModule,
-        QRCodeModule
+        QRCodeModule,
+        DialogModule,
     ],
     declarations: [
         createRoomComponent,
