@@ -8,7 +8,6 @@
                 {{ my_question.question }}
             </div>
             <div class="col-2 text-xl font-semibold flex justify-content-end">
-                <!-- <p-button (onClick)="swhow()" icon="pi pi-search" severity="danger " /> -->
                 <p-button (click)="showDialog()" icon="pi pi-eye" styleClass="button-delete"></p-button>
                 <p-dialog 
                     header="Header" 
@@ -33,29 +32,31 @@
                             <div class="col-12">
                                 Question
                                 <div class="text-xl border-1 border-round p-2">
-                                    Who is carreau ?
+                                    {{ my_question.question }}
                                 </div>
                             </div>
 
                             <div class="col-12">
                                 Réponse
                                 <div class="text-xl border-1 border-round p-3 mb-2">
-                                    un puceau
+                                    {{ my_question.reponse[0] }}
                                 </div>
                                 <div class="text-xl border-1 border-round p-3 mb-2">
-                                    un malgache
+                                    {{ my_question.reponse[1] }}
                                 </div>
-                                <div class="text-xl border-1 border-round p-3 mb-2">
-                                    un fdp
-                                </div>
-                                <div class="text-xl border-1 border-round p-3">
-                                    un mec avec une twingo
+                                <div *ngIf="my_question.type">
+                                    <div class="text-xl border-1 border-round p-3 mb-2">
+                                        {{ my_question.reponse[2] }}
+                                    </div>
+                                    <div class="text-xl border-1 border-round p-3">
+                                        {{ my_question.reponse[3] }}
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="col-12">
-                                <p-dropdown [options]="time" [(ngModel)]="selectedtime" (onChange)="onTimeChange($event)" optionLabel="name" class="align-self-end uppercase"></p-dropdown>
-                                <p-dropdown [options]="point" [(ngModel)]="selectedpoint" (onChange)="onPointChange($event)" optionLabel="name" class="align-self-end uppercase ml-3"></p-dropdown>                
+                                <p-dropdown [options]="time" [(ngModel)]="selectedtime" (onChange)="onTimeChange($event)" optionLabel="time" class="align-self-end uppercase"></p-dropdown>
+                                <p-dropdown [options]="point" [(ngModel)]="selectedpoint" (onChange)="onPointChange($event)" optionLabel="point" class="align-self-end uppercase ml-3"></p-dropdown>                
                             </div>
                         </div>
                     </div>  
@@ -70,7 +71,7 @@
                 <p-button (onClick)="onDeleteQuestion()" icon="pi pi-times" severity="danger " styleClass="button-delete"/>
             </div>
             <div class="col-12 bg-blue">
-                {{ my_question.reponse[0] }}
+                {{ my_question.reponse[0] }} , {{ my_question.reponse[1]}}...
             </div>
         </div>
     </div>

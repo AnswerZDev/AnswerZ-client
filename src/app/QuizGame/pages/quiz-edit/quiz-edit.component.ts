@@ -12,6 +12,9 @@ export interface NumberPlayers {
 export interface QuestionQuiz {
   question : string;
   reponse: string[];
+  type : boolean;
+  point: number;
+  time: number;
 }
 
 @Component({
@@ -32,37 +35,26 @@ export class QuizEditComponent {
   listeQuestion: QuestionQuiz[] = [
     {   
       question: "qui est le plus beau",
-      reponse: ["romain", "test"]
+      reponse: ["romain", "audric", "hugo", "théo"],
+      type: true,
+      point: 100,
+      time: 5,
     },
     {   
-      question: "qui est le plus beau",
-      reponse: ["romain", "test"]
+      question: "Who is carreau",
+      reponse: ["informaticien", "puceau"],
+      type: false,
+      point: 100,
+      time: 5,
     },
     {   
-      question: "qui est le plus beau",
-      reponse: ["romain", "test"]
-    },
-    {   
-      question: "qui est le plus beau",
-      reponse: ["romain", "test"]
-    },
-    {   
-      question: "qui est le plus beau",
-      reponse: ["romain", "test"]
-    },
-    {   
-      question: "qui est le plus beau",
-      reponse: ["romain", "test"]
-    },
-    {   
-      question: "qui est le plus beau",
-      reponse: ["romain", "test"]
-    },
-    {   
-      question: "qui est le plus beau",
-      reponse: ["romain", "test"]
-    },
- ];
+      question: "La plus belle voiture ?",
+      reponse: ["e36", "e46", "e30", "e24"],
+      type: true,
+      point: 100,
+      time: 5,
+    }
+  ];
 
   ngOnInit(): void {
 

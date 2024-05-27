@@ -1,0 +1,31 @@
+:host ::ng-deep {
+    .p-dropdown {
+        background-color: #9468F1;
+        border: #9468F1;
+        border-radius: 10px;
+    }
+
+    .p-dropdown-label, .p-dropdown-trigger-icon {
+        color: white;
+    }
+
+    .p-button {
+        background-color: white;
+        border: 1px solid #e0e0e0;
+        color: #9468F1;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+}
+
+.title {
+    color: rgba(148,104,241,0.77);
+    font-size: 1.5em;
+}
+
+.container-create-quiz{
+    line-height: 22px;
+}
+
+.text-create-quiz{
+    line-height: 16px;
+}

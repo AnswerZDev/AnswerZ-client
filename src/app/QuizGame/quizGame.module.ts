@@ -16,6 +16,7 @@ import { GameComponent } from './pages/game/game.component';
 import { QuizEditComponent } from './pages/quiz-edit/quiz-edit.component';
 import { VisualizationQuestionQuizComponent } from './components/visualization-question-quiz/visualization-question-quiz.component'
 import { DialogModule } from 'primeng/dialog';
+import { MyQuizVisualizationComponent } from './pages/my-quiz-visualization/my-quiz-visualization.component';
 
 @NgModule({
     imports: [
@@ -39,7 +40,8 @@ import { DialogModule } from 'primeng/dialog';
         LobbyListComponent,
         GameComponent,
         QuizEditComponent,
-        VisualizationQuestionQuizComponent
+        VisualizationQuestionQuizComponent,
+        MyQuizVisualizationComponent
     ],
     providers: [],
 })
