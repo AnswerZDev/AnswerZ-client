@@ -13,6 +13,15 @@ export class Question extends Item {
     private _choices: string[] | undefined;
 
 
+    constructor(data: any) {
+        super(data)
+
+        this._description = data.description;
+        this._duration = data.duration;
+        this._points = data.points;
+        this._question_type = data.question_type;
+        this._choices = data.choices;
+    }
     
     public get description(): string | undefined {
         return this._description;
