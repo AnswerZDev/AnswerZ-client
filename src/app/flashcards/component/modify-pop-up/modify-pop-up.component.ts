@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FlashcardService } from '../../services/flashcards.service';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { ToastService } from 'src/app/shared/services/toast.service';
 import { first } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'modify-pop-up-preview',
@@ -19,7 +19,7 @@ export class ModifyPopUpComponent implements OnInit{
       public readonly flashcardService: FlashcardService,
       private readonly ref: DynamicDialogRef,
       private readonly config: DynamicDialogConfig,
-      private readonly toastService: ToastService,
+      private readonly messageService: MessageService,
       private readonly formBuilder: FormBuilder,
   ) {
     this.updateForm();
@@ -51,10 +51,10 @@ export class ModifyPopUpComponent implements OnInit{
     if (this.flashcardForm.valid) {
       this.flashcardService.onUpdateFlashcards.pipe(first()).subscribe({
         next: () => {
-          this.toastService.toast('success', 'Success', 'Updated successfully');
+          this.messageService.add({ severity: 'success', detail: 'Updated successfully' });
         },
         error: () => {
-          this.toastService.toast('error', 'Error', 'Error during the update');
+          this.messageService.add({ severity: 'error', detail: 'Error during the update' });
         },
         complete: () => {
           this.flashcardForm.reset();

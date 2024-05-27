@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { CardsetService, Mode } from '../../services/cardset.service';
 import { first } from 'rxjs';
 import { FlashcardService } from 'src/app/flashcards/services/flashcards.service';
-import { ToastService } from 'src/app/shared/services/toast.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-my-cardsets',
@@ -27,7 +27,7 @@ export class MyCardsetsComponent implements OnInit {
     private router: Router,
     public readonly cardsetsService: CardsetService,
     public readonly flashcardsService: FlashcardService,
-    private readonly toastService: ToastService
+    private readonly messageService: MessageService
   ) { }
 
   ngOnInit(): void {
@@ -56,7 +56,7 @@ export class MyCardsetsComponent implements OnInit {
         this.paginate({ first: 0, rows: 4, page: 1, pageCount: Math.ceil(this.totalRecords / 5) });
       },
       error: () => {
-        this.toastService.toast('error', 'Error', 'Error during fetching cardsets');
+        this.messageService.add({severity: 'error', detail: 'Error during fetching cardsets'});
       }
     });
     if(visibility === 'Public') {

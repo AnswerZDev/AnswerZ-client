@@ -38,8 +38,6 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
         FlashcardModule,
         UserModule,
         AdminModule,
-        AuthModule,
-        BrowserAnimationsModule,
         SharedModule,
         NgClass,
         CardsetModule,

@@ -27,7 +27,11 @@ export class CardsetApi extends ApiService {
     }
 
     public getOne(id: number): Observable<Cardset> {
-        let f = this.get(`/${id}`).pipe(
+        let f = this.get(`/${id}`, {
+            headers: {
+                'skip-cache': 'true'
+            }
+        }).pipe(
             map((data: any) => HydraFactory.createItem(Cardset, data))
         )
         return f as unknown as Observable<Cardset>
@@ -54,15 +58,8 @@ export class CardsetApi extends ApiService {
         return f as unknown as Observable<Cardset>
     }
 
-    public createImage(body: any): Observable<Cardset> {
-        let f = this.post('/create-image-cardset', body).pipe(
-            map((response) => HydraFactory.createItem(Cardset, response))
-        );
-        return f as unknown as Observable<Cardset>
-    }
-
     public uploadImage(id: number, body: FormData): Observable<Cardset> {
-        let f = this.patch(`/upload-image-cardset/${id}`, body).pipe(
+        let f = this.post(`/upload-image-cardset/${id}`, body).pipe(
             map((response: any) => HydraFactory.createItem(Cardset, response))
         )
         return f as unknown as Observable<Cardset>

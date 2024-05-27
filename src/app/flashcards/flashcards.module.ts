@@ -13,6 +13,7 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { InputTextModule } from 'primeng/inputtext';
 import { PaginatorModule } from 'primeng/paginator';
 import { ModifyPopUpComponent } from './component/modify-pop-up/modify-pop-up.component';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
     imports: [
@@ -36,7 +37,7 @@ import { ModifyPopUpComponent } from './component/modify-pop-up/modify-pop-up.co
         CardsPreviewComponent,
         ModifyPopUpComponent
     ],
-    providers: [],
+    providers: [MessageService],
     exports: [
         CardsPreviewComponent
     ]

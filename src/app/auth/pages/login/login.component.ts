@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
 import {SecurityService} from "../../../shared/services/security.services";
 import {first} from "rxjs";
-import {ToastService} from "../../../shared/services/toast.service";
 import {MessageService} from "primeng/api";
 
 @Component({
@@ -30,7 +29,6 @@ export class LoginComponent implements OnInit{
     constructor(
         private readonly router: Router,
         private readonly securityService: SecurityService,
-        private readonly toastService: ToastService,
         private readonly messageService: MessageService
     ) { }
 

@@ -1,10 +1,9 @@
 import {AfterContentInit, Component, ContentChildren, OnInit, QueryList, ViewChild} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { PrimeTemplate } from 'primeng/api';
+import { MessageService, PrimeTemplate } from 'primeng/api';
 import { CardsPreviewComponent } from '../../../flashcards/component/cards-preview/cards-preview.component';
 import { FlashcardService } from 'src/app/flashcards/services/flashcards.service';
 import { first } from 'rxjs';
-import { ToastService } from 'src/app/shared/services/toast.service';
 import { CardsetService, Mode } from '../../services/cardset.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -41,11 +40,11 @@ export class GenericFlashcardSetComponent implements AfterContentInit, OnInit{
 
   constructor(
     private readonly formBuilder: FormBuilder,
-    private readonly toastService: ToastService, 
     public readonly flashcardsService: FlashcardService,
     public readonly cardsetsService: CardsetService,
     private readonly router: Router,
-    private readonly route: ActivatedRoute
+    private readonly route: ActivatedRoute,
+    private readonly messageService: MessageService
   ) {
     this.createForm();
   }
@@ -109,6 +108,7 @@ export class GenericFlashcardSetComponent implements AfterContentInit, OnInit{
         this.handleFile(files[0]);
         this.resizeImage(this.imageUpload);
       } else {
+        this.imageUrl = URL.createObjectURL(files[0])
         this.handleFile(files[0]);
         this.resizeImage(this.imageUrl);
       }
@@ -143,7 +143,7 @@ export class GenericFlashcardSetComponent implements AfterContentInit, OnInit{
         }
       },
       error: (error) => {
-        this.toastService.toast('error', 'Error', 'Error during fetching cardset');
+        this.messageService.add({ severity: 'error', detail: 'Error during fetching cardset' });
       }
     });
   }
@@ -161,7 +161,7 @@ export class GenericFlashcardSetComponent implements AfterContentInit, OnInit{
 
   handleFile(file: File) {
     if (file.size > 25 * 1024 * 1024) {
-      console.log("Le fichier dépasse la taille maximale autorisée (25 Mo)");
+      this.messageService.add({ severity: "warning", detail: "Le fichier dépasse la taille maximale autorisée (25 Mo)" });
       return;
     }
   
@@ -222,11 +222,11 @@ export class GenericFlashcardSetComponent implements AfterContentInit, OnInit{
         this.cardsetsService.onCreateCardsets.pipe(first()).subscribe({
           next: (id) => {
             const cardSetId = id;
-            this.toastService.toast('success', 'Success', 'Creation successed');
+            this.messageService.add({ severity: 'success', detail: 'Creation successed' });
             this.router.navigate(['/cardset/add-flashcard-to-set', cardSetId]);
           },
           error: () => {
-            this.toastService.toast('error', 'Error', 'Error during creation');
+            this.messageService.add({ severity: 'error', detail: 'Error during creation' });
           },
           complete: () => {
             // Réinitialise le formulaire dans le bloc finally (au cas où il n'y aurait pas de réponse)
@@ -245,7 +245,7 @@ export class GenericFlashcardSetComponent implements AfterContentInit, OnInit{
             this.categoryName = selectedCategory.name;
             selectedCategoryControl.setValue(this.categoryName);
           } else {
-            this.toastService.toast('error', 'Error', 'Some values are null');
+            this.messageService.add({ severity: 'error', detail: 'Some values are null' });
           }
         
           
@@ -257,26 +257,31 @@ export class GenericFlashcardSetComponent implements AfterContentInit, OnInit{
         
           selectedVisibilityControl.setValue(this.categoryVisibility);
         } else {
-          this.toastService.toast('error', 'Error', 'Some values are null');
+          this.messageService.add({ severity: 'error', detail: 'Some values are null'});
         }
-        const cardsetData: FormData = new FormData(); 
-        cardsetData.append('name', this.cardsetsService.cardsetForm.value.name);
-        cardsetData.append('description', this.cardsetsService.cardsetForm.value.description);
-        cardsetData.append('category', this.categoryName);
-        cardsetData.append('visibility', this.categoryVisibility);
-        cardsetData.append('createdAt', new Date().toISOString());
-        cardsetData.append('numberOfGoodAnswer', '0');
+
+        const cardsetData = {
+          name: this.cardsetsService.cardsetForm.value.name,
+          description: this.cardsetsService.cardsetForm.value.description,
+          category: this.categoryName,
+          visibility: this.categoryVisibility,
+          createdAt: new Date(),
+          numberOfGoodAnswer: 0
+        };
+
         if(this.file) {
           this.cardsetsService.createCardset(cardsetData, this.file); 
+        } else {
+          this.cardsetsService.createCardset(cardsetData); 
         }
       } else {
         this.cardsetsService.onUpdateCardsets.pipe(first()).subscribe({
           next: () => {
-            this.toastService.toast('success', 'Success', 'Modification successed');
+            this.messageService.add({ severity: 'success', detail: 'Modification successed' });
             this.router.navigate(['/cardset/add-flashcard-to-set', this.cardsetId]);
           },
           error: () => {
-            this.toastService.toast('error', 'Error', 'Error during update');
+            this.messageService.add({ severity: 'error', detail: 'Error during update' });
           },
           complete: () => {
             // Réinitialise le formulaire dans le bloc finally (au cas où il n'y aurait pas de réponse)
@@ -295,7 +300,7 @@ export class GenericFlashcardSetComponent implements AfterContentInit, OnInit{
             this.categoryName = selectedCategory.name;
             selectedCategoryControl.setValue(this.categoryName);
           } else {
-            this.toastService.toast('error', 'Error', 'Some values are null');
+            this.messageService.add({ severity: 'error', detail: 'Some values are null' });
           }
         
           
@@ -307,7 +312,7 @@ export class GenericFlashcardSetComponent implements AfterContentInit, OnInit{
         
           selectedVisibilityControl.setValue(this.categoryVisibility);
         } else {
-          this.toastService.toast('error', 'Error', 'Some values are null');
+          this.messageService.add({ severity: 'error', detail: 'Some values are null' });
         }
         const cardsetData = {
           name: this.cardsetsService.cardsetForm.value.name,
@@ -317,12 +322,14 @@ export class GenericFlashcardSetComponent implements AfterContentInit, OnInit{
           createdAt: new Date(),
         };
         if(this.file) {
-            this.cardsetsService.updateCardset(this.cardsetId, cardsetData, this.file);
+          this.cardsetsService.updateCardset(this.cardsetId, cardsetData, this.file);
+        } else {
+          this.cardsetsService.updateCardset(this.cardsetId, cardsetData);
         }
       }
     } else {
       // Le formulaire n'est pas valide
-      this.toastService.toast('error', 'Error', 'Form is not valid');
+      this.messageService.add({ severity: 'error', detail: 'Form is not valid' });
     }
   }
 

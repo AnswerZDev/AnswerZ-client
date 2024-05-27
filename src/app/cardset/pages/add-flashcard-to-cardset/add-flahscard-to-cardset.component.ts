@@ -2,9 +2,9 @@ import { Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { FlashcardService } from 'src/app/flashcards/services/flashcards.service';
 import { first } from 'rxjs';
-import { ToastService } from 'src/app/shared/services/toast.service';
 import { CardsetService } from '../../services/cardset.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 
 interface Mode{
   name: string;
@@ -38,7 +38,7 @@ export class AddFlashcardToSetComponent implements OnInit{
 
   constructor(
     private readonly formBuilder: FormBuilder,
-    private readonly toastService: ToastService, 
+    private readonly messageService: MessageService, 
     public readonly flashcardsService: FlashcardService,
     public readonly  cardsetsService: CardsetService,
     private readonly route: ActivatedRoute,
@@ -80,7 +80,9 @@ export class AddFlashcardToSetComponent implements OnInit{
         this.cardset = result;
 
         if(this.cardset.image !== null) {
-          this.imageResized = this.cardset.image;
+          // Ajouter un paramètre de cache buster à l'URL de l'image
+          const cacheBuster = new Date().getTime();
+          this.imageResized = `${this.cardset.image}?cb=${cacheBuster}`;
         } else {
           this.imageResized = '../../../../assets/images/no_image.jpg';
         }
@@ -90,7 +92,7 @@ export class AddFlashcardToSetComponent implements OnInit{
         this.resizeImage(this.imageResized);
       },
       error: (error) => {
-        console.error('Erreur lors de la récupération du cardset : ', error);
+        this.messageService.add({ severity: 'error', detail: 'Erreur lors de la récupération du cardset' });
       }
     });
   }
@@ -104,21 +106,6 @@ export class AddFlashcardToSetComponent implements OnInit{
     });
   }
 
-  // onDragOver(event: Event) {
-  //   event.preventDefault();
-  // }
-
-  // onDrop(event: DragEvent) {
-  //   event.preventDefault();
-
-  //   const files = event.dataTransfer?.files;
-
-  //   if (files && files.length > 0) {
-  //     const file = files[0];
-  //     this.handleImageFile(file);
-  //   }
-  // }
-
   private getAllFlashcardByCardsetId(): void {
     this.flashcardsService.onReceiveFlashcards.pipe(first()).subscribe({
       next: () => {
@@ -126,37 +113,11 @@ export class AddFlashcardToSetComponent implements OnInit{
         this.paginate({ first: 0, rows: 8, page: 1, pageCount: Math.ceil(this.totalRecords / 8) });
       },
       error: (error) => {
-        this.toastService.toast('error', 'Error', 'Error during fetching flashcards');
+        this.messageService.add({ severity: 'error', detail: 'Error during fetching flashcards' });
       }
     });
     this.flashcardsService.getAllFlashcardByCardsetId(this.cardsetId);
   }
-
-  // uploadImage(event: Event) {
-  //   const inputElement = event.target as HTMLInputElement;
-
-  //   if (inputElement.files && inputElement.files.length > 0) {
-  //     const file = inputElement.files[0];
-  //     this.handleImageFile(file);
-  //   }
-  // }
-
-  // handleImageFile(file: File) {
-  //   const maxSizeInBytes = 25 * 1024 * 1024; // 25 Mo en octets
-  
-  //   if (file.size <= maxSizeInBytes) {
-  //     const reader = new FileReader();
-  
-  //     reader.onload = (e: any) => {
-  //       const imageDataUrl = e.target.result;
-  //       this.resizeImage(imageDataUrl);
-  //     };
-  
-  //     reader.readAsDataURL(file);
-  //   } else {
-  //     alert("Le fichier est trop volumineux. Veuillez sélectionner un fichier de 25 Mo ou moins.");
-  //   }
-  // }
   
   resizeImage(imageDataUrl: string): void {
     const canvas = document.createElement('canvas');
@@ -200,11 +161,11 @@ export class AddFlashcardToSetComponent implements OnInit{
       if(this.flashcardId === undefined || this.flashcardId === 0) {
         this.flashcardsService.onCreateFlashcards.pipe(first()).subscribe({
           next: () => {
-            this.toastService.toast('success', 'Success', 'Creation successed');
+            this.messageService.add({ severity: 'success', detail: 'Creation successed' });
             this.totalRecords = this.flashcardsService.flashcards.length;
           },
           error: () => {
-            this.toastService.toast('error', 'Error', 'Error during creation');
+            this.messageService.add({ severity: 'error', detail: 'Error during creation' });
           },
           complete: () => {
             // Réinitialise le formulaire dans le bloc finally (au cas où il n'y aurait pas de réponse)
@@ -224,10 +185,10 @@ export class AddFlashcardToSetComponent implements OnInit{
           };
           this.flashcardsService.onUpdateFlashcards.pipe(first()).subscribe({
             next: () => {
-              this.toastService.toast('success', 'Success', 'Modification successed');
+              this.messageService.add({ severity: 'success', detail: 'Modification successed' });
             },
             error: () => {
-              this.toastService.toast('error', 'Error', 'Error during update');
+              this.messageService.add({ severity: 'error', detail: 'Error during update' });
             },
             complete: () => {
               // Réinitialise le formulaire dans le bloc finally (au cas où il n'y aurait pas de réponse)
@@ -238,7 +199,7 @@ export class AddFlashcardToSetComponent implements OnInit{
       }
     } else {
       // Le formulaire n'est pas valide
-      this.toastService.toast('error', 'Error', 'Form is not valid');
+      this.messageService.add({ severity: 'error', detail: 'Form is not valid' });
     }
   }
 
@@ -249,11 +210,10 @@ export class AddFlashcardToSetComponent implements OnInit{
     }
     this.cardset = cardset;
     if(cardset) {
-      this.toastService.toast('success', 'Success', 'Modification successed');
-      this.cardsetsService.uploadCardsetImage(this.cardsetId, this.cardset.image);
+      this.messageService.add({ severity: 'success', detail: 'Modification successed' });
       this.router.navigate(['/cardset/my-cardsets']);
     } else {
-      this.toastService.toast('error', 'Error', 'Error during submit flashcards to cardset');
+      this.messageService.add({ severity: 'error', detail: 'Error during submit flashcards to cardset' });
     }
   }
 
