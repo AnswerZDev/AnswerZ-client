@@ -98,9 +98,9 @@ export class AddFlashcardToSetComponent implements OnInit{
   }
 
   private onFlashcardesSubscribe(): void {
-    this.flashcardsService.flashCardsChange.subscribe({
+    this.flashcardsService._flashCardsChange.subscribe({
       next: () => {
-        this.totalRecords = this.flashcardsService.flashcards.length;
+        this.totalRecords = this.flashcardsService._flashcards.length;
         this.paginate({ first: 0, rows: 8, page: 1, pageCount: Math.ceil(this.totalRecords / 8) });
       }
     });
@@ -109,7 +109,7 @@ export class AddFlashcardToSetComponent implements OnInit{
   private getAllFlashcardByCardsetId(): void {
     this.flashcardsService.onReceiveFlashcards.pipe(first()).subscribe({
       next: () => {
-        this.totalRecords = this.flashcardsService.flashcards.length;
+        this.totalRecords = this.flashcardsService._flashcards.length;
         this.paginate({ first: 0, rows: 8, page: 1, pageCount: Math.ceil(this.totalRecords / 8) });
       },
       error: (error) => {
@@ -162,7 +162,7 @@ export class AddFlashcardToSetComponent implements OnInit{
         this.flashcardsService.onCreateFlashcards.pipe(first()).subscribe({
           next: () => {
             this.messageService.add({ severity: 'success', detail: 'Creation successed' });
-            this.totalRecords = this.flashcardsService.flashcards.length;
+            this.totalRecords = this.flashcardsService._flashcards.length;
           },
           error: () => {
             this.messageService.add({ severity: 'error', detail: 'Error during creation' });
@@ -206,7 +206,7 @@ export class AddFlashcardToSetComponent implements OnInit{
   onSubmitFlashcardsToCardset() {
     const cardset = {
       ...this.cardset,
-      _flashcards: this.flashcardsService.flashcards
+      _flashcards: this.flashcardsService._flashcards
     }
     this.cardset = cardset;
     if(cardset) {
@@ -220,6 +220,6 @@ export class AddFlashcardToSetComponent implements OnInit{
   paginate(event: any) {
     const startIndex = event.first;
     const endIndex = startIndex + event.rows;
-    this.displayedFlashcards = this.flashcardsService.flashcards.slice(startIndex, endIndex);
+    this.displayedFlashcards = this.flashcardsService._flashcards.slice(startIndex, endIndex);
   }
 }

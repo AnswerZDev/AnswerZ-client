@@ -8,14 +8,14 @@ import { Flashcard } from 'src/app/core/models/api/flashcard';
 })
 export class FlashcardService {
 
-    private _flashcards: Flashcard[] = [];
+    public _flashcards: Flashcard[] = [];
 
     public onReceiveFlashcards: EventEmitter<boolean> = new EventEmitter<boolean>();
     public onCreateFlashcards: EventEmitter<boolean> = new EventEmitter<boolean>();
     public onUpdateFlashcards: EventEmitter<boolean> = new EventEmitter<boolean>();
     public onDeleteFlashcards: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-    private _flashCardsChange: Subject<boolean> = new Subject<boolean>()
+    public _flashCardsChange: Subject<boolean> = new Subject<boolean>()
 
     constructor(
         private readonly flascardApi: FlashcardApi,  
@@ -40,6 +40,19 @@ export class FlashcardService {
                 return flashcard;       
             }), 
         );
+    }
+
+    public getAllFlashcardByCardsetId(cardsetId: number): void {
+        this.flascardApi.getAllFlashcardByCardsetId(cardsetId).subscribe({
+            next: (data: any) => {
+                this._flashcards = data.member;
+                this.onReceiveFlashcards.emit(true);
+                this._flashCardsChange.next(true);
+            },
+            error: (error) => {
+
+            }
+        });
     }
 
     public createFlashcard(data: any): void {
