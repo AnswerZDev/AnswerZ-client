@@ -1,11 +1,11 @@
-.profil{
+.profil {
     width: 90%;
     margin: auto;
     height: 100%;
     color: #9468F1;
 
-    .head-container{
-        background-color: rgba(148,104,241,1);
+    .head-container {
+        background-color: rgba(148, 104, 241, 1);
         color: black;
         border-radius: 10px;
         padding: 1rem 2rem;
@@ -15,7 +15,7 @@
         width: 85px;
         height: 85px;
         border-radius: 50%;
-        background-color:#d1d1d1;
+        background-color: #d1d1d1;
         color: black;
     }
 
@@ -25,12 +25,21 @@
 :host ::ng-deep {
     .p-button {
         border-radius: 40px;
-        background-color: rgba(148,104,241,1);
+        background-color: rgba(148, 104, 241, 1);
         border: 1px solid white;
     }
 
     .p-avatar {
         width: 6rem !important;
         height: 6rem !important;
+    }
+
+    .p-dropdown {
+        background: rgb(148, 104, 241);
+        border: 1px solid white;
+
+        .p-dropdown-label, .p-dropdown-trigger {
+            color: white;
+        }
     }
 }

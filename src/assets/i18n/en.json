@@ -1,0 +1,10 @@
+{
+    "app": {
+        "choose-file": "browse",
+        "friends": "friends",
+        "my-profile": "my profile",
+        "recent-activity": "recent activity",
+        "save": "save",
+        "see-my-friends": "see my friends"
+    }
+}

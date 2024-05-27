@@ -1,5 +1,7 @@
 <div class="profil">
-    <h1>My profile</h1>
+    <h1>
+        {{ 'app.my-profile' | translate | ucFirst }}
+    </h1>
     <div class="flex flex-column gap-2 head-container">
         <div class="flex flex-row gap-3 align-items-center">
             <div>
@@ -31,14 +33,24 @@
             </div>
         </div>
         <div class="flex flex-row" [ngClass]="editMode ? 'justify-content-between' : 'justify-content-end'">
-            <p-fileUpload
-                *ngIf="editMode"
-                method="post"
-                accept="image/*"
-                (onSelect)="uploadProfilePicture($event)"
-                chooseLabel="Browse"
-                mode="basic"
-            />
+            
+            <div *ngIf="editMode" class="flex flex-row gap-2">
+                <p-fileUpload
+                    method="post"
+                    accept="image/*"
+                    (onSelect)="uploadProfilePicture($event)"
+                    chooseLabel="{{ 'app.choose-file' | translate | ucFirst }}"
+                    mode="basic"
+                />
+                <form [formGroup]="formLanguage">
+                    <p-dropdown
+                        formControlName="language"
+                        [options]="languages"
+                        optionLabel="label"
+                        optionValue="code"
+                        placeholder="Select your language"/>
+                </form>
+            </div>
             <p-button
                 [label]="editMode ? 'Save' : 'Edit'"
                 severity="help"
@@ -49,7 +61,9 @@
     
     <div class="flex flex-column lg:flex-row mt-5">
         <div class="w-12 lg:w-6 lg:border-right-1 lg:border-500 px-2 lg:px-5 lg:py-3">
-            <h3>Friends</h3>
+            <h3>
+                {{ 'app.friends' | translate | ucFirst }}
+            </h3>
             <div class="flex flex-row justify-content-between flex-wrap">
                 <p-avatar
                     styleClass="mr-2 mb-3 custom-large-avatar" size="xlarge" shape="circle"></p-avatar>
@@ -61,10 +75,14 @@
                     styleClass="mr-2 mb-3 custom-large-avatar" size="xlarge" shape="circle"></p-avatar>
             </div>
             <div class="text-center p-3">
-                <a>see all friends</a>
+                <a>
+                    {{ 'app.see-my-friends' | translate | ucFirst }}
+                </a>
             </div>
             <div>
-                <h3>Activité récente</h3>
+                <h3>
+                    {{ 'app.recent-activity' | translate | ucFirst }}
+                </h3>
                 <div class="w-100 p-8 bg-blue-200">
                 
                 </div>
