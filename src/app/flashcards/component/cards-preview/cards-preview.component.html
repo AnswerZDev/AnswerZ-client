@@ -5,13 +5,12 @@
                 <div class="flex flex-column">
                     <div class="flex flex-row gap-2 md:gap-3 mr-2">
                         <span style="font-size: 30px; font-weight: bold; margin-top: 5px;">Flashcard #{{i+1}}</span>
-                        <div *ngIf="editMode">
-                            <button pButton icon="pi pi-pencil" class="p-button-rounded modify" (click)="modifyFlashcard(flashcard.id)"></button>
+                        <div>
+                            <button pButton icon="pi pi-pencil" class="p-button-rounded modify" (click)="modifyFlashcard(flashcard.id, flashcard.question, flashcard.answer)"></button>
                         </div>
                     </div>
                     <span>.......................................................</span>
                 </div>
-                <p-toast></p-toast>
                 <p-confirmPopup></p-confirmPopup>
                 <button class="delete" (click)="deleteFlashcard(flashcard.id, $event)">×</button>
             </div>

@@ -1,73 +1,69 @@
 import { Flashcard } from "./flashcard";
 import {Item} from "./hydra/item";
-import { User } from "./user";
 
 export class Cardset extends Item {
     constructor(data: any) {
-        super(data)
+        super(data);
 
         this._name = data.name;
         this._description = data.description;
-        this._author = data.author !== undefined ? new User(data.author) : undefined;
-
         this._visibility = data.visibility;
+        this._category = data.category;
         this._numberOfGoodAnswer = data.numberOfGoodAnswer;
         this._createdAt = data.createdAt;
-
-        if (data.flashcards !== undefined) {
-            data.flashcards.forEach( (element: Flashcard) => {
-                console.log(element)
-                this._flashcards.push(element);
-            });
-        }
+        this._image = data.image;
+        this._flashcards = data.flashcards;
     }
-
-    private _name: string | undefined;
-
-    private _description: string | undefined;
 
     private _author: User | undefined;
 
+    private _name: string | undefined;
+
+    public get name(): string | undefined {
+        return this._name;
+    }
+
+    private _description: string | undefined;
+
+    public get description(): string | undefined {
+        return this._description;
+    }
+
     private _visibility: string | undefined;
+
+    public get visibility(): string | undefined {
+        return this._visibility;
+    }
+
+    private _category: string | undefined;
+
+    public get category(): string | undefined {
+        return this._category;
+    }
 
     private _numberOfGoodAnswer: number | undefined;
 
+    public get numberOfGoodAnswer(): number | undefined {
+        return this._numberOfGoodAnswer;
+    }
+
     private _createdAt: Date | undefined;
 
-    private _flashcards: Flashcard[] = [];
-
-
-    public get name(): string | undefined {
-      return this._name;
-    }
-
-    public get description(): string | undefined {
-      return this._description;
-    }
-
-
-    public get author(): User | undefined {
-      return this._author;
-    }
-
-
-    public get visibility(): string | undefined {
-      return this._visibility;
-    }
-
-
-    public get numberOfGoodAnswer(): number | undefined {
-      return this._numberOfGoodAnswer;
-    }
-
-
     public get createdAt(): Date | undefined {
-      return this._createdAt;
+        return this._createdAt;
     }
 
+    public _image: string | undefined;
+
+    public get image(): string | undefined {
+        return this._image;
+    }
+
+    private _flashcards: Flashcard[] | undefined;
 
     public get flashcards(): Flashcard[] | undefined {
-      return this._flashcards;
+        return this._flashcards;
     }
 
+    //private _accessControls: AccessControl[] | undefined;
 }

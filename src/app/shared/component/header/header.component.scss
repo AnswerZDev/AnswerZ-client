@@ -30,14 +30,10 @@
         background-color: #8A61E0;
         color: white;
         border: #8A61E0;
+        outline: none;
     }
 
-    .menu:hover {
-        background-color: white;
-        color: #8A61E0;
-    }
-
-    .menu-focus {
+    .menu:hover, .menu:focus {
         background-color: white;
         color: #8A61E0;
     }

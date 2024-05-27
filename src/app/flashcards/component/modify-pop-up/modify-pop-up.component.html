@@ -1,0 +1,15 @@
+<div class="w-30rem">
+    <form [formGroup]="flashcardForm" class="flex flex-column pt-1">
+        <div class="flex flex-column gap-2">
+            <span class="text">Question :</span>
+            <input pInputText  type="input" formControlName="question">
+        </div>
+        <div class="flex flex-column pt-5 gap-2">
+            <span class="text">Answer :</span>
+            <input pInputText type="input" formControlName="answer">
+        </div>
+        <div class="align-self-center pt-5">
+            <p-button type="submit" (click)="saveChanges()" label="Submit" styleClass="buttonSubmit"></p-button>
+        </div>
+    </form>
+</div>

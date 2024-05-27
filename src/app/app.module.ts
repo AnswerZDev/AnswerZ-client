@@ -19,6 +19,7 @@ import {CoreModule} from "./core/core.module";
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { MessagesModule } from 'primeng/messages';
 import { NgClass } from '@angular/common';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @NgModule({
     declarations: [
@@ -28,8 +29,8 @@ import { NgClass } from '@angular/common';
         BrowserModule,
         AppRoutingModule,
         ToastModule,
+        ConfirmDialogModule,
         AuthModule,
-        ToastModule,
         BrowserAnimationsModule,
         HttpClientModule,
         HomeModule,
@@ -37,8 +38,6 @@ import { NgClass } from '@angular/common';
         FlashcardModule,
         UserModule,
         AdminModule,
-        AuthModule,
-        BrowserAnimationsModule,
         SharedModule,
         CardsetModule,
         NgClass,

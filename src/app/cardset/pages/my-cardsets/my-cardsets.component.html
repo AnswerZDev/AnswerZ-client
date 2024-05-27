@@ -4,13 +4,17 @@
     </p-button>
 </div>
 <div class="flex flex-row justify-content-between pt-5 pl-5 pr-5">
-    <span class="title">My sets</span>
+    <span class="title align-self-center">My sets</span>
     <div class="flex flex-column">
-        <p-dropdown [options]="modesVisibilite" [(ngModel)]="selectedModeVisibilities" optionLabel="name" value="Public" class="align-self-end"></p-dropdown>
+        <p-dropdown [options]="modesVisibilite" [(ngModel)]="selectedModeVisibilities" (onChange)="onVisibilityChange($event)" optionLabel="name" class="align-self-end"></p-dropdown>
         <div class="flex flex-row align-items-center pt-3 gap-3">
-            <img src="../../../../assets/images/information.svg" class="w-1rem h-1rem"/>
+            <img [src]="imageInformation" class="w-1rem h-1rem"/>
             <span class="font-medium">Hit to have more informations</span>
         </div>
     </div>
+</div>
+<app-cardset class="flex" [displayedCardsets]="displayedCardsets"></app-cardset>
+<div class="flex flex-column align-items-center pt-7">
+    <p-paginator [rows]="pageSize" [totalRecords]="totalRecords" (onPageChange)="paginate($event)" class="mt-2"></p-paginator>
 </div>
 
