@@ -68,7 +68,6 @@ export class AddFlashcardToSetComponent implements OnInit{
     ];
 
     this.cardsetId = this.route.snapshot.params['cardsetId'];  // On récupère l'id du cardset qu'on vient de créer ou qu'on a créé
-
     
     this.getCardsetById(); // On récupère les informations du cardset
     this.getAllFlashcardByCardsetId();

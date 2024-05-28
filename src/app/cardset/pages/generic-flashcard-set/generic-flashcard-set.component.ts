@@ -30,7 +30,6 @@ export class GenericFlashcardSetComponent implements AfterContentInit, OnInit{
   imageUpload: string = "../../../../assets/images/image_upload.svg";
   file: File | null =  null;
   imageUrl: string = ''; // Image qu'on a reçu dans le formulaire de modification
-  resizedImageUrl: string = ''; // Image redimensionnée à afficher dans la section de prévisualisation
 
   @ViewChild(CardsPreviewComponent) cardsPreview!: CardsPreviewComponent;
 
@@ -188,6 +187,7 @@ export class GenericFlashcardSetComponent implements AfterContentInit, OnInit{
   
       if (ctx) {
         ctx.drawImage(image, 0, 0, width, height);
+        this.imageUrl = canvas.toDataURL('image/png');
       }
     };
 
@@ -214,10 +214,8 @@ export class GenericFlashcardSetComponent implements AfterContentInit, OnInit{
       if(this.cardsetId === null || this.cardsetId === undefined){
         // Envoie les données au backend
         this.cardsetsService.onCreateCardsets.pipe(first()).subscribe({
-          next: (id) => {
-            const cardSetId = id;
+          next: () => {
             this.messageService.add({ severity: 'success', detail: 'Creation successed' });
-            this.router.navigate(['/cardset/add-flashcard-to-set', cardSetId]);
           },
           error: () => {
             this.messageService.add({ severity: 'error', detail: 'Error during creation' });

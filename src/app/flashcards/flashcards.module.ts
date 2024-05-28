@@ -10,7 +10,7 @@ import { CardsPreviewComponent } from './component/cards-preview/cards-preview.c
 import { ModifyPopUpComponent } from './component/modify-pop-up/modify-pop-up.component';
 import { AllFlashcardsSetComponent } from './component/all-flashcards-set/all-flashcards-set.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ConfirmationService, MessageService } from 'primeng/api';
+import { MessageService } from 'primeng/api';
 
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { InputTextModule } from 'primeng/inputtext';
@@ -40,7 +40,7 @@ import { ToastModule } from 'primeng/toast';
         AllFlashcardsSetComponent,
         ModifyPopUpComponent
     ],
-    providers: [MessageService, ConfirmationService],
+    providers: [MessageService],
     exports: [
         CardsPreviewComponent
     ]

@@ -1,5 +1,6 @@
 import { EventEmitter, Injectable } from "@angular/core";
 import { FormControl, FormGroup } from "@angular/forms";
+import { Router } from "@angular/router";
 import { Observable, Subject, map } from "rxjs";
 import { CardsetApi } from "src/app/core/http/cardset/cardset.api";
 import { Cardset } from "src/app/core/models/api/cardset";
@@ -20,13 +21,13 @@ export class CardsetService {
     public onCreateCardsets: EventEmitter<any> = new EventEmitter<any>();
     public onUpdateCardsets: EventEmitter<boolean> = new EventEmitter<boolean>();
     public onDeleteCardsets: EventEmitter<boolean> = new EventEmitter<boolean>();
-    // public onUploadImage: EventEmitter<boolean> = new EventEmitter<boolean>();
+    public onUploadImage: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     private _cardsetsChange: Subject<boolean> = new Subject<boolean>();
 
-    private _pictureUpdated: Subject<boolean> = new Subject<boolean>();
+    private _pictureUpdated: Subject<number> = new Subject<number>();
 
-    public constructor(public readonly cardsetApi: CardsetApi) {
+    public constructor(public readonly cardsetApi: CardsetApi, private readonly _router: Router) {
         this.cardsetForm = new FormGroup({
             image: new FormControl<File | null>(null),
             name: new FormControl<string | null>(null),
@@ -78,16 +79,18 @@ export class CardsetService {
         this.cardsetApi.create(data).subscribe({
             next: (createdCardset: any) => {
                 if (file) {
-                    this.uploadCardsetImage(createdCardset.id, file);//.subscribe({
-                    //     next: () => {
-                    //         console.log("subscribe");
-                    //         this.onCreateCardsets.emit(true);
-                    //         this.cardsetsChange.next(true);
-                    //     },
-                    // });
+                    this.uploadCardsetImage(createdCardset.id, file).subscribe({
+                        next: () => {
+                            this.onCreateCardsets.emit(true);
+                            this.cardsetsChange.next(true);
+                            this._router.navigate(['/cardset/add-flashcard-to-set', createdCardset.id]);
+                        },
+                    });
+                } else {
+                    this.onCreateCardsets.emit(true);
+                    this.cardsetsChange.next(true);
+                    this._router.navigate(['/cardset/add-flashcard-to-set', createdCardset.id]);
                 }
-                this.onCreateCardsets.emit(createdCardset.id);
-                this.cardsetsChange.next(true);
                 this._cardsets.push(createdCardset);
             },
             error: (error) => {},
@@ -102,16 +105,16 @@ export class CardsetService {
                     this._cardsets[index] = updatedCardset;
                 }
                 if(file) {
-                    this.uploadCardsetImage(updatedCardset.id, file);//.subscribe({
-                    //     next: () => {
-                    //         console.log('Image updated successfully');
-                    //         this.onUpdateCardsets.emit(true);
-                    //         this.cardsetsChange.next(true);
-                    //     },
-                    // });
-                } 
-                this.onUpdateCardsets.emit(true);
-                this.cardsetsChange.next(true);
+                    this.uploadCardsetImage(updatedCardset.id, file).subscribe({
+                        next: () => {
+                            this.onUpdateCardsets.emit(true);
+                            this.cardsetsChange.next(true);
+                        },
+                    });
+                } else {
+                    this.onUpdateCardsets.emit(true);
+                    this.cardsetsChange.next(true);
+                }
             },
             error: (error) => {
                 console.log(error);
@@ -130,25 +133,17 @@ export class CardsetService {
         });
     }
 
-    public uploadCardsetImage(id: number, file: any): void {
+    public uploadCardsetImage(id: number, file: any): Subject<number> {
         let body: FormData = new FormData();
         body.append("imageCardset", file);
-        console.log('Starting uploadCardsetImage'); // Ajout de log ici
         this.cardsetApi.uploadImage(id, body).subscribe({
-            next: (updatedCardset: any) => {
-                console.log('Upload image - start');
-                const index = this._cardsets.findIndex((cardset) => cardset.id === updatedCardset.id);
-                this._cardsets[index] = updatedCardset;
-                //this.onUploadImage.emit(true);
-                this.cardsetsChange.next(true);
-                console.log('Upload image - completed');
-                this._pictureUpdated.next(true);
+            next: (cardset: any) => {
+                this._pictureUpdated.next(cardset.id);
             },
             error: (error) => {
                 console.dir(error)
-            },
-            complete: () => {},
+            }
         });
-        //return this._pictureUpdated;
+        return this._pictureUpdated;
     }
 }
