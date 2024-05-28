@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { SocketService } from 'src/app/core/services/socket.service';
-import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Question } from 'src/app/core/models/api/question';
+import { MessageService } from 'primeng/api';
 
 
 
@@ -57,15 +56,36 @@ export class CreateQuestionComponent{
 
     myNOQ : NumberOfQuestions | undefined;
 
+    @Output() questionCreated = new EventEmitter<Question>();
 
+    /*
+    public questionForm: FormGroup = new FormGroup({
+        myTime: new FormControl(null, Validators.required),
+        myChoice: new FormControl(null, Validators.required),
+        myPoints: new FormControl(null, Validators.required),
+        myNOQ: new FormControl(null, Validators.required),
+        input_question: new FormControl(null, Validators.required),
+    })
+    */
+
+    constructor(
+        private readonly messageService: MessageService
+    ) { }
 
     /**
      * @author @HugoooR
      * @date 14/05/2024
      * @description Create a question with the data
-     * @memberof HomePage
+     * @memberof CreateQuestionComponent
      */
     createQuestion(): void {
+        /*
+        if (this.questionForm.invalid) {
+            this.messageService.add({ severity: 'error', summary: 'Erreur', detail: 'Tous les champs obligatoires doivent être remplis.' });
+            return;
+        }
+        */
+        
         // Vérifiez les champs communs
         if (!this.myTime || !this.myChoice || !this.myPoints || !this.input_question) {
             console.error('Tous les champs obligatoires doivent être remplis.');
@@ -78,15 +98,6 @@ export class CreateQuestionComponent{
             return;
         }
 
-        // If all checks pass, proceed to create the question
-        const question = {
-            time: this.myTime.duration,
-            type: this.myChoice.type,
-            points: this.myPoints.points,
-            question: this.input_question,
-            answers: this.list_answers
-        };
-
         //let ques = new Question([this.input_question,this.myTime.duration,this.myPoints.points,this.myChoice.type, this.list_answers]);
         let ques = new Question({
             description: this.input_question,
@@ -97,12 +108,21 @@ export class CreateQuestionComponent{
           });
 
         console.log('Question created:', ques);
-        // Here you can send the question object to your backend or perform other actions
+
+        // add to the output the created question so the parent's component can get the question
+        this.questionCreated.emit(ques);
         
         window.history.back();
 
     }
 
+
+    /**
+     * @author @HugoooR
+     * @date 28/05/2024
+     * @description Set the default values for the dropdown
+     * @memberof CreateQuestionComponent
+     */
     ngOnInit() {
        
         this.timeChoices = [

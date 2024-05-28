@@ -13,6 +13,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { LobbyListComponent } from './components/lobby-list/lobby-list.component' 
 import { QRCodeModule } from 'angularx-qrcode';
 import { GameComponent } from './pages/game/game.component'
+import { MessageService } from 'primeng/api'
 
 @NgModule({
     imports: [
