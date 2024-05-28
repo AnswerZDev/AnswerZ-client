@@ -83,15 +83,14 @@ export class CardsetService {
   }
 
   getAllCardsetPublic(): void{
-    // return this.api_cardset.all_collection();
-    this.cardsetApi.all_collection().subscribe({
+    this.cardsetApi.getAllCardsetPublic().subscribe({
         next: (data: any) => {
             this._cardsets = data.member;
         },
         error: () => {
         }
     });
-}
+  }
 
   public createCardset(data: any, file?: File): void {
     this.cardsetApi.create(data).subscribe({
