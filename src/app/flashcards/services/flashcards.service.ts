@@ -59,7 +59,7 @@ export class FlashcardService {
         this.flascardApi.create(data).subscribe({
           next: (createdFlashcard: any) => {
             this._flashcards.push(createdFlashcard);
-            this.onReceiveFlashcards.emit(true);
+            this.onCreateFlashcards.emit(true);
             this._flashCardsChange.next(true);
           },
           error: (error) => {
@@ -75,7 +75,7 @@ export class FlashcardService {
                 if (index !== -1) {
                     this._flashcards[index] = data;
                 }
-                this.onReceiveFlashcards.emit(true);
+                this.onUpdateFlashcards.emit(true);
                 this._flashCardsChange.next(true);
             }, 
             error: (error) => {

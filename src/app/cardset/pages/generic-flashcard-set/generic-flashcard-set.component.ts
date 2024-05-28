@@ -103,13 +103,12 @@ export class GenericFlashcardSetComponent implements AfterContentInit, OnInit{
 
     if (files && files.length > 0) {
       this.file = files[0];
-      if(this.cardsetId === null || this.cardsetId === undefined){
+      if(this.cardsetId === null || this.cardsetId === undefined) {
         this.imageUpload = URL.createObjectURL(files[0]);
         this.handleFile(files[0]);
         this.resizeImage(this.imageUpload);
       } else {
-        this.imageUrl = URL.createObjectURL(files[0])
-        this.handleFile(files[0]);
+        this.handleFile(this.file);
         this.resizeImage(this.imageUrl);
       }
     }
@@ -189,11 +188,6 @@ export class GenericFlashcardSetComponent implements AfterContentInit, OnInit{
   
       if (ctx) {
         ctx.drawImage(image, 0, 0, width, height);
-        if(this.cardsetId === null || this.cardsetId === undefined){
-          this.imageUpload = canvas.toDataURL("image/jpeg", 0.75);
-        } else {
-          this.imageUrl = canvas.toDataURL("image/jpeg", 0.75);
-        }
       }
     };
 

@@ -18,8 +18,8 @@ export class CardsetComponent {
   constructor(
     private readonly router: Router,
     public readonly cardsetsService: CardsetService,
+    private readonly messageService: MessageService,
     private readonly confirmationService: ConfirmationService,
-    private readonly messageService: MessageService
   ) {}
 
   redirectToEdit(cardsetId: number) {
@@ -58,10 +58,10 @@ export class CardsetComponent {
 
       accept: () => {
         this.cardsetsService.deleteCardset(cardsetId);
-        this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'Record deleted' });
+        this.messageService.add({ severity: 'info', detail: 'Cardset deleted' });
       },
       reject: () => {
-        this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
+        this.messageService.add({ severity: 'error', detail: 'You have rejected' });
       }
     });
   }

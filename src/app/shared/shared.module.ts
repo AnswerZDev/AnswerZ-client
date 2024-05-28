@@ -7,7 +7,6 @@ import { FooterComponent } from './component/footer/footer.component';
 import { FlashcardsSetComponent } from './component/flashcards-set/flashcards-set.component';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
-import { ConfirmService } from './services/confirm.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { AvatarModule } from 'primeng/avatar';
@@ -35,7 +34,7 @@ import { TabMenuModule } from 'primeng/tabmenu';
         FlashcardsSetComponent,
         FooterComponent,
     ],
-    providers: [ConfirmService, MessageService, ConfirmationService],
+    providers: [MessageService, ConfirmationService],
     exports: [
         HeaderComponent,
         FlashcardsSetComponent,

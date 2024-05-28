@@ -39,7 +39,7 @@ import { MessageService } from 'primeng/api';
         ConfirmPopupModule,
         PaginatorModule,
         ProgressBarModule,
-        FlashcardModule
+        FlashcardModule,
     ],
     declarations: [
         CreateFlashcardSetComponent,
