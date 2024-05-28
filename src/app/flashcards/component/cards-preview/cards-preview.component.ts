@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ToastService } from 'src/app/shared/services/toast.service';
 import { ConfirmService } from 'src/app/shared/services/confirm.service';
 import { Flashcard } from 'src/app/core/models/api/flashcard';
 import { FlashcardService } from '../../services/flashcards.service';
