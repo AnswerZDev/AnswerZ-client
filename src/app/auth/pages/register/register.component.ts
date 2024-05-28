@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms'
 import {MessageService} from "primeng/api";
 import {passwordConfirmValidator} from "../../../shared/validators/password-confirm.validator";
 import {AuthService} from "../../services/auth.services";
-import {ToastService} from "../../../shared/services/toast.service";
 import {Router} from "@angular/router";
 import {SecurityService} from "../../../shared/services/security.services";
 
@@ -41,7 +40,7 @@ export class RegisterComponent{
 
     constructor(
         private readonly authService: AuthService,
-        private readonly toastService: ToastService,
+        private readonly messageService: MessageService,
         private readonly router: Router,
         private readonly _securityService: SecurityService
     ) {
@@ -66,11 +65,10 @@ export class RegisterComponent{
     protected register(): void {
         this.authService.onSignUpEmitter.subscribe((isSuccess) => {
             if(!isSuccess) {
-                this.toastService.toast(
-                    'error',
-                    'Error',
-                    'An error occurred while registering the user. Please retry later.'
-                );
+                this.messageService.add({
+                    severity: 'error',
+                    detail: 'An error occurred while registering the user. Please retry later.'
+                });
             }
         });
         this.authService.register(this.authForm);

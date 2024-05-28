@@ -1,62 +1,163 @@
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { Observable, map } from "rxjs";
+import { EventEmitter, Injectable } from "@angular/core";
+import { FormControl, FormGroup } from "@angular/forms";
+import { Observable, Subject, map } from "rxjs";
 import { CardsetApi } from "src/app/core/http/cardset/cardset.api";
 import { Cardset } from "src/app/core/models/api/cardset";
 
+export interface Mode {
+  name: string;
+}
+
 @Injectable({
-    providedIn: 'root',
+  providedIn: "root",
 })
-export class CardsetService{
+export class CardsetService {
+  private _cardsets: Cardset[] = [];
+  private cardset_play!: Cardset;
 
-    private _cardsets: Cardset[] = [];
-    private cardset_play!: Cardset;
+  cardsetForm!: FormGroup;
 
-    constructor(private readonly api_cardset: CardsetApi) {
-    }
+  public onReceiveCardsets: EventEmitter<boolean> = new EventEmitter<boolean>();
+  public onCreateCardsets: EventEmitter<any> = new EventEmitter<any>();
+  public onUpdateCardsets: EventEmitter<boolean> = new EventEmitter<boolean>();
+  public onDeleteCardsets: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-    get cardsets(): Cardset[] {
-        return this._cardsets;
-    }
+  private _cardsetsChange: Subject<boolean> = new Subject<boolean>();
 
-    get cardsetPlay(){
-        return this.cardset_play;
-    }
+  private _pictureUpdated: Subject<boolean> = new Subject<boolean>();
 
-    setcardsetPlay(cardset: Cardset){
-        this.cardset_play = cardset;
-    }
+  public constructor(public readonly cardsetApi: CardsetApi) {
+    this.cardsetForm = new FormGroup({
+      image: new FormControl<File | null>(null),
+      name: new FormControl<string | null>(null),
+      description: new FormControl<string | null>(null),
+      selectedCategory: new FormControl<Mode | null>(null),
+      selectedVisibility: new FormControl<Mode | null>(null),
+    });
+  }
 
-    getAllCardset(): void{
-        // return this.api_cardset.all_collection();
-        this.api_cardset.all_collection().subscribe({
-            next: (data: any) => {
-                this._cardsets = data.member;
+  get cardsets(): Cardset[] {
+    return this._cardsets;
+  }
+
+  get cardsetsChange(): Subject<boolean> {
+    return this._cardsetsChange;
+  }
+
+  get cardsetPlay(){
+    return this.cardset_play;
+ }
+
+  setcardsetPlay(cardset: Cardset){
+    this.cardset_play = cardset;
+  }
+
+  public getMyPrivateCardsets(): void {
+    this.cardsetApi.getMyCardsets("Private").subscribe({
+      next: (data: any) => {
+        this._cardsets = data.member;
+        this.onReceiveCardsets.emit(true);
+        this.cardsetsChange.next(true);
+      },
+      error: (error) => {},
+    });
+  }
+
+  public getMyPublicCardsets(): void {
+    this.cardsetApi.getMyCardsets("Public").subscribe({
+      next: (data: any) => {
+        this._cardsets = data.member;
+        this.onReceiveCardsets.emit(true);
+        this.cardsetsChange.next(true);
+      },
+      error: (error) => {},
+    });
+  }
+
+  public getCardsetById(id: number): Observable<any> {
+    return this.cardsetApi.getOne(id).pipe(
+      map((cardset) => {
+        return cardset;
+      })
+    );
+  }
+
+  getAllCardsetPublic(): void{
+    // return this.api_cardset.all_collection();
+    this.cardsetApi.all_collection().subscribe({
+        next: (data: any) => {
+            this._cardsets = data.member;
+        },
+        error: () => {
+        }
+    });
+}
+
+  public createCardset(data: any, file?: File): void {
+    this.cardsetApi.create(data).subscribe({
+      next: (createdCardset: any) => {
+        if (file !== null) {
+          this.uploadCardsetImage(createdCardset.id, file);
+        }
+        this._cardsets.push(createdCardset);
+        this.onCreateCardsets.emit(createdCardset.id);
+        this.cardsetsChange.next(true);
+      },
+      error: (error) => {},
+    });
+  }
+
+  public updateCardset(id: number, data: any, file?: File): void {
+    this.cardsetApi.update(id, data).subscribe({
+      next: (updatedCardset: any) => {
+        if (file !== null) {
+          this._pictureUpdated.subscribe({
+            next: (value) => {
+              if (value) {
+                this.onUpdateCardsets.emit(true);
+                this.cardsetsChange.next(true);
+              }
             },
-            error: () => {
-            }
-        });
-    }
+          });
+          this.uploadCardsetImage(updatedCardset.id, file);
+        }
+        const index = this._cardsets.findIndex(
+          (cardset) => cardset.id === updatedCardset.id
+        );
+        this._cardsets[index] = updatedCardset;
+      },
+      error: (error) => {},
+    });
+  }
 
+  public deleteCardset(id: number): void {
+    this.cardsetApi.deleteByid(id).subscribe({
+      next: () => {
+        this._cardsets = this._cardsets.filter(
+          (cardset) => Number(cardset.id) !== id
+        );
+        this.onDeleteCardsets.emit(true);
+        this.cardsetsChange.next(true);
+      },
+      error: (error) => {},
+    });
+  }
 
-    getAllCardsetPublic(): void{
-        // return this.api_cardset.all_collection();
-        this.api_cardset.all_collection().subscribe({
-            next: (data: any) => {
-                this._cardsets = data.member;
-            },
-            error: () => {
-            }
-        });
-    }
-
-    getOneCardset(){
-        // return this.api_cardset.all_collection();
-        return this.api_cardset.one_cardset();
-    }
-
-    // getAllCardset(): Observable<any> {
-    //    // return this.http.get(`${this.baseUrl}`);
-    // }
-
+  public uploadCardsetImage(id: number, file: any): void {
+    let body: FormData = new FormData();
+    body.append("imageCardset", file);
+    this.cardsetApi.uploadImage(id, body).subscribe({
+      next: (updatedCardset: any) => {
+        const index = this._cardsets.findIndex(
+          (cardset) => cardset.id === updatedCardset.id
+        );
+        this._cardsets[index] = updatedCardset;
+        this.onUpdateCardsets.emit(true);
+        this.cardsetsChange.next(true);
+        this._pictureUpdated.next(true);
+      },
+      error: (error) => {},
+      complete: () => {},
+    });
+  }
 }

@@ -3,12 +3,13 @@ import { NgModule } from '@angular/core'
 import { CreateFlashcardSetComponent } from './component/create-flashcard-set/create-flashcard-set.component'
 import { EditFlashcardSetComponent } from './component/edit-flashcard-set/edit-flashcard-set.component'
 import { MyCardsetsComponent } from './pages/my-cardsets/my-cardsets.component'
+import { AddFlashcardToSetComponent } from './pages/add-flashcard-to-cardset/add-flahscard-to-cardset.component'
 import { AllCardsetComponent } from './pages/all-cardset/all-cardset.component'
 
 const routes: Routes = [
     {
         path: '',
-        redirectTo: 'my-cardsets', // à changer dans le futur,
+        redirectTo: 'my-cardsets', 
         pathMatch: 'full',
     },
     {
@@ -20,8 +21,12 @@ const routes: Routes = [
         component: CreateFlashcardSetComponent,
     },
     {
-        path: 'edit-flashcard-set',
+        path: 'edit-flashcard-set/:cardsetId',
         component: EditFlashcardSetComponent,
+    },
+    {
+        path: 'add-flashcard-to-set/:cardsetId',
+        component: AddFlashcardToSetComponent
     },
     {
         path: 'all-cardset',

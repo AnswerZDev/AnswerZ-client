@@ -1,0 +1,38 @@
+<div *ngFor="let cardset of displayedCardsets;" class="pl-5 align-items-center pt-3">
+    <div class="w-20rem h-15rem p-2 border-1 border-round-2xl shadow-3 surface-border" id="{{cardset.id}}">
+        <div class="h-11rem">
+            <div class="flex flex-row justify-content-between">
+                <img [src]="imageWorld" class="w-2rem h-2rem">
+                <div *ngIf="!cardset.isFlipped">
+                    <span class="text-2xl font-bold text">{{ cardset.name }}</span>
+                </div>
+                <div *ngIf="cardset.isFlipped">
+                    <span class="text-2xl font-bold text">{{ cardset.category }}</span>
+                </div>
+                <button (click)="flipCard(cardset)" class="pt-0 border-none outline-none cursor-pointer surface-0">
+                    <img [src]="imageInformation" class="w-1rem h-1rem">
+                </button>
+            </div>
+            <ng-container *ngIf="!cardset.isFlipped; else cardBack">
+                <div class="flex flex-column justify-content-between h-full">
+                    <div class="flex justify-content-center" *ngIf="cardset.image !== null">
+                        <img [src]="cardset.image" class="w-10rem h-7rem border-round-lg">
+                    </div>
+                    <div class="flex justify-content-center" *ngIf="cardset.image === null">
+                        <img src="../../../../assets/images/no_image.jpg" class="w-10rem h-7rem border-round-lg">
+                    </div>
+                    <div class="flex flex-row justify-content-around pt-3">
+                        <p-button icon="pi pi-pencil" styleClass="flex justify-content-center cardset-button" (click)="redirectToEdit(cardset.id)"></p-button>
+                        <p-button icon="pi pi-play" styleClass=" flex justify-content-center cardset-button" (click)="redirectToPlay(cardset.id)"></p-button>
+                        <p-button icon="pi pi-trash" styleClass="flex justify-content-center cardset-button" (click)="deleteCardset($event, cardset.id)"></p-button>
+                    </div>
+                </div>
+            </ng-container>
+            <ng-template #cardBack>
+                <div class="flex justify-content-center text-center pt-3">
+                    <span class="text">{{ cardset.description }}</span>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>

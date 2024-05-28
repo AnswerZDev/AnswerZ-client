@@ -7,7 +7,6 @@ import { KeyFilterModule } from 'primeng/keyfilter';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { HttpClientModule } from '@angular/common/http';
-import { ToastModule } from 'primeng/toast';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { InputTextModule } from 'primeng/inputtext';
 import { PaginatorModule } from 'primeng/paginator';
@@ -16,11 +15,17 @@ import { GenericFlashcardSetComponent } from './pages/generic-flashcard-set/gene
 import { CardsetRoutingModule } from './cardset-routing.module';
 import { FlashcardModule } from 'src/app/flashcards/flashcards.module';
 import { MyCardsetsComponent } from './pages/my-cardsets/my-cardsets.component';
+import { CardsetComponent } from './component/cardset/cardset.component';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { AddFlashcardToSetComponent } from './pages/add-flashcard-to-cardset/add-flahscard-to-cardset.component';
+import { MessageService } from 'primeng/api';
 import { AllCardsetComponent } from './pages/all-cardset/all-cardset.component';
 import { DialogModule } from 'primeng/dialog';
 import { VisualizationCardsetComponent } from './component/visualization-cardset/visualization-cardset.component';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { SearchCardsetComponent } from './component/search-cardset/search-cardset.component';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
     imports: [
@@ -36,11 +41,14 @@ import { SearchCardsetComponent } from './component/search-cardset/search-cardse
         ButtonModule,
         HttpClientModule,
         InputTextModule,
+        InputTextareaModule,
         ToastModule,
         ButtonModule,
         FlashcardModule,
         ConfirmPopupModule,
         PaginatorModule,
+        ProgressBarModule,
+        FlashcardModule,
         DialogModule,
         AutoCompleteModule
     ],
@@ -49,11 +57,14 @@ import { SearchCardsetComponent } from './component/search-cardset/search-cardse
         EditFlashcardSetComponent,
         GenericFlashcardSetComponent,
         MyCardsetsComponent,
+        CardsetComponent,
+        AddFlashcardToSetComponent,
+        MyCardsetsComponent,
         AllCardsetComponent,
         VisualizationCardsetComponent,
         SearchCardsetComponent
     ],
-    providers: [],
+    providers: [MessageService],
     exports: []
 })
 export class CardsetModule { }

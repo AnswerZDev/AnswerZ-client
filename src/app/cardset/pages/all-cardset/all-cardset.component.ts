@@ -30,7 +30,7 @@ export class AllCardsetComponent {
   async ngOnInit() {
 
     // load all cardset public
-    this.cardsetservice.getAllCardset();
+    this.cardsetservice.getAllCardsetPublic();
    
     this.categories = [
       { name: 'Categories' },
