@@ -4,18 +4,22 @@
     <h2>Waiting for players  </h2>
     <div class="loader"></div>
   </div>
-  <div id="flipContainer" type="button" (click)="flip_flashcard()" class="relative flex justify-content-center align-items-center opacity-100 w-6 h-30rem border-round-3xl border-solid border-3 border-primary shadow-6 border-solid">
-    <div>
+  <div id="flipContainer" type="button" (click)="flip_flashcard()" class="relative flex flex-column justify-content-center align-items-center opacity-100 w-6 h-30rem border-round-3xl border-solid border-3 border-primary shadow-6 border-solid">
+    <div class="leave-btn-container"  style="width: 95%; display: flex; justify-content: flex-end;">
+      <p-button label="Leave" class="leave-btn-container" (click)="leaveGame()"/>
+    </div>
+    
+    <div style="display: flex; width: 100%; height: 100%; justify-content: center;">
       <div *ngIf="!isFliped; else isFlipedTemplate">
-        <img src="{{ roomInfo?.game?.image }}">
-        <h3>{{ roomInfo?.game?.title }}</h3>
-        <div *ngIf="isHost">
-          <p-button type="submit" class="flex flex-column w-full button-start" (click)="startGame()"> START GAME </p-button>
-        </div>
+          <img src="{{ roomInfo?.game?.image }}">
+          <h3>{{ roomInfo?.game?.title }}</h3>
+          <div *ngIf="isHost">
+            <p-button type="submit" class="flex flex-column w-full button-start" (click)="startGame()"> START GAME </p-button>
+          </div>
       </div>
         
       <ng-template #isFlipedTemplate>
-        <div class="card-container">
+        <div class="card-container" style="display: flex; flex-direction: row;">
           <div class="joining-method">
             <p>{{ roomInfo?.game?.host }}</p>
             <qrcode [qrdata]="url"></qrcode>

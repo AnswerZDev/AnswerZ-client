@@ -67,4 +67,8 @@ export class SocketService {
       this._router.navigate(['quiz-game/game', roomId]);
     });
   }
+
+  leaveGame(roomId : string, isHost: boolean){
+    this._socket.emit('leave-game', roomId, isHost);
+  }
 }

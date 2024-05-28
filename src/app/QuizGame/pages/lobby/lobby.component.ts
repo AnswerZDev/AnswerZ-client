@@ -44,7 +44,6 @@ export class LobbyComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
 
-
       // TODO : REWORK QR CODE FUNCTIONS
       // THIS IS JUST A QUICK POC
       this.roomId = params.get('roomId');
@@ -77,6 +76,13 @@ export class LobbyComponent implements OnInit {
   startGame(){
     if(this.roomId){
       this.socketService.startGame(this.roomId);
+    }
+  }
+
+  leaveGame(){
+    if(this.roomId){
+      this.isHost = (this.socketService.getCurrentSocketId() == this.roomInfo.game.host);
+      this.socketService.leaveGame(this.roomId, this.isHost);
     }
   }
 }
