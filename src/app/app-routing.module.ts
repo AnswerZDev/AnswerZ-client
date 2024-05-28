@@ -37,6 +37,11 @@ const routes: Routes = [
         path: 'quiz-game',
         loadChildren: () =>
             import('./QuizGame/quizGame.module').then((m) => m.QuizGameModule)
+    },
+    {
+        path: 'cardset',
+        loadChildren: () =>
+            import('./cardset/cardset.module').then((m) => m.CardsetModule)
     }
 ]
 
