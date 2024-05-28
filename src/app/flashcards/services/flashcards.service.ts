@@ -1,5 +1,5 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import {Observable, map, Subject, tap} from 'rxjs';
 import { FlashcardApi } from 'src/app/core/http/flashcard/flashcard.api';
 import { Flashcard } from 'src/app/core/models/api/flashcard';
 
@@ -8,9 +8,14 @@ import { Flashcard } from 'src/app/core/models/api/flashcard';
 })
 export class FlashcardService {
 
-    private _flashcards: Flashcard[] = [];
+    public _flashcards: Flashcard[] = [];
 
     public onReceiveFlashcards: EventEmitter<boolean> = new EventEmitter<boolean>();
+    public onCreateFlashcards: EventEmitter<boolean> = new EventEmitter<boolean>();
+    public onUpdateFlashcards: EventEmitter<boolean> = new EventEmitter<boolean>();
+    public onDeleteFlashcards: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+    public _flashCardsChange: Subject<boolean> = new Subject<boolean>()
 
     constructor(
         private readonly flascardApi: FlashcardApi,  
@@ -20,16 +25,13 @@ export class FlashcardService {
         this.flascardApi.getAll().subscribe({
             next: (data: any) => {
                 this._flashcards = data.member;    
-                this.onReceiveFlashcards.emit(true)        
+                this.onReceiveFlashcards.emit(true);
+                this._flashCardsChange.next(true);        
             }, 
             error: (error) => {
-      
+
             }
         });
-    }
-
-    get flashcards(): Flashcard[] {
-        return this._flashcards;
     }
 
     public getFlashcardById(id: number): Observable<any> {
@@ -40,11 +42,25 @@ export class FlashcardService {
         );
     }
 
+    public getAllFlashcardByCardsetId(cardsetId: number): void {
+        this.flascardApi.getAllFlashcardByCardsetId(cardsetId).subscribe({
+            next: (data: any) => {
+                this._flashcards = data.member;
+                this.onReceiveFlashcards.emit(true);
+                this._flashCardsChange.next(true);
+            },
+            error: (error) => {
+
+            }
+        });
+    }
+
     public createFlashcard(data: any): void {
         this.flascardApi.create(data).subscribe({
           next: (createdFlashcard: any) => {
             this._flashcards.push(createdFlashcard);
             this.onReceiveFlashcards.emit(true);
+            this._flashCardsChange.next(true);
           },
           error: (error) => {
 
@@ -59,10 +75,10 @@ export class FlashcardService {
                 if (index !== -1) {
                     this._flashcards[index] = data;
                 }
-                this.onReceiveFlashcards.emit(true);  
+                this.onReceiveFlashcards.emit(true);
+                this._flashCardsChange.next(true);
             }, 
             error: (error) => {
-
             }
         });
     }
@@ -73,8 +89,9 @@ export class FlashcardService {
                 const index = this._flashcards.findIndex((flashcard) => Number(flashcard.id) === id);
                 if (index !== -1) {
                     this._flashcards.splice(index, 1);
-                    this.onReceiveFlashcards.emit(true);
                 }
+                this._flashCardsChange.next(true);
+                this.onDeleteFlashcards.emit(true);
             },
             error: (error) => {
 

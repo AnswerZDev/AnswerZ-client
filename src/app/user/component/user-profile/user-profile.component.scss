@@ -4,19 +4,11 @@
     height: 100%;
     color: #9468F1;
 
-    .my-container{
-        background-color: rgba(148, 104, 241, 0.77);
-        border-radius: 10px;
-    }
-
-    .first-container{
-        color: black;
-    }
-
-    .second-container{
+    .head-container{
         background-color: rgba(148,104,241,1);
         color: black;
         border-radius: 10px;
+        padding: 1rem 2rem;
     }
 
     .p-circle {
@@ -26,7 +18,7 @@
         background-color:#d1d1d1;
         color: black;
     }
-  
+
 }
 
 // To override the default primeng styles
@@ -36,10 +28,9 @@
         background-color: rgba(148,104,241,1);
         border: 1px solid white;
     }
-}
 
-:host {
-    .profil_user{
-        //background-image: url('{{ backgroundImageUrl }}');
+    .p-avatar {
+        width: 6rem !important;
+        height: 6rem !important;
     }
 }

@@ -1,0 +1,151 @@
+<div class="flex flex-column justify-content-center pt-7">
+    <div class="global-container">
+        <div class="picture-container">
+            <img class="w-full h-full" src="../../../../assets/images/register.png" height="1139" width="1120"/>
+        </div>
+        <form [formGroup]="authForm">
+            <div
+                    class="block-auth border-round-left-xl w-full"
+            >
+                <div class="flex flex-column gap-2 px-6 py-7">
+                    <div>
+                        <h1 class="text-lg text-center main-title">Welcome !</h1>
+                    </div>
+                    
+                    <div class="flex flex-column gap-2">
+                        <label class="text-xs" for="firstname">Firstname</label>
+                        <input
+                                id="firstname"
+                                type="text"
+                                pInputText
+                                formControlName="firstName"
+                        />
+                        <small *ngIf="
+                            authForm.get('firstName')?.value !== null
+                             && authForm.get('firstName')?.hasError('required')">
+                            <span class="text-red-500">
+                                Fullname is required
+                            </span>
+                        </small>
+                    </div>
+                    
+                    <div class="flex flex-column gap-2">
+                        <label class="text-xs" for="lastName">Lastname</label>
+                        <input
+                            id="lastName"
+                            type="text"
+                            pInputText
+                            formControlName="lastName"
+                        />
+                        <small *ngIf="
+                            authForm.get('lastName')?.value !== null
+                             && authForm.get('lastName')?.hasError('required')">
+                            <span class="text-red-500">
+                                Fullname is required
+                            </span>
+                        </small>
+                    </div>
+                    
+                    <div class="flex flex-column gap-2">
+                        <label class="text-xs" for="username">Username</label>
+                        <input
+                                id="username"
+                                type="text"
+                                pInputText
+                                formControlName="username"
+                        />
+                        <small *ngIf="
+                            authForm.get('username')?.value !== null
+                             && authForm.get('username')?.hasError('required')">
+                            <span class="text-red-500" >
+                                Username is required
+                            </span>
+                        </small>
+                    </div>
+                    
+                    <div class="flex flex-column gap-2">
+                        <label class="text-xs" for="email">Email</label>
+                        <input
+                                id="email"
+                                type="email"
+                                pInputText
+                                formControlName="email"
+                        />
+                        <small  *ngIf="
+                            authForm.get('email')?.value !== null
+                             && authForm.get('email')?.hasError('required')">
+                            <span class="text-red-500">
+                                Email is required
+                            </span>
+                        </small>
+                        <small *ngIf="
+                            authForm.get('email')?.value !== null
+                             && authForm.get('email')?.hasError('email')">
+                            <span class="text-red-500">
+                                Format incorrect
+                            </span>
+                        </small>
+                    </div>
+                    
+                    <div class="flex flex-column gap-2">
+                        <label class="text-xs" for="password">Password</label>
+                        <input
+                                id="password"
+                                type="password"
+                                pInputText
+                                formControlName="password"
+                        />
+                        <small *ngIf="
+                            authForm.get('password')?.value !== null
+                             && authForm.get('password')?.hasError('required')">
+                            <span class="text-red-500" >
+                                Password is required
+                            </span>
+                        </small>
+                        <small *ngIf="
+                            authForm.get('password')?.value !== null
+                             && authForm.get('password')?.hasError('minLength')">
+                            <span class="text-red-500" >
+                                Password is required
+                            </span>
+                        </small>
+                    </div>
+                    
+                    <div class="flex flex-column gap-2">
+                        <label class="text-xs" for="confirm-password">Confirm Password</label>
+                        <input
+                                id="confirm-password"
+                                type="password"
+                                pInputText
+                                formControlName="confirmPassword"
+                        />
+                        <small *ngIf="
+                        authForm.get('confirmPassword')?.value !== null
+                        && authForm.get('confirmPassword')?.hasError('required')">
+                            <span class="text-red-500" >
+                                Confirm Password is required
+                            </span>
+                        </small>
+                    </div>
+                    
+                    <div class="w-full pt-5">
+                        <p-button label="Register"
+                                  type="submit"
+                                  [disabled]="!authForm.valid"
+                                  (onClick)="register()"
+                        >
+                        </p-button>
+                    </div>
+                    
+                    <div class="text-center"></div>
+                    <div class="flex flex-row justify-content-center gap-2">
+                        <i class="pi pi-google text-xl"></i>
+                        <i class="pi pi-github text-xl"></i>
+                        <i class="pi pi-facebook text-xl"></i>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<p-toast></p-toast>
