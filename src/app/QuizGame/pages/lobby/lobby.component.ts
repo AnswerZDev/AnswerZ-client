@@ -55,6 +55,7 @@ export class LobbyComponent implements OnInit {
 
       if(this.roomId != null){
         this.socketService.listenToGameStarted(this.roomId);
+
         this.socketService.getRoomInfo(this.roomId).subscribe((info: any) => {
             this.roomInfo = info;
             this.nOfParticipants = this.roomInfo.clients.length;
@@ -68,6 +69,8 @@ export class LobbyComponent implements OnInit {
                 console.log(this.roomInfo);
             });
         });
+
+        this.socketService.listenToHostLeaveGame();
       }
     });
   }

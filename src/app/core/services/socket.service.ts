@@ -68,6 +68,13 @@ export class SocketService {
     });
   }
 
+  listenToHostLeaveGame(){
+    this._socket.off('host-leave');
+    this._socket.once('host-leave', () => {
+      this._router.navigate(['quiz-game/join-game']);
+    });
+  }
+
   leaveGame(roomId : string, isHost: boolean){
     this._socket.emit('leave-game', roomId, isHost);
   }
