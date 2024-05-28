@@ -27,4 +27,11 @@ export class CardsetApi extends ApiService {
         )
         return u as unknown as Observable<Cardset> // toujours retoruné comme ca avec <Model>
     }
+
+    public getAllCardsetsPublic(): Observable<Cardset[]>{
+        let u = this.get('/public').pipe(
+            map((data: any) => HydraFactory.createCollection(Cardset, data))
+        )
+        return u as unknown as Observable<Cardset[]>
+    }
 }

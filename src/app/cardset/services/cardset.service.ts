@@ -38,6 +38,18 @@ export class CardsetService{
         });
     }
 
+
+    getAllCardsetPublic(): void{
+        // return this.api_cardset.all_collection();
+        this.api_cardset.all_collection().subscribe({
+            next: (data: any) => {
+                this._cardsets = data.member;
+            },
+            error: () => {
+            }
+        });
+    }
+
     getOneCardset(){
         // return this.api_cardset.all_collection();
         return this.api_cardset.one_cardset();
