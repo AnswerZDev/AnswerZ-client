@@ -5,7 +5,6 @@ import {Router} from "@angular/router";
 import {UserApi} from "../../core/http/user/user.api";
 import {Subject} from "rxjs";
 import {User} from "../../core/models/api/user";
-import {ToastService} from "./toast.service";
 
 @Injectable({
     providedIn: 'root',

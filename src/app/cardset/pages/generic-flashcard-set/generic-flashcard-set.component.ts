@@ -119,7 +119,7 @@ export class GenericFlashcardSetComponent implements AfterContentInit, OnInit{
     this.flashcardsService.onReceiveFlashcards.pipe(first()).subscribe(
       (data: any) => {
         if(data) {
-          this.totalRecords = this.flashcardsService.flashcards.length;
+          this.totalRecords = this.flashcardsService._flashcards.length;
           this.paginate({ first: 0, rows: 8, page: 1, pageCount: Math.ceil(this.totalRecords / 8) });
         }
       } 
@@ -336,6 +336,6 @@ export class GenericFlashcardSetComponent implements AfterContentInit, OnInit{
   paginate(event: any) {
     const startIndex = event.first;
     const endIndex = startIndex + event.rows;
-    this.displayedFlashcards = this.flashcardsService.flashcards.slice(startIndex, endIndex);
+    this.displayedFlashcards = this.flashcardsService._flashcards.slice(startIndex, endIndex);
   }
 }

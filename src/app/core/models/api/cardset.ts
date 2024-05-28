@@ -1,5 +1,6 @@
 import { Flashcard } from "./flashcard";
 import {Item} from "./hydra/item";
+import { User } from "./user";
 
 export class Cardset extends Item {
     constructor(data: any) {
