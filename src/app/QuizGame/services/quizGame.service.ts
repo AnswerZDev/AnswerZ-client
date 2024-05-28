@@ -1,7 +1,8 @@
 import { Injectable } from "@angular/core";
 import { QuestionQuiz } from "../pages/quiz-edit/quiz-edit.component";
 
-interface QuizGame{
+export interface QuizGame{
+    idQuizGame: number;
     idUser: number;
     name: string;
     nbPlayers: number;
@@ -13,15 +14,37 @@ interface QuizGame{
 })
 export class QuisGameService{
 
-    private _quizgame: QuizGame[] | undefined;
+    private _quizgame: QuizGame[] = [];
+    private _quizgamePlay?: QuizGame;
 
     get quizgame(): QuizGame[] | undefined {
         return this._quizgame;
     }
 
+    get quizgamePlay(): QuizGame | undefined{
+        return this._quizgamePlay;
+    }
+
+    public setQuizgamePlay(quiz: QuizGame) {
+        this._quizgamePlay = quiz;
+    }
+
+    public createQuizGame(): QuizGame {
+        this._quizgame.push({
+            idQuizGame: 3,
+            idUser: 1,
+            name: "",
+            nbPlayers: 1,
+            question: []
+        });
+
+        return this._quizgame[2];
+    }
+
     public getQuizGameByUser(id: number) {
         this._quizgame = [
          {
+            idQuizGame: 1,
             idUser: 1,
             name: "English quiz",
             nbPlayers: 10,
@@ -50,6 +73,7 @@ export class QuisGameService{
             ]
          },
          {
+            idQuizGame: 2,
             idUser: 1,
             name: "Mathématique quiz",
             nbPlayers: 15,
@@ -65,7 +89,8 @@ export class QuisGameService{
             ]
          }
         ];
-
         console.log(this._quizgame);
     }
+
+
 }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { DropdownChangeEvent } from 'primeng/dropdown';
+import { QuisGameService, QuizGame } from '../../services/quizGame.service';
 
 export interface Mode {
   name: string;
@@ -31,6 +32,7 @@ export class QuizEditComponent {
   numberPlayers: NumberPlayers[]|undefined;
   selectednumberPlayers: NumberPlayers | undefined = { name : '1 players' };
   numberQuestion: number = 1;
+  quizGameEdit?: QuizGame;
 
   listeQuestion: QuestionQuiz[] = [
     {   
@@ -55,6 +57,12 @@ export class QuizEditComponent {
       time: 5,
     }
   ];
+
+  constructor(
+    public quizGameService: QuisGameService
+  ){
+
+  }
 
   ngOnInit(): void {
 

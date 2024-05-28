@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { QuisGameService } from '../../services/quizGame.service';
+import { QuisGameService, QuizGame } from '../../services/quizGame.service';
 
 @Component({
   selector: 'app-my-quiz-visualization',
@@ -11,6 +11,7 @@ export class MyQuizVisualizationComponent {
 
   modesVisibilite: any[]|undefined;
   selectedModeVisibilities: any;
+  quizGameCreate?: QuizGame;
 
   constructor(
     private router: Router,
@@ -23,7 +24,14 @@ export class MyQuizVisualizationComponent {
     this.quizGameService.getQuizGameByUser(1);
   }
 
-  redirectToCreateFlashcardSet() {
+  redirectToEditQuizGame(quiz: QuizGame) {
+    this.quizGameService.setQuizgamePlay(quiz);
+    this.router.navigateByUrl('/quiz-game/quiz-edit')
+  }
+
+  redirectToCreateQuizGame() {
+    this.quizGameCreate = this.quizGameService.createQuizGame();
+    this.quizGameService.setQuizgamePlay(this.quizGameCreate);
     this.router.navigateByUrl('/quiz-game/quiz-edit')
   }
 
