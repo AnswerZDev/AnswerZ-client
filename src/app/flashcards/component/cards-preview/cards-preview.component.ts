@@ -40,22 +40,22 @@ export class CardsPreviewComponent {
     }
   }
 
-  deleteFlashcard(id: number, event: Event) {
-    this.confirmService.confirm(event, 'Are you sure you want to delete ?', 'Delete successfully', 'Canceled suppression', () => 
-    {
-      this.flashcardService.onDeleteFlashcards.pipe(first()).subscribe({
-        next: () => {
-          // Suppression réussie
-          this.flashcards = this.flashcards.filter((flashcard) => Number(flashcard.id) !== id);
-        },
-        error: () => {
+  // deleteFlashcard(id: number, event: Event) {
+  //   this.confirmService.confirm(event, 'Are you sure you want to delete ?', 'Delete successfully', 'Canceled suppression', () => 
+  //   {
+  //     this.flashcardService.onDeleteFlashcards.pipe(first()).subscribe({
+  //       next: () => {
+  //         // Suppression réussie
+  //         this.flashcards = this.flashcards.filter((flashcard) => Number(flashcard.id) !== id);
+  //       },
+  //       error: () => {
           
-        }
-      });
-      this.flashcardService.deleteFlashcard(id);
-    }, 
-    () => {
+  //       }
+  //     });
+  //     this.flashcardService.deleteFlashcard(id);
+  //   }, 
+  //   () => {
       
-    });
-  };
+  //   });
+  // };
 }
