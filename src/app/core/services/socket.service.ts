@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Socket, io } from 'socket.io-client';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { UserApi } from '../http/user/user.api';
+import { SocketApi } from '../http/socket/socket.api';
 
 @Injectable({
   providedIn: 'root'
@@ -10,16 +12,26 @@ export class SocketService {
   private _socket: Socket;
 
   constructor(
-    private readonly _router: Router
-  ) {
-    this._socket = io('http://localhost:3000');
+    private readonly _router: Router,
+    private readonly _socketApi: SocketApi
+    ) {
+    this._socket = io('http://localhost:3100');
   }
+
 
   getCurrentSocketId(){
     return this._socket.id;
   }
 
+  getUserInfos(){
+    return this._socketApi.getUserInfos();
+  }
+
   createRoom() {
+    const datas = this.getUserInfos().subscribe((value) =>{
+      console.log(value);
+    });
+
     this._socket.emit('create-game', this._socket.id);
     this._socket.off('roomCreated');
     this._socket.once('roomCreated', (roomId: string) => {
