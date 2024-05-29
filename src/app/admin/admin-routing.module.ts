@@ -1,9 +1,7 @@
 import { NgModule } from "@angular/core";
-import { NgModel } from "@angular/forms";
 import { RouterModule, Routes } from "@angular/router";
-import { Router } from "express";
-import * as path from "path";
 import { DashboardAdminComponent } from "./component/dashboard-admin/dashboard-admin.component";
+import { userGuard } from "../core/guards/user.guard";
 
 const routes: Routes = [
     {
@@ -13,6 +11,7 @@ const routes: Routes = [
     },
     {
         path: 'dashboard-admin',
+        canActivate: [userGuard],
         component: DashboardAdminComponent
     }
 ]

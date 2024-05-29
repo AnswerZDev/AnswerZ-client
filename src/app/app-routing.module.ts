@@ -33,11 +33,6 @@ const routes: Routes = [
         loadChildren: () =>
             import('./admin/admin.module').then((m) => m.AdminModule)
     },
-    {
-        path: 'cardset',
-        loadChildren: () =>
-            import('./cardset/cardset.module').then((m) => m.CardsetModule)
-    }
 ]
 
 @NgModule({
