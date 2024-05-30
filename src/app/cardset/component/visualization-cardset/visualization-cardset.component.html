@@ -1,6 +1,13 @@
 <div class="w-full bg-indigo-100 p-3 border-ra border-round-2xl text-center">
-    <p-button icon="pi pi-heart" severity="help " />
-    <div class="title mb-3">{{ my_cardset.name }}</div>
+    <div class="flex flex-row align-items-center">
+        <button
+        (click)="onChangeLike()"
+        [ngClass]="{ heart: like }"
+        class="button-like">
+        <i class="pi pi-heart" ></i>
+        </button>
+        <div class="title ml-2">{{ my_cardset.name }}</div>
+    </div>
     <div class="mb-3">
         <img [src]="picture" alt="Image descriptif du cardset" class="w-full" >
     </div>

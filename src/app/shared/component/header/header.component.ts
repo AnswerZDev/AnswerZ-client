@@ -2,38 +2,29 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import {SecurityService} from "../../services/security.services";
 import {MenuItem} from "primeng/api";
+import { AppService } from '../../services/appService.service';
+import { userGuard } from 'src/app/core/guards/user.guard';
 
 @Component({
     selector: 'app-header',
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
     // url for the logo
     public imageLogo: string = '../../../../assets/images/answerz-logo.png';
 
     showButtons = false;
+    isAuthenticated = false;
 
     items: MenuItem[] | undefined;
 
     constructor(
         private readonly router: Router,
-        public readonly securityService: SecurityService,
+        public readonly securityService: SecurityService
     ) {
         this.initializeApp();
-    }
-
-    ngOnInit(): void {
-        this.router.events.subscribe((event) => {
-            if (event instanceof NavigationEnd) {
-              this.showButtons = this.shouldShowButtons(event.url);
-            }
-        });
-    }
-
-    shouldShowButtons(url: string): boolean {
-        return url.includes('/my-cardsets');
     }
 
     /**
@@ -87,5 +78,13 @@ export class HeaderComponent implements OnInit {
                 }
             }
         ];
+    }
+
+    redirectToQuizGame() {
+        this.router.navigateByUrl('/quiz-game');
+    }
+
+    redirectToCardset() {
+        this.router.navigateByUrl('/cardset');
     }
 }

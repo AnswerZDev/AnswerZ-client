@@ -11,6 +11,7 @@ import { CardsetService } from '../../services/cardset.service';
 export class VisualizationCardsetComponent {
 
   @Input() my_cardset!: Cardset; 
+  like: boolean = false;
 
   constructor(
     private router: Router,
@@ -33,7 +34,10 @@ export class VisualizationCardsetComponent {
       this.visible = true;
   }
 
-  onLike() {
-    throw new Error('Method not implemented.');
+  onChangeLike() {
+    if(! this.like)
+      this.like = true;
+    else
+      this.like = false;
   }
 }

@@ -13,6 +13,22 @@
         color: white;
         border: 1px solid black;
     }
+
+    .heart{
+        background-color: red;
+    }
+
+    .pi.pi-heart{
+        color: #fff;
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+
+    .button-like{
+        border: none;
+        border-radius: 50%;
+        padding: 5px 5px 1px 5px;
+    }
 }
 
 // Media queries

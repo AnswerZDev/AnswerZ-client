@@ -5,6 +5,7 @@ import { EditFlashcardSetComponent } from './component/edit-flashcard-set/edit-f
 import { MyCardsetsComponent } from './pages/my-cardsets/my-cardsets.component'
 import { AddFlashcardToSetComponent } from './pages/add-flashcard-to-cardset/add-flahscard-to-cardset.component'
 import { AllCardsetComponent } from './pages/all-cardset/all-cardset.component'
+import { userGuard } from '../core/guards/user.guard'
 
 const routes: Routes = [
     {
@@ -14,6 +15,7 @@ const routes: Routes = [
     },
     {
         path: 'my-cardsets',
+        canActivate: [userGuard],
         component: MyCardsetsComponent,
     },
     {
