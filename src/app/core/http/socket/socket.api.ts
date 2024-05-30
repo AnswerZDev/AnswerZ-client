@@ -15,10 +15,7 @@ export class SocketApi {
     public constructor(private readonly _httpClient: HttpClient) {
     }
 
-
     public getUserInfos(): Observable<void> {
         return this._httpClient.get<void>(environment.socketServer + '/socket/user-infos')
     }
-
-    
 }

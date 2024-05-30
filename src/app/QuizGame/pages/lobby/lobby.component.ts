@@ -52,15 +52,15 @@ export class LobbyComponent implements OnInit {
       this.url += this.roomId;
 
 
-
       if(this.roomId != null){
+
         this.socketService.listenToGameStarted(this.roomId);
 
         this.socketService.getRoomInfo(this.roomId).subscribe((info: any) => {
-            this.roomInfo = info;
-            this.nOfParticipants = this.roomInfo.clients.length;
-            this.isHost = (this.socketService.getCurrentSocketId() == this.roomInfo.game.host);
-        });
+          this.roomInfo = info;
+          this.nOfParticipants = this.roomInfo.clients.length;
+          this.isHost = (this.socketService.getCurrentSocketId() == this.roomInfo.game.host);
+      });
 
         this.socketService.newUserInLobby(this.roomId).subscribe((newParticipant: any) => {
             console.log('New user joined:', newParticipant);

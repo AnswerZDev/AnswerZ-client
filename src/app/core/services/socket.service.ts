@@ -10,12 +10,16 @@ import { SocketApi } from '../http/socket/socket.api';
 })
 export class SocketService {
   private _socket: Socket;
+  private userInfos : any;
 
   constructor(
     private readonly _router: Router,
     private readonly _socketApi: SocketApi
-    ) {
+  ) {
     this._socket = io('http://localhost:3100');
+    this.getUserInfos().subscribe((value) => {
+      this.userInfos = value;
+    });
   }
 
 
@@ -28,19 +32,16 @@ export class SocketService {
   }
 
   createRoom() {
-    const datas = this.getUserInfos().subscribe((value) =>{
-      console.log(value);
-    });
 
-    this._socket.emit('create-game', this._socket.id);
-    this._socket.off('roomCreated');
-    this._socket.once('roomCreated', (roomId: string) => {
-      this._router.navigate(['quiz-game/quizz-lobby', roomId]);
-    });
+      this._socket.emit('create-game', this._socket.id, this.userInfos);
+      this._socket.off('roomCreated');
+      this._socket.once('roomCreated', (roomId: string) => {
+        this._router.navigate(['quiz-game/quizz-lobby', roomId]);
+      });
   }
 
   joinRoom(roomId : string) {
-    this._socket.emit('join-game', roomId);
+    this._socket.emit('join-game', roomId, this.userInfos);
     this._socket.off('joined-game');
     this._socket.once('joined-game', (roomId: string) => {
       this._router.navigate(['quiz-game/quizz-lobby', roomId]);
