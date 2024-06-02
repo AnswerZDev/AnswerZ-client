@@ -14,7 +14,9 @@ export class createRoomComponent{
         messageId : new FormControl(null, Validators.required),
     })
 
-    constructor(private socketService: SocketService) { }
+    constructor(private socketService: SocketService) {
+    }
+
 
     onSubmit() {
         if(this.roomForm.valid){

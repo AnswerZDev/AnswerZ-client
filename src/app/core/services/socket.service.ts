@@ -17,8 +17,26 @@ export class SocketService {
     private readonly _socketApi: SocketApi
   ) {
     this._socket = io('http://localhost:3100');
+
     this.getUserInfos().subscribe((value) => {
       this.userInfos = value;
+    });
+
+    console.log('test');
+    console.log(this.userInfos);
+
+    this.connection();
+
+  }
+
+  connection(): void{
+    this._socket.on('connected', () => {
+      this.getUserInfos().subscribe((value) => {
+        this._socket.emit('give-user-infos', value);
+        this._socket.on('already-in-room', () => {
+          alert("already in room");
+        });
+      });
     });
   }
 
@@ -32,8 +50,9 @@ export class SocketService {
   }
 
   createRoom() {
+    console.log(this.userInfos)
+    this._socket.emit('create-game', this._socket.id, this.userInfos);
 
-      this._socket.emit('create-game', this._socket.id, this.userInfos);
       this._socket.off('roomCreated');
       this._socket.once('roomCreated', (roomId: string) => {
         this._router.navigate(['quiz-game/quizz-lobby', roomId]);
