@@ -6,11 +6,13 @@
             >
                 <div class="flex flex-column gap-2 px-6 py-7">
                     <div>
-                        <h1 class="text-lg text-center main-title">Welcome Back!</h1>
+                        <h1 class="text-lg text-center main-title">
+                            {{ 'app.welcome-back' | translate | ucFirst }} !
+                        </h1>
                     </div>
                     
                     <div class="flex flex-column gap-2">
-                        <label class="text-xs" for="username">Username</label>
+                        <label class="text-xs" for="username">E-mail</label>
                         <input
                                 id="username"
                                 type="text"
@@ -20,7 +22,9 @@
                     </div>
                     
                     <div class="flex flex-column gap-2">
-                        <label class="text-xs" for="password">Password</label>
+                        <label class="text-xs" for="password">
+                            {{ 'app.password' | translate | ucFirst }}
+                        </label>
                         <input
                                 id="password"
                                 type="password"
@@ -38,20 +42,17 @@
                     
                     <div class="text-center">
                         <p>
-                            Don't have an account ?
-                            <a (click)="redirectToRegister()">Register</a>
+                            {{ 'app.havent-account' | translate | ucFirst }} ?
+                            <a (click)="redirectToRegister()">
+                                {{ 'app.signup' | translate | ucFirst }}
+                            </a>
                         </p>
                         <p>
-                            You have forgot your password ?
-                            <a (click)="redirectToForgotPassword()">Reset password</a>
+                            {{ 'app.forgot-password' | translate | ucFirst }} ?
+                            <a (click)="redirectToForgotPassword()">
+                                {{ 'app.reset-password' | translate | ucFirst }}
+                            </a>
                         </p>
-                    </div>
-                    
-                    <div class="text-center"></div>
-                    <div class="flex flex-row justify-content-center gap-2">
-                        <i class="pi pi-google text-xl"></i>
-                        <i class="pi pi-github text-xl"></i>
-                        <i class="pi pi-facebook text-xl"></i>
                     </div>
                 </div>
             </div>

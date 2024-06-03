@@ -1,13 +1,23 @@
 {
     "app": {
         "choose-file": "browse",
+        "confirm-password": "confirm password",
         "edit": "edit",
+        "forgot-password": "lost your password",
+        "firstName": "firstname",
         "friends": "friends",
+        "havent-account": "don't have an account",
+        "lastName": "lastname",
+        "my-profile": "my profile",
+        "password": "password",
         "signin": "sign in",
         "signup": "sign up",
-        "my-profile": "my profile",
         "recent-activity": "recent activity",
+        "reset-password": "reset password",
         "save": "save",
-        "see-my-friends": "see my friends"
+        "see-my-friends": "see my friends",
+        "username": "username",
+        "welcome": "welcome",
+        "welcome-back": "welcome back"
     }
 }

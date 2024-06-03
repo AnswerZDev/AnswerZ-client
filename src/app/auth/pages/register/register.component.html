@@ -9,11 +9,15 @@
             >
                 <div class="flex flex-column gap-2 px-6 py-7">
                     <div>
-                        <h1 class="text-lg text-center main-title">Welcome !</h1>
+                        <h1 class="text-lg text-center main-title">
+                            {{ 'app.welcome' | translate | ucFirst }} !
+                        </h1>
                     </div>
                     
                     <div class="flex flex-column gap-2">
-                        <label class="text-xs" for="firstname">Firstname</label>
+                        <label class="text-xs" for="firstname">
+                            {{ 'app.firstName' | translate | ucFirst }}
+                        </label>
                         <input
                                 id="firstname"
                                 type="text"
@@ -24,13 +28,15 @@
                             authForm.get('firstName')?.value !== null
                              && authForm.get('firstName')?.hasError('required')">
                             <span class="text-red-500">
-                                Fullname is required
+                                {{ 'app.firstName' | translate | ucFirst }} is required
                             </span>
                         </small>
                     </div>
                     
                     <div class="flex flex-column gap-2">
-                        <label class="text-xs" for="lastName">Lastname</label>
+                        <label class="text-xs" for="lastName">
+                            {{ 'app.lastName' | translate | ucFirst }}
+                        </label>
                         <input
                             id="lastName"
                             type="text"
@@ -41,13 +47,15 @@
                             authForm.get('lastName')?.value !== null
                              && authForm.get('lastName')?.hasError('required')">
                             <span class="text-red-500">
-                                Fullname is required
+                                {{ 'app.lastName' | translate | ucFirst }} is required
                             </span>
                         </small>
                     </div>
                     
                     <div class="flex flex-column gap-2">
-                        <label class="text-xs" for="username">Username</label>
+                        <label class="text-xs" for="username">
+                            {{ 'app.username' | translate | ucFirst }}
+                        </label>
                         <input
                                 id="username"
                                 type="text"
@@ -58,7 +66,7 @@
                             authForm.get('username')?.value !== null
                              && authForm.get('username')?.hasError('required')">
                             <span class="text-red-500" >
-                                Username is required
+                                {{ 'app.username' | translate | ucFirst }} is required
                             </span>
                         </small>
                     </div>
@@ -88,7 +96,9 @@
                     </div>
                     
                     <div class="flex flex-column gap-2">
-                        <label class="text-xs" for="password">Password</label>
+                        <label class="text-xs" for="password">
+                            {{ 'app.password' | translate | ucFirst }}
+                        </label>
                         <input
                                 id="password"
                                 type="password"
@@ -99,20 +109,22 @@
                             authForm.get('password')?.value !== null
                              && authForm.get('password')?.hasError('required')">
                             <span class="text-red-500" >
-                                Password is required
+                                {{ 'app.password' | translate | ucFirst }} is required
                             </span>
                         </small>
                         <small *ngIf="
                             authForm.get('password')?.value !== null
                              && authForm.get('password')?.hasError('minLength')">
                             <span class="text-red-500" >
-                                Password is required
+                                {{ 'app.password' | translate | ucFirst }} is required
                             </span>
                         </small>
                     </div>
                     
                     <div class="flex flex-column gap-2">
-                        <label class="text-xs" for="confirm-password">Confirm Password</label>
+                        <label class="text-xs" for="confirm-password">
+                            {{ 'app.confirm-password' | translate | ucFirst }}
+                        </label>
                         <input
                                 id="confirm-password"
                                 type="password"
@@ -123,25 +135,18 @@
                         authForm.get('confirmPassword')?.value !== null
                         && authForm.get('confirmPassword')?.hasError('required')">
                             <span class="text-red-500" >
-                                Confirm Password is required
+                                {{ 'app.confirm-password' | translate | ucFirst }} is required
                             </span>
                         </small>
                     </div>
                     
                     <div class="w-full pt-5">
-                        <p-button label="Register"
+                        <p-button [label]="'app.signup' | translate | ucFirst"
                                   type="submit"
                                   [disabled]="!authForm.valid"
                                   (onClick)="register()"
                         >
                         </p-button>
-                    </div>
-                    
-                    <div class="text-center"></div>
-                    <div class="flex flex-row justify-content-center gap-2">
-                        <i class="pi pi-google text-xl"></i>
-                        <i class="pi pi-github text-xl"></i>
-                        <i class="pi pi-facebook text-xl"></i>
                     </div>
                 </div>
             </div>
