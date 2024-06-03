@@ -1,7 +1,9 @@
-
-
 .title {
     color: rgba(148,104,241,0.77);
+}
+
+.text {
+    color: #9468F1;
 }
 
 :host ::ng-deep {
@@ -20,5 +22,9 @@
         border: 1px solid #e0e0e0;
         color: #9468F1;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .p-progressbar-value {
+        background: #9468F1;
     }
 }

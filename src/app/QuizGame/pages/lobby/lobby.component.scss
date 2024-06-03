@@ -6,12 +6,18 @@
     align-items: center;
 }
 
+.card-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
 
 
 #flipContainer{
     animation-duration: 1000ms;
     animation-timing-function: ease;
 }
+
 
 :host ::ng-deep {
     .button-start > .p-button {
@@ -20,6 +26,12 @@
         border-radius: 15px;
         font-weight: 550;
         justify-content: center;
+    }
+    
+    .leave-btn-container> .p-button{
+        background-color: red;
+        margin-top: 15%;
+        border-radius: 50px;
     }
 }
 

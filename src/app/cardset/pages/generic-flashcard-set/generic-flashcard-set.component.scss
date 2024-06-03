@@ -23,6 +23,11 @@ input::placeholder {
     color: rgba(148,104,241,0.77);
 }
 
+.description {
+    min-height: 13rem;
+    color: rgba(148,104,241,0.77);
+}
+
 :host ::ng-deep {
     .p-dropdown {
         background-color: #9468F1;
@@ -31,9 +36,13 @@ input::placeholder {
     }
 
     .p-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
         color: rgba(148,104,241,0.77);
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         border-radius: 20px;
+        height: 100%;
     }
 
     .p-card .p-card-body {
@@ -66,10 +75,10 @@ input::placeholder {
             background-color: white;
             border: 3px solid #9468F1;
             color: #9468F1;
-            width: 100%;
+            //width: 100%;
             justify-content: center;
             font-weight: bold;
         }
-        width: 40%;
+       // width: 40%;
     }
 }

@@ -40,6 +40,7 @@ input::placeholder {
     background-color: #9468F1;
     border: #9468F1;
     border-radius: 10px;
+    padding-left: 15%;
   }
 
   .p-dropdown:enabled:focus {
@@ -49,6 +50,25 @@ input::placeholder {
   .p-dropdown-label, .p-dropdown-trigger-icon {
     color: white;
   }
+
+  .p-inputtext:disabled{
+    background-color: #9468F1;
+  }
+
+  .p-inputtext:disabled::placeholder{
+    color: white;
+    text-align: center;
+  }
+
+  .noq-input{
+    padding-left: 10%;
+  }
+
+  .true-false-input{
+    text-align: center !important;
+    color: white;
+  }
+
 }
 
 .input-question-compo{

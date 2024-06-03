@@ -44,7 +44,6 @@ export class LobbyComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
 
-
       // TODO : REWORK QR CODE FUNCTIONS
       // THIS IS JUST A QUICK POC
       this.roomId = params.get('roomId');
@@ -53,14 +52,15 @@ export class LobbyComponent implements OnInit {
       this.url += this.roomId;
 
 
-
       if(this.roomId != null){
+
         this.socketService.listenToGameStarted(this.roomId);
+
         this.socketService.getRoomInfo(this.roomId).subscribe((info: any) => {
-            this.roomInfo = info;
-            this.nOfParticipants = this.roomInfo.clients.length;
-            this.isHost = (this.socketService.getCurrentSocketId() == this.roomInfo.game.host);
-        });
+          this.roomInfo = info;
+          this.nOfParticipants = this.roomInfo.clients.length;
+          this.isHost = (this.socketService.getCurrentSocketId() == this.roomInfo.game.host);
+      });
 
         this.socketService.newUserInLobby(this.roomId).subscribe((newParticipant: any) => {
             console.log('New user joined:', newParticipant);
@@ -69,6 +69,8 @@ export class LobbyComponent implements OnInit {
                 console.log(this.roomInfo);
             });
         });
+
+        this.socketService.listenToHostLeaveGame();
       }
     });
   }
@@ -77,6 +79,13 @@ export class LobbyComponent implements OnInit {
   startGame(){
     if(this.roomId){
       this.socketService.startGame(this.roomId);
+    }
+  }
+
+  leaveGame(){
+    if(this.roomId){
+      this.isHost = (this.socketService.getCurrentSocketId() == this.roomInfo.game.host);
+      this.socketService.leaveGame(this.roomId, this.isHost);
     }
   }
 }

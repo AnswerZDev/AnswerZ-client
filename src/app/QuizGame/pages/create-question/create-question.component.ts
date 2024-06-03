@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { SocketService } from 'src/app/core/services/socket.service';
-import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Question } from 'src/app/core/models/api/question';
+import { MessageService } from 'primeng/api';
 
 
 
@@ -17,6 +17,10 @@ export interface Type{
     type: string;
 }
 
+export interface NumberOfQuestions{
+    number: number;
+}
+
 @Component({
     selector: 'app-create-question',
     templateUrl: './create-question.component.html',
@@ -26,7 +30,15 @@ export interface Type{
 
 export class CreateQuestionComponent{
     
-    public e_value = "";
+    e_value : String =  "";
+
+    input_question : String = "";
+
+    false_value : String = "False";
+
+    true_value : String = "True";
+
+    list_answers : String [] = [];
 
     timeChoices : Time[] | undefined;
 
@@ -34,20 +46,83 @@ export class CreateQuestionComponent{
 
     typeChoices : Type[] | undefined;
 
+    NOQChoices : NumberOfQuestions[] | undefined;
+
     myChoice : Type | undefined;
 
+    myPoints : Points | undefined;
+
+    myTime : Time | undefined;
+
+    myNOQ : NumberOfQuestions | undefined;
+
+    @Output() questionCreated = new EventEmitter<Question>();
+
+    /*
+    public questionForm: FormGroup = new FormGroup({
+        myTime: new FormControl(null, Validators.required),
+        myChoice: new FormControl(null, Validators.required),
+        myPoints: new FormControl(null, Validators.required),
+        myNOQ: new FormControl(null, Validators.required),
+        input_question: new FormControl(null, Validators.required),
+    })
+    */
+
+    constructor(
+        private readonly messageService: MessageService
+    ) { }
 
     /**
      * @author @HugoooR
      * @date 14/05/2024
      * @description Create a question with the data
-     * @memberof HomePage
+     * @memberof CreateQuestionComponent
      */
     createQuestion(): void {
+        /*
+        if (this.questionForm.invalid) {
+            this.messageService.add({ severity: 'error', summary: 'Erreur', detail: 'Tous les champs obligatoires doivent être remplis.' });
+            return;
+        }
+        */
         
+        // Vérifiez les champs communs
+        if (!this.myTime || !this.myChoice || !this.myPoints || !this.input_question) {
+            console.error('Tous les champs obligatoires doivent être remplis.');
+            return;
+        }
+
+        // Vérifiez list_answers seulement si le type est "MCQ"
+        if (this.myChoice.type === 'MCQ' && (!this.list_answers || this.list_answers.length === 0)) {
+            console.error('Pour les questions à choix multiples, vous devez fournir des réponses.');
+            return;
+        }
+
+        //let ques = new Question([this.input_question,this.myTime.duration,this.myPoints.points,this.myChoice.type, this.list_answers]);
+        let ques = new Question({
+            description: this.input_question,
+            duration: this.myTime.duration.toString(),
+            points: this.myPoints.points,
+            question_type: this.myChoice.type,
+            choices: this.list_answers
+          });
+
+        console.log('Question created:', ques);
+
+        // add to the output the created question so the parent's component can get the question
+        this.questionCreated.emit(ques);
+        
+        window.history.back();
+
     }
 
 
+    /**
+     * @author @HugoooR
+     * @date 28/05/2024
+     * @description Set the default values for the dropdown
+     * @memberof CreateQuestionComponent
+     */
     ngOnInit() {
        
         this.timeChoices = [
@@ -76,5 +151,16 @@ export class CreateQuestionComponent{
             { type: "True/False"},
             { type: "MCQ"},
         ];
+
+        this.NOQChoices = [
+            { number: 2 },
+            { number: 3 },
+            { number: 4 },
+            { number: 5 },
+            { number: 6 },
+            { number: 7 },
+            { number: 8 },
+        ];
+
     }
 }

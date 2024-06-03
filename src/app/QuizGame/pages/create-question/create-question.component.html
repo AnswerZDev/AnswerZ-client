@@ -3,30 +3,35 @@
         Create question
     </span>
     <div class="flex flex-column px-3 py-3">
-        <div class="flex flex-row">
-            <div class="flex flex-column input-question-compo">
+        <div class="flex lg:flex-row flex-column">
+            <div class="flex flex-column lg:input-question-compo w-9 lg:w-4">
                 <span class="create-question font-medium text-2xl">
                     Question
                 </span>
                 
-                <input class="input-question" type="text" pInputText [(ngModel)]="e_value" placeholder="Enter a question"/>
+                <input class="input-question" type="text" pInputText [(ngModel)]="input_question" placeholder="Enter a question"/>
+
             </div>
-            <div class="flex flex-row">
-                <p-dropdown class="text-sm md:text-lg w-1rem md:w-7rem" [options]="timeChoices" optionLabel="duration" placeholder="Time"></p-dropdown>
-                <p-dropdown class="text-sm md:text-lg w-1rem md:w-7rem" [options]="pointsChoices" optionLabel="points" placeholder="Points"></p-dropdown>
-                <p-dropdown class="text-sm md:text-lg w-1rem md:w-7rem" [options]="typeChoices" optionLabel="type" placeholder="Type" [(ngModel)]="myChoice"></p-dropdown>
+            <div class="flex md:flex-row flex-column lg:ml-auto pt-5 md:justify-content-between w-8 lg:w-5">
+                <p-dropdown class="text-sm py-2 md:text-lg w-1rem md:w-7rem" [options]="timeChoices" optionLabel="duration" placeholder="Time" [(ngModel)]="myTime"></p-dropdown>
+                <p-dropdown class="text-sm py-2 md:text-lg w-1rem md:w-7rem" [options]="pointsChoices" optionLabel="points" placeholder="Points" [(ngModel)]="myPoints"></p-dropdown>
+                <p-dropdown class="text-sm py-2 md:text-lg w-1rem md:w-7rem" [options]="typeChoices" optionLabel="type" placeholder="Type" [(ngModel)]="myChoice"></p-dropdown>
             </div>
         </div>
-        <div class="flex flex-column">
-            <div *ngIf="myChoice && myChoice.type === 'MCQ'">
-                <span class="font-medium text-xl">Options QCM</span>
-                <input type="text" pInputText placeholder="Option 1"/>
-                <input type="text" pInputText placeholder="Option 2"/>
-                <input type="text" pInputText placeholder="Option 3"/>
-                <input type="text" pInputText placeholder="Option 4"/>
+        <div class="flex flex-column pt-8">
+            <div *ngIf="myChoice && myChoice.type === 'MCQ'" class="flex flex-column">
+                <p-dropdown class="text-sm md:text-lg w-1rem md:w-7rem" [options]="NOQChoices" optionLabel="number" placeholder="Number of questions" [(ngModel)]="myNOQ" inputId="float-label"></p-dropdown>
+                <div class="flex flex-wrap pt-6 md:gap-7 justify-content-around">
+                    <div *ngFor="let i of [].constructor(myNOQ && myNOQ.number && myNOQ.number > 2 ? myNOQ.number : 2); let j = index" class="pb-5">
+                        <input type="text" pInputText [(ngModel)]="list_answers[j]" pInputText placeholder="Option {{ j + 1 }}" class="noq-input" />
+                    </div>
+                </div>
             </div>
-            <div *ngIf="myChoice && myChoice.type === 'True/False'">
-                <span class="font-medium text-xl">Options True/False</span>
+            <div *ngIf="myChoice && myChoice.type === 'True/False'" class="flex justify-content-center">
+                <div class="flex md:flex-row flex-column md:justify-content-between w-auto lg:w-7">
+                    <input id="disabled-input" type="text" pInputText [disabled]="true" [(ngModel)]="true_value" placeholder="True" class="true-false-input"/>
+                    <input id="disabled-input" type="text" pInputText [disabled]="true" [(ngModel)]="false_value" placeholder="False" class="true-false-input"/>
+                </div>
             </div>
         </div>
         <div class="flex flex-column align-items-center py-5">
