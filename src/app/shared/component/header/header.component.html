@@ -10,8 +10,10 @@
     <div>
         <div class="flex flex-row gap-2 button-header-container"
              *ngIf="!securityService.isAuthenticated(); else isLoginTemplate">
-            <p-button styleClass="login" label="Login" (onClick)="redirectToLoginPage()"></p-button>
-            <p-button styleClass="login" label="Register" (onClick)="redirectToRegisterPage()"></p-button>
+            <p-button styleClass="login" label="{{'app.signin' | translate | ucFirst}}"
+                      (onClick)="redirectToLoginPage()"></p-button>
+            <p-button styleClass="login" label="{{'app.signup' | translate | ucFirst}}"
+                      (onClick)="redirectToRegisterPage()"></p-button>
         </div>
         <ng-template #isLoginTemplate>
             <p-avatar (click)="menu.toggle($event)"

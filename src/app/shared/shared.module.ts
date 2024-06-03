@@ -33,6 +33,7 @@ import {UcFirstPipe} from "./pipes/uc-first.pipe";
         ToastModule,
         ConfirmPopupModule,
         TabMenuModule,
+        TranslateModule
     ],
     declarations: [
         HeaderComponent,

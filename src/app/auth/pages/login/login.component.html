@@ -30,7 +30,7 @@
                     </div>
                     
                     <div class="w-full pt-5">
-                        <p-button label="Login"
+                        <p-button label="{{'app.signin' | translate | ucFirst}}"
                                   type="submit"
                                   (click)="login()" [disabled]="!authForm.valid">
                         </p-button>

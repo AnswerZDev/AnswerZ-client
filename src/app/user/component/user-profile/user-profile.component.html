@@ -22,12 +22,9 @@
                     </span>
                     </div>
                     <div class="flex flex-column md:flex-row gap-1">
-                    <span>
-                        {{securityService.user?.numberOfFlashcards}} flashcards
-                    </span>
                         <span>
-                        34 likes
-                    </span>
+                            {{securityService.user?.numberOfFlashcards}} flashcards
+                        </span>
                     </div>
                 </div>
             </div>
@@ -52,7 +49,10 @@
                 </form>
             </div>
             <p-button
-                [label]="editMode ? 'Save' : 'Edit'"
+                [label]="editMode ?
+                    ('app.save' | translate | ucFirst)
+                    : ('app.edit' | translate | ucFirst)
+                "
                 severity="help"
                 (onClick)="redirectToEditMode()"
             />

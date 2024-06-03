@@ -1,7 +1,10 @@
 {
     "app": {
         "choose-file": "browse",
+        "edit": "edit",
         "friends": "friends",
+        "signin": "sign in",
+        "signup": "sign up",
         "my-profile": "my profile",
         "recent-activity": "recent activity",
         "save": "save",

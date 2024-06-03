@@ -35,6 +35,8 @@ export class AppService {
         const lang: string | null = localStorage.getItem('language');
         if (lang) {
             this._translate.setDefaultLang(lang);
+            return;
         }
+        this._translate.setDefaultLang('fr');
     }
 }
