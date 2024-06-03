@@ -22,11 +22,20 @@
     margin: 2rem;
     background-color: #f0f0f0;
     border-radius: 10px;
-    overflow: hidden;
 }
 
 .progress-bar {
     height: 100%;
     background-color: #9468F1;
     transition: width 0.1s ease-in-out;
+    border-left-radius: 10px;
 }
+
+.full-bar {
+    border-radius: 10px;
+}
+
+.decreasing-bar {
+    border-radius: 10px 0 0 10px;
+}
+
