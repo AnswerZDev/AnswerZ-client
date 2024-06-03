@@ -1,0 +1,44 @@
+:host ::ng-deep {
+    .saveModificaton {
+        border-radius: 40px;
+        background-color: #8A61E0;
+        color: white;
+        border: #8A61E0;
+        box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    .p-dropdown {
+        background-color: #9468F1;
+        border: #9468F1;
+        border-radius: 10px;
+    }
+
+    .p-dropdown-label, .p-dropdown-trigger-icon {
+        color: white;
+    }
+
+    .button-delete{
+        background-color: white;
+        color: black;
+        border: none;
+    }
+}
+
+.title{
+    color: #8A61E0;
+}
+
+.my-quiz{
+    box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.2);
+}
+
+.quiz-picture{
+    height: 300px;
+}
+
+
+.container-question-second{
+    overflow-y: scroll;
+    max-height: 450px;
+    padding: 5px;
+}

@@ -22,9 +22,6 @@ export class SocketService {
       this.userInfos = value;
     });
 
-    console.log('test');
-    console.log(this.userInfos);
-
     this.connection();
 
   }
@@ -33,8 +30,8 @@ export class SocketService {
     this._socket.on('connected', () => {
       this.getUserInfos().subscribe((value) => {
         this._socket.emit('give-user-infos', value);
-        this._socket.on('already-in-room', () => {
-          alert("already in room");
+        this._socket.on('already-in-room', (arg) => {
+          this._router.navigate(['quiz-game/quizz-lobby', arg]);
         });
       });
     });
@@ -52,7 +49,6 @@ export class SocketService {
   createRoom() {
     console.log(this.userInfos)
     this._socket.emit('create-game', this._socket.id, this.userInfos);
-
       this._socket.off('roomCreated');
       this._socket.once('roomCreated', (roomId: string) => {
         this._router.navigate(['quiz-game/quizz-lobby', roomId]);
@@ -60,9 +56,10 @@ export class SocketService {
   }
 
   joinRoom(roomId : string) {
+    console.log(this.userInfos)
     this._socket.emit('join-game', roomId, this.userInfos);
     this._socket.off('joined-game');
-    this._socket.once('joined-game', (roomId: string) => {
+    this._socket.once('joined-game', (roomId: string,) => {
       this._router.navigate(['quiz-game/quizz-lobby', roomId]);
     });
   }
@@ -82,6 +79,16 @@ export class SocketService {
         observer.next(info);
       });
       this._socket.emit('getRoomInfo', roomId);
+    });
+  }
+
+  getCurrentHost(roomId : string){
+    this.getUserInfos().subscribe((value) => {
+      this.userInfos = value;
+      this.getRoomInfo(roomId).subscribe((info: any) => {
+        const roomInfo = info;
+        return roomInfo.game.host;
+    });
     });
   }
 

@@ -1,0 +1,34 @@
+<div class="p-3 md:p-7">
+    <div class="grid gy-4">
+        <div class="col-12 md:col-6">
+            <div class="p-3 border-round-md my-quiz bg-white">
+                <h1 class="title">{{ quizGameService.quizgamePlay?.name }}</h1>
+                <!-- Mettre bouton -->
+                <img [src]="photoQuizz" alt="profil image" class="w-full quiz-picture mb-3">
+                <p-dropdown [options]="modesVisibilite" [(ngModel)]="selectedModeVisibilities" (onChange)="onVisibilityChange($event)" optionLabel="name" class="align-self-end uppercase"></p-dropdown>
+                <p-dropdown [options]="numberPlayers" [(ngModel)]="selectednumberPlayers" (onChange)="onNumberPlayersChange($event)" optionLabel="name" class="align-self-end uppercase ml-3"></p-dropdown>
+                <p>Join usLorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce dictum molestie purus, quis venenatis diam eleifend ut. Pellentesque bibendum orci quis semper finibus. In aliquam urna turpis, quis cursus velit mollis eleifend. Donec porta metus eget nisl aliquet, ac fermentum lacus vestibulum. Phasellus id accumsan risus.</p>
+            </div>
+        </div>
+        <div class="col-12 md:col-6 container-question-first">
+            <div class="p-3 border-round-md h-full">
+                <div class="text-center mb-4">
+                    <p-button styleClass="saveModificaton uppercase w-5" label="play" (onClick)="onPlay()"></p-button>
+                    &nbsp;
+                </div>
+                <div class="title mb-3 text-xl">
+                    Questions ({{ quizGameService.quizgamePlay?.question?.length }})
+                </div>
+                <div class="container-question-second">
+                    <div *ngFor="let question of quizGameService.quizgamePlay?.question" class="grid">
+                        <app-visualization-question-quiz class="col-12 mb-2" [my_question]="question"></app-visualization-question-quiz>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 text-center pt-4">
+            <p-button styleClass="saveModificaton uppercase" label="save modification" (onClick)="saveModificaton()"></p-button>
+            &nbsp;
+        </div>
+    </div>
+</div>
