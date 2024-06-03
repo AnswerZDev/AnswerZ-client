@@ -1,0 +1,36 @@
+.quiz-question{
+    border-radius: 10px;
+    box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.2);
+    
+}
+
+.quiz-question-link{
+    text-decoration: none;
+    color: black;
+}
+
+:host ::ng-deep {
+    .button-delete{
+        padding: 0;
+        margin: 0;
+    }
+
+    .bouton-save{
+        color: white;
+        background-color: #9468F1;
+        padding: 15px;
+        border-radius: 15px;
+    }
+}
+
+.number{
+    width: 50px;
+    height: 50px;
+    background-color: #9468F1;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+}

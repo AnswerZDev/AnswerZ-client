@@ -12,7 +12,11 @@ import { JoinRoomComponent } from './pages/join-room/join-room.component'
 import { DropdownModule } from 'primeng/dropdown';
 import { LobbyListComponent } from './components/lobby-list/lobby-list.component' 
 import { QRCodeModule } from 'angularx-qrcode';
-import { GameComponent } from './pages/game/game.component'
+import { GameComponent } from './pages/game/game.component';
+import { QuizEditComponent } from './pages/quiz-edit/quiz-edit.component';
+import { VisualizationQuestionQuizComponent } from './components/visualization-question-quiz/visualization-question-quiz.component'
+import { DialogModule } from 'primeng/dialog';
+import { MyQuizVisualizationComponent } from './pages/my-quiz-visualization/my-quiz-visualization.component';
 import { MessageService } from 'primeng/api'
 
 @NgModule({
@@ -27,6 +31,7 @@ import { MessageService } from 'primeng/api'
         InputTextModule,
         DropdownModule,
         QRCodeModule,
+        DialogModule,
     ],
     declarations: [
         createRoomComponent,
@@ -34,7 +39,10 @@ import { MessageService } from 'primeng/api'
         LobbyComponent,
         JoinRoomComponent,
         LobbyListComponent,
-        GameComponent
+        GameComponent,
+        QuizEditComponent,
+        VisualizationQuestionQuizComponent,
+        MyQuizVisualizationComponent
     ],
     providers: [],
 })
