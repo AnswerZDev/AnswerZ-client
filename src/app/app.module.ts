@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AuthRoutingModule } from './auth/auth-routing.module';
 import { AuthModule } from './auth/auth.module';
 import { ToastModule } from 'primeng/toast';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -11,7 +12,7 @@ import { HomeModule } from './home/home.module';
 import { ErrorsModule } from './errors/errors.module';
 import { FlashcardModule } from './flashcards/flashcards.module';
 import { UserModule } from './user/user.module';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { AdminModule } from './admin/admin.module'
 import { CardsetModule } from './cardset/cardset.module';
 import {CoreModule} from "./core/core.module";
@@ -33,8 +34,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         BrowserModule,
         AppRoutingModule,
         ToastModule,
+        ConfirmDialogModule,
         AuthModule,
-        ToastModule,
         BrowserAnimationsModule,
         HttpClientModule,
         HomeModule,
@@ -42,8 +43,6 @@ export function HttpLoaderFactory(http: HttpClient) {
         FlashcardModule,
         UserModule,
         AdminModule,
-        AuthModule,
-        BrowserAnimationsModule,
         SharedModule,
         CardsetModule,
         NgClass,

@@ -7,7 +7,6 @@ import { KeyFilterModule } from 'primeng/keyfilter';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { HttpClientModule } from '@angular/common/http';
-import { ToastModule } from 'primeng/toast';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { InputTextModule } from 'primeng/inputtext';
 import { PaginatorModule } from 'primeng/paginator';
@@ -16,6 +15,11 @@ import { GenericFlashcardSetComponent } from './pages/generic-flashcard-set/gene
 import { CardsetRoutingModule } from './cardset-routing.module';
 import { FlashcardModule } from 'src/app/flashcards/flashcards.module';
 import { MyCardsetsComponent } from './pages/my-cardsets/my-cardsets.component';
+import { CardsetComponent } from './component/cardset/cardset.component';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { AddFlashcardToSetComponent } from './pages/add-flashcard-to-cardset/add-flahscard-to-cardset.component';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
     imports: [
@@ -31,18 +35,21 @@ import { MyCardsetsComponent } from './pages/my-cardsets/my-cardsets.component';
         ButtonModule,
         HttpClientModule,
         InputTextModule,
-        ToastModule,
+        InputTextareaModule,
         ConfirmPopupModule,
         PaginatorModule,
+        ProgressBarModule,
         FlashcardModule
     ],
     declarations: [
         CreateFlashcardSetComponent,
         EditFlashcardSetComponent,
         GenericFlashcardSetComponent,
-        MyCardsetsComponent
+        MyCardsetsComponent,
+        CardsetComponent,
+        AddFlashcardToSetComponent
     ],
-    providers: [],
+    providers: [MessageService],
     exports: []
 })
 export class CardsetModule { }

@@ -7,13 +7,15 @@ import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { HomeFlashcardComponent } from './pages/home-flashcard/home-flashcard.component';
 import { CardsPreviewComponent } from './component/cards-preview/cards-preview.component';
+import { ModifyPopUpComponent } from './component/modify-pop-up/modify-pop-up.component';
+import { AllFlashcardsSetComponent } from './component/all-flashcards-set/all-flashcards-set.component';
 import { HttpClientModule } from '@angular/common/http';
+import { MessageService } from 'primeng/api';
 
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { InputTextModule } from 'primeng/inputtext';
 import { PaginatorModule } from 'primeng/paginator';
 import { ToastModule } from 'primeng/toast';
-import { AllFlashcardsSetComponent } from './component/all-flashcards-set/all-flashcards-set.component';
 
 @NgModule({
     imports: [
@@ -36,8 +38,9 @@ import { AllFlashcardsSetComponent } from './component/all-flashcards-set/all-fl
         HomeFlashcardComponent,
         CardsPreviewComponent,
         AllFlashcardsSetComponent,
+        ModifyPopUpComponent
     ],
-    providers: [],
+    providers: [MessageService],
     exports: [
         CardsPreviewComponent
     ]

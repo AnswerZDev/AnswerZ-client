@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthenticationApi} from "../../../core/http/authentication/authentication.api";
 import {AuthService} from "../../services/auth.services";
-import {ToastService} from "../../../shared/services/toast.service";
+import { MessageService } from 'primeng/api';
 
 @Component({
     selector: 'app-forgot-password',
@@ -19,7 +19,7 @@ export class ForgotPasswordComponent implements OnInit {
     constructor(
         private readonly router: Router,
         private readonly authService: AuthService,
-        private readonly toastService: ToastService,
+        private readonly messageService: MessageService
     ) { }
 
     ngOnInit(): void {
@@ -35,9 +35,9 @@ export class ForgotPasswordComponent implements OnInit {
         this.authService.resetPasswordObservable.subscribe({
             next: (value) => {
                 if(value) {
-                    this.toastService.toast('success', 'Success', 'Reset password email sent');
-                }else {
-                    this.toastService.toast('error', 'Error', 'Reset password email not sent');
+                    this.messageService.add({ severity: 'success', detail: 'Reset password email sent' });
+                } else {
+                    this.messageService.add({ severity: 'error', detail: 'Reset password email not sent' });
                 }
             }
         });

@@ -11,6 +11,18 @@
 
 .modify {
     background-color: white;
-    border-color: rgba(148,104,241,0.77);
+    border-color: rgba(148,104,241,0.77) !important;
     color: rgba(148,104,241,0.77);
+}
+
+.text {
+    color: rgba(148,104,241,0.77);
+
+}
+
+:host ::ng-deep {
+    .buttonSubmit {
+        background-color: #9468F1;
+        border: #9468F1;
+    }
 }
