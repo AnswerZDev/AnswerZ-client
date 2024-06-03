@@ -15,6 +15,7 @@ export class LobbyComponent implements OnInit {
   nOfParticipants : number = 0;
   url: string = '';
   isHost : boolean = false;
+  userUid: any;
 
   constructor(private route: ActivatedRoute, private router: Router, private socketService: SocketService) {
   }
@@ -59,7 +60,16 @@ export class LobbyComponent implements OnInit {
         this.socketService.getRoomInfo(this.roomId).subscribe((info: any) => {
           this.roomInfo = info;
           this.nOfParticipants = this.roomInfo.clients.length;
-          this.isHost = (this.socketService.getCurrentSocketId() == this.roomInfo.game.host);
+
+          this.socketService.getUserInfos().subscribe((value) => {
+            this.userUid = value;
+            this.isHost = this.userUid.uid == this.roomInfo.game.host;
+
+            console.log(this.isHost)
+          });
+          
+
+   
       });
 
         this.socketService.newUserInLobby(this.roomId).subscribe((newParticipant: any) => {
@@ -84,7 +94,6 @@ export class LobbyComponent implements OnInit {
 
   leaveGame(){
     if(this.roomId){
-      this.isHost = (this.socketService.getCurrentSocketId() == this.roomInfo.game.host);
       this.socketService.leaveGame(this.roomId, this.isHost);
     }
   }
