@@ -18,6 +18,7 @@ import { CreateQuizComponent } from './pages/create-quiz/create-quiz.component'
 import { CardModule } from 'primeng/card'
 import { KeyFilterModule } from 'primeng/keyfilter'
 import { ConfirmPopupModule } from 'primeng/confirmpopup'
+import { InputTextareaModule } from 'primeng/inputtextarea'
 
 @NgModule({
     imports: [
@@ -43,6 +44,7 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup'
         ButtonModule,
         InputTextModule,
         ConfirmPopupModule,
+        InputTextareaModule,
     ],
     declarations: [
         createRoomComponent,

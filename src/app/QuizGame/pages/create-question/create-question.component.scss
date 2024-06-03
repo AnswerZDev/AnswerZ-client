@@ -15,6 +15,8 @@ input::placeholder {
     box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.2);
     font-family: "Montserrat", sans-serif;
     font-weight: 300;
+    transition: 0.2s ease-in-out;
+    opacity: 0.8;
   }
   .submit-button {
     button {
@@ -22,6 +24,12 @@ input::placeholder {
       color: white;
     }
   }
+
+  .p-button:hover {
+    opacity: 1;
+    transition: 0.2s ease-in-out;
+  }
+
   .input-question {
     border: none;
     border-bottom: #9468f1 1px solid;

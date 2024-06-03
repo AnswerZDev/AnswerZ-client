@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { Mode } from 'src/app/cardset/services/cardset.service';
 
 
 @Component({
@@ -12,11 +13,19 @@ import { MessageService } from 'primeng/api';
 
 
 export class CreateQuizComponent{
-    imageUrl: string = ''; // Image qu'on a reçu dans le formulaire de modification
-    imageUpload: string = "../../../../assets/images/image_upload.svg";
-    quizForm!: FormGroup;
-    file: File | null =  null;
-    quizId: number = 0;
+  imageUrl: string = ''; // Image qu'on a reçu dans le formulaire de modification
+  imageUpload: string = "../../../../assets/images/image_upload.svg";
+  quizForm!: FormGroup;
+  file: File | null =  null;
+  quizId: number |undefined;
+
+  modesVisibilite: Mode[] | undefined;
+  modesCategorie: Mode[] | undefined;
+  categoryName: string = '';
+  categoryVisibility: string = '';
+  input_question : String = "";
+  blockChars: RegExp = /^[0-9a-zA-Z\s]+$/;
+  maxPlayers: RegExp = /^[0-9]+$/;
 
 
 
@@ -29,6 +38,30 @@ export class CreateQuizComponent{
       ) {
         this.createForm();
       }
+
+
+      ngOnInit() {
+        //this.onCardsetsSubscribe();
+        //this.onFlashcardesSubscribe();
+        this.modesVisibilite = [
+          { name: 'Public' },
+          { name: 'Private' }
+        ];
+        this.modesCategorie = [
+          { name: 'Mathematics' },
+          { name: 'French' },
+          { name: 'English' },
+          { name: 'History' },
+          { name: 'Geography' },
+          { name: 'Science' },
+          { name: 'Sport' },
+          { name: 'Art' },
+          { name: 'Music' },
+          { name: 'Other' }
+        ];
+      }
+
+
     
       private createForm() {
         this.quizForm = this.formBuilder.group({
@@ -114,6 +147,10 @@ export class CreateQuizComponent{
         this.resizeImage(this.imageUrl);
       }
     }
+  }
+
+  createQuestion(): void {
+  
   }
 
 }
