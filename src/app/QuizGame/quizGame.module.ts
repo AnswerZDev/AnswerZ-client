@@ -17,6 +17,8 @@ import { QuizEditComponent } from './pages/quiz-edit/quiz-edit.component';
 import { VisualizationQuestionQuizComponent } from './components/visualization-question-quiz/visualization-question-quiz.component'
 import { DialogModule } from 'primeng/dialog';
 import { MyQuizVisualizationComponent } from './pages/my-quiz-visualization/my-quiz-visualization.component';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { QuizQuestionComponent } from './pages/quiz-question/quiz-question.component'
 
 @NgModule({
     imports: [
@@ -31,6 +33,7 @@ import { MyQuizVisualizationComponent } from './pages/my-quiz-visualization/my-q
         DropdownModule,
         QRCodeModule,
         DialogModule,
+        ProgressBarModule,
     ],
     declarations: [
         createRoomComponent,
@@ -41,7 +44,8 @@ import { MyQuizVisualizationComponent } from './pages/my-quiz-visualization/my-q
         GameComponent,
         QuizEditComponent,
         VisualizationQuestionQuizComponent,
-        MyQuizVisualizationComponent
+        MyQuizVisualizationComponent,
+        QuizQuestionComponent
     ],
     providers: [],
 })

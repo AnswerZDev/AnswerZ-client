@@ -1,0 +1,32 @@
+.header-container {
+    display: flex;
+    flex-direction: column;
+    margin: 2rem;
+}
+
+.title {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #9468F1;
+}
+
+.theme {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: rgba(148,104,241,0.77);
+}
+
+.progress-container {
+    width: 80%;
+    height: 20px;
+    margin: 2rem;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: #9468F1;
+    transition: width 0.1s ease-in-out;
+}

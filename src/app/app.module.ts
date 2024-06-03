@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AdminModule } from './admin/admin.module'
 import { CardsetModule } from './cardset/cardset.module';
 import { NgClass } from '@angular/common';
+import { QuizGameModule } from './QuizGame/quizGame.module';
 
 @NgModule({
     declarations: [
@@ -25,7 +26,6 @@ import { NgClass } from '@angular/common';
         AppRoutingModule,
         ToastModule,
         AuthModule,
-        ToastModule,
         BrowserAnimationsModule,
         HttpClientModule,
         HomeModule,
@@ -33,11 +33,10 @@ import { NgClass } from '@angular/common';
         FlashcardModule,
         UserModule,
         AdminModule,
-        AuthModule,
-        BrowserAnimationsModule,
         SharedModule,
         NgClass,
         CardsetModule,
+        QuizGameModule
     ],
     providers: [],
     bootstrap: [AppComponent]
