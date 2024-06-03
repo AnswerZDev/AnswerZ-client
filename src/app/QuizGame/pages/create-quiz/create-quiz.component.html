@@ -1,0 +1,23 @@
+<div class="flex flex-column px-5 py-5 md:px-auto  pl-5">
+    <span class="create-question font-medium text-4xl">
+        Create Quiz
+    </span>
+    <div class="flex flex-row px-3 py-3">
+        <p-card class="flex flex-column w-6 mt-5" (dragover)="onDragOver($event)" (drop)="onDrop($event)">
+            <div class="flex flex-column align-items-center">
+                <label for="input-file" class="flex flex-column align-items-center gap-2 pt-3">
+                <input id="input-file" type="file" accept=".png, .jpg, .gif" class="opacity-0 hidden" (change)="handleFileInput($event)"/>
+                <img *ngIf="!quizId" [src]="imageUpload" alt="ImageUpload" class="w-10 h-full border-round-2xl max-h-15rem ImageUpload"/>
+                <img *ngIf="quizId !== null && quizId !== undefined && imageUrl !== ''" [src]="imageUrl" alt="ImageUpload" class="w-10 h-full border-round-2xl max-h-15rem ImageUpload"/>
+                <div class="flex flex-column text-center md:text-auto gap-2">
+                    <span class="font-bold block text-sm md:text-lg align-self-auto md:align-self-center">Upload an image</span>
+                    <span class="text-sm md:text-lg">or drag and drop PNG, JPG, GIF up to 25Mo</span>
+                </div>
+                </label>
+            </div>
+        </p-card>
+        <div class="w-6">
+
+        </div>
+      </div>
+    </div>

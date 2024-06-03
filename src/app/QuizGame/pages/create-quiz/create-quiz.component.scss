@@ -1,0 +1,35 @@
+.create-question {
+    color: #9468f1;
+}
+
+
+.ImageUpload{
+    cursor: pointer;
+}
+
+:host ::ng-deep {
+
+    .p-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        color: rgba(148,104,241,0.77);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 20px;
+        height: 100%;
+    }
+
+    .p-card .p-card-body {
+        padding-top: 0;
+    }
+
+    .p-card .p-card-content {
+        padding: 0;
+    }
+
+    .custom-card .p-card {
+        background: rgba(148,104,241,0.2);
+        padding-top: 0;
+    }
+}
+

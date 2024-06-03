@@ -14,6 +14,10 @@ import { LobbyListComponent } from './components/lobby-list/lobby-list.component
 import { QRCodeModule } from 'angularx-qrcode';
 import { GameComponent } from './pages/game/game.component'
 import { MessageService } from 'primeng/api'
+import { CreateQuizComponent } from './pages/create-quiz/create-quiz.component'
+import { CardModule } from 'primeng/card'
+import { KeyFilterModule } from 'primeng/keyfilter'
+import { ConfirmPopupModule } from 'primeng/confirmpopup'
 
 @NgModule({
     imports: [
@@ -27,6 +31,18 @@ import { MessageService } from 'primeng/api'
         InputTextModule,
         DropdownModule,
         QRCodeModule,
+        CardModule,
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        NgIf,
+        NgClass,
+        DropdownModule,
+        KeyFilterModule,
+        CardModule,
+        ButtonModule,
+        InputTextModule,
+        ConfirmPopupModule,
     ],
     declarations: [
         createRoomComponent,
@@ -34,7 +50,8 @@ import { MessageService } from 'primeng/api'
         LobbyComponent,
         JoinRoomComponent,
         LobbyListComponent,
-        GameComponent
+        GameComponent,
+        CreateQuizComponent,
     ],
     providers: [],
 })

@@ -5,6 +5,7 @@ import { CreateQuestionComponent } from './pages/create-question/create-question
 import { LobbyComponent } from './pages/lobby/lobby.component'
 import { JoinRoomComponent } from './pages/join-room/join-room.component'
 import { GameComponent } from './pages/game/game.component'
+import { CreateQuizComponent } from './pages/create-quiz/create-quiz.component'
 
 const routes: Routes = [
     {
@@ -31,6 +32,10 @@ const routes: Routes = [
     {
         path: 'game/:roomId',
         component: GameComponent,
+    },
+    {
+        path: 'create-quiz',
+        component: CreateQuizComponent,
     },
 ]
 
