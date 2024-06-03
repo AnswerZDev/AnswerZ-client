@@ -1,0 +1,13 @@
+{
+    "app": {
+        "choose-file": "choisir un fichier",
+        "edit": "éditer",
+        "friends": "amis",
+        "signin": "se connecter",
+        "signup": "s'inscrire",
+        "my-profile": "mon profil",
+        "recent-activity": "activité récente",
+        "save": "sauvegarder",
+        "see-my-friends": "voir mes amis"
+    }
+}

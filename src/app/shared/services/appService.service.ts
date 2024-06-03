@@ -1,17 +1,16 @@
-import { EventEmitter, Injectable } from '@angular/core'
-import { MessageService } from 'primeng/api'
-import { Router } from '@angular/router'
+import {EventEmitter, Injectable} from '@angular/core';
 import {SecurityService} from "./security.services";
+import {TranslateService} from "@ngx-translate/core";
 
 @Injectable({
     providedIn: 'root',
 })
 export class AppService {
     constructor(
-        private readonly messageService: MessageService,
-        private readonly router: Router,
-        private readonly securityService: SecurityService,
-    ) {}
+        private readonly _securityService: SecurityService,
+        private readonly _translate: TranslateService
+    ) {
+    }
 
     private isApplicationLoaded = false
 
@@ -22,12 +21,22 @@ export class AppService {
     }
 
     public loadApplication() {
-        this.securityService.load()
-        this._applicationLoad.emit()
-        this.isApplicationLoaded = true
+        this._securityService.load();
+        this._applicationLoad.emit();
+        this.isApplicationLoaded = true;
+        this.initTranslation();
     }
 
     public applicationIsLoaded(): boolean {
         return this.isApplicationLoaded
+    }
+
+    private initTranslation(): void {
+        const lang: string | null = localStorage.getItem('language');
+        if (lang) {
+            this._translate.setDefaultLang(lang);
+            return;
+        }
+        this._translate.setDefaultLang('fr');
     }
 }

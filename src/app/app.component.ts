@@ -24,7 +24,6 @@ export class AppComponent {
     /* Petite stratégie pour ne pas avoir le footer sur les pages souhaitées */
     constructor(
         private readonly applicationService: AppService,
-        private readonly messageService: MessageService
     ) {
         this.applicationService.loadApplication();
     }

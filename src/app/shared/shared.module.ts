@@ -14,6 +14,8 @@ import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
 import { MenuModule } from 'primeng/menu';
 import { TabMenuModule } from 'primeng/tabmenu';
+import {UcFirstPipe} from "./pipes/uc-first.pipe";
+import {TranslateModule} from "@ngx-translate/core";
 
 @NgModule({
     imports: [
@@ -29,17 +31,27 @@ import { TabMenuModule } from 'primeng/tabmenu';
         MenuModule,
         ConfirmPopupModule,
         TabMenuModule,
+        TranslateModule
     ],
     declarations: [
         HeaderComponent,
         FlashcardsSetComponent,
         FooterComponent,
+        UcFirstPipe
     ],
-    providers: [ConfirmService, MessageService, ConfirmationService],
+    providers: [
+        ConfirmService,
+        MessageService,
+        ConfirmationService,
+        UcFirstPipe
+    ],
     exports: [
         HeaderComponent,
         FlashcardsSetComponent,
         FooterComponent,
+        TranslateModule,
+        UcFirstPipe
     ]
 })
-export class SharedModule { }
+export class SharedModule {
+}

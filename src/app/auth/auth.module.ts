@@ -8,6 +8,8 @@ import { ButtonModule } from 'primeng/button';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component'
 import {ToastModule} from "primeng/toast";
 import {RegisterComponent} from "./pages/register/register.component";
+import {TranslateModule} from "@ngx-translate/core";
+import {SharedModule} from "../shared/shared.module";
 
 
 @NgModule({
@@ -21,6 +23,8 @@ import {RegisterComponent} from "./pages/register/register.component";
         ButtonModule,
         ToastModule,
         NgOptimizedImage,
+        TranslateModule,
+        SharedModule
     ],
     declarations: [
         LoginComponent,

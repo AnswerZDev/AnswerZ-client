@@ -12,14 +12,20 @@ import { HomeModule } from './home/home.module';
 import { ErrorsModule } from './errors/errors.module';
 import { FlashcardModule } from './flashcards/flashcards.module';
 import { UserModule } from './user/user.module';
-import { HttpClientModule } from '@angular/common/http';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 import { AdminModule } from './admin/admin.module'
 import { CardsetModule } from './cardset/cardset.module';
 import {CoreModule} from "./core/core.module";
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { MessagesModule } from 'primeng/messages';
 import { NgClass } from '@angular/common';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import {TranslateLoader,TranslateModule} from "@ngx-translate/core";
+import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+import {ConfirmDialogModule} from "primeng/confirmdialog";
+
+export function HttpLoaderFactory(http: HttpClient) {
+    return new TranslateHttpLoader(http)
+}
 
 @NgModule({
     declarations: [
@@ -44,8 +50,16 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
         CoreModule,
         ProgressSpinnerModule,
         MessagesModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient],
+            },
+        }),
     ],
     providers: [],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    exports: []
 })
 export class AppModule { }
