@@ -7,7 +7,6 @@ import { FooterComponent } from './component/footer/footer.component';
 import { FlashcardsSetComponent } from './component/flashcards-set/flashcards-set.component';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
-import { ToastService } from './services/toast.service';
 import { ConfirmService } from './services/confirm.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
@@ -15,6 +14,8 @@ import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
 import { MenuModule } from 'primeng/menu';
 import { TabMenuModule } from 'primeng/tabmenu';
+import {UcFirstPipe} from "./pipes/uc-first.pipe";
+import {TranslateModule} from "@ngx-translate/core";
 
 @NgModule({
     imports: [
@@ -39,7 +40,6 @@ import { TabMenuModule } from 'primeng/tabmenu';
         UcFirstPipe
     ],
     providers: [
-        ToastService,
         ConfirmService,
         MessageService,
         ConfirmationService,
