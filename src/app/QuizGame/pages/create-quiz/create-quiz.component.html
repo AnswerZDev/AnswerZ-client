@@ -2,8 +2,8 @@
     <span class="create-question font-medium text-4xl">
         Create Quiz
     </span>
-    <div class="flex flex-row px-3 py-3">
-        <p-card class="flex flex-column w-6 mt-5" (dragover)="onDragOver($event)" (drop)="onDrop($event)">
+    <div class="flex flex-column md:flex-row px-3 py-3">
+        <p-card class="flex flex-column md:w-6 mt-5" (dragover)="onDragOver($event)" (drop)="onDrop($event)">
             <div class="flex flex-column align-items-center">
                 <label for="input-file" class="flex flex-column align-items-center gap-2 pt-3">
                 <input id="input-file" type="file" accept=".png, .jpg, .gif" class="opacity-0 hidden" (change)="handleFileInput($event)"/>
@@ -16,7 +16,7 @@
                 </label>
             </div>
         </p-card>
-        <div class="flex flex-column w-6 justify-content-around px-5">
+        <div class="flex flex-column md:w-6 justify-content-around px-5">
 
             <div class="flex flex-column pt-5">
                 <span class="create-question font-medium text-xl">
