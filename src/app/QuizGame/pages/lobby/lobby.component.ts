@@ -94,7 +94,7 @@ export class LobbyComponent implements OnInit {
 
   leaveGame(){
     if(this.roomId){
-      this.socketService.leaveGame(this.roomId, this.isHost);
+      this.socketService.leaveGame(this.roomId, this.userUid.uid);
     }
   }
 }

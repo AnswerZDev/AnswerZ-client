@@ -114,7 +114,10 @@ export class SocketService {
     });
   }
 
-  leaveGame(roomId : string, isHost: boolean){
-    this._socket.emit('leave-game', roomId, isHost);
+  leaveGame(roomId : string, userUid :string){
+    this.getUserInfos().subscribe((value) => {
+      this._socket.emit('leave-game', roomId, value);
+    });
+    
   }
 }
