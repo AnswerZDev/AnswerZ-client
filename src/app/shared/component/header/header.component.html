@@ -18,7 +18,7 @@
         <ng-template #isLoginTemplate>
             <p-avatar (click)="menu.toggle($event)"
                       *ngIf="securityService.user && securityService.user.pictureProfileUrl; else noProfilePicture"
-                      [image]="securityService.user.pictureProfileUrl" styleClass="my-2"
+                      [image]="securityService.user.pictureProfileUrl" styleClass="my-2 cursor-pointer"
                       size="large" shape="circle"></p-avatar>
             <ng-template #noProfilePicture>
                 <p-avatar (click)="menu.toggle($event)" icon="pi pi-user" styleClass="my-2" size="normal"

@@ -1,21 +1,21 @@
 <div>
   <div class="flex flex-column lg:flex-row lg:justify-content-start py-2 welcome-container">
     <span class="welcome-message pl-2 lg:pl-7 font-medium">
-      Join us and start to boost your learning !
+      {{ 'app.sub-header-title' | translate | ucFirst }} !
     </span>
   </div>
 
   <div class="flex flex-row justify-content-center lg:justify-content-between">
     <div class="flex flex-column w-full py-2 lg:pl-8 lg:py-5">
       <span class="slogan-home font-medium text-5xl pl-3 lg:text-7xl">
-        Have fun while learning with AnswerZ
+        {{ 'app.home-title' | translate | ucFirst }}
       </span>
       <span class="info-home text-2xl py-3 font-semibold pl-3 lg:text-4xl">
-        Free app for everyone
+        {{ 'app.home-sub-title' | translate | ucFirst }}
       </span>
       <div class="flex flex-row py-1 justify-content-center lg:justify-content-start lg:py-4">
-        <p-button (click)="redirectToLoginPage()" class="home-button1" label="Get Started"></p-button>
-        <p-button (click)="redirectToGithubPage()" class="pl-5" label="Learn More"></p-button>
+        <p-button (click)="redirectToLoginPage()" class="home-button1" [label]="'app.get-started' | translate | ucFirst"></p-button>
+        <p-button (click)="redirectToGithubPage()" class="pl-5" [label]="'app.learn-more' | translate | ucFirst"></p-button>
       </div>
 
       <div class="flex flex-row py-4 px-2 justify-content-between lg:pr-7">
@@ -24,7 +24,7 @@
             100K+
           </span>
           <span class="text-xl lg:text-3xl">
-            Students
+            {{ 'app.students' | translate | ucFirst }}
           </span>
         </div>
 
@@ -42,7 +42,7 @@
             100+
           </span>
           <span class="text-xl lg:text-3xl">
-            Countries
+            {{ 'app.countries' | translate | ucFirst }}
           </span>
         </div>
 
@@ -61,7 +61,7 @@
         <i class="pi pi-search search-bar-home-color lg:text-xl"></i>
         <input id="searchbar-home" class="p-inputtext-lg search-input w-full" type="text" pInputText />
         <label class="search-bar-home-color search-bar-text-small lg:search-bar-text lg:text-xl" htmlFor="searchbar-home">
-          Search for what you want to learn
+          {{ 'app.home-search-placeholder' | translate | ucFirst }}
         </label>
       </span>
     </div>
@@ -73,7 +73,7 @@
 
     <div class="flex flex-column py-3 align-items-center">
       <span class="text-3xl font-semibold explore-set py-3" style="color: white;">
-        Explore More
+        {{ 'app.explore-more' | translate | ucFirst}}
       </span>
       <p-button icon="pi pi-plus button-explore text-xl"></p-button>
     </div>
@@ -83,10 +83,10 @@
   <div class="flex flex-row py-5">
     <div class="flex flex-column lg:pl-5">
       <span class="features-home font-medium text-5xl pl-5">
-        Features
+        {{ 'app.features' | translate | ucFirst }}
       </span>
       <span class="info-home py-3 text-2xl pl-5 lg:font-semibold">
-        Discover the benefits of our platform
+        {{ 'app.features-sub-title' | translate | ucFirst }}
       </span>
 
       <div class="flex lg:flex-row justify-content-center">
@@ -99,10 +99,10 @@
                 </div>
 
                 <span class="features-home text-2xl font-medium pt-2">
-                  Relaxing and Learning
+                  {{ 'app.relaxing-card-title' | translate | ucFirst }}
                 </span>
                 <span class="info-home py-3 w-full">
-                  Resources and tools that help students relax and reduce stress, while enhancing learning.
+                    {{ 'app.relaxing-card-content' | translate | ucFirst }}
                 </span>
 
                 <p-button class="py-2" (click)="redirectToGithubPage()" label="Read More"></p-button>
@@ -115,10 +115,10 @@
                 </div>
 
                 <span class="features-home text-2xl font-medium pt-2">
-                  Certificates
+                    {{ 'app.certificates-card-title' | translate | ucFirst }}
                 </span>
                 <span class="info-home py-3 w-full">
-                  Section highlighting various academic and professional certificates and their requirements and benefits.
+                    {{ 'app.certificates-card-content' | translate | ucFirst }}
                 </span>
 
                 <p-button class="py-2" (click)="redirectToGithubPage()" label="Read More"></p-button>
@@ -131,10 +131,10 @@
                 </div>
 
                 <span class="features-home text-2xl font-medium pt-2">
-                  Creative Thinking
+                    {{ 'app.creative-card-title' | translate | ucFirst }}
                 </span>
                 <span class="info-home py-3 w-full">
-                  Information on courses, programs, and resources for students to develop their creative skills.
+                    {{ 'app.creative-card-content' | translate | ucFirst }}
                 </span>
 
                 <p-button class="py-2" (click)="redirectToGithubPage()" label="Read More"></p-button>
