@@ -1,4 +1,4 @@
-<div class="flex flex-column px-5 py-5 md:px-auto  pl-5">
+<form class="flex flex-column px-5 py-5 md:px-auto  pl-5" [formGroup]="quizForm">
     <span class="create-question font-medium text-4xl">
         Create Quiz
     </span>
@@ -22,7 +22,7 @@
                 <span class="create-question font-medium text-xl">
                     Title
                 </span>
-                <input class="input-question text-xl" type="text" pInputText [(ngModel)]="input_question" placeholder="Enter a title"/>
+                <input class="input-question text-xl" formControlName="selectedTitle"  type="text" pInputText placeholder="Enter a title"/>
             </div>
 
             <div class="flex flex-column pt-5">
@@ -43,7 +43,7 @@
                 <span class="create-question font-medium text-xl py-2">
                     Maximum players
                 </span>
-                <input class="input-question text-xl" type="number" pInputText [(ngModel)]="maxPlayers" placeholder="Enter a number"/>
+                <input class="input-question text-xl" type="number" formControlName="selectedMaxPlayers" pInputText placeholder="Enter a number"/>
             </div>
         </div>
     </div>
@@ -54,4 +54,4 @@
     <div class="flex flex-column align-items-center py-5">
         <p-button (click)="createQuestion()" class="submit-button" label="Submit"></p-button>
     </div>
-</div>
+</form>

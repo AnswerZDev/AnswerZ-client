@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormControlName, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Mode } from 'src/app/cardset/services/cardset.service';
@@ -12,10 +12,17 @@ import { Mode } from 'src/app/cardset/services/cardset.service';
 })
 
 
-export class CreateQuizComponent{
+export class CreateQuizComponent implements OnInit{
   imageUrl: string = ''; // Image qu'on a reçu dans le formulaire de modification
   imageUpload: string = "../../../../assets/images/image_upload.svg";
-  quizForm!: FormGroup;
+
+  quizForm: FormGroup = new FormGroup({
+    selectedCategory: new FormControl(null, Validators.required),
+    selectedTitle: new FormControl(null, Validators.required),
+    selectedVisibility: new FormControl(null, Validators.required),
+    selectedMaxPlayers: new FormControl(null, [Validators.required, Validators.min(0), Validators.max(100)]),
+    description: new FormControl(null, Validators.required),
+  })
   file: File | null =  null;
   quizId: number |undefined;
 
@@ -36,7 +43,6 @@ export class CreateQuizComponent{
         private readonly route: ActivatedRoute,
         private readonly messageService: MessageService
       ) {
-        this.createForm();
       }
 
 
@@ -59,15 +65,6 @@ export class CreateQuizComponent{
           { name: 'Music' },
           { name: 'Other' }
         ];
-      }
-
-
-    
-      private createForm() {
-        this.quizForm = this.formBuilder.group({
-          question: ['', [Validators.required]],
-          answer: ['', [Validators.required]],
-        });
       }
 
 
@@ -150,7 +147,9 @@ export class CreateQuizComponent{
   }
 
   createQuestion(): void {
-  
+    this.quizForm.valid;
+
+    this.router.navigate(["/quiz-game/quiz-edit"]);
   }
 
 }

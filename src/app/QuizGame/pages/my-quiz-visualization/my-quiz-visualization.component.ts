@@ -32,7 +32,7 @@ export class MyQuizVisualizationComponent {
   redirectToCreateQuizGame() {
     this.quizGameCreate = this.quizGameService.createQuizGame();
     this.quizGameService.setQuizgamePlay(this.quizGameCreate);
-    this.router.navigateByUrl('/quiz-game/quiz-edit')
+    this.router.navigate(["/quiz-game/create-quiz"])
   }
 
 }

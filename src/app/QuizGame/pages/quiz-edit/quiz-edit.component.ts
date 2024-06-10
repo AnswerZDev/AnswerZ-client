@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { DropdownChangeEvent } from 'primeng/dropdown';
 import { QuisGameService, QuizGame } from '../../services/quizGame.service';
+import { Router } from '@angular/router';
+
 
 export interface Mode {
   name: string;
@@ -59,7 +61,9 @@ export class QuizEditComponent {
   ];
 
   constructor(
-    public quizGameService: QuisGameService
+    public quizGameService: QuisGameService,
+    private readonly router: Router,
+
   ){
 
   }
@@ -106,4 +110,8 @@ export class QuizEditComponent {
     throw new Error('Method not implemented.');
   }
     
+
+  addQuestion(): void{
+    this.router.navigate(["/quiz-game/create-question"]);
+  }
 }

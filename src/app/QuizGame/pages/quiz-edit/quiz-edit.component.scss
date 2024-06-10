@@ -22,6 +22,17 @@
         color: black;
         border: none;
     }
+
+    .p-button {
+        background-color: #8a61e0;
+        border: 1px solid #8a61e0;
+        box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.2);
+        transition: 0.2s ease-in-out;
+    }
+
+    .button-create-question:enabled:hover{
+        border-radius: 100% !important;
+    }
 }
 
 .title{
