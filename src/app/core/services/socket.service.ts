@@ -27,6 +27,7 @@ export class SocketService {
   }
 
   connection(): void{
+    console.log("connection");
     this._socket.on('connected', () => {
       this.getUserInfos().subscribe((value) => {
         this._socket.emit('give-user-infos', value);
@@ -63,6 +64,14 @@ export class SocketService {
       this._router.navigate(['quiz-game/quizz-lobby', roomId]);
     });
   }
+
+
+  goToNextquestion(roomId: string){
+    this._socket.on('go-next-question', () => {
+      this._socket.emit('ask-question');
+    });
+  }
+
 
   newUserInLobby(roomId: string): Observable<any> {
     return new Observable<any>(observer => {
@@ -120,8 +129,9 @@ export class SocketService {
     this.getUserInfos().subscribe((value) => {
       this._socket.emit('leave-game', roomId, value);
     });
-    
   }
+
+
 
   askQuestion(roomId: string){
     this._socket.emit('ask-question', roomId);

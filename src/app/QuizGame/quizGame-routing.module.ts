@@ -8,6 +8,7 @@ import { GameComponent } from './pages/game/game.component'
 import { QuizEditComponent } from './pages/quiz-edit/quiz-edit.component'
 import { MyCardsetsComponent } from '../cardset/pages/my-cardsets/my-cardsets.component'
 import { MyQuizVisualizationComponent } from './pages/my-quiz-visualization/my-quiz-visualization.component'
+import { QuizQuestionComponent } from './pages/quiz-question/quiz-question.component'
 
 const routes: Routes = [
     {
@@ -43,6 +44,10 @@ const routes: Routes = [
         path: 'quiz-edit',
         component: QuizEditComponent,
     },
+    {
+        path: 'quiz-question',
+        component: QuizQuestionComponent,
+    }
 ]
 
 @NgModule({

@@ -1,6 +1,9 @@
-<!-- game.component.html -->
 <div *ngIf="question$ | async as question">
-    <h2>Nouvelle question:</h2>
-    <p>{{ question }}</p>
-  </div>
-  
+  <h2>Nouvelle question:</h2>
+  <p>{{ question }}</p>
+
+  <form [formGroup]="responseForm" (ngSubmit)="sendResponse()">
+    <textarea formControlName="response" placeholder="Tapez votre réponse ici"></textarea>
+    <button type="submit">Envoyer la réponse</button>
+  </form>
+</div>

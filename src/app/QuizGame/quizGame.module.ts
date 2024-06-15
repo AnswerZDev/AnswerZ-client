@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core'
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { NgClass, NgIf } from '@angular/common'
 import { QuizGameRoutingModule } from './quizGame-routing.module'
 import { createRoomComponent } from './pages/create-room/create-room.component'
@@ -18,6 +18,8 @@ import { VisualizationQuestionQuizComponent } from './components/visualization-q
 import { DialogModule } from 'primeng/dialog';
 import { MyQuizVisualizationComponent } from './pages/my-quiz-visualization/my-quiz-visualization.component';
 import { MessageService } from 'primeng/api'
+import { ProgressBarModule } from 'primeng/progressbar';
+import { QuizQuestionComponent } from './pages/quiz-question/quiz-question.component'
 
 @NgModule({
     imports: [
@@ -32,6 +34,7 @@ import { MessageService } from 'primeng/api'
         DropdownModule,
         QRCodeModule,
         DialogModule,
+        ProgressBarModule,
     ],
     declarations: [
         createRoomComponent,
@@ -42,7 +45,8 @@ import { MessageService } from 'primeng/api'
         GameComponent,
         QuizEditComponent,
         VisualizationQuestionQuizComponent,
-        MyQuizVisualizationComponent
+        MyQuizVisualizationComponent,
+        QuizQuestionComponent
     ],
     providers: [],
 })

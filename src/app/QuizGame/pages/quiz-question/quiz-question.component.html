@@ -1,0 +1,11 @@
+<div class="header-container">
+    <span class="title">John Doe's game</span>
+    <span class="theme">Theme: History</span>
+</div>
+<div class="flex flex-row gap-2 align-items-center">
+    <div class="progress-container">
+        <div class="progress-bar" [style.width.%]="progressPercentage"
+             [ngClass]="progressPercentage === 100 ? 'full-bar' : 'decreasing-bar'"></div>
+    </div>
+    <i class="pi pi-stopwatch"></i>
+</div>
