@@ -23,7 +23,7 @@
                     </div>
                     <div class="flex flex-row justify-content-around pt-3">
                         <p-button icon="pi pi-pencil" styleClass="flex justify-content-center cardset-button" (click)="redirectToEdit(cardset.id)"></p-button>
-                        <p-button icon="pi pi-play" styleClass=" flex justify-content-center cardset-button"></p-button>
+                        <p-button icon="pi pi-play" styleClass=" flex justify-content-center cardset-button" (click)="redirectToPlay(cardset.id)"></p-button>
                         <p-button icon="pi pi-trash" styleClass="flex justify-content-center cardset-button" (click)="deleteCardset($event, cardset.id)"></p-button>
                     </div>
                 </div>

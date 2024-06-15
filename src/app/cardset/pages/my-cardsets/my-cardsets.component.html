@@ -14,7 +14,10 @@
     </div>
 </div>
 <app-cardset class="flex" [displayedCardsets]="displayedCardsets"></app-cardset>
-<div class="flex flex-column align-items-center pt-7">
+<div class="flex flex-column align-items-center pt-7 mb-5">
     <p-paginator [rows]="pageSize" [totalRecords]="totalRecords" (onPageChange)="paginate($event)" class="mt-2"></p-paginator>
+</div>
+<div class="text-center">
+    <p-button (click)="redirectToAllCardsetPublic()" class="pl-5" label="Explore all"></p-button>
 </div>
 

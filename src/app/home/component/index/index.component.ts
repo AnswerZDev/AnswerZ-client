@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
     styleUrls: ['./index.component.scss'],
 })
 export class IndexComponent {
+
     constructor(private readonly router: Router) { }
 
     /**
@@ -30,6 +31,8 @@ export class IndexComponent {
         window.open("https://github.com/AnswerZDev/AnswerZ", "_blank");
     }
 
-    tabCardSet = [];
+    redirectToAllCardsetPublic() {
+        this.router.navigate(['/cardset/all-cardset']);
+    }
 
 }

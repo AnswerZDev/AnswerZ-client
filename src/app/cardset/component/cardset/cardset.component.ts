@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { CardsetService } from '../../services/cardset.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { Cardset } from 'src/app/core/models/api/cardset';
 
 @Component({
   selector: 'app-cardset',
@@ -9,6 +10,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
   styleUrls: ['./cardset.component.scss'],
 })
 export class CardsetComponent {
+
   imageInformation: string = '../../../../assets/images/information.svg';
   imageWorld: string = '../../../../assets/images/world.svg';
   @Input() displayedCardsets: any[] = [];
@@ -64,5 +66,14 @@ export class CardsetComponent {
         this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
       }
     });
+  }
+
+  redirectToPlay(cardsetId: number) {
+    this.cardsetsService.getCardsetById(cardsetId).subscribe({
+      next: (result) => {
+        this.cardsetsService.setcardsetPlay(result);
+        this.router.navigateByUrl('/flashcard/play-flashcard');
+      }
+    });    
   }
 }

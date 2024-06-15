@@ -13,6 +13,7 @@ export interface Mode {
 })
 export class CardsetService {
   private _cardsets: Cardset[] = [];
+  private cardset_play!: Cardset;
 
   cardsetForm!: FormGroup;
 
@@ -43,6 +44,14 @@ export class CardsetService {
     return this._cardsetsChange;
   }
 
+  get cardsetPlay(){
+    return this.cardset_play;
+ }
+
+  setcardsetPlay(cardset: Cardset){
+    this.cardset_play = cardset;
+  }
+
   public getMyPrivateCardsets(): void {
     this.cardsetApi.getMyCardsets("Private").subscribe({
       next: (data: any) => {
@@ -71,6 +80,16 @@ export class CardsetService {
         return cardset;
       })
     );
+  }
+
+  getAllCardsetPublic(): void{
+    this.cardsetApi.getAllCardsetPublic().subscribe({
+        next: (data: any) => {
+            this._cardsets = data.member;
+        },
+        error: () => {
+        }
+    });
   }
 
   public createCardset(data: any, file?: File): void {

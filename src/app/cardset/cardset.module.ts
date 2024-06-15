@@ -20,6 +20,12 @@ import { ProgressBarModule } from 'primeng/progressbar';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { AddFlashcardToSetComponent } from './pages/add-flashcard-to-cardset/add-flahscard-to-cardset.component';
 import { MessageService } from 'primeng/api';
+import { AllCardsetComponent } from './pages/all-cardset/all-cardset.component';
+import { DialogModule } from 'primeng/dialog';
+import { VisualizationCardsetComponent } from './component/visualization-cardset/visualization-cardset.component';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { SearchCardsetComponent } from './component/search-cardset/search-cardset.component';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
     imports: [
@@ -36,10 +42,15 @@ import { MessageService } from 'primeng/api';
         HttpClientModule,
         InputTextModule,
         InputTextareaModule,
+        ToastModule,
+        ButtonModule,
+        FlashcardModule,
         ConfirmPopupModule,
         PaginatorModule,
         ProgressBarModule,
-        FlashcardModule
+        FlashcardModule,
+        DialogModule,
+        AutoCompleteModule
     ],
     declarations: [
         CreateFlashcardSetComponent,
@@ -47,7 +58,11 @@ import { MessageService } from 'primeng/api';
         GenericFlashcardSetComponent,
         MyCardsetsComponent,
         CardsetComponent,
-        AddFlashcardToSetComponent
+        AddFlashcardToSetComponent,
+        MyCardsetsComponent,
+        AllCardsetComponent,
+        VisualizationCardsetComponent,
+        SearchCardsetComponent
     ],
     providers: [MessageService],
     exports: []

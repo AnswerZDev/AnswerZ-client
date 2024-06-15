@@ -14,6 +14,12 @@ export class Cardset extends Item {
         this._createdAt = data.createdAt;
         this._image = data.image;
         this._flashcards = data.flashcards;
+
+        // if (data.flashcards !== undefined) {
+        //     data.flashcards.forEach( (element: Flashcard) => {
+        //         this._flashcards.push(element);
+        //     });
+        // }
     }
 
     private _author: User | undefined;

@@ -1,3 +1,4 @@
+import { Flashcard } from "./flashcard";
 import {Item} from "./hydra/item";
 import { User } from "./user";
 
@@ -11,13 +12,14 @@ export class FlashcardSet extends Item {
         this._visibility = data.visibility;
         this._numberOfGoodAnswer = data.numberOfGoodAnswer;
         this._createdAt = data.createdAt;
-        data.flashcards !== undefined ? 
-            data.flashcards.map(
-                (flashcard: any) => this._flashcards.push(
-                    new Flashcard(flashcard)
-                )
-            )
-        : undefined;
+        
+        // data.flashcards !== undefined ? 
+        //     data.flashcards.map(
+        //         (flashcard: any) => this._flashcards.push(
+        //             new Flashcard(flashcard)
+        //         )
+        //     )
+        // : undefined;
     }
 
     private _name: string | undefined;

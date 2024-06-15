@@ -19,4 +19,9 @@ describe('IndexComponent', () => {
     it('should create', () => {
         expect(component).toBeTruthy()
     })
+
+    it('should have the correct title', () => {
+        const titleElement = fixture.nativeElement.querySelector('h1');
+        expect(titleElement.textContent).toBe('romain');
+      });
 })

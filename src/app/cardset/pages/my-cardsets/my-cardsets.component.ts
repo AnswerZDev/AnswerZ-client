@@ -11,6 +11,7 @@ import { MessageService } from 'primeng/api';
   styleUrls: ['./my-cardsets.component.scss']
 })
 export class MyCardsetsComponent implements OnInit {
+
   modesVisibilite: Mode[] | undefined;
   selectedModeVisibilities: Mode | undefined = { name: 'Private' };
 
@@ -94,5 +95,9 @@ export class MyCardsetsComponent implements OnInit {
     } else {
         this.totalPages = Math.ceil(this.totalRecords / this.pageSize);
     }
+  }
+
+  redirectToAllCardsetPublic() {
+    this.router.navigateByUrl('/cardset/all-cardset');
   }
 }
