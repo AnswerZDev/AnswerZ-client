@@ -67,7 +67,7 @@ export class SocketService {
 
 
   goToNextquestion(roomId: string){
-    this._socket.on('go-next-question', () => {
+    this._socket.on('next-question', () => {
       this._socket.emit('ask-question');
     });
   }
@@ -140,7 +140,7 @@ export class SocketService {
 
   listenToQuestion(): Observable<any> {
     return new Observable<any>(observer => {
-      this._socket.on('question', (data: { question: string }) => {
+      this._socket.on('next-question', (data: { question: string }) => {
         observer.next(data);
       });
     });

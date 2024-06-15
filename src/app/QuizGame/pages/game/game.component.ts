@@ -28,8 +28,8 @@ export class GameComponent implements OnInit {
     });
     
     if (this.roomId) {
-      this.socketService.askQuestion(this.roomId);
-      
+       this.socketService.askQuestion(this.roomId)
+
       this.socketService.listenToQuestion().subscribe((question: any) => {
         console.log('New question:', question);
         this.questionSubject.next(question);
