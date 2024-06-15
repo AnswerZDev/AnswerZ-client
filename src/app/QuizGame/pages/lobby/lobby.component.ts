@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { take } from 'rxjs';
 import { SocketService } from 'src/app/core/services/socket.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { SocketService } from 'src/app/core/services/socket.service';
   styleUrls: ['./lobby.component.scss']
 })
 export class LobbyComponent implements OnInit {
-  roomInfo: any;
+  roomInfo: any | undefined;
   roomId: string | null | undefined;
   isFliped: boolean = false;
   direction: 'left' | 'right' = 'right';
@@ -18,6 +19,7 @@ export class LobbyComponent implements OnInit {
   userUid: any;
 
   constructor(private route: ActivatedRoute, private router: Router, private socketService: SocketService) {
+    
   }
 
 
@@ -42,9 +44,9 @@ export class LobbyComponent implements OnInit {
     }
   }
 
+
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
-
       // TODO : REWORK QR CODE FUNCTIONS
       // THIS IS JUST A QUICK POC
       this.roomId = params.get('roomId');
@@ -54,11 +56,11 @@ export class LobbyComponent implements OnInit {
 
 
       if(this.roomId != null){
-
         this.socketService.listenToGameStarted(this.roomId);
 
         this.socketService.getRoomInfo(this.roomId).subscribe((info: any) => {
           this.roomInfo = info;
+  
           this.nOfParticipants = this.roomInfo.clients.length;
 
           this.socketService.getUserInfos().subscribe((value) => {
@@ -67,10 +69,11 @@ export class LobbyComponent implements OnInit {
 
             console.log(this.isHost)
           });
-          
-
-   
       });
+
+
+
+      
 
         this.socketService.newUserInLobby(this.roomId).subscribe((newParticipant: any) => {
             console.log('New user joined:', newParticipant);
