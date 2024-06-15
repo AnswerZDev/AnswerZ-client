@@ -16,13 +16,14 @@ export class GameComponent implements OnInit {
   constructor(private router: Router, private socketService: SocketService, private route: ActivatedRoute) {
     this.route.paramMap.subscribe(params => {
       this.roomId = params.get('roomId');
+
     });
   }
 
   ngOnInit(): void {
     if (this.roomId) {
-      this.socketService.readyTostart(this.roomId);
-  
+      this.socketService.askQuestion(this.roomId);
+      
       this.socketService.listenToQuestion().subscribe((question: any) => {
         console.log('New question:', question);
         this.questionSubject.next(question);

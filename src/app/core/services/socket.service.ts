@@ -123,9 +123,10 @@ export class SocketService {
     
   }
 
-  readyTostart(roomId : string){
-    this._socket.emit('ready-to-play', roomId);
+  askQuestion(roomId: string){
+    this._socket.emit('ask-question', roomId);
   }
+
 
   listenToQuestion(): Observable<any> {
     return new Observable<any>(observer => {
