@@ -112,6 +112,8 @@ export class SocketService {
     this._socket.once('host-leave', () => {
       this._router.navigate(['quiz-game/join-game']);
     });
+
+    // TODO : DECONNECT USER CHeck
   }
 
   leaveGame(roomId : string, userUid :string){
@@ -120,4 +122,19 @@ export class SocketService {
     });
     
   }
+
+  readyTostart(roomId : string){
+    this._socket.emit('ready-to-play', roomId);
+  }
+
+  listenToQuestion(): Observable<any> {
+    return new Observable<any>(observer => {
+      this._socket.on('question', (data: { question: string }) => {
+        observer.next(data);
+      });
+    });
+  }
+
+
+
 }
