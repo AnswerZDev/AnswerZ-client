@@ -63,4 +63,8 @@ aio/content/examples/.DS_Store
 .env
 
 # environment files
-src/environments/ 
+src/environments/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
