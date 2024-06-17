@@ -24,8 +24,10 @@
         </div>
     </p-card>
   </div>
-  <div class="flex flex-row flex-wrap justify-content-center m-5 gap-5">
-    <app-quiz-answer *ngFor="let answer of (question$ | async)?.answers" [answer]="answer"></app-quiz-answer>
+  <div *ngIf="roomInfo">
+    <div class="flex flex-row flex-wrap justify-content-center m-5 gap-5">
+      <app-quiz-answer *ngFor="let answer of (question$ | async)?.answers" [answer]="answer" (click)="selectAnswer(answer)"></app-quiz-answer>
+    </div>
   </div>
 </div>
 <div *ngIf="!roomInfo" class="game-container">

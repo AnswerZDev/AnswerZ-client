@@ -14,10 +14,7 @@ export class GameComponent implements OnInit {
   private questionSubject = new BehaviorSubject<any>(null);
   question$: Observable<any> = this.questionSubject.asObservable();
 
-  selectedQuestions = [
-    '39-45',
-    '13-16'
-  ];
+  selectedQuestions : string[] = [];
 
   roomInfo: any;
 
@@ -46,10 +43,18 @@ export class GameComponent implements OnInit {
     this.socketService.giveAnswers(this.roomId).subscribe(() => {
       const currentQuestion = this.questionSubject.getValue();
       if (this.roomId && currentQuestion) {
-        console.log(JSON.stringify(currentQuestion.question))
         this.socketService.sendAnswer(this.roomId, currentQuestion.question as string, this.selectedQuestions);
       }
     });
+    }
+  }
+
+
+  selectAnswer(answer: string) {
+    if (!this.selectedQuestions.includes(answer)) {
+      this.selectedQuestions.push(answer);
+    } else {
+      this.selectedQuestions = this.selectedQuestions.filter(a => a !== answer);
     }
   }
 }
