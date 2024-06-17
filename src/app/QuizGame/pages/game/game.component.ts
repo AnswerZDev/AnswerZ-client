@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SocketService } from 'src/app/core/services/socket.service';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -15,11 +15,22 @@ export class GameComponent implements OnInit {
   private questionSubject = new BehaviorSubject<any>(null);
   question$: Observable<any> = this.questionSubject.asObservable();
 
-  constructor(private router: Router, private socketService: SocketService, private route: ActivatedRoute,  private fb: FormBuilder) {
+  totalTimeInSeconds: number = 30; // 30 secondes
+  progressPercentage: number = 0;
+  isClicked: boolean = false;
+  responses: any[] = [];
+  roomInfo: any;
 
+  constructor(private router: Router, private socketService: SocketService, private route: ActivatedRoute,  private fb: FormBuilder) {
     this.route.paramMap.subscribe(params => {
       this.roomId = params.get('roomId');
     });
+
+    if(this.roomId){
+      this.socketService.getRoomInfo(this.roomId).subscribe((info: any) => {
+        this.roomInfo = info;
+      });
+    }
   }
 
   ngOnInit(): void {
@@ -42,5 +53,5 @@ export class GameComponent implements OnInit {
   sendResponse() {
     const payload = { response: this.responseForm.get('response')?.value };
   }
-
 }
+
