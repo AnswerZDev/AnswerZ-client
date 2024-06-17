@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Question } from 'src/app/core/models/api/question';
 import { MessageService } from 'primeng/api';
+import { QuizQuestionsService } from '../../services/quizQuestions.service';
 
 
 
@@ -69,7 +70,8 @@ export class CreateQuestionComponent{
     */
 
     constructor(
-        private readonly messageService: MessageService
+        private readonly messageService: MessageService,
+        private readonly questionsService: QuizQuestionsService
     ) { }
 
     /**
@@ -98,6 +100,10 @@ export class CreateQuestionComponent{
             return;
         }
 
+        if(this.list_answers.length === 0){
+            this.list_answers = ["True", "False"]
+        }
+
         //let ques = new Question([this.input_question,this.myTime.duration,this.myPoints.points,this.myChoice.type, this.list_answers]);
         let ques = new Question({
             description: this.input_question,
@@ -110,7 +116,7 @@ export class CreateQuestionComponent{
         console.log('Question created:', ques);
 
         // add to the output the created question so the parent's component can get the question
-        this.questionCreated.emit(ques);
+        this.questionsService.addQuestion(ques);
         
         window.history.back();
 

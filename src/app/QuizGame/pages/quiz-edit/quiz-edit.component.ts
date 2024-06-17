@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { DropdownChangeEvent } from 'primeng/dropdown';
 import { QuisGameService, QuizGame } from '../../services/quizGame.service';
 import { Router } from '@angular/router';
+import { QuizQuestionsService } from '../../services/quizQuestions.service';
+import { Question } from 'src/app/core/models/api/question';
 
 
 export interface Mode {
@@ -36,6 +38,8 @@ export class QuizEditComponent {
   numberQuestion: number = 1;
   quizGameEdit?: QuizGame;
 
+  questionsList: Question[] = [];
+
   listeQuestion: QuestionQuiz[] = [
     {   
       question: "qui est le plus beau",
@@ -63,12 +67,14 @@ export class QuizEditComponent {
   constructor(
     public quizGameService: QuisGameService,
     private readonly router: Router,
-
+    private readonly questionsService: QuizQuestionsService,
   ){
 
   }
 
   ngOnInit(): void {
+
+    this.questionsList = this.questionsService.getAll();
 
     this.modesVisibilite = [
       { name: 'Public' },
@@ -92,6 +98,8 @@ export class QuizEditComponent {
       { name: '14 players' },
       { name: '15 players' },
     ];
+
+    console.log(this.questionsService.getAll());
   }
 
   saveModificaton() {

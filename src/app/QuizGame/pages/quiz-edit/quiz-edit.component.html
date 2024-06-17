@@ -17,11 +17,11 @@
                     &nbsp;
                 </div>
                 <div class="title mb-3 text-xl">
-                    Questions ({{ quizGameService.quizgamePlay?.question?.length }})
+                    Questions ({{ questionsList.length }})
                     <p-button label="" icon="pi pi-plus"  class="button-create-question" (onClick)="addQuestion()"/>
                 </div>
                 <div class="container-question-second">
-                    <div *ngFor="let question of quizGameService.quizgamePlay?.question" class="grid">
+                    <div *ngFor="let question of questionsList" class="grid">
                         <app-visualization-question-quiz class="col-12 mb-2" [my_question]="question"></app-visualization-question-quiz>
                     </div>
                 </div>

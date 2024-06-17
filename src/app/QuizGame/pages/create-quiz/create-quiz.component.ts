@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormControlName, FormGroup, Validators } from
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Mode } from 'src/app/cardset/services/cardset.service';
+import { Quiz } from 'src/app/core/models/api/quiz';
 
 
 @Component({
@@ -149,7 +150,19 @@ export class CreateQuizComponent implements OnInit{
   createQuestion(): void {
     this.quizForm.valid;
 
-    this.router.navigate(["/quiz-game/quiz-edit"]);
+    const formData = this.quizForm.value;
+    const newQuiz = new Quiz({
+      title: formData.selectedTitle,
+      description: formData.description,
+      visibility: formData.selectedVisibility,
+      category: formData.selectedCategory,
+      max_players: formData.selectedMaxPlayers,
+      image: this.imageUrl // ou this.imageUpload, selon votre logique
+    });
+
+    console.log(newQuiz);
+
+    //this.router.navigate(["/quiz-game/quiz-edit"]);
   }
 
 }

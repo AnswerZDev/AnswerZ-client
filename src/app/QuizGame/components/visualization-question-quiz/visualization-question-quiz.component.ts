@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { QuestionQuiz } from '../../pages/quiz-edit/quiz-edit.component';
 import { DropdownChangeEvent } from 'primeng/dropdown';
 import { Router } from '@angular/router';
+import { Question } from 'src/app/core/models/api/question';
 
 
 export interface Time {
@@ -26,7 +27,7 @@ export class VisualizationQuestionQuizComponent {
   point: Point[] = [];
   visible: boolean = false;
 
-  @Input() my_question!: QuestionQuiz; 
+  @Input() my_question!: Question; 
 
   constructor(
     private router: Router
@@ -82,8 +83,8 @@ export class VisualizationQuestionQuizComponent {
   }
 
   saveModification() {
-    this.my_question.point = this.selectedpoint.point;
-    this.my_question.time = this.selectedpoint.point;
+    this.my_question.points = this.selectedpoint.point;
+    this.my_question.duration = this.selectedtime.time.toString();
     this.visible = false;
   }
 }

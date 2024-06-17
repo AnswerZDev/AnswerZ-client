@@ -10,7 +10,7 @@ export class Question extends Item {
 
     private _question_type: string | undefined;
 
-    private _choices: string[] | undefined;
+    private _choices: string[] = [];
 
 
     constructor(data: any) {
@@ -39,7 +39,15 @@ export class Question extends Item {
         return this._question_type;
     }
 
-    public get choices(): string[] | undefined {
+    public get choices(): string[] {
         return this._choices;
+    }
+
+    public set duration(value: string | undefined) {
+        this._duration = value;
+    }
+
+    public set points(value: number | undefined) {
+        this._points = value;
     }
 }

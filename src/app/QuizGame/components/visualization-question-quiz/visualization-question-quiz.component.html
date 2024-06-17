@@ -2,10 +2,13 @@
     <div class="quiz-question py-3 px-3">
         <div class="grid grid-nogutter">
             <div class="col-2 text-xl font-semibold">
-                1.
+                {{ my_question.question_type }}
             </div>
-            <div class="col-8 text-xl font-semibold">
-                {{ my_question.question }}
+            <div class="text-xl font-semibold">
+                &nbsp;-&nbsp;
+            </div>
+            <div class="col-7 text-xl font-semibold">
+                {{ my_question.description }}
             </div>
             <div class="col-2 text-xl font-semibold flex justify-content-end">
                 <p-button (click)="showDialog()" icon="pi pi-eye" styleClass="button-delete"></p-button>
@@ -32,24 +35,24 @@
                             <div class="col-12">
                                 Question
                                 <div class="text-xl border-1 border-round p-2">
-                                    {{ my_question.question }}
+                                    {{ my_question.description }}
                                 </div>
                             </div>
 
                             <div class="col-12">
                                 Réponse
                                 <div class="text-xl border-1 border-round p-3 mb-2">
-                                    {{ my_question.reponse[0] }}
+                                    {{ my_question.choices[0] }}
                                 </div>
                                 <div class="text-xl border-1 border-round p-3 mb-2">
-                                    {{ my_question.reponse[1] }}
+                                    {{ my_question.choices[1] }}
                                 </div>
                                 <div *ngIf="my_question.type">
                                     <div class="text-xl border-1 border-round p-3 mb-2">
-                                        {{ my_question.reponse[2] }}
+                                        {{ my_question.choices[2] }}
                                     </div>
                                     <div class="text-xl border-1 border-round p-3">
-                                        {{ my_question.reponse[3] }}
+                                        {{ my_question.choices[3] }}
                                     </div>
                                 </div>
                             </div>
@@ -71,7 +74,7 @@
                 <p-button (onClick)="onDeleteQuestion()" icon="pi pi-times" severity="danger " styleClass="button-delete"/>
             </div>
             <div class="col-12 bg-blue">
-                {{ my_question.reponse[0] }} , {{ my_question.reponse[1]}}...
+                {{ my_question.choices[0] }} , {{ my_question.choices[1]}}...
             </div>
         </div>
     </div>
