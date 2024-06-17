@@ -9,13 +9,13 @@ export class QuizQuestionComponent implements OnInit{
 
   totalTimeInSeconds: number = 30; // 30 secondes
   progressPercentage: number = 0;
+  isClicked: boolean = false;
+  responses: any[] = [];
 
   constructor() {}
 
   ngOnInit() {
     this.progressPercentage = 100;
-
-    // Décrémenter le temps toutes les secondes
     setInterval(() => {
       if (this.totalTimeInSeconds > 0) {
         this.totalTimeInSeconds--;

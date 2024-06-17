@@ -20,6 +20,8 @@ import { MyQuizVisualizationComponent } from './pages/my-quiz-visualization/my-q
 import { MessageService } from 'primeng/api'
 import { ProgressBarModule } from 'primeng/progressbar';
 import { QuizQuestionComponent } from './pages/quiz-question/quiz-question.component'
+import { CardModule } from 'primeng/card'
+import { QuizAnswerComponent } from './components/quiz-answer/quiz-answer.component'
 
 @NgModule({
     imports: [
@@ -35,6 +37,7 @@ import { QuizQuestionComponent } from './pages/quiz-question/quiz-question.compo
         QRCodeModule,
         DialogModule,
         ProgressBarModule,
+        CardModule
     ],
     declarations: [
         createRoomComponent,
@@ -46,7 +49,8 @@ import { QuizQuestionComponent } from './pages/quiz-question/quiz-question.compo
         QuizEditComponent,
         VisualizationQuestionQuizComponent,
         MyQuizVisualizationComponent,
-        QuizQuestionComponent
+        QuizQuestionComponent,
+        QuizAnswerComponent
     ],
     providers: [],
 })
