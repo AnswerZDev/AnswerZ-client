@@ -10,15 +10,15 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./game.component.scss']
 })
 export class GameComponent implements OnInit {
-  responseForm!: FormGroup;
   roomId: string | null | undefined;
   private questionSubject = new BehaviorSubject<any>(null);
   question$: Observable<any> = this.questionSubject.asObservable();
 
-  totalTimeInSeconds: number = 30; // 30 secondes
-  progressPercentage: number = 0;
-  isClicked: boolean = false;
-  responses: any[] = [];
+  selectedQuestions = [
+    '39-45',
+    '13-16'
+  ];
+
   roomInfo: any;
 
   constructor(private router: Router, private socketService: SocketService, private route: ActivatedRoute,  private fb: FormBuilder) {
@@ -34,24 +34,23 @@ export class GameComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.responseForm = this.fb.group({
-      response: ['']
-    });
     
     if (this.roomId) {
        this.socketService.askQuestion(this.roomId)
 
       this.socketService.listenToQuestion().subscribe((question: any) => {
-        console.log('New question:', question);
         this.questionSubject.next(question);
       });
 
-     
+      
+    this.socketService.giveAnswers(this.roomId).subscribe(() => {
+      const currentQuestion = this.questionSubject.getValue();
+      if (this.roomId && currentQuestion) {
+        console.log(JSON.stringify(currentQuestion.question))
+        this.socketService.sendAnswer(this.roomId, currentQuestion.question as string, this.selectedQuestions);
+      }
+    });
     }
-  }
-
-  sendResponse() {
-    const payload = { response: this.responseForm.get('response')?.value };
   }
 }
 

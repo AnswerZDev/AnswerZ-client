@@ -131,10 +131,29 @@ export class SocketService {
     });
   }
 
-
-
   askQuestion(roomId: string){
     this._socket.emit('ask-question', roomId);
+  }
+
+  giveAnswers(roomId: string): Observable<any> {
+    return new Observable<any>(observer => {
+      this._socket.on('ask-answer', () => {
+        observer.next();
+      });
+    });
+  }
+
+
+  sendAnswer(roomId: string, question: string, answers: string[]): void {
+    this._socket.emit('response-answer', { roomId: roomId, question: question, answers});
+  }
+
+  listenToStats(): Observable<any> {
+    return new Observable<any>(observer => {
+      this._socket.on('question-stats', (data: { stats: any }) => {
+        observer.next(data);
+      });
+    });
   }
 
 
