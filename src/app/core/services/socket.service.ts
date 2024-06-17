@@ -150,7 +150,8 @@ export class SocketService {
 
   listenToStats(): Observable<any> {
     return new Observable<any>(observer => {
-      this._socket.on('question-stats', (data: { stats: any }) => {
+      this._socket.on('question-stats', (data: any) => {
+        console.log(data)
         observer.next(data);
       });
     });

@@ -39,6 +39,9 @@ export class GameComponent implements OnInit {
         this.questionSubject.next(question);
       });
 
+      this.socketService.listenToStats().subscribe(() => {
+      });
+
       
     this.socketService.giveAnswers(this.roomId).subscribe(() => {
       const currentQuestion = this.questionSubject.getValue();
