@@ -21,6 +21,7 @@ import { MessageService } from 'primeng/api'
 import { ProgressBarModule } from 'primeng/progressbar';
 import { CardModule } from 'primeng/card'
 import { QuizAnswerComponent } from './components/quiz-answer/quiz-answer.component'
+import { StatsGameComponent } from './components/stats-game/stats-game.component'
 
 @NgModule({
     imports: [
@@ -48,7 +49,8 @@ import { QuizAnswerComponent } from './components/quiz-answer/quiz-answer.compon
         QuizEditComponent,
         VisualizationQuestionQuizComponent,
         MyQuizVisualizationComponent,
-        QuizAnswerComponent
+        QuizAnswerComponent,
+        StatsGameComponent
     ],
     providers: [],
 })

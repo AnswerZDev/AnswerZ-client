@@ -18,6 +18,13 @@ export class GameComponent implements OnInit {
   roomInfo: any;
   value: number = 30;
 
+  totalTimeInSeconds: number = 30; // 30 secondes
+  progressPercentage: number = 0;
+  isClicked: boolean = false;
+
+  statsPercentage: number = 0;
+  globalAnswersStats: any | undefined;
+  
 
   constructor(private router: Router, private socketService: SocketService, private route: ActivatedRoute,  private fb: FormBuilder) {
     this.route.paramMap.subscribe(params => {
@@ -32,6 +39,14 @@ export class GameComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.progressPercentage = 100;
+    setInterval(() => {
+      if (this.totalTimeInSeconds > 0) {
+        this.totalTimeInSeconds--;
+        this.progressPercentage = (this.totalTimeInSeconds / 30) * 100;
+      }
+    }, 1000);
     
     if (this.roomId) {
        this.socketService.askQuestion(this.roomId)
@@ -40,7 +55,9 @@ export class GameComponent implements OnInit {
         this.questionSubject.next(question);
       });
 
-      this.socketService.listenToStats().subscribe(() => {
+      this.socketService.listenToStats().subscribe((answers) => {
+        this.globalAnswersStats = answers;
+        this.updateStatBar();
       });
 
       
@@ -60,6 +77,11 @@ export class GameComponent implements OnInit {
     } else {
       this.selectedQuestions = this.selectedQuestions.filter(a => a !== answer);
     }
+  }
+
+  updateStatBar() {
+    const totalPossibleSelections = 4; // Assuming there are 4 possible answers
+    this.progressPercentage = (this.selectedQuestions.length / totalPossibleSelections) * 100;
   }
 }
 
