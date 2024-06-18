@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Mode } from 'src/app/cardset/services/cardset.service';
 import { Quiz } from 'src/app/core/models/api/quiz';
+import {QuizQuestionsService} from "../../services/quizQuestions.service";
 
 
 @Component({
@@ -22,6 +23,7 @@ export class CreateQuizComponent implements OnInit {
         selectedMaxPlayers: new FormControl(null, [Validators.required, Validators.min(0), Validators.max(100)]),
         description: new FormControl(null, Validators.required),
     });
+
     file: File | null = null;
     quizId: number | undefined;
 

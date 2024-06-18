@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { QuizApi } from "src/app/core/http/quiz/quiz.api";
 import { Question } from "src/app/core/models/api/question";
 import { Quiz } from "src/app/core/models/api/quiz";
+import {QuestionApi} from "../../core/http/question/question.api";
 
 @Injectable({
     providedIn: 'root',
@@ -9,18 +10,14 @@ import { Quiz } from "src/app/core/models/api/quiz";
 export class QuizQuestionsService {
     private _questions: Question[] = [];
 
-    constructor(
-        private readonly _quizApi: QuizApi
-    ){}
-
     public get questions(): Question[] {
         return this._questions;
     }
 
     constructor(
-        private readonly _questionApi: QuestionApi
-    ){
-    }
+        private readonly _quizApi: QuizApi,
+        private readonly _questionApi: QuestionApi,
+    ){}
 
     public initQuestions(): void {
         this._questionApi.collection().subscribe({
@@ -41,20 +38,21 @@ export class QuizQuestionsService {
         });
     }
 
-    removeQuestion(idQuestion: string){
+    removeQuestion(idQuestion: string) {
         this._questionApi.remove(idQuestion).subscribe({
             next: () => {
                 this._questions = this._questions.filter(question => question.id !== idQuestion);
             },
-            error: (error) => { }
+            error: (error) => {
+            }
         });
-    removeQuestion(id: number){
-
     }
 
     public createQuiz(data: Quiz): void {
         this._quizApi.create(data).subscribe({
-            next: (data) => { },
+            next: (quiz: Quiz) => {
+                let id
+            },
             error: (error) => { }
         });
 
