@@ -6,7 +6,6 @@ import { Mode } from 'src/app/cardset/services/cardset.service';
 import { Quiz } from 'src/app/core/models/api/quiz';
 import {QuizQuestionsService} from "../../services/quizQuestions.service";
 
-
 @Component({
     selector: "app-create-quiz",
     templateUrl: "./create-quiz.component.html",
@@ -74,7 +73,6 @@ export class CreateQuizComponent implements OnInit {
         if (files && files.length > 0) {
             this.file = files[0];
             this.handleFile(files[0]);
-            this.resizeImage(this.imageUrl);
         }
     }
 
@@ -92,11 +90,19 @@ export class CreateQuizComponent implements OnInit {
         reader.onload = (event) => {
             this.imageUrl = event.target?.result as string;
             console.log('image url :' + this.imageUrl)
-            this.resizeImage(this.imageUrl);
+            this.resizeImage(this.imageUrl, (resizedImageUrl: string) => {
+                if (this.quizId === null || this.quizId === undefined) {
+                    this.imageUpload = resizedImageUrl;
+                } else {
+                    this.imageUrl = resizedImageUrl;
+                }
+            });
         };
+
+        reader.readAsDataURL(file);
     }
 
-    resizeImage(imageDataUrl: string): void {
+    resizeImage(imageDataUrl: string, callback: (resizedImageUrl: string) => void): void {
         const canvas = document.createElement("canvas");
         const ctx = canvas.getContext("2d");
         const image = new Image();
@@ -110,11 +116,8 @@ export class CreateQuizComponent implements OnInit {
 
             if (ctx) {
                 ctx.drawImage(image, 0, 0, width, height);
-                if (this.quizId === null || this.quizId === undefined) {
-                    this.imageUpload = canvas.toDataURL("image/jpeg", 0.75);
-                } else {
-                    this.imageUrl = canvas.toDataURL("image/jpeg", 0.75);
-                }
+                const resizedImageUrl = canvas.toDataURL("image/jpeg", 0.75);
+                callback(resizedImageUrl);
             }
         };
 
@@ -136,11 +139,9 @@ export class CreateQuizComponent implements OnInit {
             if (this.quizId === null || this.quizId === undefined) {
                 this.imageUpload = URL.createObjectURL(files[0]);
                 this.handleFile(files[0]);
-                this.resizeImage(this.imageUpload);
             } else {
                 this.imageUrl = URL.createObjectURL(files[0]);
                 this.handleFile(files[0]);
-                this.resizeImage(this.imageUrl);
             }
         }
     }
