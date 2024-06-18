@@ -47,18 +47,4 @@ export class QuizQuestionsService {
             }
         });
     }
-
-    public createQuiz(data: any ): void {
-        this._quizApi.create(data).subscribe({
-            next: (quiz: Quiz) => {
-                let id
-            },
-            error: (error) => { }
-        });
-
-        // this._quizApi.uploadImage(1, data.image).subscribe({
-        //     next: (response) => { },
-        //     error: (error) => { }
-        // });
-    }
 }

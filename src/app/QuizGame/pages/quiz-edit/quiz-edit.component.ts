@@ -1,10 +1,9 @@
-import { Component } from '@angular/core';
-import { DropdownChangeEvent } from 'primeng/dropdown';
-import { ActivatedRoute, Router } from '@angular/router';
+import {Component} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 import {QuizQuestionsService} from "../../services/quizQuestions.service";
 import {VisibilityTypeEnum} from "../../dto/VisibilityType";
-import { Quiz } from 'src/app/core/models/api/quiz';
-import { QuizService } from '../../services/quiz.service';
+import {Quiz} from 'src/app/core/models/api/quiz';
+import {QuizService} from '../../services/quiz.service';
 
 
 export interface Mode {
@@ -30,32 +29,68 @@ export interface QuestionQuiz {
 })
 export class QuizEditComponent {
 
-
     modesVisibilite: Mode[] | undefined;
     numberPlayers: NumberPlayers[] | undefined;
-    selectednumberPlayers: number = this.quiz!.max_players as number;
+    selectednumberPlayers: number = this.quiz?.max_players as number;
     quizDescription: string = this.quiz?.description as string;
     photoQuizz: string = this.quiz?.image as string;
 
-
-    protected VisibilityType = this.quiz?.visibility;
+    protected visibilityType: Mode | undefined;
 
     constructor(
         private readonly _router: Router,
         public readonly quizQuestionsService: QuizQuestionsService,
         private readonly quizService: QuizService,
         private readonly route: ActivatedRoute
-    ) {}
+    ) {
+    }
+
+    public get quiz(): Quiz | undefined {
+        return this.quizService.quiz;
+    }
 
     ngOnInit(): void {
         this.onInitModeVisibility();
         this.onInitNumberPlayers()
         this.quizQuestionsService.initQuestions();
+        this.initQuiz();
+    }
+
+    onPlay() {
+        this._router.navigate(["/quiz-game/join-game"]);
+    }
+
+    addQuestion(): void {
+        this._router.navigate(["/quiz-game/create-question"]);
+    }
+
+    public deleteQuestion(idQuestion: string): void {
+        this.quizQuestionsService.removeQuestion(idQuestion);
+    }
+
+    public saveModification(): void {
+    }
+
+    public onVisibilityChange(event: any): void {
+    }
+
+    public quitEdit(): void {
+        this._router.navigate(["/quiz-game/my-quiz"]);
+    }
+
+    private initQuiz(): void {
         this.route.params.subscribe(params => {
             const quizId = params['quizId'];
-            this.quizService.initQuizById(quizId);
+            this.quizService.initQuizById(quizId).subscribe({
+                next: (quiz: Quiz) => {
+                    let mode: Mode = {name: quiz.visibility!};
+                    this.selectednumberPlayers = quiz.max_players as number;
+                    this.quizDescription = quiz.description as string;
+                    this.visibilityType = mode;
+                    console.log(this.selectednumberPlayers);
+                }
+            });
         });
-
     }
 
     /**
@@ -66,11 +101,6 @@ export class QuizEditComponent {
             {name: VisibilityTypeEnum.PUBLIC},
             {name: VisibilityTypeEnum.PRIVATE}
         ];
-    }
-
-
-    public get quiz(): Quiz | undefined {
-        return this.quizService.quiz;
     }
 
     private onInitNumberPlayers(): void {
@@ -86,25 +116,5 @@ export class QuizEditComponent {
             {name: 9},
             {name: 10}
         ];
-    }
-
-    onPlay() {
-        this._router.navigate(["/quiz-game/join-game"]);
-    }
-
-    addQuestion(): void {
-        this._router.navigate(["/quiz-game/create-question"]);
-    }
-
-    public deleteQuestion(idQuestion: string): void {
-        this.quizQuestionsService.removeQuestion(idQuestion);
-    }
-
-    public saveModification(): void {}
-
-    public onVisibilityChange(event: any): void {}
-
-    public quitEdit(): void{
-        this._router.navigate(["/quiz-game/my-quiz"]);
     }
 }

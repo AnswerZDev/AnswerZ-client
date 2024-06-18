@@ -3,6 +3,7 @@ import { QuizApi } from "src/app/core/http/quiz/quiz.api";
 import { Question } from "src/app/core/models/api/question";
 import { Quiz } from "src/app/core/models/api/quiz";
 import {QuestionApi} from "../../core/http/question/question.api";
+import {Subject} from "rxjs";
 
 @Injectable({
     providedIn: 'root',
@@ -16,14 +17,41 @@ export class QuizService {
 
     constructor(
         private readonly _quizApi: QuizApi,
-        private readonly _questionApi: QuestionApi,
     ){}
 
-    initQuizById(quizId : string){
+    initQuizById(quizId : string): Subject<Quiz> {
+        let subject = new Subject<Quiz>();
         this._quizApi.getQuizById(quizId).subscribe({
             next: (quiz: Quiz) => {
                 this._quiz = quiz as Quiz;
+                subject.next(quiz);
             },
+            error: (error) => { }
+        });
+        return subject;
+    }
+
+    public createQuiz(data: any, file: File | null): Subject<string> {
+        let subject = new Subject<string>();
+        this._quizApi.create(data).subscribe({
+            next: (quiz: any) => {
+                subject.next(quiz.id);
+                this.uploadImage(file, quiz.id);
+            },
+            error: (error) => { }
+        });
+        return subject;
+    }
+
+    private uploadImage(file: File | null, idQuiz: string): void {
+        if(!file) return;
+
+        let formData = new FormData();
+
+        formData.append('quizPicture', file);
+
+        this._quizApi.uploadImage(idQuiz, formData).subscribe({
+            next: (response) => { },
             error: (error) => { }
         });
     }

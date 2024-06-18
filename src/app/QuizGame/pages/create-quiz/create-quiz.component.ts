@@ -1,10 +1,9 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormControlName, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { MessageService } from 'primeng/api';
-import { Mode } from 'src/app/cardset/services/cardset.service';
-import { Quiz } from 'src/app/core/models/api/quiz';
-import {QuizQuestionsService} from "../../services/quizQuestions.service";
+import {Component, OnInit} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {MessageService} from 'primeng/api';
+import {Mode} from 'src/app/cardset/services/cardset.service';
+import {QuizService} from "../../services/quiz.service";
 
 @Component({
     selector: "app-create-quiz",
@@ -32,35 +31,14 @@ export class CreateQuizComponent implements OnInit {
 
     constructor(
         private readonly _messageService: MessageService,
-        private readonly _quizQuestionsService: QuizQuestionsService,
+        private readonly _quizService: QuizService,
         private readonly _router: Router,
-    ) {}
+    ) {
+    }
 
     ngOnInit() {
         this.onInitModeVisibility();
         this.onInitModeCategory();
-    }
-
-    private onInitModeVisibility(): void {
-        this.modesVisibility = [
-            { name: "Public" },
-            { name: "Private" }
-        ];
-    }
-
-    private onInitModeCategory(): void {
-        this.modesCategories = [
-            { name: "Mathematics" },
-            { name: "French" },
-            { name: "English" },
-            { name: "History" },
-            { name: "Geography" },
-            { name: "Science" },
-            { name: "Sport" },
-            { name: "Art" },
-            { name: "Music" },
-            { name: "Other" },
-        ];
     }
 
     handleFileInput(event: Event) {
@@ -86,7 +64,6 @@ export class CreateQuizComponent implements OnInit {
 
         reader.onload = (event) => {
             this.imageUrl = event.target?.result as string;
-            console.log('image url :' + this.imageUrl)
             this.resizeImage(this.imageUrl, (resizedImageUrl: string) => {
                 if (this.quizId === null || this.quizId === undefined) {
                     this.imageUpload = resizedImageUrl;
@@ -155,11 +132,34 @@ export class CreateQuizComponent implements OnInit {
                 quizPicture: this.file!.name
             };
 
-            this._quizQuestionsService.createQuiz(newQuiz);
-
-            let idQuiz = "1";
-
-            this._router.navigate([`/quiz-game/quiz-edit/${idQuiz}`]);
+            this._quizService.createQuiz(newQuiz, this.file).subscribe({
+                next: (idQuiz: string) => {
+                    console.log('redirect to')
+                    this._router.navigate([`/quiz-game/quiz-edit/${idQuiz}`]);
+                }
+            });
         }
+    }
+
+    private onInitModeVisibility(): void {
+        this.modesVisibility = [
+            {name: "Public"},
+            {name: "Private"}
+        ];
+    }
+
+    private onInitModeCategory(): void {
+        this.modesCategories = [
+            {name: "Mathematics"},
+            {name: "French"},
+            {name: "English"},
+            {name: "History"},
+            {name: "Geography"},
+            {name: "Science"},
+            {name: "Sport"},
+            {name: "Art"},
+            {name: "Music"},
+            {name: "Other"},
+        ];
     }
 }

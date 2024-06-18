@@ -23,7 +23,7 @@ export class Quiz extends Item {
         this._description = data.description;
         this._visibility = data.visibility;
         this._category = data.category;
-        this._max_players = data.max_players;
+        this._max_players = data.maxPlayers;
         this._image = data.image;
         this._list_of_questions = data.list_of_questions;
     }

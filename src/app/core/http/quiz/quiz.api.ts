@@ -26,7 +26,7 @@ export class QuizApi extends ApiService {
         return f as unknown as Observable<Quiz>
     }
 
-    public uploadImage(id: number, body: FormData): Observable<Quiz> {
+    public uploadImage(id: string, body: FormData): Observable<Quiz> {
         let f = this.patch(`/upload-image-quiz/${id}`, body).pipe(
             map((response: any) => HydraFactory.createItem(Quiz, response))
         )
@@ -34,7 +34,7 @@ export class QuizApi extends ApiService {
     }
 
     public getQuizById(quizId: string): Observable<Quiz> {
-        let f = this.get('/getById/'+ quizId).pipe(
+        let f = this.get(`/${quizId}`).pipe(
             map((response: any) => HydraFactory.createItem(Quiz, response))
         )
         return f as unknown as Observable<Quiz>
