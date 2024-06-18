@@ -13,10 +13,11 @@ export class GameComponent implements OnInit {
   roomId: string | null | undefined;
   private questionSubject = new BehaviorSubject<any>(null);
   question$: Observable<any> = this.questionSubject.asObservable();
-
+  stats: boolean = true;
   selectedQuestions : string[] = [];
-
   roomInfo: any;
+  value: number = 30;
+
 
   constructor(private router: Router, private socketService: SocketService, private route: ActivatedRoute,  private fb: FormBuilder) {
     this.route.paramMap.subscribe(params => {

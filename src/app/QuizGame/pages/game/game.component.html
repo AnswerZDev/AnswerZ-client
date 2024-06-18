@@ -1,4 +1,5 @@
 <div *ngIf="roomInfo">
+  <div *ngIf="!stats">
     <div class="flex flex-column mt-5 ml-5">
       <span class="title">{{ roomInfo?.game?.title }}</span>
     <span class="theme">Theme: History</span>
@@ -28,6 +29,10 @@
     <div class="flex flex-row flex-wrap justify-content-center m-5 gap-5">
       <app-quiz-answer *ngFor="let answer of (question$ | async)?.answers" [answer]="answer" (click)="selectAnswer(answer)"></app-quiz-answer>
     </div>
+  </div>
+  </div>
+  <div *ngIf="stats">
+    test
   </div>
 </div>
 <div *ngIf="!roomInfo" class="game-container">
