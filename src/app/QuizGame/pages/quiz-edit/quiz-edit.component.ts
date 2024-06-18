@@ -1,125 +1,98 @@
 import { Component } from '@angular/core';
 import { DropdownChangeEvent } from 'primeng/dropdown';
-import { QuisGameService, QuizGame } from '../../services/quizGame.service';
 import { Router } from '@angular/router';
-import { QuizQuestionsService } from '../../services/quizQuestions.service';
-import { Question } from 'src/app/core/models/api/question';
+import {QuizQuestionsService} from "../../services/quizQuestions.service";
+import {VisibilityTypeEnum} from "../../dto/VisibilityType";
 
 
 export interface Mode {
-  name: string;
+    name: string;
 }
 
 export interface NumberPlayers {
-  name: string;
+    name: number;
 }
 
 export interface QuestionQuiz {
-  question : string;
-  reponse: string[];
-  type : boolean;
-  point: number;
-  time: number;
+    question: string;
+    reponse: string[];
+    type: boolean;
+    point: number;
+    time: number;
 }
 
 @Component({
-  selector: 'app-quiz-edit',
-  templateUrl: './quiz-edit.component.html',
-  styleUrls: ['./quiz-edit.component.scss']
+    selector: 'app-quiz-edit',
+    templateUrl: './quiz-edit.component.html',
+    styleUrls: ['./quiz-edit.component.scss']
 })
 export class QuizEditComponent {
 
-  public photoQuizz: string = "../../../../assets/images/carreau.jpeg";
+    public photoQuizz: string = "../../../../assets/images/audric.jpeg";
 
-  modesVisibilite: Mode[]|undefined;
-  selectedModeVisibilities: Mode | undefined = { name: 'Private' };
-  numberPlayers: NumberPlayers[]|undefined;
-  selectednumberPlayers: NumberPlayers | undefined = { name : '1 players' };
-  numberQuestion: number = 1;
-  quizGameEdit?: QuizGame;
+    modesVisibilite: Mode[] | undefined;
+    numberPlayers: NumberPlayers[] | undefined;
+    selectednumberPlayers: NumberPlayers  = {name: 1};
+    numberQuestion: number = 1;
 
-  questionsList: Question[] = [];
+    protected VisibilityType = VisibilityTypeEnum;
 
-  listeQuestion: QuestionQuiz[] = [
-    {   
-      question: "qui est le plus beau",
-      reponse: ["romain", "audric", "hugo", "théo"],
-      type: true,
-      point: 100,
-      time: 5,
-    },
-    {   
-      question: "Who is carreau",
-      reponse: ["informaticien", "puceau"],
-      type: false,
-      point: 100,
-      time: 5,
-    },
-    {   
-      question: "La plus belle voiture ?",
-      reponse: ["e36", "e46", "e30", "e24"],
-      type: true,
-      point: 100,
-      time: 5,
+
+    quizDescription: string = 'Test description';
+
+    constructor(
+        private readonly _router: Router,
+        public readonly quizQuestionsService: QuizQuestionsService
+    ) {}
+
+    ngOnInit(): void {
+        this.onInitModeVisibility();
+        this.onInitNumberPlayers()
+        this.quizQuestionsService.initQuestions();
     }
-  ];
 
-  constructor(
-    public quizGameService: QuisGameService,
-    private readonly router: Router,
-    private readonly questionsService: QuizQuestionsService,
-  ){
+    /**
+     * Init mode visibility dropdown
+     */
+    private onInitModeVisibility(): void {
+        this.modesVisibilite = [
+            {name: VisibilityTypeEnum.PUBLIC},
+            {name: VisibilityTypeEnum.PRIVATE}
+        ];
+    }
 
-  }
+    private onInitNumberPlayers(): void {
+        this.numberPlayers = [
+            {name: 1},
+            {name: 2},
+            {name: 3},
+            {name: 4},
+            {name: 5},
+            {name: 6},
+            {name: 7},
+            {name: 8},
+            {name: 9},
+            {name: 10}
+        ];
+    }
 
-  ngOnInit(): void {
+    saveModificaton() {
+        throw new Error('Method not implemented.');
+    }
 
-    this.questionsList = this.questionsService.getAll();
+    onVisibilityChange($event: DropdownChangeEvent) {
+        throw new Error('Method not implemented.');
+    }
 
-    this.modesVisibilite = [
-      { name: 'Public' },
-      { name: 'Private' }
-    ];
+    onNumberPlayersChange($event: DropdownChangeEvent) {
+        throw new Error('Method not implemented.');
+    }
 
-    this.numberPlayers = [
-      { name: '1 players' },
-      { name: '2 players' },
-      { name: '3 players' },
-      { name: '4 players' },
-      { name: '5 players' },
-      { name: '6 players' },
-      { name: '7 players' },
-      { name: '8 players' },
-      { name: '9 players' },
-      { name: '10 players' },
-      { name: '11 players' },
-      { name: '12 players' },
-      { name: '13 players' },
-      { name: '14 players' },
-      { name: '15 players' },
-    ];
+    onPlay() {
+        throw new Error('Method not implemented.');
+    }
 
-    console.log(this.questionsService.getAll());
-  }
-
-  saveModificaton() {
-    throw new Error('Method not implemented.');
-  }
-
-  onVisibilityChange($event: DropdownChangeEvent) {
-    throw new Error('Method not implemented.');
-  }
-
-  onNumberPlayersChange($event: DropdownChangeEvent) {
-    throw new Error('Method not implemented.');
-  }
-
-  onPlay() {
-    throw new Error('Method not implemented.');
-  }
-    
-
-  addQuestion(): void{
-    this.router.navigate(["/quiz-game/create-question"]);
-  }
+    addQuestion(): void {
+        this._router.navigate(["/quiz-game/create-question"]);
+    }
 }

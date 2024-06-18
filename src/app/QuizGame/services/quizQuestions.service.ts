@@ -1,21 +1,41 @@
 import { Injectable } from "@angular/core";
 import { Question } from "src/app/core/models/api/question";
+import {QuestionApi} from "../../core/http/question/question.api";
 
 @Injectable({
     providedIn: 'root',
 })
-export class QuizQuestionsService{
-    private questions: Question[] = [];
+export class QuizQuestionsService {
+    private _questions: Question[] = [];
 
-    constructor(){
+    public get questions(): Question[] {
+        return this._questions;
     }
 
-    getAll(): Question[]{
-        return this.questions;
+    constructor(
+        private readonly _questionApi: QuestionApi
+    ){
     }
 
-    addQuestion(question: Question){
-        this.questions.push(question);
+    public initQuestions(): void {
+        this._questionApi.collection().subscribe({
+            next: (questions: any) => {
+                this._questions = questions.member as Question[];
+            },
+            error: (error) => {
+            }
+        });
+    }
+
+    addQuestion(question: any){
+
+
+        this._questionApi.create(question).subscribe({
+            next: (question: Question) => {
+                this._questions.push(question);
+            },
+            error: (error) => { }
+        });
     }
 
     removeQuestion(id: number){

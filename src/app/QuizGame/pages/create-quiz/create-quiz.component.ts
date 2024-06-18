@@ -5,7 +5,6 @@ import { MessageService } from 'primeng/api';
 import { Mode } from 'src/app/cardset/services/cardset.service';
 import { Quiz } from 'src/app/core/models/api/quiz';
 
-
 @Component({
     selector: 'app-create-quiz',
     templateUrl: './create-quiz.component.html',
@@ -159,10 +158,6 @@ export class CreateQuizComponent implements OnInit{
       max_players: formData.selectedMaxPlayers,
       image: this.imageUrl // ou this.imageUpload, selon votre logique
     });
-
-    console.log(newQuiz);
-
-    //this.router.navigate(["/quiz-game/quiz-edit"]);
   }
 
 }

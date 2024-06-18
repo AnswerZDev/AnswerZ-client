@@ -19,15 +19,15 @@
             </div>
         </div>
         <div class="flex flex-column pt-8">
-            <div *ngIf="myChoice && myChoice.type === 'MCQ'" class="flex flex-column">
+            <div *ngIf="myChoice && myChoice.type === QuestionTypeEnum.QCM" class="flex flex-column">
                 <p-dropdown class="text-sm md:text-lg w-1rem md:w-7rem" [options]="NOQChoices" optionLabel="number" placeholder="Number of questions" [(ngModel)]="myNOQ" inputId="float-label"></p-dropdown>
                 <div class="flex flex-wrap pt-6 md:gap-7 justify-content-around">
-                    <div *ngFor="let i of [].constructor(myNOQ && myNOQ.number && myNOQ.number > 2 ? myNOQ.number : 2); let j = index" class="pb-5">
-                        <input type="text" pInputText [(ngModel)]="list_answers[j]" pInputText placeholder="Option {{ j + 1 }}" class="noq-input" />
+                    <div *ngFor="let _ of numberOfOptions; let j = index" class="pb-5">
+                        <input type="text" [(ngModel)]="list_answers[j]" pInputText placeholder="Option {{ j + 1 }}" class="noq-input" />
                     </div>
                 </div>
             </div>
-            <div *ngIf="myChoice && myChoice.type === 'True/False'" class="flex justify-content-center">
+            <div *ngIf="myChoice && myChoice.type === QuestionTypeEnum.BOOLEAN" class="flex justify-content-center">
                 <div class="flex md:flex-row flex-column md:justify-content-between w-auto lg:w-7">
                     <input id="disabled-input" type="text" pInputText [disabled]="true" [(ngModel)]="true_value" placeholder="True" class="true-false-input"/>
                     <input id="disabled-input" type="text" pInputText [disabled]="true" [(ngModel)]="false_value" placeholder="False" class="true-false-input"/>
