@@ -9,6 +9,7 @@ import { QuizEditComponent } from './pages/quiz-edit/quiz-edit.component'
 import { MyCardsetsComponent } from '../cardset/pages/my-cardsets/my-cardsets.component'
 import { MyQuizVisualizationComponent } from './pages/my-quiz-visualization/my-quiz-visualization.component'
 import { CreateQuizComponent } from './pages/create-quiz/create-quiz.component'
+import { userGuard } from '../core/guards/user.guard'
 
 const routes: Routes = [
     {
@@ -18,34 +19,42 @@ const routes: Routes = [
     },
     {
         path: 'my-quiz',
+        canActivate: [userGuard],
         component: MyQuizVisualizationComponent,
     },
     {
         path: 'create-game',
+        canActivate: [userGuard],
         component: createRoomComponent,
     },
     {
         path: 'create-question',
+        canActivate: [userGuard],
         component: CreateQuestionComponent,
     },
     {
         path: 'join-game',
+        canActivate: [userGuard],
         component: JoinRoomComponent,
     },
     {
         path: 'quizz-lobby/:roomId',
+        canActivate: [userGuard],
         component: LobbyComponent,
     },
     {
         path: 'game/:roomId',
+        canActivate: [userGuard],
         component: GameComponent,
     },
     {
         path: 'create-quiz',
+        canActivate: [userGuard],
         component: CreateQuizComponent,
     },
     {
         path: 'quiz-edit/:quizId',
+        canActivate: [userGuard],
         component: QuizEditComponent,
     },
 ]
