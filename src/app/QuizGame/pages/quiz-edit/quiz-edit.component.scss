@@ -33,6 +33,19 @@
     .button-create-question:enabled:hover{
         border-radius: 100% !important;
     }
+
+    .quit-button{
+        background-color: transparent !important;
+        color: black;
+        border: 0px;
+        box-shadow: none;
+        border-radius: 100%;
+    }
+    
+    .pi.pi-times {
+        font-size: 2rem;
+        font-weight: bold;
+    }
 }
 
 .title{
