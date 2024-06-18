@@ -51,8 +51,7 @@ export class QuizEditComponent {
 
     ngOnInit(): void {
         this.onInitModeVisibility();
-        this.onInitNumberPlayers()
-        this.quizQuestionsService.initQuestions();
+        this.onInitNumberPlayers();
         this.initQuiz();
     }
 
@@ -61,11 +60,11 @@ export class QuizEditComponent {
     }
 
     addQuestion(): void {
-        this._router.navigate(["/quiz-game/create-question"]);
+        this._router.navigate(["/quiz-game/create-question/quiz/" + this.quiz?.id]);
     }
 
     public deleteQuestion(idQuestion: string): void {
-        this.quizQuestionsService.removeQuestion(idQuestion);
+        this.quizQuestionsService.removeQuestion(idQuestion, this.quiz?.id as string);
     }
 
     public saveModification(): void {
@@ -87,7 +86,6 @@ export class QuizEditComponent {
                     this.selectednumberPlayers = quiz.max_players as number;
                     this.quizDescription = quiz.description as string;
                     this.visibilityType = mode;
-                    console.log(this.selectednumberPlayers);
                 }
             });
         });

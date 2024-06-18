@@ -23,8 +23,8 @@ export class QuestionApi extends ApiService {
         return u as unknown as Observable<Question[]>;
     }
 
-    public create(question: Question): Observable<Question> {
-        return this.post('/create-question', question).pipe(
+    public create(question: Question, idQuiz: string): Observable<Question> {
+        return this.post(`/create-question/quiz/${idQuiz}`, question).pipe(
             map((data: any) => HydraFactory.createItem(Question, data))
         );
     }

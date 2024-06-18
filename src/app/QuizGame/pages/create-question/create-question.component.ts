@@ -3,6 +3,7 @@ import {Question} from 'src/app/core/models/api/question';
 import {QuizQuestionsService} from '../../services/quizQuestions.service';
 import {NumberOfQuestions, Points, Time, Type} from "../../../shared/dto/question.dto";
 import {QuestionTypeEnum} from "../../dto/QuestionType";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
     selector: 'app-create-question',
@@ -40,7 +41,9 @@ export class CreateQuestionComponent {
     protected readonly QuestionTypeEnum = QuestionTypeEnum;
 
     constructor(
-        private readonly questionsService: QuizQuestionsService
+        private readonly questionsService: QuizQuestionsService,
+        private readonly _activatedRoute: ActivatedRoute,
+        private readonly _router: Router
     ) {
     }
 
@@ -75,9 +78,9 @@ export class CreateQuestionComponent {
         };
 
         // add to the output the created question so the parent's component can get the question
-        this.questionsService.addQuestion(ques);
+        this.questionsService.addQuestion(ques, this._activatedRoute.snapshot.params['quizId'] as string);
 
-        window.history.back();
+        this._router.navigate(["/quiz-game/quiz-edit/", this._activatedRoute.snapshot.params['quizId']]);
 
     }
 

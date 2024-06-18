@@ -28,7 +28,7 @@ const routes: Routes = [
         component: createRoomComponent,
     },
     {
-        path: 'create-question',
+        path: 'create-question/quiz/:quizId',
         canActivate: [userGuard],
         component: CreateQuestionComponent,
     },
