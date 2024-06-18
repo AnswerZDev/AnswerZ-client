@@ -13,7 +13,7 @@ export class GameComponent implements OnInit {
   roomId: string | null | undefined;
   private questionSubject = new BehaviorSubject<any>(null);
   question$: Observable<any> = this.questionSubject.asObservable();
-  stats: boolean = true;
+  stats: boolean = false;
   selectedQuestions : string[] = [];
   roomInfo: any;
   value: number = 30;
@@ -52,11 +52,14 @@ export class GameComponent implements OnInit {
        this.socketService.askQuestion(this.roomId)
 
       this.socketService.listenToQuestion().subscribe((question: any) => {
+        this.stats = false;
         this.questionSubject.next(question);
       });
 
       this.socketService.listenToStats().subscribe((answers) => {
         this.globalAnswersStats = answers;
+        this.stats = true;
+        console.log(this.stats);
         this.updateStatBar();
       });
 
