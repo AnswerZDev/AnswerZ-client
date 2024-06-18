@@ -27,13 +27,9 @@ export class CreateQuizComponent implements OnInit {
     file: File | null = null;
     quizId: number | undefined;
 
-    modesVisibilite: Mode[] | undefined;
-    modesCategorie: Mode[] | undefined;
-    categoryName: string = "";
-    categoryVisibility: string = "";
-    input_question: String = "";
+    modesVisibility: Mode[] | undefined;
+    modesCategories: Mode[] | undefined;
     blockChars: RegExp = /^[0-9a-zA-Z\s]+$/;
-    maxPlayers: RegExp = /^[0-9]+$/;
 
     constructor(
         private readonly _messageService: MessageService,
@@ -46,14 +42,14 @@ export class CreateQuizComponent implements OnInit {
     }
 
     private onInitModeVisibility(): void {
-        this.modesVisibilite = [
+        this.modesVisibility = [
             { name: "Public" },
             { name: "Private" }
         ];
     }
 
     private onInitModeCategory(): void {
-        this.modesCategorie = [
+        this.modesCategories = [
             { name: "Mathematics" },
             { name: "French" },
             { name: "English" },
@@ -148,14 +144,14 @@ export class CreateQuizComponent implements OnInit {
     createQuiz(): void {
         if (this.quizForm.valid) {
             const formData = this.quizForm.value;
-            const newQuiz = new Quiz({
+            const newQuiz = {
                 title: formData.selectedTitle,
                 description: formData.description,
-                visibility: formData.selectedVisibility,
-                category: formData.selectedCategory,
-                max_players: formData.selectedMaxPlayers,
-                image: this.imageUpload.split('/')[-1]
-            });
+                visibility: formData.selectedVisibility.name,
+                category: formData.selectedCategory.name,
+                maxPlayers: formData.selectedMaxPlayers,
+                quizPicture: this.file!.name
+            };
 
             this._quizQuestionsService.createQuiz(newQuiz);
         }

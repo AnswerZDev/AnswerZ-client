@@ -48,7 +48,7 @@ export class QuizQuestionsService {
         });
     }
 
-    public createQuiz(data: Quiz): void {
+    public createQuiz(data: any ): void {
         this._quizApi.create(data).subscribe({
             next: (quiz: Quiz) => {
                 let id
