@@ -77,7 +77,7 @@ export class QuizEditComponent {
     }
 
     onPlay() {
-        throw new Error('Method not implemented.');
+        this._router.navigate(["/quiz-game/join-game"]);
     }
 
     addQuestion(): void {
@@ -91,4 +91,8 @@ export class QuizEditComponent {
     public saveModification(): void {}
 
     public onVisibilityChange(event: any): void {}
+
+    public quitEdit(): void{
+        this._router.navigate(["/quiz-game/my-quiz"]);
+    }
 }
