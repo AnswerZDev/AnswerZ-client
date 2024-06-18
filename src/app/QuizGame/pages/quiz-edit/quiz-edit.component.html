@@ -2,7 +2,7 @@
     <div class="grid gy-4">
         <div class="col-12 md:col-6">
             <div class="p-3 border-round-md my-quiz bg-white">
-<!--                <h1 class="title">{{ quizGameService.quizgamePlay?.name }}</h1>-->
+                <!--                <h1 class="title">{{ quizGameService.quizgamePlay?.name }}</h1>-->
                 <!-- Mettre bouton -->
                 <img [src]="photoQuizz" alt="picture quiz" class="quiz-picture mb-3">
                 <div class="flex lg:flex-row flex-column">
@@ -10,16 +10,11 @@
                     <p-dropdown [options]="modesVisibilite" [(ngModel)]="VisibilityType"
                                 (onChange)="onVisibilityChange($event)" optionLabel="name"
                                 class="lg:align-self-end"></p-dropdown>
-                    <!--                <p-dropdown [options]="numberPlayers" [(ngModel)]="selectednumberPlayers"-->
-                    <!--                            (onChange)="onNumberPlayersChange($event)" optionLabel="name"-->
-                    <!--                            class="align-self-end uppercase ml-3"></p-dropdown>-->
                     <div class="flex flex-column lg:ml-auto">
                 
                         <span class="max-players-display font-medium  py-2">
                             Maximum players
                         </span>
-<!--                        <input class="input-question" type="number" pInputText [(ngModel)]="selectednumberPlayers.name"-->
-<!--                               placeholder="Enter a number" class=""/>-->
                         <p-inputNumber
                             inputId="integeronly"
                             [(ngModel)]="selectednumberPlayers.name"
@@ -47,7 +42,7 @@
                 </div>
                 <div class="flex flex-column pt-4 container-question-second">
                     <div *ngFor="let question of quizQuestionsService.questions" class="flex p-2">
-                        <app-visualization-question-quiz class="w-full"
+                        <app-visualization-question-quiz (onDeleteQuestionEvent)="deleteQuestion($event)" class="w-full"
                                                          [my_question]="question"></app-visualization-question-quiz>
                     </div>
                 </div>
@@ -55,7 +50,7 @@
         </div>
         <div class="col-12 text-center pt-4">
             <p-button styleClass="saveModificaton uppercase" label="save modification"
-                      (onClick)="saveModificaton()"></p-button>
+                      (onClick)="saveModification()"></p-button>
             &nbsp;
         </div>
     </div>

@@ -28,8 +28,6 @@ export class QuizQuestionsService {
     }
 
     addQuestion(question: any){
-
-
         this._questionApi.create(question).subscribe({
             next: (question: Question) => {
                 this._questions.push(question);
@@ -38,7 +36,12 @@ export class QuizQuestionsService {
         });
     }
 
-    removeQuestion(id: number){
-        
+    removeQuestion(idQuestion: string){
+        this._questionApi.remove(idQuestion).subscribe({
+            next: () => {
+                this._questions = this._questions.filter(question => question.id !== idQuestion);
+            },
+            error: (error) => { }
+        });
     }
 }

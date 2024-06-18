@@ -76,18 +76,6 @@ export class QuizEditComponent {
         ];
     }
 
-    saveModificaton() {
-        throw new Error('Method not implemented.');
-    }
-
-    onVisibilityChange($event: DropdownChangeEvent) {
-        throw new Error('Method not implemented.');
-    }
-
-    onNumberPlayersChange($event: DropdownChangeEvent) {
-        throw new Error('Method not implemented.');
-    }
-
     onPlay() {
         throw new Error('Method not implemented.');
     }
@@ -95,4 +83,12 @@ export class QuizEditComponent {
     addQuestion(): void {
         this._router.navigate(["/quiz-game/create-question"]);
     }
+
+    public deleteQuestion(idQuestion: string): void {
+        this.quizQuestionsService.removeQuestion(idQuestion);
+    }
+
+    public saveModification(): void {}
+
+    public onVisibilityChange(event: any): void {}
 }

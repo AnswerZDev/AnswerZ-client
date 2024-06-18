@@ -28,5 +28,8 @@ export class QuestionApi extends ApiService {
             map((data: any) => HydraFactory.createItem(Question, data))
         );
     }
-    
+
+    public remove(id: string): Observable<void> {
+        return this.delete('/delete-question/' + id);
+    }
 }
