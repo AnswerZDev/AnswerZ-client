@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { DropdownChangeEvent } from 'primeng/dropdown';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {QuizQuestionsService} from "../../services/quizQuestions.service";
 import {VisibilityTypeEnum} from "../../dto/VisibilityType";
+import { Quiz } from 'src/app/core/models/api/quiz';
+import { QuizService } from '../../services/quiz.service';
 
 
 export interface Mode {
@@ -28,27 +30,32 @@ export interface QuestionQuiz {
 })
 export class QuizEditComponent {
 
-    public photoQuizz: string = "../../../../assets/images/audric.jpeg";
 
     modesVisibilite: Mode[] | undefined;
     numberPlayers: NumberPlayers[] | undefined;
-    selectednumberPlayers: NumberPlayers  = {name: 1};
-    numberQuestion: number = 1;
+    selectednumberPlayers: number = this.quiz!.max_players as number;
+    quizDescription: string = this.quiz?.description as string;
+    photoQuizz: string = this.quiz?.image as string;
 
-    protected VisibilityType = VisibilityTypeEnum;
 
-
-    quizDescription: string = 'Test description';
+    protected VisibilityType = this.quiz?.visibility;
 
     constructor(
         private readonly _router: Router,
-        public readonly quizQuestionsService: QuizQuestionsService
+        public readonly quizQuestionsService: QuizQuestionsService,
+        private readonly quizService: QuizService,
+        private readonly route: ActivatedRoute
     ) {}
 
     ngOnInit(): void {
         this.onInitModeVisibility();
         this.onInitNumberPlayers()
         this.quizQuestionsService.initQuestions();
+        this.route.params.subscribe(params => {
+            const quizId = params['quizId'];
+            this.quizService.initQuizById(quizId);
+        });
+
     }
 
     /**
@@ -59,6 +66,11 @@ export class QuizEditComponent {
             {name: VisibilityTypeEnum.PUBLIC},
             {name: VisibilityTypeEnum.PRIVATE}
         ];
+    }
+
+
+    public get quiz(): Quiz | undefined {
+        return this.quizService.quiz;
     }
 
     private onInitNumberPlayers(): void {

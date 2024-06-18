@@ -32,4 +32,11 @@ export class QuizApi extends ApiService {
         )
         return f as unknown as Observable<Quiz>
     }
+
+    public getQuizById(quizId: string): Observable<Quiz> {
+        let f = this.get('/getById/'+ quizId).pipe(
+            map((response: any) => HydraFactory.createItem(Quiz, response))
+        )
+        return f as unknown as Observable<Quiz>
+    }
 }

@@ -32,7 +32,8 @@ export class CreateQuizComponent implements OnInit {
 
     constructor(
         private readonly _messageService: MessageService,
-        private readonly _quizQuestionsService: QuizQuestionsService
+        private readonly _quizQuestionsService: QuizQuestionsService,
+        private readonly _router: Router,
     ) {}
 
     ngOnInit() {
@@ -155,6 +156,10 @@ export class CreateQuizComponent implements OnInit {
             };
 
             this._quizQuestionsService.createQuiz(newQuiz);
+
+            let idQuiz = "1";
+
+            this._router.navigate([`/quiz-game/quiz-edit/${idQuiz}`]);
         }
     }
 }
