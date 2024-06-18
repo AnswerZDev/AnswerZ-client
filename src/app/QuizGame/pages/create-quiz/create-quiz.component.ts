@@ -1,10 +1,10 @@
-import { Component, EventEmitter, OnInit, Output } from "@angular/core";
-import { FormBuilder, FormControl, FormControlName, FormGroup, Validators } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
-import { MessageService } from "primeng/api";
-import { Mode } from "src/app/cardset/services/cardset.service";
-import { Quiz } from "src/app/core/models/api/quiz";
-import { QuizQuestionsService } from "../../services/quizQuestions.service";
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormControl, FormControlName, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
+import { Mode } from 'src/app/cardset/services/cardset.service';
+import { Quiz } from 'src/app/core/models/api/quiz';
+
 
 @Component({
     selector: "app-create-quiz",
@@ -32,7 +32,7 @@ export class CreateQuizComponent implements OnInit {
     input_question: String = "";
     blockChars: RegExp = /^[0-9a-zA-Z\s]+$/;
     maxPlayers: RegExp = /^[0-9]+$/;
-    
+
     constructor(
         private readonly _messageService: MessageService,
         private readonly _quizQuestionsService: QuizQuestionsService
@@ -45,7 +45,7 @@ export class CreateQuizComponent implements OnInit {
 
     private onInitModeVisibility(): void {
         this.modesVisibilite = [
-            { name: "Public" }, 
+            { name: "Public" },
             { name: "Private" }
         ];
     }

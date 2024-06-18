@@ -44,12 +44,16 @@
 }
 
 .quiz-picture{
-    height: 300px;
+    max-height: 300px;
+    width: auto;
 }
 
 
 .container-question-second{
-    overflow-y: scroll;
     max-height: 450px;
     padding: 5px;
+}
+
+.max-players-display{
+    color: #9468f1;
 }

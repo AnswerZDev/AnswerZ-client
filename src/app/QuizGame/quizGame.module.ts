@@ -23,6 +23,7 @@ import { CardModule } from 'primeng/card'
 import { KeyFilterModule } from 'primeng/keyfilter'
 import { ConfirmPopupModule } from 'primeng/confirmpopup'
 import { InputTextareaModule } from 'primeng/inputtextarea'
+import {InputNumberModule} from "primeng/inputnumber";
 
 @NgModule({
     imports: [
@@ -50,6 +51,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea'
         ConfirmPopupModule,
         InputTextareaModule,
         DialogModule,
+        InputNumberModule,
     ],
     declarations: [
         createRoomComponent,
