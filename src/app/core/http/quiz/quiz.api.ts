@@ -26,8 +26,8 @@ export class QuizApi extends ApiService {
         return f as unknown as Observable<Quiz>
     }
 
-    public uploadImage(body: FormData): Observable<Quiz> {
-        let f = this.post(`/upload-image-quiz`, body).pipe(
+    public uploadImage(id: number, body: FormData): Observable<Quiz> {
+        let f = this.patch(`/upload-image-quiz/${id}`, body).pipe(
             map((response: any) => HydraFactory.createItem(Quiz, response))
         )
         return f as unknown as Observable<Quiz>

@@ -1,4 +1,5 @@
 import {Item} from "./hydra/item";
+import { Question } from "./question";
 
 export class Quiz extends Item {
     private _title: string | undefined;
@@ -13,6 +14,8 @@ export class Quiz extends Item {
 
     private _max_players: number | undefined;
 
+    private _list_of_questions: Question[] | undefined;
+
     constructor(data: any) {
         super(data);
 
@@ -22,6 +25,7 @@ export class Quiz extends Item {
         this._category = data.category;
         this._max_players = data.max_players;
         this._image = data.image;
+        this._list_of_questions = data.list_of_questions;
     }
 
     public get max_players(): number | undefined {
@@ -64,5 +68,12 @@ export class Quiz extends Item {
     }
     public set description(value: string | undefined) {
         this._description = value;
+    }
+
+    public get list_of_questions(): Question[] | undefined {
+        return this._list_of_questions;
+    }
+    public set list_of_questions(value: Question[] | undefined) {
+        this._list_of_questions = value;
     }
 }
