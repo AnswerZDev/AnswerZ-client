@@ -80,9 +80,7 @@ export class AddFlashcardToSetComponent implements OnInit{
         this.cardset = result;
 
         if(this.cardset.image !== null) {
-          // Ajouter un paramètre de cache buster à l'URL de l'image
-          const cacheBuster = new Date().getTime();
-          this.imageResized = `${this.cardset.image}?cb=${cacheBuster}`;
+          this.imageResized = this.cardset.image;
         } else {
           this.imageResized = '../../../../assets/images/no_image.jpg';
         }
@@ -210,6 +208,7 @@ export class AddFlashcardToSetComponent implements OnInit{
     }
     this.cardset = cardset;
     if(cardset) {
+      this.cardsetsService.cardsets.push(cardset);
       this.messageService.add({ severity: 'success', detail: 'Modification successed' });
       this.router.navigate(['/cardset/my-cardsets']);
     } else {
