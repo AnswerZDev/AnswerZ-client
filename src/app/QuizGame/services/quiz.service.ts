@@ -62,16 +62,22 @@ export class QuizService {
         });
     }
 
-    getAllQuizByUser(visibility: string): Subject<Quiz> {
-        let subject = new Subject<Quiz>();
-        this._quizApi.getAllQuizFromUser(visibility).subscribe({
-            next: (quiz: Quiz) => {
-                this._quiz = quiz as Quiz;
-                subject.next(quiz);
+    getAllPublicQuizByUser(): void {
+        this._quizApi.getAllPublicQuizFromUser().subscribe({
+            next: (quiz: any) => {
+                this._quiz_list = quiz.member as Quiz[];
             },
             error: (error) => { }
         });
-        return subject;
+    }
+
+    getAllPrivateQuizByUser(): void {
+        this._quizApi.getAllPrivateQuizFromUser().subscribe({
+            next: (quiz: any) => {
+                this._quiz_list = quiz.member as Quiz[];
+            },
+            error: (error) => { }
+        });
     }
 
 }

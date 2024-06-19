@@ -44,11 +44,26 @@ export class QuizApi extends ApiService {
         return f as unknown as Observable<Quiz>
     }
 
-    public getAllQuizFromUser(visibility: string): Observable<Quiz> {
-        let f = this.get(`/me`, {visibility: visibility}).pipe(
-            map((response: any) => HydraFactory.createItem(Quiz, response))
+    public getAllPublicQuizFromUser(): Observable<Quiz[]> {
+        let f = this.get('/public/all', {
+            headers: {
+                'skip-cache': 'true'
+            }
+        }).pipe(
+            map((response: any) => HydraFactory.createCollection(Quiz, response))
         )
-        return f as unknown as Observable<Quiz>
+        return f as unknown as Observable<Quiz[]>
+    }
+
+    public getAllPrivateQuizFromUser(): Observable<Quiz[]> {
+        let f = this.get('/private/all', {
+            headers: {
+                'skip-cache': 'true'
+            }
+        }).pipe(
+            map((response: any) => HydraFactory.createCollection(Quiz, response))
+        )
+        return f as unknown as Observable<Quiz[]>
     }
 
 }
