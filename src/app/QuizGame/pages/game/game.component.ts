@@ -25,6 +25,7 @@ export class GameComponent implements OnInit {
   statsPercentage: number = 0;
   globalAnswersStats: any | undefined;
   nbTotalAnswers: number = 0;
+  questionNumber: number = 0;
   
 
   constructor(private router: Router, private socketService: SocketService, private route: ActivatedRoute,  private fb: FormBuilder) {
@@ -40,12 +41,17 @@ export class GameComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.totalTimeInSeconds = 30;
     this.progressPercentage = 100;
+
     setInterval(() => {
       if (this.totalTimeInSeconds > 0) {
         this.totalTimeInSeconds--;
-        this.progressPercentage = (this.totalTimeInSeconds / 30) * 100;
+      } else {
+        this.totalTimeInSeconds = 35;
       }
+      this.progressPercentage = (this.totalTimeInSeconds / 30) * 100;
     }, 1000);
     
     if (this.roomId) {
@@ -59,6 +65,7 @@ export class GameComponent implements OnInit {
 
       this.socketService.listenToQuestion().subscribe((question: any) => {
         this.stats = false;
+        this.questionNumber = question.questionNumber;
         this.questionSubject.next(question);
       });
 
