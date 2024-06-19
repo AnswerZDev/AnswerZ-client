@@ -1,14 +1,14 @@
-import { RouterModule, Routes } from '@angular/router'
-import { NgModule } from '@angular/core'
-import { createRoomComponent } from './pages/create-room/create-room.component'
-import { CreateQuestionComponent } from './pages/create-question/create-question.component'
-import { LobbyComponent } from './pages/lobby/lobby.component'
-import { JoinRoomComponent } from './pages/join-room/join-room.component'
-import { GameComponent } from './pages/game/game.component'
-import { QuizEditComponent } from './pages/quiz-edit/quiz-edit.component'
-import { MyQuizVisualizationComponent } from './pages/my-quiz-visualization/my-quiz-visualization.component'
-import { CreateQuizComponent } from './pages/create-quiz/create-quiz.component'
-import { userGuard } from '../core/guards/user.guard'
+import {RouterModule, Routes} from '@angular/router'
+import {NgModule} from '@angular/core'
+import {createRoomComponent} from './pages/create-room/create-room.component'
+import {CreateQuestionComponent} from './pages/create-question/create-question.component'
+import {LobbyComponent} from './pages/lobby/lobby.component'
+import {JoinRoomComponent} from './pages/join-room/join-room.component'
+import {GameComponent} from './pages/game/game.component'
+import {QuizEditComponent} from './pages/quiz-edit/quiz-edit.component'
+import {MyQuizVisualizationComponent} from './pages/my-quiz-visualization/my-quiz-visualization.component'
+import {userGuard} from '../core/guards/user.guard'
+import {CreateQuizComponent} from "./pages/create-quiz/create-quiz.component";
 
 const routes: Routes = [
     {
@@ -45,7 +45,15 @@ const routes: Routes = [
                 component: GameComponent,
             },
             {
-                path: 'quiz-edit',
+                path: 'create-question/quiz/:quizId',
+                component: CreateQuestionComponent,
+            },
+            {
+                path: 'create-quiz',
+                component: CreateQuizComponent,
+            },
+            {
+                path: 'quiz-edit/:quizId',
                 component: QuizEditComponent,
             },
         ]
@@ -56,4 +64,5 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
 })
-export class QuizGameRoutingModule { }
+export class QuizGameRoutingModule {
+}
