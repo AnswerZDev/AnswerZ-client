@@ -52,6 +52,11 @@ export class GameComponent implements OnInit {
     if (this.roomId) {
        this.socketService.askQuestion(this.roomId)
 
+      this.socketService.listenToGameEnded().subscribe(() => {
+        //TODO: Manage display
+        console.log('game ended')
+      });
+
       this.socketService.listenToQuestion().subscribe((question: any) => {
         this.stats = false;
         this.questionSubject.next(question);

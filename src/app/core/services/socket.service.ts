@@ -165,4 +165,15 @@ export class SocketService {
       });
     });
   }
+
+
+
+  listenToGameEnded(): Observable<any> {
+    return new Observable<any>(observer => {
+      this._socket.on('game-ended', () => {
+        observer.next();
+      });
+    });
+  }
 }
+
