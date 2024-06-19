@@ -1,0 +1,89 @@
+<div class="quiz-question-link w-full">
+    <div class="quiz-question py-3 px-3">
+        <div class="flex flex-row ">
+            
+            <div class="flex flex-column justify-content-between">
+                <div class="text-xl font-semibold">
+                    {{ my_question.question_type }}
+                </div>
+    
+                <div class="text-l font-semibold pt-2">
+                    {{ my_question.description }}
+                </div>
+            </div>
+            
+            <div class="flex flex-row ml-auto gap-2">
+                <p-button (onClick)="onDeleteQuestion()" icon="pi pi-times" severity="danger" styleClass="button-delete"/>
+            </div>
+            
+            
+        </div>
+<!--        <div class="grid grid-nogutter">-->
+<!--            -->
+<!--            <div class="col-2 text-xl font-semibold flex justify-content-end">-->
+<!--                <p-dialog-->
+<!--                    header="Header" -->
+<!--                    [(visible)]="visible" -->
+<!--                    [modal]="true" -->
+<!--                    [style]="{ width: '25rem' }" -->
+<!--                    [breakpoints]="{ '1199px': '30vw', '575px': '90vw' }" -->
+<!--                    [draggable]="false" -->
+<!--                    [resizable]="false">-->
+<!--                    <ng-template pTemplate="header">-->
+<!--                            <div class="flex align-items-center justify-content-center w-full">-->
+<!--                                <div class="number">-->
+<!--                                    1-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                      -->
+<!--                    </ng-template>-->
+
+<!--                    <div class="flex flex-column">-->
+<!--                        <div class="grid">-->
+<!--                           -->
+<!--                            <div class="col-12">-->
+<!--                                Question-->
+<!--                                <div class="text-xl border-1 border-round p-2">-->
+<!--                                    {{ my_question.description }}-->
+<!--                                </div>-->
+<!--                            </div>-->
+
+<!--                            <div class="col-12">-->
+<!--                                Réponse-->
+<!--                                <div class="text-xl border-1 border-round p-3 mb-2">-->
+<!--                                    {{ my_question.choices[0] }}-->
+<!--                                </div>-->
+<!--                                <div class="text-xl border-1 border-round p-3 mb-2">-->
+<!--                                    {{ my_question.choices[1] }}-->
+<!--                                </div>-->
+<!--                                <div *ngIf="my_question.type">-->
+<!--                                    <div class="text-xl border-1 border-round p-3 mb-2">-->
+<!--                                        {{ my_question.choices[2] }}-->
+<!--                                    </div>-->
+<!--                                    <div class="text-xl border-1 border-round p-3">-->
+<!--                                        {{ my_question.choices[3] }}-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+
+<!--                            <div class="col-12">-->
+<!--                                <p-dropdown [options]="time" [(ngModel)]="selectedtime" (onChange)="onTimeChange($event)" optionLabel="time" class="align-self-end uppercase"></p-dropdown>-->
+<!--                                <p-dropdown [options]="point" [(ngModel)]="selectedpoint" (onChange)="onPointChange($event)" optionLabel="point" class="align-self-end uppercase ml-3"></p-dropdown>                -->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>  -->
+<!--                    -->
+<!--                    <ng-template pTemplate="footer">-->
+<!--                        <div class="flex justify-content-center">-->
+<!--                            <p-button (click)="saveModification()" label="Save" pAutoFocus [autofocus]="true" styleClass="bouton-save"></p-button>-->
+<!--                        </div>-->
+<!--                    </ng-template>-->
+<!--                </p-dialog>-->
+<!--   -->
+<!--            </div>-->
+<!--            <div class="col-12 bg-blue">-->
+<!--                {{ my_question.choices[0] }} , {{ my_question.choices[1]}}...-->
+<!--            </div>-->
+<!--        </div>-->
+    </div>
+</div>

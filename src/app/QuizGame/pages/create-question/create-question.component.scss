@@ -1,0 +1,84 @@
+.create-question {
+  color: #9468f1;
+}
+
+input::placeholder {
+  color: rgba(148,104,241,0.77);
+}
+
+:host ::ng-deep {
+  .p-button {
+    border-radius: 8px;
+    background-color: transparent;
+    color: #8a61e0;
+    border: 1px solid #8a61e0;
+    box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.2);
+    font-family: "Montserrat", sans-serif;
+    font-weight: 300;
+    transition: 0.2s ease-in-out;
+    opacity: 0.8;
+  }
+  .submit-button {
+    button {
+      background-color: #8a61e0;
+      color: white;
+    }
+  }
+
+  .p-button:hover {
+    opacity: 1;
+    transition: 0.2s ease-in-out;
+  }
+
+  .input-question {
+    border: none;
+    border-bottom: #9468f1 1px solid;
+    border-radius: 0px;
+  }
+
+  .p-inputtext{
+    padding: 0.75rem 0.75rem 0.75rem 0rem;
+  }
+
+  .p-inputtext:enabled:focus {
+    box-shadow: none !important;
+  }
+
+  .p-dropdown {
+    background-color: #9468F1;
+    border: #9468F1;
+    border-radius: 10px;
+    padding-left: 15%;
+  }
+
+  .p-dropdown:enabled:focus {
+    box-shadow: none !important;
+  }
+
+  .p-dropdown-label, .p-dropdown-trigger-icon {
+    color: white;
+  }
+
+  .p-inputtext:disabled{
+    background-color: #9468F1;
+  }
+
+  .p-inputtext:disabled::placeholder{
+    color: white;
+    text-align: center;
+  }
+
+  .noq-input{
+    padding-left: 10%;
+  }
+
+  .true-false-input{
+    text-align: center !important;
+    color: white;
+  }
+
+}
+
+.input-question-compo{
+  width: 35%;
+}

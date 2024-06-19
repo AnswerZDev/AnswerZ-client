@@ -1,0 +1,97 @@
+.create-question {
+    color: #9468f1;
+}
+
+#block {
+    background-color: rgba(148,104,241,0.2);
+    color: rgba(148,104,241,0.77);
+    border: #9468F1;
+    height: 45px;
+    text-indent: 2rem;
+}
+
+label {
+    color: #9468F1;
+}
+
+.description {
+    min-height: 13rem;
+    color: rgba(148,104,241,0.77);
+}
+
+
+.ImageUpload{
+    cursor: pointer;
+}
+
+:host ::ng-deep {
+
+    .p-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        color: rgba(148,104,241,0.77);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 20px;
+        height: 100%;
+    }
+
+    .p-dropdown {
+        background-color: #9468F1;
+        border: #9468F1;
+        border-radius: 10px;
+    }
+
+    .input-question {
+        border: none;
+        border-bottom: #9468f1 1px solid;
+        border-radius: 0px;
+        padding-left: 0;
+    }
+
+    .p-inputtext:enabled:focus {
+        box-shadow: none !important;
+    }
+
+    .p-dropdown-label, .p-dropdown-trigger-icon {
+        color: white;
+    }
+
+    .p-card .p-card-body {
+        padding-top: 0;
+    }
+
+    .p-card .p-card-content {
+        padding: 0;
+    }
+
+    .custom-card .p-card {
+        background: rgba(148,104,241,0.2);
+        padding-top: 0;
+    }
+
+    .p-button {
+        border-radius: 8px;
+        background-color: transparent;
+        color: #8a61e0;
+        border: 1px solid #8a61e0;
+        box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.2);
+        font-family: "Montserrat", sans-serif;
+        font-weight: 300;
+        transition: 0.2s ease-in-out;
+        opacity: 0.8;
+    }
+    
+    .submit-button {
+        button {
+            background-color: #8a61e0;
+            color: white;
+        }
+    }
+
+    .p-button:hover {
+        opacity: 1;
+        transition: 0.2s ease-in-out;
+    }
+
+}

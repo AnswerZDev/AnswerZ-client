@@ -1,0 +1,57 @@
+<form class="flex flex-column px-5 py-5 md:px-auto  pl-5" [formGroup]="quizForm">
+    <span class="create-question font-medium text-4xl">
+        Create Quiz
+    </span>
+    <div class="flex flex-column md:flex-row px-3 py-3">
+        <p-card class="flex flex-column md:w-6 mt-5" (dragover)="onDragOver($event)" (drop)="onDrop($event)">
+            <div class="flex flex-column align-items-center">
+                <label for="input-file" class="flex flex-column align-items-center gap-2 pt-3">
+                <input id="input-file" type="file" accept=".png, .jpg, .gif" class="opacity-0 hidden" (change)="handleFileInput($event)"/>
+                <img *ngIf="!quizId" [src]="imageUpload" alt="ImageUpload" class="w-10 h-full border-round-2xl max-h-15rem ImageUpload"/>
+                <img *ngIf="quizId !== null && quizId !== undefined && imageUrl !== ''" [src]="imageUrl" alt="ImageUpload" class="w-10 h-full border-round-2xl max-h-15rem ImageUpload"/>
+                <div class="flex flex-column text-center md:text-auto gap-2">
+                    <span class="font-bold block text-sm md:text-lg align-self-auto md:align-self-center">Upload an image</span>
+                    <span class="text-sm md:text-lg">or drag and drop PNG, JPG, GIF up to 25 Mo</span>
+                </div>
+                </label>
+            </div>
+        </p-card>
+        <div class="flex flex-column md:w-6 justify-content-around px-5">
+
+            <div class="flex flex-column pt-5">
+                <span class="create-question font-medium text-xl">
+                    Title
+                </span>
+                <input class="input-question text-xl" formControlName="selectedTitle"  type="text" pInputText placeholder="Enter a title"/>
+            </div>
+
+            <div class="flex flex-column pt-5">
+                <span class="create-question font-medium text-xl py-2">
+                    Categories
+                </span>
+                <p-dropdown formControlName="selectedCategory" [options]="modesCategories" optionLabel="name" placeholder="Categories"></p-dropdown>
+            </div>
+
+            <div class="flex flex-column pt-5">
+                <span class="create-question font-medium text-xl py-2">
+                    Visibility
+                </span>
+                <p-dropdown formControlName="selectedVisibility" [options]="modesVisibility" optionLabel="name" value="Public" placeholder="Visibility"></p-dropdown>
+            </div>
+
+            <div class="flex flex-column pt-5">
+                <span class="create-question font-medium text-xl py-2">
+                    Maximum players
+                </span>
+                <input class="input-question text-xl" type="number" formControlName="selectedMaxPlayers" pInputText placeholder="Enter a number"/>
+            </div>
+        </div>
+    </div>
+    <span class="create-question font-medium text-xl py-2">
+        Description
+    </span>
+    <textarea pInputTextarea id="block" formControlName="description" [pKeyFilter]="blockChars" class="w-full p-3 border-round-xl mb-4 description" placeholder="Enter a description"></textarea>
+    <div class="flex flex-column align-items-center py-5">
+        <p-button (click)="createQuiz()" class="submit-button" label="Submit"></p-button>
+    </div>
+</form>

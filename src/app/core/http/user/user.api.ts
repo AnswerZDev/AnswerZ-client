@@ -5,13 +5,14 @@ import {User} from "../../models/api/user";
 import {HydraFactory} from "../../models/api/hydra/hydra.factory";
 import {SecurityService} from "../../../shared/services/security.services";
 import {Flashcard} from "../../models/api/flashcard";
+import { HttpClient } from "@angular/common/http";
 
 @Injectable({
     providedIn: 'root',
 })
 export class UserApi extends ApiService {
-    public constructor(    ) {
-        super('user')
+    public constructor( ) {
+        super('user');
     }
 
     public current(): Observable<User> {
@@ -30,4 +31,5 @@ export class UserApi extends ApiService {
         let cb: Observable<any> = this.post('/upload-photo', data);
         return cb as unknown as Observable<any>;
     }
+    
 }

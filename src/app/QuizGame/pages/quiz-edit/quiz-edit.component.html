@@ -1,0 +1,64 @@
+<div class="p-3 md:p-7">
+    <div class="flex flex-column p-3">
+        <p-button label="" icon="pi pi-times" class="align-self-end" styleClass="quit-button" (onClick)="quitEdit()"/>
+    </div>
+    <div class="grid gy-4">
+        
+        <div class="col-12 md:col-6">
+            
+            <div class="p-3 border-round-md my-quiz bg-white">
+                <h1 class="title">{{ quiz?.title }}</h1>
+                <img [src]="quiz?.image" alt="picture quiz" class="quiz-picture mb-3">
+                <div class="flex lg:flex-row flex-column">
+                    
+                    <p-dropdown [options]="modesVisibilite" [(ngModel)]="visibilityType"
+                                (onChange)="onVisibilityChange($event)" optionLabel="name"
+                                class="lg:align-self-end"></p-dropdown>
+                    <div class="flex flex-column lg:ml-auto">
+                
+                        <span class="max-players-display font-medium  py-2">
+                            Maximum players
+                        </span>
+                        <p-inputNumber
+                            inputId="integeronly"
+                            [(ngModel)]="selectednumberPlayers"
+                            placeholder="Enter a number"
+                            [min]="0"
+                            [max]="100"
+                        />
+                    </div>
+                
+                </div>
+                <p class="mb-0">{{quizDescription}}</p>
+            </div>
+        </div>
+        <div class="col-12 md:col-6 container-question-first">
+            <div class="p-3 border-round-md h-full">
+                <div class="text-center mb-4">
+                    <p-button styleClass="saveModificaton uppercase w-5" label="play" (onClick)="onPlay()"></p-button>
+                    &nbsp;
+                </div>
+                <div class="flex flex-row justify-content-between my-2 align-items-center">
+                    <span>
+                        Question ({{ quiz?.list_of_questions?.length }})
+                    </span>
+                    <p-button label="" icon="pi pi-plus" class="button-create-question" (onClick)="addQuestion()"/>
+                </div>
+                <div class="flex flex-column pt-4 container-question-second">
+                    <div *ngFor="let question of quiz?.list_of_questions" class="flex p-2">
+                        <app-visualization-question-quiz (onDeleteQuestionEvent)="deleteQuestion($event)" class="w-full"
+                                                         [my_question]="question"></app-visualization-question-quiz>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 text-center pt-4">
+            <p-button styleClass="saveModificaton" label="Save modifications"
+                      (onClick)="saveModification()"></p-button>
+            &nbsp;
+            <p-button styleClass="deleteQuiz" label="Delete quiz"
+                      (onClick)="deleteQuiz()"></p-button>
+        </div>
+    </div>
+
+</div>

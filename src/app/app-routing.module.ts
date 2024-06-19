@@ -39,6 +39,11 @@ const routes: Routes = [
             import('./admin/admin.module').then((m) => m.AdminModule)
     },
     {
+        path: 'quiz-game',
+        loadChildren: () =>
+            import('./QuizGame/quizGame.module').then((m) => m.QuizGameModule)
+    },
+    {
         path: 'cardset',
         loadChildren: () =>
             import('./cardset/cardset.module').then((m) => m.CardsetModule)

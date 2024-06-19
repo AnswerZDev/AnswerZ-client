@@ -1,0 +1,7 @@
+<form [formGroup]="roomForm">
+    <input id="roomId" formControlName="roomId">
+    <button (click)="onSubmit()">OK!</button>
+
+    <input id="messageId" formControlName="messageId">
+    <button (click)="onSend()">Message</button>
+</form>

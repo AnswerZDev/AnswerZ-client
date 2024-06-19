@@ -1,0 +1,9 @@
+<div class="players">
+    <h2>Players :</h2>
+    <div class="player-list">
+      <div *ngFor="let player of roomInfo.clients" class="player">
+        <img src="assets/images/user.png" alt="{{player.name}}">
+        <span>{{ player }} </span>
+      </div>
+    </div>
+  </div>

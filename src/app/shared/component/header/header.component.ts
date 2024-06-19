@@ -27,6 +27,10 @@ export class HeaderComponent {
         this.initializeApp();
     }
 
+    ngOnInit(): void {
+
+    }
+
     /**
      * @author @thdupin2
      * @date 29/10/2023
@@ -55,6 +59,26 @@ export class HeaderComponent {
      */
     redirectToRegisterPage(): void {
         this.router.navigate(['/auth/register']);
+    }
+
+    /**
+     * @author @thdupin2
+     * @date 29/10/2023
+     * @description Navigation to your Cardsets vizualisation.
+     * @memberof HeaderComponent
+     */
+    redirectToFlashcardsPart(): void {
+        this.router.navigate(['/cardset/my-cardsets']);
+    }
+
+    /**
+     * @author @thdupin2
+     * @date 29/10/2023
+     * @description Navigation to your Quiz vizualisation.
+     * @memberof HeaderComponent
+     */
+    redirectToQuizPart(): void {
+        this.router.navigate(['/quiz-game/my-quiz']);
     }
 
     /**

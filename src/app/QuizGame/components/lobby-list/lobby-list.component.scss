@@ -1,0 +1,31 @@
+.players {
+    margin-top: 4%;
+  }
+  
+  h2 {
+    color: #6a6a6a;
+  }
+  
+  .player-list {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  
+  
+  .player {
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 25px;
+    padding: 5px 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .player img {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+  }

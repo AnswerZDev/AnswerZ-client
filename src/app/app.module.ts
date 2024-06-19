@@ -26,6 +26,7 @@ import {ConfirmDialogModule} from "primeng/confirmdialog";
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http)
 }
+import { QuizGameModule } from './QuizGame/quizGame.module';
 
 @NgModule({
     declarations: [
@@ -46,9 +47,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         AdminModule,
         SharedModule,
         CardsetModule,
-        NgClass,
-        CoreModule,
         ProgressSpinnerModule,
+        CoreModule,
         MessagesModule,
         TranslateModule.forRoot({
             loader: {
@@ -57,6 +57,9 @@ export function HttpLoaderFactory(http: HttpClient) {
                 deps: [HttpClient],
             },
         }),
+        QuizGameModule,
+        NgClass,
+        AuthRoutingModule
     ],
     providers: [],
     bootstrap: [AppComponent],

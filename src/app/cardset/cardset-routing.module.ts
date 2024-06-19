@@ -14,25 +14,26 @@ const routes: Routes = [
         pathMatch: 'full',
     },
     {
-        path: 'my-cardsets',
+        path: '',
         canActivate: [userGuard],
-        component: MyCardsetsComponent,
-    },
-    {
-        path: 'create-flashcard-set',
-        component: CreateFlashcardSetComponent,
-    },
-    {
-        path: 'edit-flashcard-set/:cardsetId',
-        component: EditFlashcardSetComponent,
-    },
-    {
-        path: 'add-flashcard-to-set/:cardsetId',
-        component: AddFlashcardToSetComponent
-    },
-    {
-        path: 'all-cardset',
-        component: AllCardsetComponent,
+        children: [
+            {
+                path: 'my-cardsets',
+                component: MyCardsetsComponent,
+            },
+            {
+                path: 'create-flashcard-set',
+                component: CreateFlashcardSetComponent,
+            },
+            {
+                path: 'edit-flashcard-set/:cardsetId',
+                component: EditFlashcardSetComponent,
+            },
+            {
+                path: 'add-flashcard-to-set/:cardsetId',
+                component: AddFlashcardToSetComponent
+            }
+        ]
     }
 ]
 

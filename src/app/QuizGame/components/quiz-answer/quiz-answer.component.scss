@@ -1,0 +1,39 @@
+.text {
+    color: #9468F1;
+}
+
+:host::ng-deep {
+    .p-button {
+        display: flex;
+        justify-content: center;
+        width: 1000px;
+        height: 100px;
+        border: 1px solid transparent;
+        cursor: pointer;
+        font-size: 30px;
+        font-weight: bold;
+    }
+
+    .p-button.selected-answer {
+        background-color: #9468F1!important;
+        color: #ffffff!important;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .p-button.not-selected-answer {
+        background-color: #ffffff!important;
+        color: #9468F1!important;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .p-button:hover {
+        .text {
+            color: #ffffff;
+        }
+        background-color: #9468F1;
+    }
+
+    .p-button-body {
+        align-items: center;
+    }
+}
