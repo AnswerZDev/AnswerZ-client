@@ -4,6 +4,7 @@ import { CreateFlashcardSetComponent } from './component/create-flashcard-set/cr
 import { EditFlashcardSetComponent } from './component/edit-flashcard-set/edit-flashcard-set.component'
 import { MyCardsetsComponent } from './pages/my-cardsets/my-cardsets.component'
 import { AddFlashcardToSetComponent } from './pages/add-flashcard-to-cardset/add-flahscard-to-cardset.component'
+import { userGuard } from '../core/guards/user.guard'
 
 const routes: Routes = [
     {
@@ -12,20 +13,26 @@ const routes: Routes = [
         pathMatch: 'full',
     },
     {
-        path: 'my-cardsets',
-        component: MyCardsetsComponent,
-    },
-    {
-        path: 'create-flashcard-set',
-        component: CreateFlashcardSetComponent,
-    },
-    {
-        path: 'edit-flashcard-set/:cardsetId',
-        component: EditFlashcardSetComponent,
-    },
-    {
-        path: 'add-flashcard-to-set/:cardsetId',
-        component: AddFlashcardToSetComponent
+        path: '',
+        canActivate: [userGuard],
+        children: [
+            {
+                path: 'my-cardsets',
+                component: MyCardsetsComponent,
+            },
+            {
+                path: 'create-flashcard-set',
+                component: CreateFlashcardSetComponent,
+            },
+            {
+                path: 'edit-flashcard-set/:cardsetId',
+                component: EditFlashcardSetComponent,
+            },
+            {
+                path: 'add-flashcard-to-set/:cardsetId',
+                component: AddFlashcardToSetComponent
+            }
+        ]
     }
 ]
 
