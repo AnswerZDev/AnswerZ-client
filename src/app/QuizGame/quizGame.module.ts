@@ -22,6 +22,7 @@ import { ProgressBarModule } from 'primeng/progressbar';
 import { CardModule } from 'primeng/card'
 import { QuizAnswerComponent } from './components/quiz-answer/quiz-answer.component'
 import { StatsGameComponent } from './components/stats-game/stats-game.component'
+import { EndGameComponent } from './components/end-game/end-game.component'
 
 @NgModule({
     imports: [
@@ -50,7 +51,8 @@ import { StatsGameComponent } from './components/stats-game/stats-game.component
         VisualizationQuestionQuizComponent,
         MyQuizVisualizationComponent,
         QuizAnswerComponent,
-        StatsGameComponent
+        StatsGameComponent,
+        EndGameComponent
     ],
     providers: [],
 })

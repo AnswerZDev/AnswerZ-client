@@ -21,9 +21,10 @@ export class GameComponent implements OnInit {
   totalTimeInSeconds: number = 30; // 30 secondes
   progressPercentage: number = 0;
   isClicked: boolean = false;
-
+  endGame: boolean = false;
   statsPercentage: number = 0;
   globalAnswersStats: any | undefined;
+  nbTotalAnswers: number = 0;
   
 
   constructor(private router: Router, private socketService: SocketService, private route: ActivatedRoute,  private fb: FormBuilder) {
@@ -60,16 +61,15 @@ export class GameComponent implements OnInit {
         this.globalAnswersStats = answers;
         this.stats = true;
         console.log(this.stats);
-        this.updateStatBar();
       });
 
       
-    this.socketService.giveAnswers(this.roomId).subscribe(() => {
-      const currentQuestion = this.questionSubject.getValue();
-      if (this.roomId && currentQuestion) {
-        this.socketService.sendAnswer(this.roomId, currentQuestion.question as string, this.selectedQuestions);
-      }
-    });
+      this.socketService.giveAnswers(this.roomId).subscribe(() => {
+        const currentQuestion = this.questionSubject.getValue();
+        if (this.roomId && currentQuestion) {
+          this.socketService.sendAnswer(this.roomId, currentQuestion.question as string, this.selectedQuestions);
+        }
+      });
     }
   }
 
@@ -80,11 +80,6 @@ export class GameComponent implements OnInit {
     } else {
       this.selectedQuestions = this.selectedQuestions.filter(a => a !== answer);
     }
-  }
-
-  updateStatBar() {
-    const totalPossibleSelections = 4; // Assuming there are 4 possible answers
-    this.progressPercentage = (this.selectedQuestions.length / totalPossibleSelections) * 100;
   }
 }
 

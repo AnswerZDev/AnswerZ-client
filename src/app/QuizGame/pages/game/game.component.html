@@ -40,6 +40,9 @@
       <app-stats-game [statsPercentage]="statsPercentage" [answers]="globalAnswersStats" [index]="i"></app-stats-game>
     </div>
   </div>
+  <div *ngIf="endGame">
+    <app-end-game></app-end-game>
+  </div>
 </div>
 <div *ngIf="!roomInfo" class="game-container">
   <h1>BAD ID</h1>
