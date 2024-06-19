@@ -25,7 +25,11 @@ export class GameComponent implements OnInit {
   statsPercentage: number = 0;
   globalAnswersStats: any | undefined;
   nbTotalAnswers: number = 0;
-  questionNumber: number = 0;
+  questionNumberIndex: number = 1;
+  totalQuestion: number = 0
+  indexQuestion: number = 0;
+  first: boolean = true;
+  
   
 
   constructor(private router: Router, private socketService: SocketService, private route: ActivatedRoute,  private fb: FormBuilder) {
@@ -41,7 +45,7 @@ export class GameComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.indexQuestion = 1;
     this.totalTimeInSeconds = 30;
     this.progressPercentage = 100;
 
@@ -63,15 +67,23 @@ export class GameComponent implements OnInit {
         console.log('game ended')
       });
 
+      this.socketService.getQuestionInfo().subscribe((arg) => {
+        this.totalQuestion =  arg.questionTotal;
+        console.log(arg)
+      }, (error) => {
+        console.error('Error:', error);
+      });
+
       this.socketService.listenToQuestion().subscribe((question: any) => {
         this.stats = false;
-        this.questionNumber = question.questionNumber;
+        this.questionNumberIndex = question.questionNumber;
         this.questionSubject.next(question);
       });
 
       this.socketService.listenToStats().subscribe((answers) => {
         this.globalAnswersStats = answers;
         this.stats = true;
+        this.first = false;
         console.log(this.stats);
       });
 
@@ -79,6 +91,7 @@ export class GameComponent implements OnInit {
       this.socketService.giveAnswers(this.roomId).subscribe(() => {
         const currentQuestion = this.questionSubject.getValue();
         if (this.roomId && currentQuestion) {
+          this.indexQuestion += 1;
           this.socketService.sendAnswer(this.roomId, currentQuestion.question as string, this.selectedQuestions);
         }
       });

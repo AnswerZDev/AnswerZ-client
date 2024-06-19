@@ -166,6 +166,17 @@ export class SocketService {
     });
   }
 
+  getQuestionInfo(): Observable<any> {
+    return new Observable<any>(observer => {
+      this._socket.on('question-infos', (arg) => {
+        observer.next(arg);
+      });
+      return () => {
+        this._socket.off('question-infos');
+      };
+    });
+  }
+
 
 
   listenToGameEnded(): Observable<any> {
