@@ -3,6 +3,7 @@ import { ApiService } from "../../services/api.service";
 import { Observable, map } from "rxjs";
 import { HydraFactory } from "../../models/api/hydra/hydra.factory";
 import { Quiz } from "../../models/api/quiz";
+import {observableToBeFn} from "rxjs/internal/testing/TestScheduler";
 
 @Injectable({
     providedIn: 'root',
@@ -19,8 +20,8 @@ export class QuizApi extends ApiService {
         return f as unknown as Observable<Quiz>
     }
 
-    public update(id: number, data: any): Observable<Quiz> {
-        let f = this.patch(`/${id}`, data).pipe(
+    public update(id: string, data: any): Observable<Quiz> {
+        let f = this.patch(`/update-quiz/${id}`, data).pipe(
             map((response: any) => HydraFactory.createItem(Quiz, response))
         )
         return f as unknown as Observable<Quiz>

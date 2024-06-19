@@ -40,13 +40,13 @@ export class QuizEditComponent {
     constructor(
         private readonly _router: Router,
         public readonly quizQuestionsService: QuizQuestionsService,
-        private readonly quizService: QuizService,
+        private readonly _quizService: QuizService,
         private readonly route: ActivatedRoute
     ) {
     }
 
     public get quiz(): Quiz | undefined {
-        return this.quizService.quiz;
+        return this._quizService.quiz;
     }
 
     ngOnInit(): void {
@@ -68,11 +68,18 @@ export class QuizEditComponent {
     }
 
     public saveModification(): void {
+        this._quizService.updateQuiz(
+            this.quiz?.id as string,
+            {
+                maxPlayers: this.selectednumberPlayers,
+                visibility: this.visibilityType?.name,
+            }
+        );
 
     }
 
     public deleteQuiz(): void {
-        this.quizService.deleteQuiz(this.quiz?.id as string)
+        this._quizService.deleteQuiz(this.quiz?.id as string)
         this._router.navigate(["/quiz-game/my-quiz"]);
     }
 
@@ -86,7 +93,7 @@ export class QuizEditComponent {
     private initQuiz(): void {
         this.route.params.subscribe(params => {
             const quizId = params['quizId'];
-            this.quizService.initQuizById(quizId).subscribe({
+            this._quizService.initQuizById(quizId).subscribe({
                 next: (quiz: Quiz) => {
                     let mode: Mode = {name: quiz.visibility!};
                     this.selectednumberPlayers = quiz.max_players as number;

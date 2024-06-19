@@ -57,7 +57,7 @@ export class MyQuizVisualizationComponent implements OnInit {
         ];
     }
 
-    public editQuiz(idQuiz: string) {
+    public redirectToEditQuiz(idQuiz: string) {
         this._router.navigate(["/quiz-game/quiz-edit/" + idQuiz]);
     }
 

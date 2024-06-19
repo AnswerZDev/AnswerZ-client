@@ -19,9 +19,9 @@
                 <div *ngFor="let quiz of quiz_list"
                      class="mr-4 border-round-3xl h-15rem w-15rem text-white
                         flex justify-content-center align-items-center image-container"
-                     (click)="editQuiz(quiz.id)"
+                     (click)="redirectToEditQuiz(quiz.id)"
                 >
-                    <div class="flex flex-column h-full pt-2">
+                    <div class="flex flex-column h-full pt-2 container">
                         <img class="picture-quiz-container" [src]="quiz.image">
                         <span class="text-black-alpha-90 text-xs text-center pt-2">
                             {{ quiz.title }}

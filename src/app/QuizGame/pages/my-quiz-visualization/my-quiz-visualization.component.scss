@@ -32,6 +32,7 @@
 
 .picture-quiz-container {
     height: 85%;
+    max-width: 100%;
     border-radius: 100%;
 }
 
@@ -43,4 +44,8 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     cursor: pointer;
+}
+
+.container {
+    max-width: 100%
 }

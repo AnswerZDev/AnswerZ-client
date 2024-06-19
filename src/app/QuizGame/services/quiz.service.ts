@@ -1,38 +1,38 @@
-import { Injectable } from "@angular/core";
-import { QuizApi } from "src/app/core/http/quiz/quiz.api";
-import { Question } from "src/app/core/models/api/question";
-import { Quiz } from "src/app/core/models/api/quiz";
-import {QuestionApi} from "../../core/http/question/question.api";
+import {Injectable} from "@angular/core";
+import {QuizApi} from "src/app/core/http/quiz/quiz.api";
+import {Quiz} from "src/app/core/models/api/quiz";
 import {Subject} from "rxjs";
 
 @Injectable({
     providedIn: 'root',
 })
 export class QuizService {
-    private _quiz: Quiz | undefined;
-    private _quiz_list: Quiz[] | undefined;
+    constructor(
+        private readonly _quizApi: QuizApi,
+    ) {
+    }
 
+    private _quiz: Quiz | undefined;
 
     public get quiz() {
         return this._quiz;
     }
 
+    private _quiz_list: Quiz[] | undefined;
+
     public get quiz_list() {
         return this._quiz_list;
     }
 
-    constructor(
-        private readonly _quizApi: QuizApi,
-    ){}
-
-    initQuizById(quizId : string): Subject<Quiz> {
+    initQuizById(quizId: string): Subject<Quiz> {
         let subject = new Subject<Quiz>();
         this._quizApi.getQuizById(quizId).subscribe({
             next: (quiz: Quiz) => {
                 this._quiz = quiz as Quiz;
                 subject.next(quiz);
             },
-            error: (error) => { }
+            error: (error) => {
+            }
         });
         return subject;
     }
@@ -44,22 +44,10 @@ export class QuizService {
                 subject.next(quiz.id);
                 this.uploadImage(file, quiz.id);
             },
-            error: (error) => { }
+            error: (error) => {
+            }
         });
         return subject;
-    }
-
-    private uploadImage(file: File | null, idQuiz: string): void {
-        if(!file) return;
-
-        let formData = new FormData();
-
-        formData.append('quizPicture', file);
-
-        this._quizApi.uploadImage(idQuiz, formData).subscribe({
-            next: (response) => { },
-            error: (error) => { }
-        });
     }
 
     getAllPublicQuizByUser(): void {
@@ -67,7 +55,8 @@ export class QuizService {
             next: (quiz: any) => {
                 this._quiz_list = quiz.member as Quiz[];
             },
-            error: (error) => { }
+            error: (error) => {
+            }
         });
     }
 
@@ -76,7 +65,33 @@ export class QuizService {
             next: (quiz: any) => {
                 this._quiz_list = quiz.member as Quiz[];
             },
-            error: (error) => { }
+            error: (error) => {
+            }
+        });
+    }
+
+    updateQuiz(idQuiz: string, data: any) {
+        this._quizApi.update(idQuiz, data).subscribe({
+            next: (quiz: any) => {
+                this._quiz = quiz as Quiz;
+            },
+            error: (error) => {
+            }
+        });
+    }
+
+    private uploadImage(file: File | null, idQuiz: string): void {
+        if (!file) return;
+
+        let formData = new FormData();
+
+        formData.append('quizPicture', file);
+
+        this._quizApi.uploadImage(idQuiz, formData).subscribe({
+            next: (response) => {
+            },
+            error: (error) => {
+            }
         });
     }
 
