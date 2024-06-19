@@ -62,9 +62,9 @@ export class QuizService {
         });
     }
 
-    getAllQuizByUser(): Subject<Quiz> {
+    getAllQuizByUser(visibility: string): Subject<Quiz> {
         let subject = new Subject<Quiz>();
-        this._quizApi.getAllQuizFromUser().subscribe({
+        this._quizApi.getAllQuizFromUser(visibility).subscribe({
             next: (quiz: Quiz) => {
                 this._quiz = quiz as Quiz;
                 subject.next(quiz);

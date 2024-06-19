@@ -9,6 +9,9 @@
     <div class="grid pt-6">
         <div class="col-12 mb-4">
             <span class="title">Your quiz</span>
+            <div class="p-4">
+                <p-dropdown [options]="modesVisibilite" [(ngModel)]="selectedModeVisibilities" (onChange)="onVisibilityChange($event)" optionLabel="name"></p-dropdown>
+            </div>
         </div>
         <div
              class="col-3 bg-blue-300 mr-4 border-round-3xl h-8rem text-white
