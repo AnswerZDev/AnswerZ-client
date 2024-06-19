@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ConfirmService } from 'src/app/shared/services/confirm.service';
 import { Flashcard } from 'src/app/core/models/api/flashcard';
 import { FlashcardService } from '../../services/flashcards.service';
 import { first } from 'rxjs';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ModifyPopUpComponent } from '../modify-pop-up/modify-pop-up.component';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-cards-preview',
@@ -22,8 +22,9 @@ export class CardsPreviewComponent {
   private _ref: DynamicDialogRef | undefined;
 
   constructor(
-    private readonly flashcardService: FlashcardService, 
-    private readonly confirmService: ConfirmService,
+    private readonly flashcardService: FlashcardService,
+    private readonly messageService: MessageService,
+    private readonly confirmationService: ConfirmationService,
     private readonly dialogService: DialogService
   ) { }
 
@@ -40,22 +41,32 @@ export class CardsPreviewComponent {
     }
   }
 
-  // deleteFlashcard(id: number, event: Event) {
-  //   this.confirmService.confirm(event, 'Are you sure you want to delete ?', 'Delete successfully', 'Canceled suppression', () => 
-  //   {
-  //     this.flashcardService.onDeleteFlashcards.pipe(first()).subscribe({
-  //       next: () => {
-  //         // Suppression réussie
-  //         this.flashcards = this.flashcards.filter((flashcard) => Number(flashcard.id) !== id);
-  //       },
-  //       error: () => {
-          
-  //       }
-  //     });
-  //     this.flashcardService.deleteFlashcard(id);
-  //   }, 
-  //   () => {
-      
-  //   });
-  // };
+  deleteFlashcard(id: number, event: Event) {
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      message: 'Are you sure you want to delete this flashcard?',
+      header: 'Delete Confirmation',
+      icon: 'pi pi-info-circle',
+      acceptButtonStyleClass:"p-button-danger p-button-text",
+      rejectButtonStyleClass:"p-button-text p-button-text",
+      acceptIcon:"none",
+      rejectIcon:"none",
+
+      accept: () => {
+        this.flashcardService.onDeleteFlashcards.pipe(first()).subscribe({
+          next: () => {
+            this.flashcards = this.flashcards.filter((flashcard) => Number(flashcard.id) !== id);
+            this.messageService.add({ severity: 'info', detail: 'Flashcard deleted' });
+          },
+          error: () => {
+            this.messageService.add({ severity: 'error', detail: 'Error during deleting flashcard' });
+          }
+        });
+        this.flashcardService.deleteFlashcard(id);
+      },
+      reject: () => {
+        this.messageService.add({ severity: 'error', detail: 'You have rejected' });
+      }
+    });
+  };
 }

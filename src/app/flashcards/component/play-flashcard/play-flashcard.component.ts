@@ -24,11 +24,12 @@ export class PlayFlashcardComponent {
 
 
   constructor(
-      private readonly cardsetservice: CardsetService,
+      public readonly cardsetservice: CardsetService,
       private router: Router,
     ){
+
       // appeler API chargement données
-      cardsetservice.cardsetPlay.flashcards?.forEach(
+      this.cardsetservice.cardsetPlay.flashcards?.forEach(
         flashcard => this.data.push(flashcard)
       );
 

@@ -58,7 +58,7 @@ export class CardsetApi extends ApiService {
         return f as unknown as Observable<Cardset>
     }
 
-    public uploadImage(id: number, body: FormData): Observable<Cardset> {
+    public uploadImage(id: number, body: any): Observable<Cardset> {
         let f = this.post(`/upload-image-cardset/${id}`, body).pipe(
             map((response: any) => HydraFactory.createItem(Cardset, response))
         )

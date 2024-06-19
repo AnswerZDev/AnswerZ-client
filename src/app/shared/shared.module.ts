@@ -7,7 +7,6 @@ import { FooterComponent } from './component/footer/footer.component';
 import { FlashcardsSetComponent } from './component/flashcards-set/flashcards-set.component';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
-import { ConfirmService } from './services/confirm.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { AvatarModule } from 'primeng/avatar';
@@ -40,7 +39,6 @@ import {TranslateModule} from "@ngx-translate/core";
         UcFirstPipe
     ],
     providers: [
-        ConfirmService,
         MessageService,
         ConfirmationService,
         UcFirstPipe
@@ -53,5 +51,4 @@ import {TranslateModule} from "@ngx-translate/core";
         UcFirstPipe
     ]
 })
-export class SharedModule {
-}
+export class SharedModule { }
