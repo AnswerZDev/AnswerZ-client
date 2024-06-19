@@ -40,7 +40,6 @@ export class GameComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.progressPercentage = 100;
     setInterval(() => {
       if (this.totalTimeInSeconds > 0) {
@@ -53,7 +52,8 @@ export class GameComponent implements OnInit {
        this.socketService.askQuestion(this.roomId)
 
       this.socketService.listenToGameEnded().subscribe(() => {
-        //TODO: Manage display
+        this.endGame = true;
+        this.stats = false;
         console.log('game ended')
       });
 

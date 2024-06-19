@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-end-game',
@@ -7,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class EndGameComponent {
 
+  constructor(private readonly _router: Router) { }
+
+  redirectToMyQuiz() {
+    this._router.navigate(['/quiz-game/my-quiz']);
+  }
 }

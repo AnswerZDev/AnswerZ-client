@@ -1,5 +1,5 @@
 <div *ngIf="roomInfo">
-  <div *ngIf="!stats">
+  <div *ngIf="!stats && !endGame">
     <div class="flex flex-column mt-5 ml-5">
       <span class="title">{{ roomInfo?.game?.title }}</span>
     <span class="theme">Theme: History</span>
@@ -40,7 +40,7 @@
       <app-stats-game [statsPercentage]="statsPercentage" [answers]="globalAnswersStats" [index]="i"></app-stats-game>
     </div>
   </div>
-  <div *ngIf="endGame">
+  <div *ngIf="endGame && !stats">
     <app-end-game></app-end-game>
   </div>
 </div>
