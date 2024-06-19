@@ -10,9 +10,15 @@ import {Subject} from "rxjs";
 })
 export class QuizService {
     private _quiz: Quiz | undefined;
+    private _quiz_list: Quiz[] | undefined;
+
 
     public get quiz() {
         return this._quiz;
+    }
+
+    public get quiz_list() {
+        return this._quiz_list;
     }
 
     constructor(
@@ -55,4 +61,17 @@ export class QuizService {
             error: (error) => { }
         });
     }
+
+    getAllQuizByUser(): Subject<Quiz> {
+        let subject = new Subject<Quiz>();
+        this._quizApi.getAllQuizFromUser().subscribe({
+            next: (quiz: Quiz) => {
+                this._quiz = quiz as Quiz;
+                subject.next(quiz);
+            },
+            error: (error) => { }
+        });
+        return subject;
+    }
+
 }

@@ -11,9 +11,14 @@
 
 :host ::ng-deep {
     .button-delete{
-        padding: 0;
+        padding: 10%;
         margin: 0;
         color: white;
+        border-radius: 100%;
+        width: auto;
+        height: auto;
+        background-color: red;
+        border: none;
     }
 
     .bouton-save{
