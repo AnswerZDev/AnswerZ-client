@@ -27,8 +27,9 @@ export class PlayFlashcardComponent {
       private readonly cardsetservice: CardsetService,
       private router: Router,
     ){
+
       // appeler API chargement données
-      cardsetservice.cardsetPlay.flashcards?.forEach(
+      this.cardsetservice.cardsetPlay.flashcards?.forEach(
         flashcard => this.data.push(flashcard)
       );
 
