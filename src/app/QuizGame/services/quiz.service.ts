@@ -80,4 +80,13 @@ export class QuizService {
         });
     }
 
+    deleteQuiz(quizId : string): void {
+        this._quizApi.deleteQuizById(quizId).subscribe({
+            next: () => {
+                this._quizApi.deleteQuizById(quizId).subscribe();
+            },
+            error: (error) => { }
+        });
+    }
+
 }

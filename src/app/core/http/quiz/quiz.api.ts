@@ -66,4 +66,10 @@ export class QuizApi extends ApiService {
         return f as unknown as Observable<Quiz[]>
     }
 
+    public deleteQuizById(quizId: string): Observable<Quiz> {
+        let f = this.delete(`/${quizId}`).pipe(
+            map((response: any) => HydraFactory.createItem(Quiz, response))
+        )
+        return f as unknown as Observable<Quiz>
+    }
 }

@@ -68,6 +68,12 @@ export class QuizEditComponent {
     }
 
     public saveModification(): void {
+
+    }
+
+    public deleteQuiz(): void {
+        this.quizService.deleteQuiz(this.quiz?.id as string)
+        this._router.navigate(["/quiz-game/my-quiz"]);
     }
 
     public onVisibilityChange(event: any): void {
