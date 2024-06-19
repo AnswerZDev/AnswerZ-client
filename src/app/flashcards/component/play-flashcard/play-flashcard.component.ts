@@ -24,7 +24,7 @@ export class PlayFlashcardComponent {
 
 
   constructor(
-      private readonly cardsetservice: CardsetService,
+      public readonly cardsetservice: CardsetService,
       private router: Router,
     ){
 
