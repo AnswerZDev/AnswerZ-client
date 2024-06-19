@@ -20,7 +20,7 @@ export class createRoomComponent{
 
     onSubmit() {
         if(this.roomForm.valid){
-            this.socketService.createRoom();
+            // this.socketService.createRoom();
         }
     }
 

@@ -4,6 +4,7 @@ import {QuizQuestionsService} from "../../services/quizQuestions.service";
 import {VisibilityTypeEnum} from "../../dto/VisibilityType";
 import {Quiz} from 'src/app/core/models/api/quiz';
 import {QuizService} from '../../services/quiz.service';
+import {SocketService} from "../../../core/services/socket.service";
 
 
 export interface Mode {
@@ -41,7 +42,8 @@ export class QuizEditComponent {
         private readonly _router: Router,
         public readonly quizQuestionsService: QuizQuestionsService,
         private readonly _quizService: QuizService,
-        private readonly route: ActivatedRoute
+        private readonly route: ActivatedRoute,
+        private readonly _socketService: SocketService
     ) {
     }
 
@@ -55,8 +57,9 @@ export class QuizEditComponent {
         this.initQuiz();
     }
 
-    onPlay() {
-        this._router.navigate(["/quiz-game/join-game"]);
+    onPlay(): void {
+        if(!this.quiz ||  (this.quiz && !this.quiz.list_of_questions)) return;
+        this._socketService.createRoom(this.quiz.list_of_questions);
     }
 
     addQuestion(): void {
@@ -128,4 +131,10 @@ export class QuizEditComponent {
             {name: 10}
         ];
     }
+
+    // onSend() {
+    //     if(this.roomForm.valid){
+    //         this._socketService.sendMessage(this.roomForm.controls['roomId'].value,this.roomForm.controls['messageId'].value);
+    //     }
+    // }
 }
