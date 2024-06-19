@@ -17,7 +17,6 @@ import { QuizEditComponent } from './pages/quiz-edit/quiz-edit.component';
 import { VisualizationQuestionQuizComponent } from './components/visualization-question-quiz/visualization-question-quiz.component'
 import { DialogModule } from 'primeng/dialog';
 import { MyQuizVisualizationComponent } from './pages/my-quiz-visualization/my-quiz-visualization.component';
-import { MessageService } from 'primeng/api'
 import { CreateQuizComponent } from './pages/create-quiz/create-quiz.component'
 import { CardModule } from 'primeng/card'
 import { KeyFilterModule } from 'primeng/keyfilter'
@@ -25,7 +24,6 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup'
 import { InputTextareaModule } from 'primeng/inputtextarea'
 import {InputNumberModule} from "primeng/inputnumber";
 import { ProgressBarModule } from 'primeng/progressbar';
-import { CardModule } from 'primeng/card'
 import { QuizAnswerComponent } from './components/quiz-answer/quiz-answer.component'
 import { StatsGameComponent } from './components/stats-game/stats-game.component'
 import { EndGameComponent } from './components/end-game/end-game.component'
@@ -57,7 +55,7 @@ import { EndGameComponent } from './components/end-game/end-game.component'
         InputTextareaModule,
         DialogModule,
         ProgressBarModule,
-        CardModule
+        CardModule,
         InputNumberModule,
     ],
     declarations: [
