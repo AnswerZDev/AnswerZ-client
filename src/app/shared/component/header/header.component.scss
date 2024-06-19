@@ -26,16 +26,16 @@
     }
 
     .menu {
-        border-radius: 40px;
-        background-color: #8A61E0;
-        color: white;
-        border: #8A61E0;
-        outline: none;
+        border-radius: 40px !important;
+        background-color: #8A61E0 !important;
+        color: white !important;
+        border: #8A61E0 !important;
+        outline: none !important;
     }
 
-    .menu:hover, .menu:focus {
-        background-color: white;
-        color: #8A61E0;
+    .menu:hover {
+        background-color: white !important;
+        color: #8A61E0 !important;
     }
 }
 

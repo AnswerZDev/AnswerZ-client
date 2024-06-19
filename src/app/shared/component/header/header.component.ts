@@ -25,15 +25,7 @@ export class HeaderComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.router.events.subscribe((event) => {
-            if (event instanceof NavigationEnd) {
-              this.showButtons = this.shouldShowButtons(event.url);
-            }
-        });
-    }
 
-    shouldShowButtons(url: string): boolean {
-        return url.includes('/my-cardsets');
     }
 
     /**
@@ -64,6 +56,26 @@ export class HeaderComponent implements OnInit {
      */
     redirectToRegisterPage(): void {
         this.router.navigate(['/auth/register']);
+    }
+
+    /**
+     * @author @thdupin2
+     * @date 29/10/2023
+     * @description Navigation to your Cardsets vizualisation.
+     * @memberof HeaderComponent
+     */
+    redirectToFlashcardsPart(): void {
+        this.router.navigate(['/cardset/my-cardsets']);
+    }
+
+    /**
+     * @author @thdupin2
+     * @date 29/10/2023
+     * @description Navigation to your Quiz vizualisation.
+     * @memberof HeaderComponent
+     */
+    redirectToQuizPart(): void {
+        this.router.navigate(['/quiz-game/my-quiz']);
     }
 
     /**

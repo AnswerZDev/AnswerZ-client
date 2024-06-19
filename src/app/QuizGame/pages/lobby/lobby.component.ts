@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
+import { ChangeDetectorRef } from '@angular/core';
 import { SocketService } from 'src/app/core/services/socket.service';
 
 @Component({
@@ -8,19 +9,33 @@ import { SocketService } from 'src/app/core/services/socket.service';
   styleUrls: ['./lobby.component.scss']
 })
 export class LobbyComponent implements OnInit {
-  roomInfo: any;
+  roomInfo: any | undefined;
   roomId: string | null | undefined;
   isFliped: boolean = false;
   direction: 'left' | 'right' = 'right';
-  nOfParticipants : number = 0;
+  nOfParticipants: number = 0;
   url: string = '';
-  isHost : boolean = false;
+  isHost: boolean = false;
   userUid: any;
+  isGameLaunch: any;
 
-  constructor(private route: ActivatedRoute, private router: Router, private socketService: SocketService) {
+  constructor(
+    private route: ActivatedRoute,
+    private socketService: SocketService,
+    private cdr: ChangeDetectorRef,
+    private _router: Router
+  ) {
+    this.route.paramMap.subscribe(params => {
+      this.roomId = params.get('roomId');
+      this.initializeUrl();
+      if (this.roomId != null) {
+        this.initializeSocketListeners();
+        this.fetchRoomInfo();
+        this.listenToNewParticipants();
+      }
+    });
+
   }
-
-
 
   flip_flashcard() {
     const flashcard = document.getElementById('flipContainer');
@@ -43,60 +58,57 @@ export class LobbyComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-
-      // TODO : REWORK QR CODE FUNCTIONS
-      // THIS IS JUST A QUICK POC
-      this.roomId = params.get('roomId');
-      this.url = "http://localhost:4200/quiz-game/join-game";
-      this.url += "?roomId=";
-      this.url += this.roomId;
-
-
-      if(this.roomId != null){
-
-        this.socketService.listenToGameStarted(this.roomId);
-
-        this.socketService.getRoomInfo(this.roomId).subscribe((info: any) => {
-          this.roomInfo = info;
-          this.nOfParticipants = this.roomInfo.clients.length;
-
-          this.socketService.getUserInfos().subscribe((value) => {
-            this.userUid = value;
-            this.isHost = this.userUid.uid == this.roomInfo.game.host;
-
-            console.log(this.isHost)
-          });
-          
-
-   
-      });
-
-        this.socketService.newUserInLobby(this.roomId).subscribe((newParticipant: any) => {
-            console.log('New user joined:', newParticipant);
-            this.socketService.getRoomInfo(this.roomId!).subscribe((info: any) => {
-                this.roomInfo = info;
-                console.log(this.roomInfo);
-            });
-        });
-
-        this.socketService.listenToHostLeaveGame();
-      }
-    });
   }
 
+  private initializeUrl(): void {
+    this.url = `http://localhost:4200/quiz-game/join-game?roomId=${this.roomId}`;
+  }
 
-  startGame(){
-    if(this.roomId){
+  private initializeSocketListeners(): void {
+    if (this.roomId) {
+      this.socketService.listenToGameStarted(this.roomId);
+    }
+    this.socketService.listenToHostLeaveGame();
+  }
+
+  private fetchRoomInfo(): void {
+    if (this.roomId) {
+      this.socketService.getRoomInfo(this.roomId).subscribe((info: any) => {
+        this.roomInfo = info;
+        this.nOfParticipants = this.roomInfo.clients.length;
+
+        this.socketService.getUserInfos().subscribe((value) => {
+          this.userUid = value;
+          this.isHost = this.userUid.uid == this.roomInfo.game.host;
+          this.isGameLaunch = this.roomInfo.game.isLaunch;
+          this.cdr.detectChanges();
+
+          if (this.isGameLaunch) {
+            this._router.navigate(['quiz-game/game', this.roomId]);
+          }
+        });
+      });
+    }
+  }
+
+  private listenToNewParticipants(): void {
+    if (this.roomId) {
+      this.socketService.newUserInLobby(this.roomId).subscribe((newParticipant: any) => {
+        console.log('New user joined:', newParticipant);
+        this.fetchRoomInfo();
+      });
+    }
+  }
+
+  startGame(): void {
+    if (this.roomId) {
       this.socketService.startGame(this.roomId);
     }
   }
 
-  leaveGame(){
-    if(this.roomId){
-      this.socketService.leaveGame(this.roomId, this.isHost);
+  leaveGame(): void {
+    if (this.roomId) {
+      this.socketService.leaveGame(this.roomId, this.userUid.uid);
     }
   }
 }
-
-

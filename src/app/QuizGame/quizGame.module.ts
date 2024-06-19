@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core'
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { NgClass, NgIf } from '@angular/common'
 import { QuizGameRoutingModule } from './quizGame-routing.module'
 import { createRoomComponent } from './pages/create-room/create-room.component'
@@ -24,6 +24,11 @@ import { KeyFilterModule } from 'primeng/keyfilter'
 import { ConfirmPopupModule } from 'primeng/confirmpopup'
 import { InputTextareaModule } from 'primeng/inputtextarea'
 import {InputNumberModule} from "primeng/inputnumber";
+import { ProgressBarModule } from 'primeng/progressbar';
+import { CardModule } from 'primeng/card'
+import { QuizAnswerComponent } from './components/quiz-answer/quiz-answer.component'
+import { StatsGameComponent } from './components/stats-game/stats-game.component'
+import { EndGameComponent } from './components/end-game/end-game.component'
 
 @NgModule({
     imports: [
@@ -51,6 +56,8 @@ import {InputNumberModule} from "primeng/inputnumber";
         ConfirmPopupModule,
         InputTextareaModule,
         DialogModule,
+        ProgressBarModule,
+        CardModule
         InputNumberModule,
     ],
     declarations: [
@@ -63,7 +70,10 @@ import {InputNumberModule} from "primeng/inputnumber";
         CreateQuizComponent,
         QuizEditComponent,
         VisualizationQuestionQuizComponent,
-        MyQuizVisualizationComponent
+        MyQuizVisualizationComponent,
+        QuizAnswerComponent,
+        StatsGameComponent,
+        EndGameComponent
     ],
     providers: [],
 })

@@ -27,6 +27,7 @@ export class SocketService {
   }
 
   connection(): void{
+    console.log("connection");
     this._socket.on('connected', () => {
       this.getUserInfos().subscribe((value) => {
         this._socket.emit('give-user-infos', value);
@@ -63,6 +64,14 @@ export class SocketService {
       this._router.navigate(['quiz-game/quizz-lobby', roomId]);
     });
   }
+
+
+  goToNextquestion(roomId: string){
+    this._socket.on('next-question', () => {
+      this._socket.emit('ask-question');
+    });
+  }
+
 
   newUserInLobby(roomId: string): Observable<any> {
     return new Observable<any>(observer => {
@@ -112,9 +121,70 @@ export class SocketService {
     this._socket.once('host-leave', () => {
       this._router.navigate(['quiz-game/join-game']);
     });
+
+    // TODO : DECONNECT USER CHeck
   }
 
-  leaveGame(roomId : string, isHost: boolean){
-    this._socket.emit('leave-game', roomId, isHost);
+  leaveGame(roomId : string, userUid :string){
+    this.getUserInfos().subscribe((value) => {
+      this._socket.emit('leave-game', roomId, value);
+    });
+  }
+
+  askQuestion(roomId: string){
+    this._socket.emit('ask-question', roomId);
+  }
+
+  giveAnswers(roomId: string): Observable<any> {
+    return new Observable<any>(observer => {
+      this._socket.on('ask-answer', () => {
+        observer.next();
+      });
+    });
+  }
+
+
+  sendAnswer(roomId: string, question: string, answers: string[]): void {
+    this._socket.emit('response-answer', { roomId: roomId, question: question, answers});
+  }
+
+  listenToStats(): Observable<any> {
+    return new Observable<any>(observer => {
+      this._socket.on('question-stats', (data: any) => {
+        console.log(data)
+        observer.next(data);
+      });
+    });
+  }
+
+
+  listenToQuestion(): Observable<any> {
+    return new Observable<any>(observer => {
+      this._socket.on('next-question', (data: { question: string }) => {
+        observer.next(data);
+      });
+    });
+  }
+
+  getQuestionInfo(): Observable<any> {
+    return new Observable<any>(observer => {
+      this._socket.on('question-infos', (arg) => {
+        observer.next(arg);
+      });
+      return () => {
+        this._socket.off('question-infos');
+      };
+    });
+  }
+
+
+
+  listenToGameEnded(): Observable<any> {
+    return new Observable<any>(observer => {
+      this._socket.on('game-ended', () => {
+        observer.next();
+      });
+    });
   }
 }
+

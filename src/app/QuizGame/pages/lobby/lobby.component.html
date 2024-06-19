@@ -1,4 +1,4 @@
-<div class="game-container">
+<div *ngIf="roomInfo && !isGameLaunch" class="game-container">
   <div class="header" style="display: flex; align-items: center; height: fit-content; width: 100%;
   margin-left: 15%;">
     <h2>Waiting for players  </h2>
@@ -41,4 +41,8 @@
   </div>
 
   <app-lobby-list [roomInfo]="roomInfo" style="width: 100%"></app-lobby-list>
+</div>
+
+<div *ngIf="!roomInfo" class="game-container">
+  <h1>BAD ID</h1>
 </div>

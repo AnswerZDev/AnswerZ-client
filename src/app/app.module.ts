@@ -20,6 +20,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { MessagesModule } from 'primeng/messages';
 import { NgClass } from '@angular/common';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { QuizGameModule } from './QuizGame/quizGame.module';
 
 @NgModule({
     declarations: [
@@ -40,10 +41,12 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
         AdminModule,
         SharedModule,
         CardsetModule,
-        NgClass,
-        CoreModule,
         ProgressSpinnerModule,
+        CoreModule,
         MessagesModule,
+        QuizGameModule,
+        NgClass,
+        AuthRoutingModule
     ],
     providers: [],
     bootstrap: [AppComponent]
